@@ -1,0 +1,453 @@
+﻿<!--
+    从che300同步车型
+     -->
+<!-- ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <!--<form>-->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row" style=" padding-right 15px; ">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                    <!--<span translate="WorkItemController.UnFinishedWorkitem"></span><br />
+                    {{'WorkItemController.UnFinishedWorkitem'|translate}}<br />-->
+                    <!--<h1 class="m-n font-thin h3 text-black">{{name}}</h1>-->
+                </div>
+            </div>
+        </div>
+
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="form-inline" style="float:left;">
+                        <div class="input-group searchContainer">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <a ng-click="modelSync()" class="btn btn-primary" ng-disabled="!enabledClick">增量同步</a>
+                                </div>
+                            </div>
+                            <div class="form-group hidden" style="margin-left:30px">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" style="width:120px"
+                                           ng-model="version" autocomplete="off" placeholder="最低版本：3.4.561">
+                                    <a ng-click="modelSyncByVersion()" class="btn btn-primary" ng-disabled="!enabledClick">指定版本同步</a>
+                                </div>
+                            </div>
+                            <div class="form-group" style="float:right">
+                                <a ng-click="openModelSync()" class="btn btn-primary">批量同步</a>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:-15px;margin-left:15px;margin-top:20px">同步记录：</div>
+                        <table ui-jq="dataTable" id="tbSyncLog"
+                               ui-options="dtOptions_tbSyncLog"
+                               class="table table-striped m-b-none" style="width:99.5%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:70px">同步版本</th>
+                                    <th style="width:70px;">最新版本</th>
+                                    <th style="width:130px;">同步时间</th>
+                                    <th style="width:auto;">同步结果</th>
+                                    <th style="width:80px;">CMS新增</th>
+                                    <th style="width:80px;">直租详细</th>
+                                    <th style="width:50px;">Che300</th>
+                                    <th style="width:80px;">操作人</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div style="margin-bottom:-15px;margin-left:15px;color:red">
+                            以下调整会显示在下面列表中:<br />
+                            1.品牌有调整;<br />
+                            2.品牌名称修改;<br />
+                            3.车系有调整;<br />
+                            4.车系名称修改;<br />
+                            5.车型名称修改;<br />
+                            6.删除的车型;<br />
+                        </div>
+                        <table ui-jq="dataTable" id="tabfinishWorkitem"
+                               ui-options="dtOptions_tabfinishWorkitem"
+                               class="table table-striped m-b-none" style="width:98%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:auto;">车型</th>
+                                    <th style="width:75px;">类型</th>
+                                    <th style="width:auto;">变更项</th>
+                                    <th style="width:80px;">操作项</th>
+                                    <th style="width:45px;">操作人</th>
+                                    <th style="width:60px;">操作时间</th>
+                                    <th style="width:80px;">操作结果</th>
+                                    <th style="width:60px;">版本号</th>
+                                    <th style="width:60px;">版本时间</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <!--表格部分End-->
+            </div>
+            <!--</form>-->
+            <!-- / main -->
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="SyncDetail.html">
+    <div>
+        <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                ×
+            </button>
+            <h3 class="modal-title" align="center">
+                同步到CMS详细结果
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div align="center" class="container" style="width:100%">
+                <div style="border: 1px #C7C7C7  solid; overflow-y: auto;" class="">
+                    <div id="control_hide1" align="left" style="max-height:400px;" class="">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px">No</th>
+                                    <th style="width:auto">车型名称</th>
+                                    <th style="width:180px">资产编号</th>
+                                    <th style="width:180px">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in SyncDetailData.Data">
+                                    <td>{{$index+1}}</td>
+                                    <td style="white-space:inherit">{{data.ASSET_MODEL_DSC}}</td>
+                                    <td>{{data.MIOCN}}</td>
+                                    <td>{{data.IMP_TIME}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">
+                关闭
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="SyncDetail_Rent.html">
+    <div>
+        <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                ×
+            </button>
+            <h3 class="modal-title" align="center">
+                同步到直租系统详细结果
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div align="center" class="container" style="width:100%">
+                <div style="border: 1px #C7C7C7  solid; overflow-y: auto;" class="">
+                    <div id="control_hide1" align="left" style="max-height:400px;" class="">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px">No</th>
+                                    <th style="width:80px">状态</th>
+                                    <th style="width:80px">品牌ID</th>
+                                    <th style="width:120px">品牌名称</th>
+                                    <th style="width:80px">车系ID</th>
+                                    <th style="width:120px">车系名称</th>
+                                    <th style="width:80px">车型ID</th>
+                                    <th style="width:auto">车型名称</th>
+                                    <th style="width:120px">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in RentData.Data">
+                                    <td>{{$index+1}}</td>
+                                    <td style="white-space:inherit">{{data.Status}}</td>
+                                    <td style="white-space:inherit">{{data.Brand_Id}}</td>
+                                    <td style="white-space:inherit">{{data.Brand_Name}}</td>
+                                    <td style="white-space:inherit">{{data.Series_Id}}</td>
+                                    <td style="white-space:inherit">{{data.Series_Name}}</td>
+                                    <td style="white-space:inherit">{{data.Model_Id}}</td>
+                                    <td style="white-space:inherit">{{data.Model_Name}}</td>
+                                    <td style="white-space:inherit">{{data.SyncTime}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">
+                关闭
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="Che300Data.html">
+    <div>
+        <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                ×
+            </button>
+            <h3 class="modal-title" align="center">
+                增量接口详细（{{Che300Data.data.version[0].InitialVersion}}到{{Che300Data.data.version[0].CurrentVersion}}）
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div align="center" class="container" style="width:100%;max-height:450px;overflow-y:auto;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="font-weight:700">
+                            车型详细：{{Che300Data.data.version[0].ModelTimestamp}}
+                        </div>
+                        <div style="border: 1px #C7C7C7  solid; overflow-x: auto;" class="">
+                            <div id="control_hide1" align="left" style="max-height:300px; width: 2500px;" class="">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50px">No</th>
+                                            <th style="width:80px">车系组ID</th>
+                                            <th style="width:150px">车系组名称</th>
+                                            <th style="width:80px">车系ID</th>
+                                            <th style="width:200px">车系名称</th>
+                                            <th style="width:80px">车型ID</th>
+                                            <th style="width:250px">车型名称</th>
+
+                                            <th>品牌ID</th>
+                                            <th>品牌名称</th>
+                                            <th>body_type</th>
+                                            <th>car_struct</th>
+                                            <th>标准</th>
+
+                                            <th>门数量</th>
+                                            <th>drive_name</th>
+                                            <th>马力</th>
+                                            <th>gear_name</th>
+                                            <th>gear_type</th>
+
+                                            <th>新能源</th>
+                                            <th>平行进口</th>
+                                            <th>排量</th>
+                                            <th>maker_type</th>
+                                            <th>market_date</th>
+
+                                            <th>max_reg_year</th>
+                                            <th>min_reg_year</th>
+
+                                            <th>车型年份</th>
+
+                                            <th>指导价</th>
+                                            <th>座位数</th>
+
+                                            <th>操作类型</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="data in Che300Data.data.model">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{data.series_group_id}}</td>
+                                            <td style="white-space:inherit">{{data.series_group_name}}</td>
+                                            <td>{{data.series_id}}</td>
+                                            <td style="white-space:inherit">{{data.series_name}}</td>
+                                            <td>{{data.model_id}}</td>
+                                            <td style="white-space:inherit">{{data.model_name}}</td>
+
+                                            <td style="white-space:inherit">{{data.brand_id}}</td>
+                                            <td style="white-space:inherit">{{data.brand_name}}</td>
+                                            <td style="white-space:inherit">{{data.body_type}}</td>
+                                            <td style="white-space:inherit">{{data.car_struct}}</td>
+                                            <td style="white-space:inherit">{{data.discharge_standard}}</td>
+
+                                            <td style="white-space:inherit">{{data.door_number}}</td>
+                                            <td style="white-space:inherit">{{data.drive_name}}</td>
+                                            <td style="white-space:inherit">{{data.engine_power}}</td>
+                                            <td style="white-space:inherit">{{data.gear_name}}</td>
+                                            <td style="white-space:inherit">{{data.gear_type}}</td>
+
+                                            <td style="white-space:inherit">{{data.is_green}}</td>
+                                            <td style="white-space:inherit">{{data.is_parallel}}</td>
+                                            <td style="white-space:inherit">{{data.liter}}</td>
+                                            <td style="white-space:inherit">{{data.maker_type}}</td>
+                                            <td style="white-space:inherit">{{data.market_date}}</td>
+
+                                            <td>{{data.max_reg_year}}</td>
+                                            <td>{{data.min_reg_year}}</td>
+
+                                            <td>{{data.model_year}}</td>
+
+                                            <td>{{data.price}}</td>
+                                            <td>{{data.seat_number}}</td>
+
+                                            <td>{{data.oper_type}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="font-weight:700">
+                            车系详细：{{Che300Data.data.version[0].SeriesTimestamp}}
+                        </div>
+                        <div style="border: 1px #C7C7C7  solid; overflow-x: auto;" class="">
+                            <div id="control_hide1" align="left" style="max-height:100px; max-width: 1200px;" class="">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50px">No</th>
+                                            <th style="width:80px">品牌ID</th>
+                                            <th style="width:100px">品牌名称</th>
+                                            <th style="width:120px">类型</th>
+                                            <th style="width:120px">maker type</th>
+                                            <th style="width:150px">车系组名称</th>
+                                            <th style="width:80px">车系ID</th>
+                                            <th style="width:250px">车系名称</th>
+                                            <th style="width:100px">操作类型</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="data in Che300Data.data.series">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{data.brand_id}}</td>
+                                            <td>{{data.brand_name}}</td>
+                                            <td>{{data.level_name}}</td>
+                                            <td>{{data.maker_type}}</td>
+                                            <td style="white-space:inherit">{{data.series_group_name}}</td>
+                                            <td>{{data.series_id}}</td>
+                                            <td style="white-space:inherit">{{data.series_name}}</td>
+                                            <td>{{data.oper_type}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="font-weight:700">
+                            品牌详细：{{Che300Data.data.version[0].BrandTimestamp}}
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px">No</th>
+                                    <th>品牌ID</th>
+                                    <th>品牌名称</th>
+                                    <th>操作类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in Che300Data.data.brand">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{data.brand_id}}</td>
+                                    <td>{{data.brand_name}}</td>
+                                    <td>{{data.oper_type}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">
+                关闭
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="ModelSync.html">
+    <div>
+        <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                ×
+            </button>
+            <h3 class="modal-title" align="center">
+                从Che300批量同步
+            </h3>
+        </div>
+        <div class="modal-body" style="height:450px;">
+            <div align="center" class="container" style="width:100%;max-height:430px;">
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-md-2">品牌</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="Brand" ng-change="brand_chg()">
+                            <option value="">--请选择--</option>
+                            <option ng-repeat="data in BrandList" value="{{data.brand_id}}">{{data.brand_name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">车系组-车系</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="Series" ng-change="series_chg()">
+                            <option value="">--请选择--</option>
+                            <option ng-repeat="data in SeriesList" value="{{data.series_id}}">{{data.series_group_name}}--{{ data.series_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-md-2">车型名称</div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="model_name" ng-model="modelname" ng-change="modelname_chg()"/>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-primary" ng-click="batchSync()">同步</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="max-height:350px;overflow-y:auto;">
+                            <table class="table" id="tb_model_info">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px"><input type="checkbox" id="ckAll" ng-click="selectAll()"/></th>
+                                        <th style="width:50px">No</th>
+                                        <th style="width:80px">车型ID</th>
+                                        <th style="width:auto">车型名称</th>
+                                        <th style="width:80px">CMS</th>
+                                        <th style="width:80px">直租</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in ModelList">
+                                        <td><input type="checkbox" id="ck_{{data.model_id}}" value="{{data.model_id}}"/></td>
+                                        <td>{{$index+1}}</td>
+                                        <td>{{data.model_id}}</td>
+                                        <td style="white-space:inherit"  ng-click="selectOne(this)">{{data.model_name}}</td>
+                                        <td><i id="sp_cms_{{data.model_id}}" style="font-size:17px"></i></td>
+                                        <td><i id="sp_rent_{{data.model_id}}" style="font-size:17px"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">
+                关闭
+            </button>
+        </div>
+    </div>
+</script>

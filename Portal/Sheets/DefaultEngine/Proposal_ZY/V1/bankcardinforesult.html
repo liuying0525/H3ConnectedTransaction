@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>风控评估结果</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/Portal/WFRes/images/DZJR_16_16.png" media="screen">
+    <link href="../../../WFRes/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" />
+    <link href="../../../WFRes/css/MvcSheet.css" rel="stylesheet" />
+    <link href="../../../WFRes/assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script src="../../../WFRes/assets/javascripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        .table-bordered > thead > tr > th {
+            text-align: center;
+            background-color: #EEEEEE
+        }
+        .table-bordered > tbody > tr > td {
+            text-align: center
+        }
+        .tab td {
+            padding: 10px;
+        }
+
+            .tab td:nth-child(1) {
+                width: 20%;
+            }
+
+        #tab .li-active {
+            background-color: blue;
+            color: white;
+        }
+
+        .hide {
+            display: none
+        }
+    </style>
+    <script type="text/javascript">
+        var oldTab = "tab0";
+        $(function () {
+            
+            var id = QueryString("id");
+            var idCard = QueryString("idCard");
+            var name = QueryString("name");
+            if (id == "" || id == null) {
+                alert("未查询到任务ID");
+                return;
+            }
+            if (idCard == "" || idCard == null) {
+                alert("未查询到身份证号码");
+                return;
+            }
+            if (name == "" || name == null) {
+                alert("未查询到姓名");
+                return;
+            }
+
+            var cardLiHtml = "";
+            var contentHtml = "";
+            $.ajax({
+                url: "/Portal/ZhengYuan/QueryBankCardReport?InstanceId=" + id + "&idCard=" + idCard + "&name=" + name +"&T=" + new Date().getTime(),
+                data: "",
+                type: "GET",
+                async: false,
+                dataType: "json",
+                success: function (result) {
+                    if (result == "" || result == null || result == "null" || result == undefined) {
+                        console.log(result);
+                        alert("出错啦！未查询到报告数据");
+                        return;
+                    }
+                    var r = JSON.parse(result);
+                    if (r.code == "00") {
+                        var data = r.data;
+
+                        data.forEach(function (item, number) {
+
+                            var isActive = "li-active";
+
+                            if (number != 0) {
+                                isActive = "";
+                            }
+
+                            cardLiHtml += "<li><a href=\"#\" id=\"liA-" + number + "\" class=\"" + isActive + "\" onclick=\"changeTab(" + number + ")\" >银行卡" + (number + 1) + "</a></li>";
+
+                            contentHtml += initContentTable(item, number);
+
+                        });
+                    }
+                    else {
+                        console.log(result);
+                        var message = "出错啦！未查询到报告数据";
+                        if (r.message == "" || r.message == null) {
+                            //message = "";
+                        } else {
+                            console.log(r.message);
+                        }
+                        alert(message);
+                    }
+                },
+                //error: function (msg) {
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+
+            $("#tab").append(cardLiHtml);
+            $("#tab").after(contentHtml);
+        });
+
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); //   decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+
+        function initContentTable(item, number) {
+
+            var hide = "hide";
+            if (number == 0) {
+                hide = "";
+            }
+
+            var contentHtml = "<table class=\"tab table-bordered " + hide + "\" id=\"tab" + number + "\" style=\"width: 100%\">";
+
+            if (item.data == null || item.data == "null" || item.data == undefined) {
+
+                contentHtml += "<tr><td>无银行卡信息报告</td></tr>";
+
+                return contentHtml;
+            }
+            else {
+
+                var reportDataLength = item.data.length;
+
+                item.data.forEach(function (report, index) {
+                    var rowspancount = report.value.length + 1;
+                    contentHtml += "<tr><td rowspan='" + rowspancount + "'>" + report.key + "</td></tr>";
+
+                    report.value.forEach(function (valueitem, index2) {
+                        contentHtml += "<tr><td>" + valueitem.key + "</td><td>" + valueitem.value + "</td></tr>";
+                    });
+
+                    if (reportDataLength != index + 1) {
+                        contentHtml += "<tr style='background:#DDDDDD'><td colspan='3'></td></tr>";
+                    }
+                });
+            }
+            contentHtml += "</table>";
+
+            return contentHtml;
+        }
+
+        function changeTab(tabId) {
+            //相同标签不变
+            if (oldTab == "tab" + tabId) {
+                return;
+            }
+
+            //全部不显示
+            $("#tab li a").removeClass("li-active");
+
+            //增加显示
+            $("#liA-" + tabId).addClass("li-active");
+
+            //tab显示 隐藏
+            $("#" + oldTab).addClass("hide");
+
+            oldTab = "tab" + tabId;
+            $("#" + oldTab).removeClass("hide");
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <h1 style="text-align:center">风控评估报告</h1>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">银行卡消费数据</h3>
+            </div>
+            <div class="panel-body">
+                <ul id="tab" class="nav nav-tabs">
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

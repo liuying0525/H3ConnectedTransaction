@@ -1,0 +1,82 @@
+﻿<!--权限校验-->
+<script>$.post('/Portal/Ajax/CheckFunction.ashx?Code=Manage_ManageMaintenance', {}, function(ret) {
+		console.log(ret);
+		eval(ret)
+	})</script>
+<!--
+    我的流程
+     -->
+<!--  ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm managemaintenance">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                </div>
+            </div>
+        </div>
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <form method="post" ng-submit="OnSubmitForm($event)" class="bs-example form-horizontal manageform" name="manageform" id="manageformID" novalidate>
+                        <div class="col-md-12 ManageMain" style="padding-top:40px;">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"><span class="must" style="color:red">*</span>资本净额:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" type="number"
+                                           placeholder="请输入" ng-model="maintenance.asset" name="asset"
+                                           required ng-focus ng-pattern="/(^([-]?)[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^([-]?)(0){1}$)|(^([-]?)[0-9]\.[0-9]([0-9])?$)/">
+                                    <div class="error" ng-show="(manageform.asset.$dirty&&manageform.asset.$invalid)||(manageform.asset.$invalid && manageform.submitted)">
+                                        <small ng-show="manageform.asset.$error.required">资本净额不能为空</small>
+                                        <span ng-show="manageform.asset.$error.pattern">最多保留2位小数</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上年总收入:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" placeholder="请输入" name="incomePrevYear" ng-model="maintenance.incomePrevYear">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上年总利率:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" placeholder="请输入" name="ratePrevYear" ng-model="maintenance.ratePrevYear">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上个报告期的总资产:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" placeholder="请输入" name="assetPrevReport" ng-model="maintenance.assetPrevReport">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">股票票面金额平均股价:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" placeholder="请输入" name="sharePriceAvg" ng-model="maintenance.sharePriceAvg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">已发行股份数():</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control manageinput" placeholder="请输入" name="numberOfShares" ng-model="maintenance.numberOfShares">
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align: center;">
+                                <button type="submit" class="btn btn-primary btn-lg" aria-haspopup="true" aria-expanded="true" form="manageformID">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!--表格部分End-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / main -->
+</div>

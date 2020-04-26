@@ -1,0 +1,102 @@
+﻿<!--
+    零售列表
+     -->
+<!-- ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <!--<form>-->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row" style=" padding-right 15px; ">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                    <!--<span translate="WorkItemController.UnFinishedWorkitem"></span><br />
+                    {{'WorkItemController.UnFinishedWorkitem'|translate}}<br />-->
+                    <!--<h1 class="m-n font-thin h3 text-black">{{name}}</h1>-->
+                </div>
+            </div>
+        </div>
+
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="form-inline" style="float:left;">
+                        <div class="input-group searchContainer">
+                            <div class="form-group" style="margin-right:15px">
+                                <a class="btn btn-info" ui-toggle-class="show" target=".app-aside-right" targeturl="StartInstance.html?WorkflowCode=APPLICATION">新建贷款</a>
+                                <a class="btn btn-info hidden" ui-toggle-class="show" target=".app-aside-right" targeturl="" id="btn_copy">复制</a>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="input-sm form-control" style="width:120px"
+                                       ng-model="application_no" ng-change=""
+                                       autocomplete="off"
+                                       placeholder="申请编号">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="input-sm form-control" style="width:120px"
+                                       ng-model="application_name" ng-change=""
+                                       autocomplete="off"
+                                       placeholder="姓名/公司名称">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="week" ng-model="week_month" ng-change="setTime_cdt()"> 近一周
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="month" ng-model="week_month" ng-change="setTime_cdt()"> 近一月
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input ng-model="StartTime" id="StartTime"
+                                           ui-jq="wdatePicker" style="width:100px;"
+                                           class="input-sm form-control"
+                                           placeholder="开始时间" />
+                                    <span class="input-group-addon" style="border-left:0px;border-right:0px;" translate="QueryTableColumn.To"></span>
+                                    <input ng-model="EndTime" id="EndTime"
+                                           class="input-sm form-control" style="width:100px;"
+                                           ui-jq="wdatePicker"
+                                           placeholder="结束时间" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" style="height:30px;"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <table ui-jq="dataTable" id="tabUnfinishWorkitem"
+                               ui-options="options()"
+                               class="table table-striped m-b-none" style="width:105%;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 3%;"></th>
+                                    <th style="width:9%;">申请编号</th>
+                                    <th style="width:10%;">申请人姓名</th>
+                                    <th style="width:10%;">申请类型</th>
+                                    <th style="width: 8%;">日期</th>
+                                    <th style="width: 6%;" class="hide414">H3状态</th>
+                                    <th style="width: 6%;" class="hide414">CAP状态</th>
+                                    <th style="width: 10%;" class="hide1024">制造商</th>
+                                    <th style="width: 16%;" class="hide1024">贷款车型</th>
+                                    <th style="width: 10%;" class="hide1024">贷款产品</th>
+                                    <th style="width: 10%;" class="hide1024">贷款金额</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--表格部分End-->
+        </div>
+        <!--</form>-->
+        <!-- / main -->
+    </div>

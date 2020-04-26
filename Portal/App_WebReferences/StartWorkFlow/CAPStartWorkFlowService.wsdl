@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ProposalApproval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ApprovalUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProposalApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProposalApprovalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBackFI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InstanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActivityCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBackFIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBackFIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDDBank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EngineNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VinNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDDBankResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateDDBankResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CAPStartWorkFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="capinfo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CAPStartWorkFlowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CAPStartWorkFlowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSComplied">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSCompliedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CMSCompliedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSSettled">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSSettledResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CMSSettledResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSCollectionData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contractNbr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CMSCollectionDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CMSCollectionDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoryCAPStartWorkFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="capinfo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoryCAPStartWorkFlowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoryCAPStartWorkFlowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ProposalApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:ProposalApproval" />
+  </wsdl:message>
+  <wsdl:message name="ProposalApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:ProposalApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFISoapIn">
+    <wsdl:part name="parameters" element="tns:SendBackFI" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFISoapOut">
+    <wsdl:part name="parameters" element="tns:SendBackFIResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDDBank" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDDBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowSoapIn">
+    <wsdl:part name="parameters" element="tns:CAPStartWorkFlow" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowSoapOut">
+    <wsdl:part name="parameters" element="tns:CAPStartWorkFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedSoapIn">
+    <wsdl:part name="parameters" element="tns:CMSComplied" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedSoapOut">
+    <wsdl:part name="parameters" element="tns:CMSCompliedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledSoapIn">
+    <wsdl:part name="parameters" element="tns:CMSSettled" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledSoapOut">
+    <wsdl:part name="parameters" element="tns:CMSSettledResponse" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataSoapIn">
+    <wsdl:part name="parameters" element="tns:CMSCollectionData" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataSoapOut">
+    <wsdl:part name="parameters" element="tns:CMSCollectionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowSoapIn">
+    <wsdl:part name="parameters" element="tns:HistoryCAPStartWorkFlow" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowSoapOut">
+    <wsdl:part name="parameters" element="tns:HistoryCAPStartWorkFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProposalApprovalHttpGetIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+    <wsdl:part name="ApprovalUser" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProposalApprovalHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFIHttpGetIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="applicationNo" type="s:string" />
+    <wsdl:part name="InstanceID" type="s:string" />
+    <wsdl:part name="ActivityCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFIHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankHttpGetIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="EngineNo" type="s:string" />
+    <wsdl:part name="VinNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowHttpGetIn">
+    <wsdl:part name="capinfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedHttpGetIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledHttpGetIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataHttpGetIn">
+    <wsdl:part name="contractNbr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowHttpGetIn">
+    <wsdl:part name="capinfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ProposalApprovalHttpPostIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+    <wsdl:part name="ApprovalUser" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProposalApprovalHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFIHttpPostIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="applicationNo" type="s:string" />
+    <wsdl:part name="InstanceID" type="s:string" />
+    <wsdl:part name="ActivityCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendBackFIHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankHttpPostIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="EngineNo" type="s:string" />
+    <wsdl:part name="VinNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDDBankHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowHttpPostIn">
+    <wsdl:part name="capinfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedHttpPostIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCompliedHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledHttpPostIn">
+    <wsdl:part name="applicationNumber" type="s:string" />
+    <wsdl:part name="StatusCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSSettledHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataHttpPostIn">
+    <wsdl:part name="contractNbr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CMSCollectionDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowHttpPostIn">
+    <wsdl:part name="capinfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryCAPStartWorkFlowHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="CAPStartWorkFlowServiceSoap">
+    <wsdl:operation name="ProposalApproval">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:ProposalApprovalSoapIn" />
+      <wsdl:output message="tns:ProposalApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SendBackFI</wsdl:documentation>
+      <wsdl:input message="tns:SendBackFISoapIn" />
+      <wsdl:output message="tns:SendBackFISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateDDBank</wsdl:documentation>
+      <wsdl:input message="tns:UpdateDDBankSoapIn" />
+      <wsdl:output message="tns:UpdateDDBankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:CAPStartWorkFlowSoapIn" />
+      <wsdl:output message="tns:CAPStartWorkFlowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSComplied</wsdl:documentation>
+      <wsdl:input message="tns:CMSCompliedSoapIn" />
+      <wsdl:output message="tns:CMSCompliedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSSettled</wsdl:documentation>
+      <wsdl:input message="tns:CMSSettledSoapIn" />
+      <wsdl:output message="tns:CMSSettledSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSCollectionData</wsdl:documentation>
+      <wsdl:input message="tns:CMSCollectionDataSoapIn" />
+      <wsdl:output message="tns:CMSCollectionDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:HistoryCAPStartWorkFlowSoapIn" />
+      <wsdl:output message="tns:HistoryCAPStartWorkFlowSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CAPStartWorkFlowServiceHttpGet">
+    <wsdl:operation name="ProposalApproval">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:ProposalApprovalHttpGetIn" />
+      <wsdl:output message="tns:ProposalApprovalHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SendBackFI</wsdl:documentation>
+      <wsdl:input message="tns:SendBackFIHttpGetIn" />
+      <wsdl:output message="tns:SendBackFIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateDDBank</wsdl:documentation>
+      <wsdl:input message="tns:UpdateDDBankHttpGetIn" />
+      <wsdl:output message="tns:UpdateDDBankHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:CAPStartWorkFlowHttpGetIn" />
+      <wsdl:output message="tns:CAPStartWorkFlowHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSComplied</wsdl:documentation>
+      <wsdl:input message="tns:CMSCompliedHttpGetIn" />
+      <wsdl:output message="tns:CMSCompliedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSSettled</wsdl:documentation>
+      <wsdl:input message="tns:CMSSettledHttpGetIn" />
+      <wsdl:output message="tns:CMSSettledHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSCollectionData</wsdl:documentation>
+      <wsdl:input message="tns:CMSCollectionDataHttpGetIn" />
+      <wsdl:output message="tns:CMSCollectionDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:HistoryCAPStartWorkFlowHttpGetIn" />
+      <wsdl:output message="tns:HistoryCAPStartWorkFlowHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CAPStartWorkFlowServiceHttpPost">
+    <wsdl:operation name="ProposalApproval">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:ProposalApprovalHttpPostIn" />
+      <wsdl:output message="tns:ProposalApprovalHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SendBackFI</wsdl:documentation>
+      <wsdl:input message="tns:SendBackFIHttpPostIn" />
+      <wsdl:output message="tns:SendBackFIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">UpdateDDBank</wsdl:documentation>
+      <wsdl:input message="tns:UpdateDDBankHttpPostIn" />
+      <wsdl:output message="tns:UpdateDDBankHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:CAPStartWorkFlowHttpPostIn" />
+      <wsdl:output message="tns:CAPStartWorkFlowHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSComplied</wsdl:documentation>
+      <wsdl:input message="tns:CMSCompliedHttpPostIn" />
+      <wsdl:output message="tns:CMSCompliedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSSettled</wsdl:documentation>
+      <wsdl:input message="tns:CMSSettledHttpPostIn" />
+      <wsdl:output message="tns:CMSSettledHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CMSCollectionData</wsdl:documentation>
+      <wsdl:input message="tns:CMSCollectionDataHttpPostIn" />
+      <wsdl:output message="tns:CMSCollectionDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:HistoryCAPStartWorkFlowHttpPostIn" />
+      <wsdl:output message="tns:HistoryCAPStartWorkFlowHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CAPStartWorkFlowServiceSoap" type="tns:CAPStartWorkFlowServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ProposalApproval">
+      <soap:operation soapAction="http://tempuri.org/ProposalApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <soap:operation soapAction="http://tempuri.org/SendBackFI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <soap:operation soapAction="http://tempuri.org/UpdateDDBank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <soap:operation soapAction="http://tempuri.org/CAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <soap:operation soapAction="http://tempuri.org/CMSComplied" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <soap:operation soapAction="http://tempuri.org/CMSSettled" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <soap:operation soapAction="http://tempuri.org/CMSCollectionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <soap:operation soapAction="http://tempuri.org/HistoryCAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CAPStartWorkFlowServiceSoap12" type="tns:CAPStartWorkFlowServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ProposalApproval">
+      <soap12:operation soapAction="http://tempuri.org/ProposalApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <soap12:operation soapAction="http://tempuri.org/SendBackFI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <soap12:operation soapAction="http://tempuri.org/UpdateDDBank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <soap12:operation soapAction="http://tempuri.org/CAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <soap12:operation soapAction="http://tempuri.org/CMSComplied" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <soap12:operation soapAction="http://tempuri.org/CMSSettled" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <soap12:operation soapAction="http://tempuri.org/CMSCollectionData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <soap12:operation soapAction="http://tempuri.org/HistoryCAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CAPStartWorkFlowServiceHttpGet" type="tns:CAPStartWorkFlowServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ProposalApproval">
+      <http:operation location="/ProposalApproval" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <http:operation location="/SendBackFI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <http:operation location="/UpdateDDBank" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <http:operation location="/CAPStartWorkFlow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <http:operation location="/CMSComplied" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <http:operation location="/CMSSettled" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <http:operation location="/CMSCollectionData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <http:operation location="/HistoryCAPStartWorkFlow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CAPStartWorkFlowServiceHttpPost" type="tns:CAPStartWorkFlowServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ProposalApproval">
+      <http:operation location="/ProposalApproval" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <http:operation location="/SendBackFI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <http:operation location="/UpdateDDBank" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <http:operation location="/CAPStartWorkFlow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSComplied">
+      <http:operation location="/CMSComplied" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <http:operation location="/CMSSettled" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <http:operation location="/CMSCollectionData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoryCAPStartWorkFlow">
+      <http:operation location="/HistoryCAPStartWorkFlow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CAPStartWorkFlowService">
+    <wsdl:port name="CAPStartWorkFlowServiceSoap" binding="tns:CAPStartWorkFlowServiceSoap">
+      <soap:address location="http://localhost:8010/Portal/Webservices/CAPStartWorkFlowService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CAPStartWorkFlowServiceSoap12" binding="tns:CAPStartWorkFlowServiceSoap12">
+      <soap12:address location="http://localhost:8010/Portal/Webservices/CAPStartWorkFlowService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CAPStartWorkFlowServiceHttpGet" binding="tns:CAPStartWorkFlowServiceHttpGet">
+      <http:address location="http://localhost:8010/Portal/Webservices/CAPStartWorkFlowService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CAPStartWorkFlowServiceHttpPost" binding="tns:CAPStartWorkFlowServiceHttpPost">
+      <http:address location="http://localhost:8010/Portal/Webservices/CAPStartWorkFlowService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

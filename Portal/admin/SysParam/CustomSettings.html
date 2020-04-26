@@ -1,0 +1,134 @@
+﻿<script>
+    $(function () {
+        var pageData = {};
+
+        //初始化页面数据
+        initPageData();
+
+        var model = new Vue({
+            el: "#content",
+            data: pageData,
+            methods: {
+                saveData: function (event) {
+                    saveData();
+                }
+            }
+        });
+        $("#ToolBar").AspLinkToolBar();
+        $(".H3Panel").BuildPanel();
+        
+        //初始化页面数据
+        function initPageData() {
+            $.ajax({
+                url: "/Portal/CustomSetting/GetAllCustomSetting",
+                type: 'get',
+                dataType: "json",
+                async: false,//同步执行
+                success: function (result) {
+                    debugger;
+                    pageData = result;
+                    $.LangArray(pageData, "Text");
+                    //pageData.LanData = $.Languages;
+                }
+            });
+        };
+
+        //保存全局变量
+        function saveData() {
+            $.ajax({
+                url: "/Portal/CustomSetting/SaveAllCustomSetting",
+                type: "post",
+                dataType: "json",
+                data: pageData.CustomParam,
+                success: function (result) {
+                    if (result.Success) {
+                        $.H3Dialog.Success({ content: $.Lang("msgGlobalString.SaveSucced") });
+                    } else {
+                        $.H3Dialog.Warn({ content: $.Lang("保存失败") });
+                    }
+                }
+            });
+        };
+    });
+</script>
+<validator name="formValidator">
+    <div id="ToolBar">
+        <a v-on:click="saveData" data-icon="fa fa-save" href="javascript:void(0)" data-lang="GlobalButton.Save">保存</a>
+    </div>
+    <!-- Cap日结时间 -->
+    <div class="H3Panel">
+        <span>零售禁用提交时间段</span>
+        <table class="tableList">
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    开始时间
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.SysStopFromTime" />
+                </td>
+                <td class="tableDesCol">20:00</td>
+            </tr>
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    结束时间
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.SysStopToTime" />
+                </td>
+                <td class="tableDesCol">22:00</td>
+            </tr>
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    提示内容
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.SysStopMessage" />
+                </td>
+                <td class="tableDesCol">
+                    系统日结中（从20:00到22:00），请保存好数据并在系统日结后提交
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- EventHandler方法 -->
+    <div class="H3Panel">
+        <span>EventHandler方法</span>
+        <table class="tableList">
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    OnCreated
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.HttpPostCreatedURL" />
+                </td>
+                <td class="tableDesCol">
+                    http://localhost:8010/WebApi/EventHandler/OnCreated
+                </td>
+            </tr>
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    OnUpdated
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.HttpPostUpdatedURL" />
+                </td>
+                <td class="tableDesCol">
+                    http://localhost:8010/WebApi/EventHandler/OnUpdated
+                </td>
+            </tr>
+            <tr>
+                <td class="tableLeft" style="width: 120px;">
+                    OnRemoved
+                </td>
+                <td style="width: 250px;">
+                    <input type="text" v-model="CustomParam.HttpPostRemovedURL" />
+                </td>
+                <td class="tableDesCol">
+                    http://localhost:8010/WebApi/EventHandler/OnRemoved
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</validator>

@@ -1,0 +1,197 @@
+﻿<!--权限校验-->
+<script>$.post('/Portal/Ajax/CheckFunction.ashx?Code=Manage_ManageRelatedparty', {}, function(ret) {
+		console.log(ret);
+		eval(ret)
+	})</script>
+<!--
+    我的流程
+     -->
+<!--  ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm managerelatedparty">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                </div>
+            </div>
+        </div>
+
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group searchContainer" style="float:left;">
+                            <div class="form-group">
+                                <!--<input ng-model="InstanceName" style="width:200px;" maxlength="32" class="input-sm form-control"
+                                           placeholder="{{LanJson.ProcessName}}" />-->
+                                <input  ng-model="searchName" style="width:200px;" maxlength="32" autocomplete="off" class="input-sm form-control" placeholder="请输入关联人名称" id="serchN" ng-change="search($event,'serchName')"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="border-left:0px;border-right:0px;">证件号</span>
+                                    <input   type="text" class="input-sm form-control" style="width:200px" ng-model="searchIdentityNo" ng-change="search($event,'searchIdentityNo')" autocomplete="off" placeholder="请输入">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="searchKey" type="text" class="input-sm form-control" style="width:200px;display:none;" placeholder="{{LanJson.search}}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" style="height:30px;"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <div class="form-group" style="margin-left:5px;">
+                                <div class="btn-group btn-default">
+                                    <a class="btn btn-default" ng-click="btn_addRelated()">
+                                        <i class="panel-title-icon fa fa-plus">
+                                            <span style="margin-left:3px;" translate="QueryTableColumn.Add"></span>
+                                        </i>
+                                    </a>
+                                    <!--<button class="btn btn-default" ng-click="btn_removeAgents()">
+                                        <i class="panel-title-icon fa fa-minus">
+                                            <span style="margin-left:3px;" translate="QueryTableColumn.Remove"></span>
+                                        </i>
+                                    </button>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <table ui-jq="dataTable" id="tabManageRelatedparty" ui-options="options_ManageRelatedparty" class="table table-striped m-b-none" style="width:99.5%;">
+                        <thead>
+                            <tr>
+                                <th style="width:4%;padding-left:15px;">
+                                    <input type="checkbox" ng-model="checkAll" />
+                                </th>
+                                <th style="width:20%;" translate="QueryTableColumn.Transaction_number"></th>
+                                <th style="width: 25%;" translate="QueryTableColumn.Associatedperson_name"></th>
+                                <!--<th style="width: 10%;" translate="QueryTableColumn.State"></th>-->
+                                <th style="width: 20%;" translate="QueryTableColumn.Transaction_type"></th>
+                                <th style="width: 25%;" translate="QueryTableColumn.Transaction_amout"></th>
+                                <th style="width: 20%;" translate="QueryTableColumn.ConnectedTransaction_type"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--表格部分End-->
+    </div>
+    <!-- / main -->
+</div>
+<script type="text/ng-template" id="EditRelated.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+            ×
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            <span translate="QueryTableColumn.AddRelated">关联交易</span>
+        </h4>
+    </div>
+    <alert class="animated fadeInDown hide fadeOut" id="EditError" type="danger" close="" style="width: 300px;font-size:15px;">
+        <span ng-bind="FailMessage"></span>
+    </alert>
+    <div class="modal-body" style="padding-left:50px;padding-right:50px;">
+        <form class="bs-example form-horizontal" name="ManageForm" id="ManageFormID">
+            <div class="row">
+                <div class="form-group">  
+                	<div class="col-md-3 text-right">
+                		<span class="must" style="color:red">*</span><label class="control-label" translate="QueryTableColumn.RelatedName"></label>
+                	</div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control manageinput" type="text" placeholder="请输入" ng-model="match.name" name="name" required>
+						<div class="error" ng-show="(ManageForm.name.$dirty&&ManageForm.name.$invalid)||(ManageForm.name.$invalid && ManageForm.submitted)">
+							<span ng-show="ManageForm.name.$error.required">
+								交易方名称不能为空
+							</span>
+						</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                	<div class="col-md-3 text-right">
+	                	<span class="must" style="color:red">*</span><label class="control-label" translate="QueryTableColumn.RelatedPartyType"></label>
+                    </div>
+                    <div class="col-md-9">
+                        <select class="select form-control" ng-model="match.relatedType" ng-options="o.id as o.name for o in relatedType" name="relatedType" ng-change="relatedChange()" required></select>
+                          <div style="color:red" ng-show="(ManageForm.relatedType.$dirty&&ManageForm.relatedType.$invalid)||(ManageForm.relatedType.$invalid&&ManageForm.submitted)">
+						<span ng-show="ManageForm.relatedType.$error.required">请选择交易方类型。</span></div>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                	<div class="col-md-3 text-right">
+                		<span class="must" style="color:red">*</span><label  class="control-label" translate="QueryTableColumn.IdNumber"></label>
+                	</div>
+                   
+                    <div class="col-md-9">
+                        <input type="text" class="form-control manageinput" type="text" placeholder="请输入" ng-model="match.identityNo" name="identityNo" required>
+						<div class="error" ng-show="(ManageForm.identityNo.$dirty&&ManageForm.identityNo.$invalid)||(ManageForm.identityNo.$invalid && ManageForm.submitted)">
+							<span ng-show="ManageForm.identityNo.$error.required">
+								证件号不能为空
+							</span>
+						</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                	<div class="col-md-3 text-right">
+                		<span class="must" style="color:red">*</span><label class="control-label" translate="QueryTableColumn.RelatedType"></label></div>
+                    <div class="col-md-9">              
+                     <select class="form-control" id="srelation" ng-model="match.transType" ng-options="o.name as o.id for o in transType" name="transType" ng-change="typeChange()"   required></select>
+                     <div style="color:red" ng-show="(ManageForm.transType.$dirty&&ManageForm.transType.$invalid)||(ManageForm.transType.$invalid&&ManageForm.submitted)">
+						<span ng-show="ManageForm.transType.$error.required">请选择交易类型。</span></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                	<div class="col-md-3 text-right">
+                    	<span class="must" style="color:red">*</span><label class="control-label" translate="QueryTableColumn.Transaction_amout"></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control manageinput" placeholder="请输入" ng-model="match.transMoney" name="transMoney" required ng-focus ng-pattern="/^(0|[1-9]\d*)(\s|$|\.\d{1,2}\b)/">
+                        	<div class="error" ng-show="(ManageForm.transMoney.$dirty&&ManageForm.transMoney.$invalid)||(ManageForm.transMoney.$invalid && ManageForm.submitted)">
+							<span ng-show="ManageForm.transMoney.$error.required">
+								交易金额不能为空
+							</span>
+							<span ng-show="ManageForm.transMoney.$error.pattern">只能输入大于等于0的数(最多保留2位小数)</span>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="alert alert-success alert-dismissible relatedwarn" role="alert" ng-show="matchResult==1" id="matchResult1">
+                    <button type="button" class="close" ng-click="divShow('#matchResult1')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>该交易为一般关联交易！</strong> 请按照正常流程进行交易，并对交易进行相关的留档备案！
+                </div>
+
+                <div class="alert alert-danger alert-dismissible relatedwarn" role="alert" style="padding-left:40px" ng-show="matchResult==0" id="matchResult0">
+                    <button type="button" class="close" aria-label="Close" ng-click="divShow('#matchResult0')"><span aria-hidden="true">&times;</span></button>
+                    <strong><span class="glyphicon glyphicon-ok-sign" aria-hidden="true" style=""></span>该交易不属于关联交易！</strong>
+                </div>
+                <div class="alert alert-warning relatedwarn" role="alert" ng-show="matchResult==2" id="matchResult2">
+                	 <button type="button" class="close" aria-label="Close" ng-click="divShow('#matchResult2')"><span aria-hidden="true">&times;</span></button>
+                    <strong><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>请注意！该交易为重大关联交易</strong>
+                    请按重大关联交易流程进行备案审批
+                    <!--<a href="#" class="alert-link">继续审批</a>-->
+                </div>
+            </div>
+
+    </div></form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="ok($event,'match')" ng-init="matchText='开始匹配'">
+            <span>{{matchText}}</span>
+        </button>
+         <!--<button type="button" class="btn btn-info" ng-click="ok($event,'add')" ng-show="AddBtn">
+            <span>添加</span>
+        </button>-->
+        
+        
+        
+        
+    </div>
+</script>

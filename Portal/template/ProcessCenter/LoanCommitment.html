@@ -1,0 +1,106 @@
+﻿<!--
+    放款承诺函
+     -->
+<!--  ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row" style=" padding-right: 15px; ">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                </div>
+            </div>
+        </div>
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group searchContainer">
+
+                            <div class="form-group">
+                                <input type="text" class="input-sm form-control" style="width:200px"
+                                       ng-model="searchKey" ng-change="searchKeyChange()"
+                                       autocomplete="off"
+                                       placeholder="流程名称">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="border-left:0px;border-right:0px;">PICK</span>
+                                    <select class="select form-control" id="usertype" style="width:100px" ng-model="Pick">
+                                        <option value=""></option>
+                                        <option value="0">UnPicked</option>
+                                        <option value="1">Picked</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input ng-model="StartTime" id="StartTime"
+                                           ui-jq="wdatePicker" style="width:100px;"
+                                           class="input-sm form-control"
+                                           placeholder="开始时间" />
+                                    <span class="input-group-addon" style="border-left:0px;border-right:0px;" translate="QueryTableColumn.To"></span>
+                                    <input ng-model="EndTime" id="EndTime"
+                                           class="input-sm form-control" style="width:100px;"
+                                           ui-jq="wdatePicker"
+                                           placeholder="结束时间" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" style="height:30px;"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+
+                            <div class="form-group" style="margin-left:50px">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" title="" ng-click="showCommentModal();">
+                                        <i class="fa fa-check"></i><span style=" margin-left:5px;" translate="批量PICK"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table ui-jq="dataTable" id="tabUnReadWorkitem"
+                           ui-options="dtOptions"
+                           class="table table-striped m-b-none" style="width:99.8%;">
+                        <thead>
+                            <tr>
+                                <th style="width:10px;padding-left:15px;">
+                                    <input type="checkbox" ng-model="checkAll" />
+                                </th>
+                                <th style="width:50px">
+                                    <span translate="PICK"></span>
+                                </th>
+                                <th>
+                                    <span translate="QueryTableColumn.ProcessName"></span>
+                                </th>
+                                <th>
+                                    <span translate="QueryTableColumn.CircilateSource"></span>
+                                </th>
+                                <th class="hide414">
+                                    <span translate="QueryTableColumn.ReceiveTime"></span>
+                                </th>
+                                <th class="hide1024">
+                                    <span translate="QueryTableColumn.Originator"></span>
+                                </th>
+                                <th class="hide1024">
+                                    <span translate="QueryTableColumn.DeptOfOriginator"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--表格部分End-->
+    </div>
+    <!-- / main -->
+</div>

@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://macom.263.net/axis/xmapi" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://macom.263.net/axis/xmapi" targetNamespace="http://macom.263.net/axis/xmapi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://macom.263.net/axis/xmapi">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="regXmailListAndPriviResponse">
+    <wsdl:part name="regXmailListAndPriviReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDisGroupUserRequest">
+    <wsdl:part name="deptId" type="xsd:int" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modUserStatus_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="status" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXmaillistByNameRequest">
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllXmaillistResponse">
+    <wsdl:part name="getAllXmaillistReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupUserResponse">
+    <wsdl:part name="createDisGroupUserReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modDomainCos_NewResponse">
+    <wsdl:part name="modDomainCos_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistAndAlias_NewRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regUser_NewResponse">
+    <wsdl:part name="regUser_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateDepartmentRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="departmentName" type="xsd:string" />
+    <wsdl:part name="deptId" type="xsd:int" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="listName" type="xsd:string" />
+    <wsdl:part name="listSync" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfoSupportMultiAliasResponse">
+    <wsdl:part name="modUserInfoSupportMultiAliasReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateDisGroupResponse">
+    <wsdl:part name="updateDisGroupReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticationRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainDisGroupUserResponse">
+    <wsdl:part name="getDomainDisGroupUserReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupResponse">
+    <wsdl:part name="createDisGroupReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfo_NewResponse">
+    <wsdl:part name="modUserInfo_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDisGroupResponse">
+    <wsdl:part name="getDisGroupReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateXmailListByNameRequest">
+    <wsdl:part name="oldname" type="xsd:string" />
+    <wsdl:part name="newname" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="members" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDepartmentRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentId" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDisGroupUserRequest">
+    <wsdl:part name="deptId" type="xsd:int" />
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modGid_NewResponse">
+    <wsdl:part name="modGid_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getAllXmaillistRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDirInfo_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistGsoapResponse">
+    <wsdl:part name="getDomainUserlistGsoapReturn" type="xsd:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistLengthGsoapRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDirInfoRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="RegUserResponse">
+    <wsdl:part name="RegUserReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticationResponse">
+    <wsdl:part name="AuthenticationReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="getVersionReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllAppRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regUser_MultiRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="gid" type="xsd:int" />
+    <wsdl:part name="departmentid" type="xsd:string" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="offic" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="roleId" type="xsd:int" />
+    <wsdl:part name="changepwd" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistAndAlias_NewResponse">
+    <wsdl:part name="getDomainUserlistAndAlias_NewReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDirInfo_NewResponse">
+    <wsdl:part name="getDirInfo_NewReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modPasswd_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDepartmentRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentName" type="xsd:string" />
+    <wsdl:part name="deptId" type="xsd:int" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="listName" type="xsd:string" />
+    <wsdl:part name="listSync" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="disGroupName" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="parent" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="authenticationManager_NewResponse">
+    <wsdl:part name="authenticationManager_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ModGidResponse">
+    <wsdl:part name="ModGidReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserByWechatRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="type" type="xsd:int" />
+    <wsdl:part name="querytype" type="xsd:int" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistByStatusResponse">
+    <wsdl:part name="getDomainUserlistByStatusReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regXmailListAndPriviRequest">
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="members" type="xsd:string" />
+    <wsdl:part name="listprivi" type="xsd:int" />
+    <wsdl:part name="prividept" type="xsd:string" />
+    <wsdl:part name="privideptname" type="xsd:string" />
+    <wsdl:part name="priviuser" type="xsd:string" />
+    <wsdl:part name="prividomain" type="xsd:string" />
+    <wsdl:part name="grouptype" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserInfo_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ModPasswdRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfo_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modGid_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="gid" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfo_MultiResponse">
+    <wsdl:part name="modUserInfo_MultiReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetSaasDomainUserlistRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateXmailListAndPriviRequest">
+    <wsdl:part name="oldname" type="xsd:string" />
+    <wsdl:part name="newname" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="members" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="memberstype" type="xsd:int" />
+    <wsdl:part name="grouptype" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="AspGetDomainUserlistResponse">
+    <wsdl:part name="AspGetDomainUserlistReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlist_NewResponse">
+    <wsdl:part name="getDomainUserlist_NewReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regXmailListResponse">
+    <wsdl:part name="regXmailListReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateXmailListByNameResponse">
+    <wsdl:part name="updateXmailListByNameReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDisGroupUserResponse">
+    <wsdl:part name="getDisGroupUserReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlist_NewRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDisGroupUserResponse">
+    <wsdl:part name="deleteDisGroupUserReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ModPasswdResponse">
+    <wsdl:part name="ModPasswdReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ModStatusResponse">
+    <wsdl:part name="ModStatusReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="saveOrUpdateAppResponse">
+    <wsdl:part name="saveOrUpdateAppReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainInfo_newResponse">
+    <wsdl:part name="getDomainInfo_newReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfoSupportMultiAliasRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="thisParamNotUse" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="opAliasType" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDisGroupRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ModUserInfoResponse">
+    <wsdl:part name="ModUserInfoReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modUserStatus_NewResponse">
+    <wsdl:part name="modUserStatus_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="regUser_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="gid" type="xsd:int" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="offic" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="roleId" type="xsd:int" />
+    <wsdl:part name="changepwd" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDisGroupRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentId" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modStatus_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="status" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ModStatusRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="status" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="regUserAndGroupTypeRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="gid" type="xsd:int" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="offic" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="roleId" type="xsd:int" />
+    <wsdl:part name="changepwd" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="grouptype" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteXmailuserExpiredRequest">
+    <wsdl:part name="userid" type="impl:ArrayOf_xsd_string" />
+    <wsdl:part name="status" type="xsd:int" />
+    <wsdl:part name="operator" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="RegUserRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="gid" type="xsd:int" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="offic" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistLengthGsoapResponse">
+    <wsdl:part name="getDomainUserlistLengthGsoapReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="saveOrUpdateAppRequest">
+    <wsdl:part name="appid" type="xsd:string" />
+    <wsdl:part name="apppwd" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="appshowtype" type="xsd:string" />
+    <wsdl:part name="appuacflag" type="xsd:string" />
+    <wsdl:part name="appurl" type="xsd:string" />
+    <wsdl:part name="awwidth" type="xsd:int" />
+    <wsdl:part name="awheight" type="xsd:int" />
+    <wsdl:part name="sessshowtype" type="xsd:string" />
+    <wsdl:part name="sessuacflag" type="xsd:string" />
+    <wsdl:part name="sessurl" type="xsd:string" />
+    <wsdl:part name="swwidth" type="xsd:int" />
+    <wsdl:part name="swheight" type="xsd:int" />
+    <wsdl:part name="show" type="xsd:string" />
+    <wsdl:part name="sort" type="xsd:int" />
+    <wsdl:part name="iplimit" type="xsd:string" />
+    <wsdl:part name="appdesc" type="xsd:string" />
+    <wsdl:part name="id" type="xsd:long" />
+    <wsdl:part name="icon" type="xsd:long" />
+    <wsdl:part name="top" type="xsd:long" />
+    <wsdl:part name="apptype" type="xsd:string" />
+    <wsdl:part name="saastype" type="xsd:string" />
+    <wsdl:part name="exdomain" type="xsd:string" />
+    <wsdl:part name="filename" type="xsd:string" />
+    <wsdl:part name="image" type="xsd:base64Binary" />
+    <wsdl:part name="type" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainDisGroupUserRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modDomainCos_NewRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="cos" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="AspGetDomainUserlistRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modDomainWeChatRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="cos" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regUser_MultiResponse">
+    <wsdl:part name="regUser_MultiReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteXmailListByNameRequest">
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="regXmailListRequest">
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="members" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="authentication_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="batdelAppRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="appids" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfoAndGroupTypeResponse">
+    <wsdl:part name="modUserInfoAndGroupTypeReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="DelUserResponse">
+    <wsdl:part name="DelUserReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDepartmentResponse">
+    <wsdl:part name="getDepartmentReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDepartmentRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserByWechatResponse">
+    <wsdl:part name="getUserByWechatReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateDisGroupRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="disGroupId" type="xsd:int" />
+    <wsdl:part name="disGroupName" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="parent" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistGsoapRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateXmailListAndPriviResponse">
+    <wsdl:part name="updateXmailListAndPriviReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfoAndGroupTypeRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+    <wsdl:part name="grouptype" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="isXmailUserExistResponse">
+    <wsdl:part name="isXmailUserExistReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSaasDomainUserlistResponse">
+    <wsdl:part name="GetSaasDomainUserlistReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest">
+    <wsdl:part name="domainName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="batdelAppResponse">
+    <wsdl:part name="batdelAppReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXmaillistByNameResponse">
+    <wsdl:part name="getXmaillistByNameReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDirInfoResponse">
+    <wsdl:part name="GetDirInfoReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllAppResponse">
+    <wsdl:part name="getAllAppReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDisGroupResponse">
+    <wsdl:part name="deleteDisGroupReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDepartmentResponse">
+    <wsdl:part name="createDepartmentReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ModUserInfoRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="delUser_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="delUser_NewResponse">
+    <wsdl:part name="delUser_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateDepartmentResponse">
+    <wsdl:part name="updateDepartmentReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="regUserAndGroupTypeResponse">
+    <wsdl:part name="regUserAndGroupTypeReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupUser_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentId" type="xsd:int" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserInfo_NewResponse">
+    <wsdl:part name="getUserInfo_NewReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modStatus_NewResponse">
+    <wsdl:part name="modStatus_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="isXmailUserExistRequest">
+    <wsdl:part name="userId" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="authentication_NewResponse">
+    <wsdl:part name="authentication_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modPasswd_NewResponse">
+    <wsdl:part name="modPasswd_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDomainUserlistByStatusRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="emailStatus" type="xsd:int" />
+    <wsdl:part name="emStatus" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainUserlistRequest">
+    <wsdl:part name="domain" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteDepartmentResponse">
+    <wsdl:part name="deleteDepartmentReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainUserlistResponse">
+    <wsdl:part name="GetDomainUserlistReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupUser_NewResponse">
+    <wsdl:part name="createDisGroupUser_NewReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoResponse">
+    <wsdl:part name="GetUserInfoReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteXmailuserExpiredResponse" />
+  <wsdl:message name="getManagementDomainRequest">
+    <wsdl:part name="jsonData" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getManagementDomainResponse">
+    <wsdl:part name="getManagementDomainReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="DelUserRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="modDomainWeChatResponse">
+    <wsdl:part name="modDomainWeChatReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getDomainInfo_newRequest">
+    <wsdl:part name="domainname" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createDisGroupUserRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentId" type="xsd:int" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="authenticationManager_NewRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="passwd" type="xsd:string" />
+    <wsdl:part name="crypttype" type="xsd:int" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ModGidRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="gid" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="modUserInfo_MultiRequest">
+    <wsdl:part name="userid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="departmentid" type="xsd:string" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="office" type="xsd:string" />
+    <wsdl:part name="mobile" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="fax" type="xsd:string" />
+    <wsdl:part name="alias" type="xsd:string" />
+    <wsdl:part name="alias2" type="xsd:string" />
+    <wsdl:part name="account" type="xsd:string" />
+    <wsdl:part name="sign" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteXmailListByNameResponse">
+    <wsdl:part name="deleteXmailListByNameReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="XmapiImplProxy">
+    <wsdl:operation name="getVersion" parameterOrder="domainName">
+      <wsdl:input name="getVersionRequest" message="impl:getVersionRequest" />
+      <wsdl:output name="getVersionResponse" message="impl:getVersionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getManagementDomain" parameterOrder="jsonData">
+      <wsdl:input name="getManagementDomainRequest" message="impl:getManagementDomainRequest" />
+      <wsdl:output name="getManagementDomainResponse" message="impl:getManagementDomainResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainDisGroupUser" parameterOrder="domain account sign">
+      <wsdl:input name="getDomainDisGroupUserRequest" message="impl:getDomainDisGroupUserRequest" />
+      <wsdl:output name="getDomainDisGroupUserResponse" message="impl:getDomainDisGroupUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteXmailuserExpired" parameterOrder="userid status operator">
+      <wsdl:input name="deleteXmailuserExpiredRequest" message="impl:deleteXmailuserExpiredRequest" />
+      <wsdl:output name="deleteXmailuserExpiredResponse" message="impl:deleteXmailuserExpiredResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateDepartment" parameterOrder="userid domain departmentid departmentName deptId description listName listSync mobile account sign">
+      <wsdl:input name="updateDepartmentRequest" message="impl:updateDepartmentRequest" />
+      <wsdl:output name="updateDepartmentResponse" message="impl:updateDepartmentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createDepartment" parameterOrder="userid domain departmentName deptId description listName listSync mobile account sign">
+      <wsdl:input name="createDepartmentRequest" message="impl:createDepartmentRequest" />
+      <wsdl:output name="createDepartmentResponse" message="impl:createDepartmentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroupUser" parameterOrder="userid domain departmentId office mobile phone fax account sign">
+      <wsdl:input name="createDisGroupUserRequest" message="impl:createDisGroupUserRequest" />
+      <wsdl:output name="createDisGroupUserResponse" message="impl:createDisGroupUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDepartment" parameterOrder="userid domain account sign">
+      <wsdl:input name="getDepartmentRequest" message="impl:getDepartmentRequest" />
+      <wsdl:output name="getDepartmentResponse" message="impl:getDepartmentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RegUser" parameterOrder="userid domain passwd crypttype gid departmentid username offic mobile phone fax">
+      <wsdl:input name="RegUserRequest" message="impl:RegUserRequest" />
+      <wsdl:output name="RegUserResponse" message="impl:RegUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="regUser_New" parameterOrder="userid domain passwd crypttype gid departmentid username offic mobile phone fax alias alias2 roleId changepwd account sign">
+      <wsdl:input name="regUser_NewRequest" message="impl:regUser_NewRequest" />
+      <wsdl:output name="regUser_NewResponse" message="impl:regUser_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="regUser_Multi" parameterOrder="userid domain passwd crypttype gid departmentid username offic mobile phone fax alias alias2 roleId changepwd account sign">
+      <wsdl:input name="regUser_MultiRequest" message="impl:regUser_MultiRequest" />
+      <wsdl:output name="regUser_MultiResponse" message="impl:regUser_MultiResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DelUser" parameterOrder="userid domain">
+      <wsdl:input name="DelUserRequest" message="impl:DelUserRequest" />
+      <wsdl:output name="DelUserResponse" message="impl:DelUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delUser_New" parameterOrder="userid domain account sign">
+      <wsdl:input name="delUser_NewRequest" message="impl:delUser_NewRequest" />
+      <wsdl:output name="delUser_NewResponse" message="impl:delUser_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModPasswd" parameterOrder="userid domain passwd crypttype">
+      <wsdl:input name="ModPasswdRequest" message="impl:ModPasswdRequest" />
+      <wsdl:output name="ModPasswdResponse" message="impl:ModPasswdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modPasswd_New" parameterOrder="userid domain passwd crypttype account sign">
+      <wsdl:input name="modPasswd_NewRequest" message="impl:modPasswd_NewRequest" />
+      <wsdl:output name="modPasswd_NewResponse" message="impl:modPasswd_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDirInfo" parameterOrder="userid domain passwd crypttype">
+      <wsdl:input name="GetDirInfoRequest" message="impl:GetDirInfoRequest" />
+      <wsdl:output name="GetDirInfoResponse" message="impl:GetDirInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDirInfo_New" parameterOrder="userid domain passwd crypttype account sign">
+      <wsdl:input name="getDirInfo_NewRequest" message="impl:getDirInfo_NewRequest" />
+      <wsdl:output name="getDirInfo_NewResponse" message="impl:getDirInfo_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AspGetDomainUserlist" parameterOrder="domain">
+      <wsdl:input name="AspGetDomainUserlistRequest" message="impl:AspGetDomainUserlistRequest" />
+      <wsdl:output name="AspGetDomainUserlistResponse" message="impl:AspGetDomainUserlistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModGid" parameterOrder="userid domain gid">
+      <wsdl:input name="ModGidRequest" message="impl:ModGidRequest" />
+      <wsdl:output name="ModGidResponse" message="impl:ModGidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modGid_New" parameterOrder="userid domain gid account sign">
+      <wsdl:input name="modGid_NewRequest" message="impl:modGid_NewRequest" />
+      <wsdl:output name="modGid_NewResponse" message="impl:modGid_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Authentication" parameterOrder="userid domain passwd">
+      <wsdl:input name="AuthenticationRequest" message="impl:AuthenticationRequest" />
+      <wsdl:output name="AuthenticationResponse" message="impl:AuthenticationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="authentication_New" parameterOrder="userid domain passwd crypttype account sign">
+      <wsdl:input name="authentication_NewRequest" message="impl:authentication_NewRequest" />
+      <wsdl:output name="authentication_NewResponse" message="impl:authentication_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="authenticationManager_New" parameterOrder="userid domain passwd crypttype account sign">
+      <wsdl:input name="authenticationManager_NewRequest" message="impl:authenticationManager_NewRequest" />
+      <wsdl:output name="authenticationManager_NewResponse" message="impl:authenticationManager_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModStatus" parameterOrder="userid domain status">
+      <wsdl:input name="ModStatusRequest" message="impl:ModStatusRequest" />
+      <wsdl:output name="ModStatusResponse" message="impl:ModStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modStatus_New" parameterOrder="userid domain status account sign">
+      <wsdl:input name="modStatus_NewRequest" message="impl:modStatus_NewRequest" />
+      <wsdl:output name="modStatus_NewResponse" message="impl:modStatus_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ModUserInfo" parameterOrder="userid domain departmentid username office mobile phone fax">
+      <wsdl:input name="ModUserInfoRequest" message="impl:ModUserInfoRequest" />
+      <wsdl:output name="ModUserInfoResponse" message="impl:ModUserInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfo_New" parameterOrder="userid domain departmentid username office mobile phone fax alias alias2 account sign">
+      <wsdl:input name="modUserInfo_NewRequest" message="impl:modUserInfo_NewRequest" />
+      <wsdl:output name="modUserInfo_NewResponse" message="impl:modUserInfo_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfoSupportMultiAlias" parameterOrder="userid domain departmentid username office mobile phone fax alias thisParamNotUse account sign opAliasType">
+      <wsdl:input name="modUserInfoSupportMultiAliasRequest" message="impl:modUserInfoSupportMultiAliasRequest" />
+      <wsdl:output name="modUserInfoSupportMultiAliasResponse" message="impl:modUserInfoSupportMultiAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfo_Multi" parameterOrder="userid domain departmentid username office mobile phone fax alias alias2 account sign">
+      <wsdl:input name="modUserInfo_MultiRequest" message="impl:modUserInfo_MultiRequest" />
+      <wsdl:output name="modUserInfo_MultiResponse" message="impl:modUserInfo_MultiResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteDepartment" parameterOrder="domain departmentId account sign">
+      <wsdl:input name="deleteDepartmentRequest" message="impl:deleteDepartmentRequest" />
+      <wsdl:output name="deleteDepartmentResponse" message="impl:deleteDepartmentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroup" parameterOrder="userid domain disGroupName description parent account sign">
+      <wsdl:input name="createDisGroupRequest" message="impl:createDisGroupRequest" />
+      <wsdl:output name="createDisGroupResponse" message="impl:createDisGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteDisGroupUser" parameterOrder="deptId userid domain account sign">
+      <wsdl:input name="deleteDisGroupUserRequest" message="impl:deleteDisGroupUserRequest" />
+      <wsdl:output name="deleteDisGroupUserResponse" message="impl:deleteDisGroupUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroupUser_New" parameterOrder="userid domain departmentId username office mobile phone fax account sign">
+      <wsdl:input name="createDisGroupUser_NewRequest" message="impl:createDisGroupUser_NewRequest" />
+      <wsdl:output name="createDisGroupUser_NewResponse" message="impl:createDisGroupUser_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateDisGroup" parameterOrder="userid domain disGroupId disGroupName description parent account sign">
+      <wsdl:input name="updateDisGroupRequest" message="impl:updateDisGroupRequest" />
+      <wsdl:output name="updateDisGroupResponse" message="impl:updateDisGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteDisGroup" parameterOrder="userid domain departmentId account sign">
+      <wsdl:input name="deleteDisGroupRequest" message="impl:deleteDisGroupRequest" />
+      <wsdl:output name="deleteDisGroupResponse" message="impl:deleteDisGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDisGroup" parameterOrder="userid domain account sign">
+      <wsdl:input name="getDisGroupRequest" message="impl:getDisGroupRequest" />
+      <wsdl:output name="getDisGroupResponse" message="impl:getDisGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainUserlist" parameterOrder="domain">
+      <wsdl:input name="GetDomainUserlistRequest" message="impl:GetDomainUserlistRequest" />
+      <wsdl:output name="GetDomainUserlistResponse" message="impl:GetDomainUserlistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlist_New" parameterOrder="domain account sign">
+      <wsdl:input name="getDomainUserlist_NewRequest" message="impl:getDomainUserlist_NewRequest" />
+      <wsdl:output name="getDomainUserlist_NewResponse" message="impl:getDomainUserlist_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistAndAlias_New" parameterOrder="domain account sign">
+      <wsdl:input name="getDomainUserlistAndAlias_NewRequest" message="impl:getDomainUserlistAndAlias_NewRequest" />
+      <wsdl:output name="getDomainUserlistAndAlias_NewResponse" message="impl:getDomainUserlistAndAlias_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistByStatus" parameterOrder="domain emailStatus emStatus account sign">
+      <wsdl:input name="getDomainUserlistByStatusRequest" message="impl:getDomainUserlistByStatusRequest" />
+      <wsdl:output name="getDomainUserlistByStatusResponse" message="impl:getDomainUserlistByStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistGsoap" parameterOrder="domain account sign">
+      <wsdl:input name="getDomainUserlistGsoapRequest" message="impl:getDomainUserlistGsoapRequest" />
+      <wsdl:output name="getDomainUserlistGsoapResponse" message="impl:getDomainUserlistGsoapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistLengthGsoap" parameterOrder="domain account sign">
+      <wsdl:input name="getDomainUserlistLengthGsoapRequest" message="impl:getDomainUserlistLengthGsoapRequest" />
+      <wsdl:output name="getDomainUserlistLengthGsoapResponse" message="impl:getDomainUserlistLengthGsoapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSaasDomainUserlist" parameterOrder="domain userid passwd">
+      <wsdl:input name="GetSaasDomainUserlistRequest" message="impl:GetSaasDomainUserlistRequest" />
+      <wsdl:output name="GetSaasDomainUserlistResponse" message="impl:GetSaasDomainUserlistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo" parameterOrder="userid domain">
+      <wsdl:input name="GetUserInfoRequest" message="impl:GetUserInfoRequest" />
+      <wsdl:output name="GetUserInfoResponse" message="impl:GetUserInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo_New" parameterOrder="userid domain account sign">
+      <wsdl:input name="getUserInfo_NewRequest" message="impl:getUserInfo_NewRequest" />
+      <wsdl:output name="getUserInfo_NewResponse" message="impl:getUserInfo_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDisGroupUser" parameterOrder="deptId domain account sign">
+      <wsdl:input name="getDisGroupUserRequest" message="impl:getDisGroupUserRequest" />
+      <wsdl:output name="getDisGroupUserResponse" message="impl:getDisGroupUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllXmaillist" parameterOrder="domain account sign">
+      <wsdl:input name="getAllXmaillistRequest" message="impl:getAllXmaillistRequest" />
+      <wsdl:output name="getAllXmaillistResponse" message="impl:getAllXmaillistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getXmaillistByName" parameterOrder="name domain account sign">
+      <wsdl:input name="getXmaillistByNameRequest" message="impl:getXmaillistByNameRequest" />
+      <wsdl:output name="getXmaillistByNameResponse" message="impl:getXmaillistByNameResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isXmailUserExist" parameterOrder="userId domain account sign">
+      <wsdl:input name="isXmailUserExistRequest" message="impl:isXmailUserExistRequest" />
+      <wsdl:output name="isXmailUserExistResponse" message="impl:isXmailUserExistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="regXmailList" parameterOrder="name description members domain account sign">
+      <wsdl:input name="regXmailListRequest" message="impl:regXmailListRequest" />
+      <wsdl:output name="regXmailListResponse" message="impl:regXmailListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteXmailListByName" parameterOrder="name domain account sign">
+      <wsdl:input name="deleteXmailListByNameRequest" message="impl:deleteXmailListByNameRequest" />
+      <wsdl:output name="deleteXmailListByNameResponse" message="impl:deleteXmailListByNameResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateXmailListByName" parameterOrder="oldname newname description members domain account sign">
+      <wsdl:input name="updateXmailListByNameRequest" message="impl:updateXmailListByNameRequest" />
+      <wsdl:output name="updateXmailListByNameResponse" message="impl:updateXmailListByNameResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modUserStatus_New" parameterOrder="userid domain status account sign">
+      <wsdl:input name="modUserStatus_NewRequest" message="impl:modUserStatus_NewRequest" />
+      <wsdl:output name="modUserStatus_NewResponse" message="impl:modUserStatus_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modDomainCos_New" parameterOrder="domain cos account sign">
+      <wsdl:input name="modDomainCos_NewRequest" message="impl:modDomainCos_NewRequest" />
+      <wsdl:output name="modDomainCos_NewResponse" message="impl:modDomainCos_NewResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainInfo_new" parameterOrder="domainname account sign">
+      <wsdl:input name="getDomainInfo_newRequest" message="impl:getDomainInfo_newRequest" />
+      <wsdl:output name="getDomainInfo_newResponse" message="impl:getDomainInfo_newResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modDomainWeChat" parameterOrder="domain cos account sign">
+      <wsdl:input name="modDomainWeChatRequest" message="impl:modDomainWeChatRequest" />
+      <wsdl:output name="modDomainWeChatResponse" message="impl:modDomainWeChatResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserByWechat" parameterOrder="userid type querytype domain account sign">
+      <wsdl:input name="getUserByWechatRequest" message="impl:getUserByWechatRequest" />
+      <wsdl:output name="getUserByWechatResponse" message="impl:getUserByWechatResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveOrUpdateApp" parameterOrder="appid apppwd domain name appshowtype appuacflag appurl awwidth awheight sessshowtype sessuacflag sessurl swwidth swheight show sort iplimit appdesc id icon top apptype saastype exdomain filename image type account sign">
+      <wsdl:input name="saveOrUpdateAppRequest" message="impl:saveOrUpdateAppRequest" />
+      <wsdl:output name="saveOrUpdateAppResponse" message="impl:saveOrUpdateAppResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="batdelApp" parameterOrder="domain account sign appids">
+      <wsdl:input name="batdelAppRequest" message="impl:batdelAppRequest" />
+      <wsdl:output name="batdelAppResponse" message="impl:batdelAppResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllApp" parameterOrder="domain account sign">
+      <wsdl:input name="getAllAppRequest" message="impl:getAllAppRequest" />
+      <wsdl:output name="getAllAppResponse" message="impl:getAllAppResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="regUserAndGroupType" parameterOrder="userid domain passwd crypttype gid departmentid username offic mobile phone fax alias alias2 roleId changepwd account sign grouptype">
+      <wsdl:input name="regUserAndGroupTypeRequest" message="impl:regUserAndGroupTypeRequest" />
+      <wsdl:output name="regUserAndGroupTypeResponse" message="impl:regUserAndGroupTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfoAndGroupType" parameterOrder="userid domain departmentid username office mobile phone fax alias alias2 account sign grouptype">
+      <wsdl:input name="modUserInfoAndGroupTypeRequest" message="impl:modUserInfoAndGroupTypeRequest" />
+      <wsdl:output name="modUserInfoAndGroupTypeResponse" message="impl:modUserInfoAndGroupTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="regXmailListAndPrivi" parameterOrder="name description domain account sign members listprivi prividept privideptname priviuser prividomain grouptype">
+      <wsdl:input name="regXmailListAndPriviRequest" message="impl:regXmailListAndPriviRequest" />
+      <wsdl:output name="regXmailListAndPriviResponse" message="impl:regXmailListAndPriviResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateXmailListAndPrivi" parameterOrder="oldname newname description members domain account sign memberstype grouptype">
+      <wsdl:input name="updateXmailListAndPriviRequest" message="impl:updateXmailListAndPriviRequest" />
+      <wsdl:output name="updateXmailListAndPriviResponse" message="impl:updateXmailListAndPriviResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="xmapiSoapBinding" type="impl:XmapiImplProxy">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVersionRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getManagementDomain">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getManagementDomainRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getManagementDomainResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainDisGroupUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainDisGroupUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainDisGroupUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteXmailuserExpired">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteXmailuserExpiredRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="deleteXmailuserExpiredResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDepartment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateDepartmentRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="updateDepartmentResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDepartment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createDepartmentRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="createDepartmentResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroupUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createDisGroupUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="createDisGroupUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDepartment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDepartmentRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDepartmentResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RegUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="RegUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regUser_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="regUser_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="regUser_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regUser_Multi">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="regUser_MultiRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="regUser_MultiResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="DelUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="DelUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delUser_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="delUser_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="delUser_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModPasswd">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="ModPasswdRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="ModPasswdResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modPasswd_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modPasswd_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modPasswd_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDirInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetDirInfoRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="GetDirInfoResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDirInfo_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDirInfo_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDirInfo_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AspGetDomainUserlist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="AspGetDomainUserlistRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="AspGetDomainUserlistResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModGid">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="ModGidRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="ModGidResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modGid_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modGid_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modGid_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authentication">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="AuthenticationRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="AuthenticationResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authentication_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="authentication_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="authentication_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authenticationManager_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="authenticationManager_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="authenticationManager_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="ModStatusRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="ModStatusResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modStatus_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modStatus_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modStatus_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModUserInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="ModUserInfoRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="ModUserInfoResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfo_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modUserInfo_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modUserInfo_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfoSupportMultiAlias">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modUserInfoSupportMultiAliasRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modUserInfoSupportMultiAliasResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfo_Multi">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modUserInfo_MultiRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modUserInfo_MultiResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDepartment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteDepartmentRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="deleteDepartmentResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createDisGroupRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="createDisGroupResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDisGroupUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteDisGroupUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="deleteDisGroupUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDisGroupUser_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createDisGroupUser_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="createDisGroupUser_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDisGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateDisGroupRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="updateDisGroupResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDisGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteDisGroupRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="deleteDisGroupResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDisGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDisGroupRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDisGroupResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainUserlist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetDomainUserlistRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="GetDomainUserlistResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlist_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainUserlist_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainUserlist_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistAndAlias_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainUserlistAndAlias_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainUserlistAndAlias_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistByStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainUserlistByStatusRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainUserlistByStatusResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistGsoap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainUserlistGsoapRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainUserlistGsoapResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainUserlistLengthGsoap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainUserlistLengthGsoapRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainUserlistLengthGsoapResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaasDomainUserlist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetSaasDomainUserlistRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="GetSaasDomainUserlistResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetUserInfoRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="GetUserInfoResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserInfo_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getUserInfo_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDisGroupUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDisGroupUserRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDisGroupUserResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllXmaillist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllXmaillistRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getAllXmaillistResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getXmaillistByName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getXmaillistByNameRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getXmaillistByNameResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isXmailUserExist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isXmailUserExistRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="isXmailUserExistResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regXmailList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="regXmailListRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="regXmailListResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteXmailListByName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteXmailListByNameRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="deleteXmailListByNameResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateXmailListByName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateXmailListByNameRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="updateXmailListByNameResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modUserStatus_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modUserStatus_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modUserStatus_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modDomainCos_New">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modDomainCos_NewRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modDomainCos_NewResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainInfo_new">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDomainInfo_newRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getDomainInfo_newResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modDomainWeChat">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modDomainWeChatRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modDomainWeChatResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserByWechat">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserByWechatRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getUserByWechatResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveOrUpdateApp">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="saveOrUpdateAppRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="saveOrUpdateAppResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="batdelApp">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="batdelAppRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="batdelAppResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllApp">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllAppRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="getAllAppResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regUserAndGroupType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="regUserAndGroupTypeRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="regUserAndGroupTypeResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modUserInfoAndGroupType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="modUserInfoAndGroupTypeRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="modUserInfoAndGroupTypeResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regXmailListAndPrivi">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="regXmailListAndPriviRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="regXmailListAndPriviResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateXmailListAndPrivi">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateXmailListAndPriviRequest">
+        <wsdlsoap:body use="literal" namespace="http://xmapi.webservices.ma.net263.com" />
+      </wsdl:input>
+      <wsdl:output name="updateXmailListAndPriviResponse">
+        <wsdlsoap:body use="literal" namespace="http://macom.263.net/axis/xmapi" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="XmapiImplProxyService">
+    <wsdl:port name="xmapi" binding="impl:xmapiSoapBinding">
+      <wsdlsoap:address location="http://macom.263.net/axis/xmapi" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

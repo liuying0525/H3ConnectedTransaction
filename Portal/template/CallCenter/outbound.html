@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>呼出</title>
+    <script src="../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../WFRes/layer/layer.js"></script>
+    <script type="text/javascript">
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .phoneBox {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 360px;
+            width: 500px;
+            border: 1px solid #000;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 30px;
+        }
+
+            .phoneBox .content {
+                display: flex;
+                height: 260px;
+            }
+
+            .phoneBox .left {
+                flex: 4;
+            }
+
+            .phoneBox .title {
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .phoneBox .time {
+                height: 100px;
+                width: 100px;
+                line-height: 100px;
+                font-weight: bold;
+                color: #333;
+                text-align: center;
+                border-radius: 50%;
+                margin: 20px auto 0;
+                border: 1px dashed #000;
+            }
+
+            .phoneBox .right {
+                flex: 6;
+            }
+
+            .phoneBox .btn {
+                border: 0;
+                outline: none;
+                display: block;
+                width: 120px;
+                height: 30px;
+                line-height: 30px;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                background: red;
+                color: #fff;
+                margin: 0 auto;
+            }
+
+            .phoneBox .infos {
+                border: 1px solid #999;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                line-height: 30px;
+                padding: 20px;
+            }
+
+            .phoneBox .offText {
+                text-align: center;
+                color: red;
+            }
+
+        .sp-fontsize {
+            font-size: 13px
+        }
+    </style>
+
+    <script type="text/javascript">
+        var saveflag = false;
+        var recordFile = "";
+        var uniqueid = "";
+        var objectId = "";
+        var RecordCreatedTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss");
+        //var isHandUp = false;
+        $(function () {
+            window.onbeforeunload = function (e) {
+                if (saveflag) {
+                    return;
+                } else {
+                    callOutHandUp("byhand");
+                }
+                return;
+            };
+            start();
+
+            recordFile = QueryString("recordFile");
+            uniqueid = QueryString("uniqueid");
+
+            //var script = document.createElement("script");
+            //document.p = script;
+            //script.type = "text/javascript";
+            //script.src = "/Portal/CallCenter/InitCommandJS";
+            //document.getElementsByTagName('head')[0].appendChild(script);
+
+            $.getScript("/Portal/CallCenter/InitCommandJS");
+
+            var callPopInfo = JSON.parse(localStorage.getItem("callPopOutInfo"));
+            var callerCode = localStorage.getItem("userCode");
+
+            callPopInfo.RecordFileName = recordFile;
+            callPopInfo.UniqueId = uniqueid;
+            callPopInfo.CallerCode = callerCode;
+
+            if (callPopInfo.CalledNumberType == "手机 Mobile Phone" && callPopInfo.PhonePosition == "otherplace") {
+                callPopInfo.CalledNumber = callPopInfo.CalledNumber.substring(1, callPopInfo.CalledNumber.length);
+            }
+
+            if (checkPhone(callPopInfo.CalledNumber)) {
+                callPopInfo.CalledNumberType = "手机 Mobile Phone";
+            }
+            else {
+                callPopInfo.CalledNumberType = "座机";
+            }
+            localStorage.setItem("callOutRecordInfo", JSON.stringify(callPopInfo));
+
+            saveRecord(JSON.stringify(callPopInfo));
+
+            $("#sp-contractNo").text(callPopInfo.ContractNo);
+            $("#sp-name").text(callPopInfo.CalledName);
+            $("#sp-persontype").text(callPopInfo.CalledType);
+            $("#sp-mobiletype").text(callPopInfo.CalledNumberType);
+            $("#sp-idtype").text(callPopInfo.CalledIdType);
+            $("#sp-idnumber").text(callPopInfo.CalledIdNumber);
+
+        });
+
+        //挂断
+        function callOutHandUp(handType) {
+            //isHandUp = true;
+            saveflag = true;
+            stop();
+            $("#calling-text").css("display", "none");
+            $("#btn-handup").css("display", "none");
+            $("#p-off").css("display", "block");
+            //手动挂断
+            if (handType == "byhand") {
+                console.log(handType);
+                if (objectId != "") {
+                    updateRecord();
+                }
+                else {
+                    saveRecord();
+                }
+
+            }
+            else {  //点击按钮挂断
+                console.log(handType);
+                var extension = localStorage.getItem("phoneExtension");
+                $.ajax({
+                    url: "https://172.16.2.251/admin/?m=interface&c=api&a=hangup&extension=" + extension,
+                    type: "GET",
+                    async: false,
+                    dataType: "jsonp",
+                    success: function (result) {
+                        if (parseInt(result.result) == 1) {
+
+                            if (objectId != "") {
+                                updateRecord();
+                            }
+                            else {
+                                saveRecord();
+                            }
+                        }
+                    },
+                    error: function (xhr) {
+                        alert("电话挂断出错");
+                    },
+                });
+            }
+
+
+        }
+
+        //保存记录
+        function saveRecord(callOutRecordInfo) {
+
+            var recordInfo = JSON.parse(callOutRecordInfo);
+            recordInfo.RecordCreatedTime = RecordCreatedTime;
+            //保存记录
+            $.ajax({
+                url: "/Portal/CallCenter/SaveRecord",
+                type: "Post",
+                async: false,
+                dataType: "json",
+                data: recordInfo,
+                success: function (result) {
+                    if (result.code == 1) {
+                        objectId = result.data;
+                        console.log();
+                    }
+                },
+                error: function (xhr) {
+                    alert("保存通话记录出错");
+                },
+            });
+        }
+
+        //更新记录
+        function updateRecord() {
+            var recordInfo = JSON.parse(localStorage.getItem("callOutRecordInfo"));
+            recordInfo.CallDuration = totalseconds;
+            recordInfo.ObjectId = objectId;
+
+            //保存记录
+            $.ajax({
+                url: "/Portal/CallCenter/UpdateRecord",
+                type: "Post",
+                async: false,
+                dataType: "json",
+                data: recordInfo,
+                success: function (result) {
+                    if (result.code == 1) {
+                        //保存通话记录成功
+                        //关闭页面
+                        layer.msg("保存通话记录成功,3秒后自动关闭页面", { icon: 1, time: 3000 }, function () {
+                            console.log("关闭页面");
+                            window.opener = null;
+                            window.open('', '_self');
+                            window.close();
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    alert("保存通话记录出错");
+                },
+            });
+        }
+
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); // decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+        //计时器
+        var hour, minute, second;//时 分 秒
+        hour = minute = second = 0;//初始化
+        var totalseconds = 0;//总秒数
+        var int;
+
+        function start()//开始
+        {
+            int = setInterval(timer, 1000);
+        }
+
+        function timer()//计时
+        {
+            second = second + 1;
+            totalseconds = totalseconds + 1;
+            if (second >= 60) {
+                second = 0;
+                minute = minute + 1;
+            }
+
+            if (minute >= 60) {
+                minute = 0;
+                hour = hour + 1;
+            }
+
+            $("#usetime").text(PrefixInteger(hour, 2) + ":" + PrefixInteger(minute, 2) + ":" + PrefixInteger(second, 2));
+
+        }
+
+        function stop()//暂停
+        {
+            window.clearInterval(int);
+        }
+
+        function PrefixInteger(num, length) {
+            return (Array(length).join(0) + num).slice(-length);
+        }
+
+        function mixOnInit() {
+            //接口加载完毕
+            //$("#tip").html("接口加载完成").css('color', 'green');
+            console.log("1--->");
+        }
+
+        function mixOnCallback(str) {
+            
+            var handindex = str.indexOf("Hangup");
+            var uniqueidindex = str.indexOf(uniqueid);
+            console.log("handindex=" + handindex + ",uniqueidindex=" + uniqueidindex);
+
+            if (handindex >= 0 && uniqueidindex >= 0) {
+                //if (!isHandUp) {
+                //    callOutHandUp("byhand");
+                //}
+                callOutHandUp("byhand");
+            }
+        }
+
+        function checkPhone(phone) {
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                //alert("手机号码有误，请重填");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="phoneBox">
+        <div class="content">
+            <div class="left">
+                <div class="title" id="calling-text">通话中...</div>
+                <div class="time" id="usetime">00:00:00</div>
+            </div>
+            <div class="right">
+                <div class="infos">
+                    <p>合同号：<span class="sp-fontsize" id="sp-contractNo"></span></p>
+                    <p>姓名：<span class="sp-fontsize" id="sp-name"></span></p>
+                    <p>角色：<span class="sp-fontsize" id="sp-persontype"></span></p>
+                    <p>电话类型：<span class="sp-fontsize" id="sp-mobiletype"></span></p>
+                    <p>证件类型：<span class="sp-fontsize" id="sp-idtype"></span></p>
+                    <p>证件号码：<span class="sp-fontsize" id="sp-idnumber"></span></p>
+                </div>
+            </div>
+        </div>
+        <button id="btn-handup" onclick="callOutHandUp('bybtn')" class="btn">挂断</button>
+        <p id="p-off" style="text-align: center;color:red;display:none" class="offText">通话结束</p>
+    </div>
+</body>
+</html>

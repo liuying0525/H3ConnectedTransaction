@@ -1,0 +1,96 @@
+﻿<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">身份证识别</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">取消</button>
+    </ion-header-bar>
+    <ion-content class="">
+        <div class="card">
+            <div class="item item-divider">
+                身份证（正面）
+                <a class="btn" style="float:right" onclick="idcard_reupload('0')">
+                    <i class="ion-refresh">重新选择</i>
+                </a>
+            </div>
+            <div class="item item-text-wrap">
+                <div style="text-align:center">
+                    <input id="idcard_file_0" type="file" style="width:100%" onchange="idcard_identify(this,'0')">
+                    <img id="idcard_img_0" style="width:auto;max-width:100%;display:none" src="" />
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                身份证（反面）
+                <a class="btn" style="float:right" onclick="idcard_reupload('1')">
+                    <i class="ion-refresh">重新选择</i>
+                </a>
+            </div>
+            <div class="item item-text-wrap">
+                <div style="text-align:center">
+                    <input id="idcard_file_1" type="file" style="width:100%" onchange="idcard_identify(this,'1')">
+                    <img id="idcard_img_1" style="width:auto;max-width:100%;display:none" src="" />
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list">
+            <div class="item item-input">
+                <span class="input-label">姓名</span>
+                <div class="detail">
+                    <label id="idcard_0_name"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">身份证号</span>
+                <div class="detail">
+                    <label id="idcard_0_idNumber"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">出生日期</span>
+                <div class="detail">
+                    <label id="idcard_0_birthday"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">性别</span>
+                <div class="detail">
+                    <label id="idcard_0_sex"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">民族</span>
+                <div class="detail">
+                    <label id="idcard_0_people"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">住址</span>
+                <div class="detail" style="white-space:normal">
+                    <label id="idcard_0_address"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">签发机关</span>
+                <div class="detail" style="white-space:normal">
+                    <label id="idcard_1_issueAuthority"></label>
+                </div>
+            </div>
+            <div class="item item-input">
+                <span class="input-label">有效期</span>
+                <div class="detail">
+                    <label id="idcard_1_validity"></label>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center">
+            <button type="button" class="button button-positive" ng-click="confirm()">确认并关闭</button>
+        </div>
+    </ion-content>
+</ion-modal-view>

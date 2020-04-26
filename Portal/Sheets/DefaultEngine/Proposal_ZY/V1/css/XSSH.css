@@ -1,0 +1,85 @@
+﻿.role {
+    margin: 5px;
+}
+
+.red {
+    color: red;
+    padding-left: 15px !important;
+}
+
+.black {
+    padding-left: 15px !important;
+}
+
+#example .container {
+    width: auto;
+}
+
+#example .modal-body {
+    padding-top: 3px;
+    padding-bottom: 0px;
+}
+
+    #example .modal-body .tab-content {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+        #example .modal-body .tab-content .title {
+            text-align: left;
+            padding: 0 5px;
+            font-weight: 700;
+            background-color: #ccc;
+            height: 28px;
+            line-height: 28px;
+        }
+
+            #example .modal-body .tab-content .title .title_total {
+                margin-left: 80px;
+            }
+
+                #example .modal-body .tab-content .title .title_total span {
+                    display: inline-block;
+                    min-width: 120px;
+                    max-width: 180px;
+                    height: 20px;
+                    border: 1px solid gray;
+                    text-align: center;
+                    vertical-align: middle;
+                    line-height: 20px;
+                }
+
+        #example .modal-body .tab-content .divBody {
+            height: auto;
+            min-height: 120px;
+            max-height: 160px;
+            overflow: scroll;
+        }
+
+#example .container .row {
+    height: 34px;
+}
+
+    #example .container .row div {
+        padding-bottom: 10000px;
+        margin-bottom: -10000px;
+        line-height: 20px;
+        font-weight: 700;
+        text-align: right;
+    }
+
+        #example .container .row div span {
+            display: inline-block;
+            float: left;
+            min-width: 120px;
+            max-width: 180px;
+            height: 20px;
+            line-height: 20px;
+            border: 1px solid gray;
+            text-align: center;
+            margin: 0px;
+        }
+
+.SheetGridView .header {
+    font-weight: 700;
+}

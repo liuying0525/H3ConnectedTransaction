@@ -1,0 +1,203 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton[disabled="disabled"] {
+            cursor: not-allowed;
+        }
+
+        .topButton:not([disabled="disabled"]):hover {
+            background-color: #DDD;
+        }
+
+        .topButton:not([disabled="disabled"]):active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style=" width: 100%; max-width: 100%;">
+    <!--<div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+        4S经销商打分结果
+    </div>-->
+    <div style="padding: 10px; display: flex; align-items: center; justify-content: flex-start; width: 100%; max-width: 100%;">
+        <table style="width: 100%;">
+            <colgroup>
+                <col style="width: 25%;" />
+                <col style="width: 10%;" />
+                <col style="width: 10%;" />
+                <col style="width: 10%;" />
+                <col style="width: 45%;" />
+            </colgroup>
+            <tr>
+                <td style="padding: 3px 8px;">
+                    <input name="JXSMC" style="width: 100%; padding: 3px 6px;" ng-model="SearchKey.JXSMC" placeholder="请输入经销商名称" ng-change="clickSearch()" />
+                </td>
+                <td style="padding: 3px 8px;">
+                    <select name="NWWW" style="width: 100%; padding: 6px 6px;" ng-model="SearchKey.NWWW" ng-change="clickSearch()">
+                        <option value="" selected="selected">内网/外网</option>
+                        <option value="内网" selected="selected">内网</option>
+                        <option value="外网" selected="selected">外网</option>
+                    </select>
+                </td>
+                <td style="padding: 3px 8px;">
+                    <select name="NWWW" style="width: 100%; padding: 6px 6px;" ng-model="SearchKey.KIND" ng-change="clickSearch()">
+                        <option value="" selected="selected">性质</option>
+                        <option value="4S" selected="selected">4S</option>
+                        <option value="二手车" selected="selected">二手车</option>
+                    </select>
+                </td>
+                <td style="padding: 3px 8px;">
+                    <select name="NWWW" style="width: 100%; padding: 6px 6px;" ng-model="SearchKey.JXS_LEVEL" ng-change="clickSearch()">
+                        <option value="" selected="selected">LEVEL</option>
+                        <option value="A" selected="selected">A</option>
+                        <option value="B" selected="selected">B</option>
+                        <option value="C" selected="selected">C</option>
+                        <option value="D" selected="selected">D</option>
+                    </select>
+                </td>
+                <td colspan="3" style="padding: 10px 0 0 8px; ">
+                    <div style="width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+                        <!--<button class="topButton" style="width: 100px;" ng-click="clickScore();">测试评分</button>-->
+                        <button class="topButton" style="width: 100px;" ng-click="clickSearch();">搜索</button>
+                        <!--<a class="topButton" target="_blank" href="/Portal/ajax/ExportDistributorScore.ashx" style="width: 100px; text-align: center;">导出</a>-->
+                        <a class="topButton" target="_blank" href="/Portal/ExportDistributorScore/Index" style="width: 100px; text-align: center;">导出</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding: 10px 10px; width: 100%; max-width: 100%; overflow-y: auto; overflow-x: hidden; ">
+        <div style="border: 1px solid rgb(199, 199, 199); overflow-x: auto; width: 100%;">
+            <div >
+                <table style="border-top: 1px solid #AAA; border-left: 1px solid #AAA; width: 100%; max-width: 100%;">
+                    <tr>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            序号
+                        </th>
+                        <th style="border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            经销商名称
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis; ">
+                            内网/外网
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis; ">
+                            性质
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            准入_score
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            贷后_score
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            综合_score
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            LEVEL
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            年
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            月
+                        </th>
+                        <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                            日
+                        </th>
+                    </tr>
+                    <tr ng-repeat="row in Datas" style="{{($index % 2 == 0 ? 'background-color: #EEE;' : 'background-color: #FFF;') + (row.State==1?'color: #929':'')}}">
+                        <td style="padding: 2px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style=" white-space: nowrap; text-overflow: ellipsis;">
+                                <!--<input type="radio" value="{{$index}}" name="choseState" ng-model="row.checked" />-->
+                                {{row.No}}
+                            </div>
+                        </td>
+                        <td style="width:25%; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div>
+                                <a style="color: #49F;" ng-click="DumpTo(row.Link)">{{row.JXSMC}}<label ng-show="row.State==1">(已下架)</label></a>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="width:50px; white-space: nowrap;">
+                                {{row.NWWW}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="width:50px; white-space: nowrap;">
+                                {{row.KIND}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.ZRSCORE}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.DHSCORE}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.ZHSCORE}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.JXS_LEVEL}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.Year}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.Month}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                        <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                            <div style="padding: 5px 8px; white-space: nowrap;">
+                                {{row.Day}}<label ng-show="row.State==1">(已下架)</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 10px; width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+        <input style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 50px; padding: 5px 8px;" ng-model="Page" ng-change="CheckMax()" />
+        <label>　/　{{TotalPage}}　</label>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(-1)" ng-disabled="Min">
+            <span class="fa fa-chevron-left"></span>
+        </button>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(1)" ng-disabled="Max">
+            <span class="fa fa-chevron-right">
+            </span>
+        </button>
+        <label>　共{{Total}}条数据　</label>
+        <label>每页</label>
+        <select ng-model="Size" style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 60px; padding: 6px 8px;" ng-change="clickSearch()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <label>条数据　</label>
+    </div>
+</div>

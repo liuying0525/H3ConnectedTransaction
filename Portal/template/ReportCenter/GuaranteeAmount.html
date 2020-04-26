@@ -1,0 +1,127 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton[disabled="disabled"] {
+            cursor: not-allowed;
+        }
+
+        .topButton:not([disabled="disabled"]):hover {
+            background-color: #DDD;
+        }
+
+        .topButton:not([disabled="disabled"]):active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style=" width: 100%; max-width: 100%;">
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+        担保额度
+    </div>
+    <div style="padding: 10px; display: flex; align-items: center; justify-content: flex-start; width: 100%; max-width: 100%;">
+        <table style="width: 100%;">
+            <colgroup>
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+            </colgroup>
+            <tr>
+                <td style="padding: 3px 8px;">
+                    <input name="DISTRIBUTOR" style="width: 100%; padding: 3px 6px;" ng-model="SearchKey.DISTRIBUTOR" placeholder="请输入经销商名称" />
+                </td>
+                <td colspan="3" style="padding: 10px 0 0 8px; ">
+                    <div style="width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+                        <button class="topButton" style="width: 100px;" ng-click="clickSearch();">
+                            搜索
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding: 10px 10px; width: 100%; max-width: 100%; overflow-y: auto; overflow-x: hidden; ">
+        <table style="border-top: 1px solid #AAA; border-left: 1px solid #AAA; width: 100%; max-width: 100%;">
+            <tr>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    <!--<input type="checkbox" ng-change="selectAll();" ng-model="checkAll" />-->
+                    序号
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    经销商名称
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    初始额度
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    最终额度
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    可用额度
+                </th>
+            </tr>
+            <tr ng-repeat="row in Datas" style="{{($index % 2 == 0 ? 'background-color: #EEE;' : 'background-color: #FFF;') + (row.State==1?'color: #929':'')}}">
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="width: 100%; white-space: nowrap; text-overflow: ellipsis;">
+                        <!--<input type="checkbox" ng-change="select($index);" ng-model="row.checked" />-->
+                        {{row.No}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.DISTRIBUTOR}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.VERIFYLOAN}}<label ng-show="row.State==1">(已下架)</label>
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.QUOTA}}<label ng-show="row.State==1">(已下架)</label>
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.USEQUOTA}}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding: 10px; width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+        <input style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 50px; padding: 5px 8px;" ng-model="Page" ng-change="CheckMax()" />
+        <label>　/　{{TotalPage}}　</label>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(-1)" ng-disabled="Min">
+            <span class="fa fa-chevron-left"></span>
+        </button>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(1)" ng-disabled="Max">
+            <span class="fa fa-chevron-right">
+            </span>
+        </button>
+        <label>　共{{Total}}条数据　</label>
+        <label>每页</label>
+        <select ng-model="Size" style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 60px; padding: 6px 8px;" ng-change="clickSearch()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <label>条数据　</label>
+    </div>
+</div>

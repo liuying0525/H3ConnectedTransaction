@@ -1,0 +1,78 @@
+<div class="mt"></div>
+
+<div class="menu-bar progress-picture hasBorderBottom" ng-click="openFlowChart($event)">
+    <div class="menu-bar-left">
+        <img src="/Portal/Mobile/img/details/progress.svg" class="progress mr10">
+        <span class="f16">{{names.WorkflowCharts}}</span>
+    </div>
+    <div class="menu-bar-right">
+        <i class="icon ion-ios-arrow-right" style="color: #ccc;font-size: 20px; margin-right:10px;"></i>
+    </div>
+</div>
+
+<div ng-if="instanceInfo">
+    <div class="details-header menu-bar">
+        <div class="menu-bar-left">
+            <img ng-src="{{instanceInfo.BaseInfo.ParticipantImageURL}}"
+                 ng-if="instanceInfo.BaseInfo.ParticipantImageURL">
+            <div ng-if="!instanceInfo.BaseInfo.ParticipantImageURL"
+                 ng-class="{'user-a':randomNumbers[0]===0,'user-b':randomNumbers[0]===1,'user-c':randomNumbers[0]===2,'user-d':randomNumbers[0]===3,'circle-name':true}">
+                <span>{{instanceInfo.BaseInfo.OriginatorName.trim()|limitTo:-2}}</span>
+            </div>
+            <div class="menu-bar-lr">
+                <p class="f17">{{instanceInfo.BaseInfo.OriginatorName.trim()}}</p>
+                <span class="f13 blue" ng-if="instanceInfo.BaseInfo.Approvers!=''">{{names.Waiting}}{{instanceInfo.BaseInfo.Approvers}}{{names.Approve}}</span>
+            </div>
+        </div>
+        <div class="menu-bar-right" ng-click="showHide()">
+            <span class="blue f13" ng-if="!showMoreInfo">{{names.Spread}}</span>
+            <span class="blue f13" ng-if="showMoreInfo">{{names.Retract}}</span>
+            <img src="/Portal/Mobile/img/details/up.svg" class="up" ng-if="showMoreInfo" style="width: 10px; vertical-align: 5%;"/>
+            <img src="/Portal/Mobile/img/details/down.svg" class="down" ng-if="!showMoreInfo" style="width: 10px; vertical-align:5%;"/>
+        </div>
+    </div>
+
+    <div class="progress-map" ng-if="showMoreInfo">
+        <div class="progress-map-item" ng-repeat="proItem in instanceInfo.InstanceLogInfo track by $index">
+            <img src="/Portal/Mobile/img/details/choose.svg" class="choose" ng-if="proItem.Approval==='1'||proItem.Approval===''">
+            <img src="/Portal/Mobile/img/details/unchoose2.svg" class="unchoose2" ng-if="proItem.Status==='3'||(proItem.Status==='2'&&proItem.Approval!=='1')"><!--¾Ü¾ø-->
+            <img src="/Portal/Mobile/img/details/unchoose.svg" class="unchoose" ng-if="proItem.Status==='0'||proItem.Status==='1'">
+            <div class="tooltip">
+                <div class="angle"><div class="anglein"></div></div>
+                <div class="p-item-content">
+                    <div class="pic-top">
+                        <div class="details-header menu-bar">
+                            <div class="menu-bar-left">
+                                <img ng-src="{{proItem.ParticipantImageURL}}"
+                                     ng-if="proItem.ParticipantImageURL">
+                                <div ng-if="!proItem.ParticipantImageURL"
+                                     ng-class="{'user-a':$index%4==0,'user-b':$index%4==1,'user-c':$index%4==2,'user-d':$index%4==3,'circle-name':true}">
+                                    <span>{{proItem.ParticipantName.trim()|limitTo:-2}}</span>
+                                </div>             
+                            </div>
+                            <div class="menu-bar-right">
+                                <div class="menu-bar-rt">
+                                    <p class="f16">{{proItem.ParticipantName}}<span class="grey f13" ng-if="proItem.ParticipantOuName">-{{proItem.ParticipantOuName|limitTo:6}}</span></p>
+                                    <span class="f13" ng-if="proItem.Approval!=-1" style="color:#b2b2b2;">{{proItem.FinishedTime}}</span>
+                                    <span class="f13" ng-if="proItem.Approval==-1" style="color:#b2b2b2;">{{proItem.CreatedTime}}</span>
+                                    <img ng-if="proItem.SignatureId" class="SignatureImg" ng-src="{{portalroot+'/TempImages/'+proItem.SignatureId+'.jpg'}}" />
+                                </div>
+                                <div class="menu-bar-rb">
+                                    <span class="f13 grey">{{proItem.ActivityName}}</span>
+                                    <span style="color:#979797;" ng-if="proItem.ApprovalName">|</span>
+                                    <span ng-class="{'orange':proItem.Approval==1&&proItem.Status==2,'red':(proItem.Approval!=1&&proItem.Status==2)||(proItem.Status!=2),'f13':true}">{{proItem.ApprovalName}}</span>
+                                    <span class="f13 grey" style="display:block;">{{proItem.CreatorName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pic-bottom" ng-if="proItem.Comments">
+                        {{proItem.Comments}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

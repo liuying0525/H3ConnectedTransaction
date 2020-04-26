@@ -1,0 +1,746 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    /*td {
+        text-align: center;
+    }*/
+
+
+    #tabProductQueryItem tbody tr td {
+        text-align: center;
+    }
+
+    .form-group {
+        margin: 15px 35px 0px 20px;
+    }
+
+    .select2-container {
+        width: 100%
+    }
+</style>
+<script type="text/x-jsrender" id="tp_sel">
+    {{for data}}
+    <option value="{{:id}}" title="{{:text}} [{{:id}}]">{{:text}}</option>
+    {{/for}}
+</script>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <div class="col">
+        <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+            录音记录
+        </div>
+
+        <!-- 选项卡菜单-->
+        <ul id="myTab" class="nav nav-pills" role="tablist" style="margin-left:35px;margin-top:10px">
+            <li ng-click="changeTab('callOut');" class="active"><a id="Outbound" href="" role="tab" data-toggle="pill">外呼</a></li>
+            <li ng-click="changeTab('callIn');"><a id="Access" href="" role="tab" data-toggle="pill">接入</a></li>
+        </ul>
+
+        <!-- 选项卡面板   -->
+        <div id="myTabContent" class="tab-content">
+
+            <!-- 选项卡面板  外呼 -->
+            <div class="tab-pane fade in active" id="Bulletin">
+
+                <div class="wrapper-md paddingbottomNone">
+                    <div class="panel panel-default">
+                        <div class="table-responsive">
+                            <div class="form-inline" id="formin">
+                                <div class="input-group searchContainer" id="callOutSearchKey">
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.CalledName"
+                                               autocomplete="off"
+                                               placeholder="请输入被叫人姓名">
+                                        <!--<input name="ProductName" style="width: 100%; padding: 3px 6px;" ng-model="ProductName.ProductName" placeholder="请输入产品名称" />-->
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="CalledType" style="width:200px;position: initial" ng-model="SearchKeyCallOut.CalledType">
+                                            <option value="">请选择角色类型</option>
+                                            <option value="主借人">主借人</option>
+                                            <option value="共借人">共借人</option>
+                                            <option value="担保人">担保人</option>
+                                            <option value="紧急联系人（亲属）">紧急联系人（亲属）</option>
+                                            <option value="紧急联系人（其他）">紧急联系人（其他）</option>
+                                            <option value="单位">单位</option>
+                                            <option value="住宅">住宅</option>
+                                            <option value="金融顾问">金融顾问</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="CalledIdType" style="width:200px;position: initial" ng-model="SearchKeyCallOut.CalledIdType">
+                                            <option id="" value="">请选择证件类型</option>
+                                            <option id="" value="身份证">身份证</option>
+                                            <option id="" value="户口本">户口本</option>
+                                            <option id="" value="护照">护照</option>
+                                            <option id="" value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.CalledIdNumber"
+                                               autocomplete="off"
+                                               placeholder="请选择证件号码">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.ContractNo"
+                                               autocomplete="off"
+                                               placeholder="请输入合同号">
+
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.CalledNumber"
+                                               autocomplete="off"
+                                               placeholder="请输入被叫人电话">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="CalledNumberType" style="width:200px;position: initial" ng-model="SearchKeyCallOut.CalledNumberType">
+                                            <option id="" value="">请选择电话类型</option>
+                                            <option id="" value="座机">座机</option>
+                                            <option id="" value="手机 Mobile Phone">手机 Mobile Phone</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.QuestionType"
+                                               autocomplete="off"
+                                               placeholder="请输入咨询业务类型" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.CallerName"
+                                               autocomplete="off"
+                                               placeholder="请输入主叫人姓名">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallOut.CallerPosition"
+                                               autocomplete="off"
+                                               placeholder="请输入主叫人职务">
+
+                                    </div>
+
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input ng-model="SearchKeyCallOut.CallOutStartTime" id="CallOutStartTime"
+                                                   ui-jq="wdatePicker" style="width:100px;position: initial"
+                                                   class="input-sm form-control"
+                                                   placeholder="开始时间起" />
+                                            <span class="input-group-addon" style="border-left:0px;border-right:0px;position: initial" translate="QueryTableColumn.To"></span>
+                                            <input ng-model="SearchKeyCallOut.CallOutEndTime" id="CallOutEndTime"
+                                                   class="input-sm form-control" style="width:100px;position: initial"
+                                                   ui-jq="wdatePicker"
+                                                   placeholder="结束时间止" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary">
+                                            搜索
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="input-group searchContainer" id="callInSearchKey">
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.CalledName"
+                                               autocomplete="off"
+                                               placeholder="请输入主叫人姓名">
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="" style="width:200px;position: initial" ng-model="SearchKeyCallIn.CalledType">
+                                            <option value="">请选择角色类型</option>
+                                            <option value="主借人">主借人</option>
+                                            <option value="共借人">共借人</option>
+                                            <option value="担保人">担保人</option>
+                                            <option value="紧急联系人（亲属）">紧急联系人（亲属）</option>
+                                            <option value="紧急联系人（其他）">紧急联系人（其他）</option>
+                                            <option value="单位">单位</option>
+                                            <option value="住宅">住宅</option>
+                                            <option value="金融顾问">金融顾问</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="" style="width:200px;position: initial" ng-model="SearchKeyCallIn.CalledIdType">
+                                            <option id="" value="">请选择证件类型</option>
+                                            <option id="" value="身份证">身份证</option>
+                                            <option id="" value="户口本">户口本</option>
+                                            <option id="" value="护照">护照</option>
+                                            <option id="" value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.CalledIdNumber"
+                                               autocomplete="off"
+                                               placeholder="请选择证件号码">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.ContractNo"
+                                               autocomplete="off"
+                                               placeholder="请输入合同号">
+
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.CalledNumber"
+                                               autocomplete="off"
+                                               placeholder="请输入主叫人电话">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="select form-control" id="" style="width:200px;position: initial" ng-model="SearchKeyCallIn.CalledNumberType">
+                                            <option id="" value="">请选择电话类型</option>
+                                            <option id="" value="座机">座机</option>
+                                            <option id="" value="手机 Mobile Phone">手机 Mobile Phone</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.QuestionType"
+                                               autocomplete="off"
+                                               placeholder="请选择咨询业务类型" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.CallerName"
+                                               autocomplete="off"
+                                               placeholder="请输入被叫人姓名">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="input-sm form-control" style="width:200px;position: initial"
+                                               ng-model="SearchKeyCallIn.CallerPosition"
+                                               autocomplete="off"
+                                               placeholder="请输入被叫人职务">
+
+                                    </div>
+
+                                    <br />
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input ng-model="SearchKeyCallIn.CallInStartTime" id="CallInStartTime"
+                                                   ui-jq="wdatePicker" style="width:100px;position: initial"
+                                                   class="input-sm form-control"
+                                                   placeholder="开始时间起" />
+                                            <span class="input-group-addon" style="border-left:0px;border-right:0px;" translate="QueryTableColumn.To"></span>
+                                            <input ng-model="SearchKeyCallIn.CallInEndTime" id="CallInEndTime"
+                                                   class="input-sm form-control" style="width:100px;position: initial"
+                                                   ui-jq="wdatePicker"
+                                                   placeholder="结束时间止" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary">
+                                            搜索
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
+                                <!--表格部分Start-->
+                                <table ui-jq="dataTable" id="tabCallQueryItem"
+                                       ui-options="options()"
+                                       class="table table-striped m-b-none" style="width:150%;margin-left:6px;margin-top:20px">
+                                    <thead>
+                                        <tr id="callOutTableHead">
+                                            <td style="width:5%">
+                                                序号
+                                            </td>
+                                            <td style="width:10%">
+                                                <span class="callOutTableHead">被叫人姓名</span>
+                                                <span class="callInTableHead">主叫人姓名</span>
+                                            </td>
+                                            <td style="width:10%">
+                                                <span class="callOutTableHead">被叫人角色类型</span>
+                                                <span class="callInTableHead">主叫人角色类型</span>
+                                            </td>
+                                            <td style="width:10%">
+                                                证件类型
+                                            </td>
+                                            <td style="width:15%">
+                                                证件号码
+                                            </td>
+                                            <td style="width:10%">
+                                                合同号
+                                            </td>
+                                            <td style="width:10%">
+                                                <span class="callOutTableHead">被叫人电话</span>
+                                                <span class="callInTableHead">主叫人电话</span>
+                                            </td>
+                                            <td style="width:8%">
+                                                <span class="callOutTableHead">外呼结果</span>
+                                                <span class="callInTableHead">接入结果</span>
+                                            </td>
+                                            <td style="width:10%">
+                                                咨询业务类型
+                                            </td>
+                                            <td style="width:10%">
+                                                <span class="callOutTableHead">主叫人姓名</span>
+                                                <span class="callInTableHead">被叫人姓名</span>
+                                            </td>
+                                            <td style="width:10%">
+                                                <span class="callOutTableHead">主叫人职务</span>
+                                                <span class="callInTableHead">被叫人职务</span>
+                                            </td>
+                                            <!--<td style="width:10%">
+                                                通话备注
+                                            </td>-->
+                                            <td style="width:15%">
+                                                录音生成时间
+                                            </td>
+                                            <td style="width:10%">
+                                                录音时长
+                                            </td>
+                                            <td style="width:5%">
+                                                操作
+                                            </td>
+                                            <td style="width:5%">
+                                                录音播放
+                                            </td>
+                                            <td style="width:5%">
+                                                录音下载
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） 外呼 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">编辑录音记录(外呼)</h4>
+            </div>
+            <div class="modal-body" style="background-color:white;">
+                <input type="hidden" id="CallOutObjectId" />
+                <table style="width:600px;height:450px">
+                    <tr>
+                        <td>被叫人姓名:</td>
+                        <td>
+                            <input type="text" id="CallOutCalledName" />
+                            <input type="text" hidden id="CallOutUniqueId" />
+                        </td>
+                        <td>被叫人角色类型:</td>
+                        <td>
+                            <select id="CallOutCalledType" style="width:150px;height:30px">
+                                <option value="">请选择角色类型</option>
+                                <option value="主借人">主借人</option>
+                                <option value="共借人">共借人</option>
+                                <option value="担保人">担保人</option>
+                                <option value="紧急联系人（亲属）">紧急联系人（亲属）</option>
+                                <option value="紧急联系人（其他）">紧急联系人（其他）</option>
+                                <option value="单位">单位</option>
+                                <option value="住宅">住宅</option>
+                                <option value="金融顾问">金融顾问</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>证件类型:</td>
+                        <td>
+                            <select id="CallOutCalledIdType" style="width:150px;height:30px">
+                                <option id="" value="">请选择证件类型</option>
+                                <option id="" value="身份证">身份证</option>
+                                <option id="" value="户口本">户口本</option>
+                                <option id="" value="护照">护照</option>
+                                <option id="" value="其他">其他</option>
+                            </select>
+                        </td>
+                        <td>证件号码:</td>
+                        <td>
+                            <input type="text" id="CallOutCalledIdNumber" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>合同号:</td>
+                        <td>
+                            <input type="text" id="CallOutContractNo" />
+                        </td>
+                        <td>被叫人电话:</td>
+                        <td>
+                            <input type="text" id="CallOutCalledNumber" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>业务类型:</td>
+                        <td>
+                            <div>
+                                <div>
+                                    <select class="sp-fontsize type1 industry" id="CallOutQuestionType1" qtype="type_1" multiple="multiple" data-next="CallOutQuestionType2"></select>
+                                </div>
+                                <div>
+                                    <select class="sp-fontsize industry" id="CallOutQuestionType2" qtype="type_2" multiple="multiple"></select>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>电话类型:</td>
+                        <td>
+                            <select id="CallOutCalledNumberType" style="width:150px;height:30px">
+                                <option id="" value="">请选择电话类型</option>
+                                <option id="" value="座机">座机</option>
+                                <option id="" value="手机 Mobile Phone">手机 Mobile Phone</option>
+                            </select>
+                        </td>
+                        <td>主叫人姓名:</td>
+                        <td>
+                            <input type="text" id="CallOutCallerName" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>主叫人职务:</td>
+                        <td>
+                            <input type="text" id="CallOutCallerPosition" />
+                        </td>
+                        <td>录音生成时间:</td>
+                        <td>
+                            <span id="OutStartTime"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>通话备注:</td>
+                        <td colspan="3"><textarea id="CallOutRemark" style="width:480px;height:80px"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td>录音时长:</td>
+                        <td>
+                            <input type="text" id="CallOutCallDuration" hidden />
+                            <input type="text" id="CallOutHours" style="width:50px" />h
+                            <input type="text" id="CallOutMinute" style="width:50px" />min
+                            <input type="text" id="CallOutSecond" style="width:50px" />s
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <input type="button" class="btn btn-success" id="CallOutDial" ng-click="saveCallOut();" value="确定" style="width:150px;height:30px; border-radius: 9px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（Modal）接入 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">编辑录音记录(接入)</h4>
+            </div>
+            <div class="modal-body" style="background-color:white">
+                <input type="hidden" id="CallInObjectId" />
+                <table style="width:600px;height:450px">
+                    <tr>
+                        <td>主叫人姓名:</td>
+                        <td>
+                            <input type="text" id="CallInCalledName" />
+                            <input type="text" hidden id="CallInUniqueId" />
+                        </td>
+                        <td>主叫人角色类型:</td>
+                        <td>
+                            <select id="CallInCalledType" style="width:150px;height:30px">
+                                <option value="">请选择角色类型</option>
+                                <option value="主借人">主借人</option>
+                                <option value="共借人">共借人</option>
+                                <option value="担保人">担保人</option>
+                                <option value="紧急联系人（亲属）">紧急联系人（亲属）</option>
+                                <option value="紧急联系人（其他）">紧急联系人（其他）</option>
+                                <option value="单位">单位</option>
+                                <option value="住宅">住宅</option>
+                                <option value="金融顾问">金融顾问</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>证件类型:</td>
+                        <td>
+                            <select id="CallInCalledIdType" style="width:150px;height:30px">
+                                <option id="" value="">请选择证件类型</option>
+                                <option id="" value="身份证">身份证</option>
+                                <option id="" value="户口本">户口本</option>
+                                <option id="" value="护照">护照</option>
+                                <option id="" value="其他">其他</option>
+                            </select>
+                        </td>
+                        <td>证件号码:</td>
+                        <td>
+                            <input type="text" id="CallInCalledIdNumber" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>合同号:</td>
+                        <td>
+                            <input type="text" id="CallInContractNo" />
+                        </td>
+                        <td>主叫人电话:</td>
+                        <td>
+                            <input type="text" id="CallInCalledNumber" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>电话类型:</td>
+                        <td>
+                            <select id="CallInCalledNumberType" style="width:150px;height:30px">
+                                <option id="" value="">请选择电话类型</option>
+                                <option id="" value="座机">座机</option>
+                                <option id="" value="手机 Mobile Phone">手机 Mobile Phone</option>
+                            </select>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>业务类型:</td>
+                        <td>
+                            <div>
+                                <div>
+                                    <select class="sp-fontsize type1 industry" id="CallInQuestionType1" qtype="type_1" multiple="multiple" data-next="CallInQuestionType2"></select>
+                                </div>
+                                <div>
+                                    <select class="sp-fontsize industry" id="CallInQuestionType2" qtype="type_2" multiple="multiple"></select>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>被叫人姓名:</td>
+                        <td>
+                            <input type="text" id="CallInCallerName" />
+                        </td>
+                        <td>被叫人职务:</td>
+                        <td>
+                            <input type="text" id="CallInCallerPosition" />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>通话备注:</td>
+                        <td colspan="3"><textarea id="CallInRemark" style="width:480px;height:80px"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td>录音生成时间:</td>
+                        <td>
+                            <span id="InStartTime"></span>
+                        </td>
+                        <td>录音时长:</td>
+                        <td>
+                            <input type="text" id="CallInCallDuration" hidden />
+                            <input type="text" id="CallInCallHours" style="width:50px" />h
+                            <input type="text" id="CallInMinute" style="width:50px" />min
+                            <input type="text" id="CallInSecond" style="width:50px" />s
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <input type="button" class="btn btn-success" id="CallInDial" ng-click="saveCallIn();" value="确定" style="width:150px;height:30px; border-radius: 9px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">拨打电话</h4>
+            </div>
+            <div class="modal-body" style="background-color:white">
+                <input type="text" hidden id="dialCalledName" placeholder="姓名" />
+                <input type="text" hidden id="dialCalledNumber" placeholder="号码" />
+                <input type="text" hidden id="dialCalledType" placeholder="角色" />
+                <input type="text" hidden id="dialMobileType" placeholder="电话类型" />
+                <input type="text" hidden id="dialIdType" placeholder="证件类型" />
+                <input type="text" hidden id="dialIdNumber" placeholder="证件号码" />
+                <input type="text" hidden id="dialContractNo" placeholder="合同号" />
+
+                <div class="radio radio-danger" style="margin-top:15px;text-align:center">
+                    <input type="radio" name="phoneposition" id="radio3" value="hostplace">
+                    <label for="radio3">
+                        本地号码
+                    </label>
+                </div>
+                <div class="radio radio-danger" style="margin-top:15px;text-align:center;margin-bottom:15px">
+                    <input type="radio" name="phoneposition" id="radio4" value="otherplace">
+                    <label for="radio4">
+                        外地号码
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <input type="button" class="btn btn-primary" id="Dial" value="拨打" ng-click="dialOut();" style="width:150px;height:30px; border-radius: 9px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">拨打电话</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:15px;text-align:center;margin-bottom:15px">
+                    <img id="photo" class="" src="WFRes/images/guaduan.png" width="100" height="100">
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <input type="button" class="btn btn-primary" id="HangUp" value="挂断" ng-click="handUp();" style="width:150px;height:30px; border-radius: 9px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //模态框隐藏 呼出 接入
+        //$('#myModal1').modal('hide');
+        //$('#myModal2').modal('hide');
+        select2Init();
+    })
+
+
+    function select2Init() {
+        var selectMod = {
+            initSelect: function ($target) { // 初始化
+                $target.select2({
+                    placeholder: '',
+                    language: {
+                        noResults: function () {
+                            return "暂无数据"
+                        }
+                    }
+                });
+            },
+            editInitSelected: function ($target, val) {
+                $target.val(val).trigger('change');
+            },
+            renderNext: function () { // 下拉多选联动
+                var $this = $(this);
+                var cur = $this.attr('id');
+                var curVal = $('#' + cur).val();
+                var next = $this.data('next');
+                var $next = $('#' + next);
+                var tp = $('#tp_sel');
+                var qtype = $this.attr('qtype');
+                var curArr = questiontype[qtype] || [];
+                if (curVal) {
+                    if (next && $next.length && curArr.length) {
+                        var alreadyValue = $next.val();
+                        var arr = curArr.filter(function (obj) {
+                            if (curVal.indexOf(obj.id + '') != -1) {
+                                return obj;
+                            }
+                        }).map(function (obj) {
+                            if (obj && obj.children && obj.children.length) {
+                                return obj.children;
+                            }
+                        });
+                        questiontype[next] = [].concat.apply([], arr); // 二维数组转换为一维数组
+                        $next.html(tp.render({ data: questiontype[next] })).change();
+                        $next.val(alreadyValue).trigger('change');
+                    }
+                } else {
+                    if (next && $next.length) {
+                        $next.html(tp.render({ data: questiontype[next] })).change();
+                    }
+                }
+            }
+        };
+
+        var industryMod = {
+            event: function () {
+                $('body').on('change', '.industry', selectMod.renderNext);
+            },
+            init: function () {
+                this.event();
+                $('.type1').html($('#tp_sel').render({ data: questiontype.type_1 }));
+                selectMod.initSelect($('select'));
+            },
+            //// 假如有回填信息，调用该方法即可
+            //editInit: function () {
+            //    // 回填信息，按照联动顺序，依次赋值
+            //    var editInfo = {
+            //        type_1: ['1'],
+            //        type_2: ['2']
+            //    };
+            //    selectMod.editInitSelected($('#txt-questionType'), editInfo.type_1);
+            //    selectMod.editInitSelected($('#txt-questionType2'), editInfo.type_2);
+            //}
+        };
+        industryMod.init();
+    }
+
+</script>

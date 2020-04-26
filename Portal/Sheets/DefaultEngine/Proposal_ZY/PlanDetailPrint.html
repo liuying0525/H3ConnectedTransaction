@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../../../WFRes/assets/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    
+    <script src="../../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script src="../../../WFRes/assets/javascripts/bootstrap.min.js"></script>
+    <script src="V1/js/common.js?v=<%=DateTime.Now.ToString("yyyyMMdd") %>"></script>
+
+    <style type="text/css">
+        table {
+            width:100%;
+            border:1px solid #ccc;
+        }
+        td,th {
+            height:28px;
+            text-align:center;
+            border:1px solid #ccc;
+        }
+
+        th{
+            background-color:#e4dddd;
+        }
+
+        button {
+            margin-bottom:20px;
+        }
+
+        @media print {
+            button {
+                display:none;
+            }        
+        }
+    </style>
+
+    <script type="text/javascript">
+        function queryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]);
+            return null;
+        };
+        $(function () {
+            var pid = queryString("pid");
+            var rows = get_PMT_Detail(pid);
+            var table_rows = "";
+            rows.forEach(function (row, num) {
+                table_rows += "<tr>";
+                table_rows += "<td>" + row.TERM_ID + "</td>";
+                table_rows += "<td>" + row.TOTAL_RECEIVE + "</td>";
+                table_rows += "<td>" + row.PMT + "</td>";
+                table_rows += "<td>" + row.PRINCIPAL + "</td>";
+                table_rows += "<td>" + row.ASSETITC + "</td>";
+                table_rows += "<td>" + row.PMT + "</td>";
+                table_rows += "</tr>";
+            });
+            var sum = get_PMT_Sum(pid)[0];
+
+            table_rows += "<tr><th>" + sum.TERM_ID + "期</th><th></th><th>" + sum.PMT + "</th><th>" +
+                sum.PRINCIPAL + "</th><th>" + sum.ASSETITC + "</th><th>" + sum.PMT + "</th></tr>";
+            $('#bd_detail').append(table_rows);
+
+
+            $("button").unbind("click").bind("click", function () {
+                window.print();
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>还款计划</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+                <button>打印</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>分期偿还笔</th>
+                            <th>未偿本金</th>
+                            <th>还款总额</th>
+                            <th>本金总额</th>
+                            <th>利息</th>
+                            <th>每期还款总额</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bd_detail">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

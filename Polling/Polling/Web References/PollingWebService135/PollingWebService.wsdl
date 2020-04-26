@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DistributorPolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="DistributorPollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CJHPolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="CJHPollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreditPolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreditPollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BillWflx">
+        <s:complexType />
+      </s:element>
+      <s:element name="BillWflxResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BillCgfxr">
+        <s:complexType />
+      </s:element>
+      <s:element name="BillCgfxrResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendMessagePolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendMessagePollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CAPPolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="CAPPollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendMessageCWFKPolling">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendMessageCWFKPollingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="dealerInfoSUMMARY">
+        <s:complexType />
+      </s:element>
+      <s:element name="dealerInfoSUMMARYResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DistributorPollingSoapIn">
+    <wsdl:part name="parameters" element="tns:DistributorPolling" />
+  </wsdl:message>
+  <wsdl:message name="DistributorPollingSoapOut">
+    <wsdl:part name="parameters" element="tns:DistributorPollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CJHPollingSoapIn">
+    <wsdl:part name="parameters" element="tns:CJHPolling" />
+  </wsdl:message>
+  <wsdl:message name="CJHPollingSoapOut">
+    <wsdl:part name="parameters" element="tns:CJHPollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreditPollingSoapIn">
+    <wsdl:part name="parameters" element="tns:CreditPolling" />
+  </wsdl:message>
+  <wsdl:message name="CreditPollingSoapOut">
+    <wsdl:part name="parameters" element="tns:CreditPollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="BillWflxSoapIn">
+    <wsdl:part name="parameters" element="tns:BillWflx" />
+  </wsdl:message>
+  <wsdl:message name="BillWflxSoapOut">
+    <wsdl:part name="parameters" element="tns:BillWflxResponse" />
+  </wsdl:message>
+  <wsdl:message name="BillCgfxrSoapIn">
+    <wsdl:part name="parameters" element="tns:BillCgfxr" />
+  </wsdl:message>
+  <wsdl:message name="BillCgfxrSoapOut">
+    <wsdl:part name="parameters" element="tns:BillCgfxrResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessagePollingSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessagePolling" />
+  </wsdl:message>
+  <wsdl:message name="SendMessagePollingSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessagePollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CAPPollingSoapIn">
+    <wsdl:part name="parameters" element="tns:CAPPolling" />
+  </wsdl:message>
+  <wsdl:message name="CAPPollingSoapOut">
+    <wsdl:part name="parameters" element="tns:CAPPollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageCWFKPollingSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessageCWFKPolling" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageCWFKPollingSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessageCWFKPollingResponse" />
+  </wsdl:message>
+  <wsdl:message name="dealerInfoSUMMARYSoapIn">
+    <wsdl:part name="parameters" element="tns:dealerInfoSUMMARY" />
+  </wsdl:message>
+  <wsdl:message name="dealerInfoSUMMARYSoapOut">
+    <wsdl:part name="parameters" element="tns:dealerInfoSUMMARYResponse" />
+  </wsdl:message>
+  <wsdl:message name="DistributorPollingHttpGetIn" />
+  <wsdl:message name="DistributorPollingHttpGetOut" />
+  <wsdl:message name="CJHPollingHttpGetIn" />
+  <wsdl:message name="CJHPollingHttpGetOut" />
+  <wsdl:message name="CreditPollingHttpGetIn" />
+  <wsdl:message name="CreditPollingHttpGetOut" />
+  <wsdl:message name="BillWflxHttpGetIn" />
+  <wsdl:message name="BillWflxHttpGetOut" />
+  <wsdl:message name="BillCgfxrHttpGetIn" />
+  <wsdl:message name="BillCgfxrHttpGetOut" />
+  <wsdl:message name="SendMessagePollingHttpGetIn" />
+  <wsdl:message name="SendMessagePollingHttpGetOut" />
+  <wsdl:message name="CAPPollingHttpGetIn" />
+  <wsdl:message name="CAPPollingHttpGetOut" />
+  <wsdl:message name="SendMessageCWFKPollingHttpGetIn" />
+  <wsdl:message name="SendMessageCWFKPollingHttpGetOut" />
+  <wsdl:message name="dealerInfoSUMMARYHttpGetIn" />
+  <wsdl:message name="dealerInfoSUMMARYHttpGetOut" />
+  <wsdl:message name="DistributorPollingHttpPostIn" />
+  <wsdl:message name="DistributorPollingHttpPostOut" />
+  <wsdl:message name="CJHPollingHttpPostIn" />
+  <wsdl:message name="CJHPollingHttpPostOut" />
+  <wsdl:message name="CreditPollingHttpPostIn" />
+  <wsdl:message name="CreditPollingHttpPostOut" />
+  <wsdl:message name="BillWflxHttpPostIn" />
+  <wsdl:message name="BillWflxHttpPostOut" />
+  <wsdl:message name="BillCgfxrHttpPostIn" />
+  <wsdl:message name="BillCgfxrHttpPostOut" />
+  <wsdl:message name="SendMessagePollingHttpPostIn" />
+  <wsdl:message name="SendMessagePollingHttpPostOut" />
+  <wsdl:message name="CAPPollingHttpPostIn" />
+  <wsdl:message name="CAPPollingHttpPostOut" />
+  <wsdl:message name="SendMessageCWFKPollingHttpPostIn" />
+  <wsdl:message name="SendMessageCWFKPollingHttpPostOut" />
+  <wsdl:message name="dealerInfoSUMMARYHttpPostIn" />
+  <wsdl:message name="dealerInfoSUMMARYHttpPostOut" />
+  <wsdl:portType name="PollingWebServiceSoap">
+    <wsdl:operation name="DistributorPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷款，还款，还款异常</wsdl:documentation>
+      <wsdl:input message="tns:DistributorPollingSoapIn" />
+      <wsdl:output message="tns:DistributorPollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">临时车架号修改通知</wsdl:documentation>
+      <wsdl:input message="tns:CJHPollingSoapIn" />
+      <wsdl:output message="tns:CJHPollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">授信通知</wsdl:documentation>
+      <wsdl:input message="tns:CreditPollingSoapIn" />
+      <wsdl:output message="tns:CreditPollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">每月第1天针对于未还利息经销商进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillWflxSoapIn" />
+      <wsdl:output message="tns:BillWflxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">超过付息日第一天经销商未付利息进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillCgfxrSoapIn" />
+      <wsdl:output message="tns:BillCgfxrSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">还款清算-即将到期车辆（到期日前10天提醒）未提交还款申请提醒消息</wsdl:documentation>
+      <wsdl:input message="tns:SendMessagePollingSoapIn" />
+      <wsdl:output message="tns:SendMessagePollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">同步用户</wsdl:documentation>
+      <wsdl:input message="tns:CAPPollingSoapIn" />
+      <wsdl:output message="tns:CAPPollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通知财务放款</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageCWFKPollingSoapIn" />
+      <wsdl:output message="tns:SendMessageCWFKPollingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">汇总经销商信息</wsdl:documentation>
+      <wsdl:input message="tns:dealerInfoSUMMARYSoapIn" />
+      <wsdl:output message="tns:dealerInfoSUMMARYSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PollingWebServiceHttpGet">
+    <wsdl:operation name="DistributorPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷款，还款，还款异常</wsdl:documentation>
+      <wsdl:input message="tns:DistributorPollingHttpGetIn" />
+      <wsdl:output message="tns:DistributorPollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">临时车架号修改通知</wsdl:documentation>
+      <wsdl:input message="tns:CJHPollingHttpGetIn" />
+      <wsdl:output message="tns:CJHPollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">授信通知</wsdl:documentation>
+      <wsdl:input message="tns:CreditPollingHttpGetIn" />
+      <wsdl:output message="tns:CreditPollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">每月第1天针对于未还利息经销商进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillWflxHttpGetIn" />
+      <wsdl:output message="tns:BillWflxHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">超过付息日第一天经销商未付利息进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillCgfxrHttpGetIn" />
+      <wsdl:output message="tns:BillCgfxrHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">还款清算-即将到期车辆（到期日前10天提醒）未提交还款申请提醒消息</wsdl:documentation>
+      <wsdl:input message="tns:SendMessagePollingHttpGetIn" />
+      <wsdl:output message="tns:SendMessagePollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">同步用户</wsdl:documentation>
+      <wsdl:input message="tns:CAPPollingHttpGetIn" />
+      <wsdl:output message="tns:CAPPollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通知财务放款</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageCWFKPollingHttpGetIn" />
+      <wsdl:output message="tns:SendMessageCWFKPollingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">汇总经销商信息</wsdl:documentation>
+      <wsdl:input message="tns:dealerInfoSUMMARYHttpGetIn" />
+      <wsdl:output message="tns:dealerInfoSUMMARYHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PollingWebServiceHttpPost">
+    <wsdl:operation name="DistributorPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷款，还款，还款异常</wsdl:documentation>
+      <wsdl:input message="tns:DistributorPollingHttpPostIn" />
+      <wsdl:output message="tns:DistributorPollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">临时车架号修改通知</wsdl:documentation>
+      <wsdl:input message="tns:CJHPollingHttpPostIn" />
+      <wsdl:output message="tns:CJHPollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">授信通知</wsdl:documentation>
+      <wsdl:input message="tns:CreditPollingHttpPostIn" />
+      <wsdl:output message="tns:CreditPollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">每月第1天针对于未还利息经销商进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillWflxHttpPostIn" />
+      <wsdl:output message="tns:BillWflxHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">超过付息日第一天经销商未付利息进行提示</wsdl:documentation>
+      <wsdl:input message="tns:BillCgfxrHttpPostIn" />
+      <wsdl:output message="tns:BillCgfxrHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">还款清算-即将到期车辆（到期日前10天提醒）未提交还款申请提醒消息</wsdl:documentation>
+      <wsdl:input message="tns:SendMessagePollingHttpPostIn" />
+      <wsdl:output message="tns:SendMessagePollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">同步用户</wsdl:documentation>
+      <wsdl:input message="tns:CAPPollingHttpPostIn" />
+      <wsdl:output message="tns:CAPPollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通知财务放款</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageCWFKPollingHttpPostIn" />
+      <wsdl:output message="tns:SendMessageCWFKPollingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">汇总经销商信息</wsdl:documentation>
+      <wsdl:input message="tns:dealerInfoSUMMARYHttpPostIn" />
+      <wsdl:output message="tns:dealerInfoSUMMARYHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PollingWebServiceSoap" type="tns:PollingWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DistributorPolling">
+      <soap:operation soapAction="http://tempuri.org/DistributorPolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <soap:operation soapAction="http://tempuri.org/CJHPolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <soap:operation soapAction="http://tempuri.org/CreditPolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <soap:operation soapAction="http://tempuri.org/BillWflx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <soap:operation soapAction="http://tempuri.org/BillCgfxr" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <soap:operation soapAction="http://tempuri.org/SendMessagePolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <soap:operation soapAction="http://tempuri.org/CAPPolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <soap:operation soapAction="http://tempuri.org/SendMessageCWFKPolling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <soap:operation soapAction="http://tempuri.org/dealerInfoSUMMARY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PollingWebServiceSoap12" type="tns:PollingWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DistributorPolling">
+      <soap12:operation soapAction="http://tempuri.org/DistributorPolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <soap12:operation soapAction="http://tempuri.org/CJHPolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <soap12:operation soapAction="http://tempuri.org/CreditPolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <soap12:operation soapAction="http://tempuri.org/BillWflx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <soap12:operation soapAction="http://tempuri.org/BillCgfxr" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <soap12:operation soapAction="http://tempuri.org/SendMessagePolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <soap12:operation soapAction="http://tempuri.org/CAPPolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <soap12:operation soapAction="http://tempuri.org/SendMessageCWFKPolling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <soap12:operation soapAction="http://tempuri.org/dealerInfoSUMMARY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PollingWebServiceHttpGet" type="tns:PollingWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DistributorPolling">
+      <http:operation location="/DistributorPolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <http:operation location="/CJHPolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <http:operation location="/CreditPolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <http:operation location="/BillWflx" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <http:operation location="/BillCgfxr" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <http:operation location="/SendMessagePolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <http:operation location="/CAPPolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <http:operation location="/SendMessageCWFKPolling" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <http:operation location="/dealerInfoSUMMARY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PollingWebServiceHttpPost" type="tns:PollingWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DistributorPolling">
+      <http:operation location="/DistributorPolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CJHPolling">
+      <http:operation location="/CJHPolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CreditPolling">
+      <http:operation location="/CreditPolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BillWflx">
+      <http:operation location="/BillWflx" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BillCgfxr">
+      <http:operation location="/BillCgfxr" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessagePolling">
+      <http:operation location="/SendMessagePolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CAPPolling">
+      <http:operation location="/CAPPolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCWFKPolling">
+      <http:operation location="/SendMessageCWFKPolling" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="dealerInfoSUMMARY">
+      <http:operation location="/dealerInfoSUMMARY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PollingWebService">
+    <wsdl:port name="PollingWebServiceSoap" binding="tns:PollingWebServiceSoap">
+      <soap:address location="http://172.16.10.135:8010/Portal/Webservices/PollingWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PollingWebServiceSoap12" binding="tns:PollingWebServiceSoap12">
+      <soap12:address location="http://172.16.10.135:8010/Portal/Webservices/PollingWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PollingWebServiceHttpGet" binding="tns:PollingWebServiceHttpGet">
+      <http:address location="http://172.16.10.135:8010/Portal/Webservices/PollingWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PollingWebServiceHttpPost" binding="tns:PollingWebServiceHttpPost">
+      <http:address location="http://172.16.10.135:8010/Portal/Webservices/PollingWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

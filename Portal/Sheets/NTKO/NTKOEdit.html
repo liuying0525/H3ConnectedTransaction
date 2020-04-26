@@ -1,0 +1,96 @@
+﻿<html>
+<head>
+    <title>打印预览页面</title>
+    <script src="../../Hybrid/form/jquery-2.1.3.min.js"></script>
+
+   
+
+    <script type="text/javascript">
+        var TANGER_OCX_OBJ; function init() {
+            TANGER_OCX_OBJ = document.getElementById("TANGER_OCX");
+            TANGER_OCX_OBJ.activate(true);
+            //var Template = "贷款同意通知书(个人版)ea8c279e-bf98-4d63-b1a9-3920b3361ce8";
+            var Template = GetQueryString("Template");
+            Template = decodeURI(Template);
+            //var url = "/Portal/PrintFilePath/" + Template + ".doc?T=" + new Date().getTime();
+            var url = "/Portal/ReadAttachment/Read?AttachmentID=" + Template + "&OpenMethod=0&T=" + new Date().getTime();
+            console.log(url);
+            //TANGER_OCX_OBJ.OpenFromURL("/Portal/TemplateFile/doc/" + Template + ".doc");
+            TANGER_OCX_OBJ.OpenFromURL(url);
+            TANGER_OCX_OBJ.IsShowToolMenu = false;
+            TANGER_OCX_OBJ.IsNoCopy = false;
+            //控件中的文档是否禁止拷贝 TANGER_OCX_OBJ.IsStrictNoCopy = false;
+            //是否严格禁止拷贝 //TANGER_OCX_OBJ.FileSaveAs = false;
+            //TANGER_OCX_OBJ.FileSave = false;
+            //TANGER_OCX_OBJ.FileOpen = false;
+            //TANGER_OCX_OBJ.FileNew = false;
+            TANGER_OCX_OBJ.ToolBars = false;
+            TANGER_OCX_OBJ.Menubar = false;
+            TANGER_OCX_OBJ.CustomToolBar = false;
+            TANGER_OCX_OBJ.SetReadOnly(true);
+
+        }
+
+        function SetDocReadOnly() {
+
+            try {
+                if (TANGER_OCX_OBJ.DocType == 1) {
+                    TANGER_OCX_OBJ.ActiveDocument.Protect(1, true, "ntko123");
+                } else if (TANGER_OCX_OBJ.DocType == 2) {
+                    TANGER_OCX_OBJ.ActiveDocument.Protect("ntko123");
+                    for (var i = 1; i <= TANGER_OCX_OBJ.ActiveDocument.Sheets.Count; i++) {
+                        TANGER_OCX_OBJ.ActiveDocument.Sheets(i).Protect("ntko123", true, true, true, true);
+                        //TANGER_OCX_OBJ.ActiveDocument.Sheets(i).EnableSelection =-4142;
+                    }
+                } else {
+                    TANGER_OCX_OBJ.ShowTipMessage("提示", "不允许设置只读.");
+
+                }
+            } catch (err) {
+                alert("错误" + err.description);
+            }
+        }
+        //文档允许编辑
+        function UnSetReadOnly() {
+            if (TANGER_OCX_OBJ.DocType == 1) {
+                TANGER_OCX_OBJ.ActiveDocument.UnProtect("ntko123");
+            } else if (TANGER_OCX_OBJ.DocType == 2) {
+                for (var i = 1; i <= TANGER_OCX_OBJ.ActiveDocument.Sheets.Count; i++) {
+                    TANGER_OCX_OBJ.ActiveDocument.Sheets(i).Unprotect("ntko123");
+                }
+
+                TANGER_OCX_OBJ.ActiveDocument.application.ActiveWorkbook.Unprotect("ntko123");
+            } else {
+                TANGER_OCX_OBJ.ShowTipMessage("提示", "不允许设置允许编辑.");
+            }
+        }
+
+
+        function doPrint() {
+            TANGER_OCX_OBJ.PrintOut(true);
+        }
+
+        var GetQueryString = function (name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]);
+            return null;
+        }
+
+    </script>
+</head>
+<body onload="init();">
+    <form enctype="multipart/form-data">
+        <input id="print" type="button" value="打印" onclick="doPrint()" />
+        <script type="text/javascript" src="officecontrol/ntkoofficecontrol.js"> </script>
+
+
+
+       <!-- <script language="javascript" for="TANGER_OCX" event="ondocumentopened(str,doc)"> </script>-->
+        <script language="JScript" for="TANGER_OCX" event="onfilecommand(str,code)"> </script>
+        <script language="JScript" for="TANGER_OCX" event="OnDocumentOpened(str,obj)">
+            OnComplete3(str, obj);
+        </script>
+    </form>
+</body>
+</html>

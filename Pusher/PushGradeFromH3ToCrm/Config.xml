@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <PushInterval>0</PushInterval>
+  <!--<Engine>Servers=172.16.7.96:8511;User=administrator;Password=000000;Engine=DefaultEngine;</Engine>-->
+  <Engine>Servers=172.16.10.75:8511;User=administrator;Password=000000;Engine=DefaultEngine;</Engine>
+  <PushPointTime>2020/01/01 00:55:00.000</PushPointTime>
+  <!--<PushUrl>http://172.16.7.145:8888/crm_new/http/dongzheng/h3/auditremark</PushUrl>-->
+  <PushUrl>http://172.16.10.80/http/dongzheng/h3/auditremark</PushUrl>
+  <!--<PushUrl>http://localhost:8010/Portal/ajax/PusherHelper/Test.ashx</PushUrl>-->
+  <StructNames>
+    <GroupNames>
+      <ObjectId>GroupId</ObjectId>
+      <DealerType>DealerType</DealerType>
+      <DealerIntranet>DealerIntranet</DealerIntranet>
+    </GroupNames>
+    <ScoreNames>
+      <ObjectId>ScoreId</ObjectId>
+      <ScoreName>ScoreName</ScoreName>
+      <Weight>Weight</Weight>
+      <Expression>Expression</Expression>
+    </ScoreNames>
+    <DetailNames>
+      <ObjectId>DetailId</ObjectId>
+      <Rate>Rate</Rate>
+    </DetailNames>
+    <OptionNames>
+      <ObjectId>OptionId</ObjectId>
+      <Memo>Memo</Memo>
+      <Value>Score</Value>
+    </OptionNames>
+    <GradeNames>
+      <ObjectId>ObjectId</ObjectId>
+      <GroupId>PID</GroupId>
+      <Grade>Grade</Grade>  
+      <RangeFrom>RangeFrom</RangeFrom>
+      <RangeTo>RangeTo</RangeTo>
+    </GradeNames>
+  </StructNames>
+  <DataViews>
+    <SelectStr>in_cms.MV_H3_DEALER_OD_INFO_CN</SelectStr>
+    <DealerColumn>经销商编号</DealerColumn>
+    <ViewDealerName>经销商名称</ViewDealerName>
+    <ViewDealerType>经销商类型</ViewDealerType>
+    <ViewDealerKind>经销商性质</ViewDealerKind>
+  </DataViews>
+  <DataViews>
+    <SelectStr>DZ_V_H3_GETSCOREGRADE</SelectStr>
+    <DealerColumn>DEALERID</DealerColumn>
+    <ViewDealerName>DISTRIBUTOR</ViewDealerName>
+    <ViewDealerType>DISTRIBUTORTYPE</ViewDealerType>
+    <ViewDealerKind>TYPE</ViewDealerKind>
+    </DataViews>
+</configuration>

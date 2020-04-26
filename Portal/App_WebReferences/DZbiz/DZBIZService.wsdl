@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BizAutoAssign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="activeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cyz" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="amount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BizAutoAssignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BizAutoAssignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CAPStartWorkFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CAPStartWorkFlowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CAPStartWorkFlowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Authentication" type="tns:Authentication" />
+      <s:complexType name="Authentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="SetItemValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectSchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyValues" type="tns:ArrayOfDataItemParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDataItemParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataItemParam" nillable="true" type="tns:DataItemParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataItemParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetItemValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetItemValuesResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartWorkflow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="workflowCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="finishStart" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramValues" type="tns:ArrayOfDataItemParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BPMServiceResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstanceID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkItemID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkItemUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StartWorkflowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StartWorkflowResult" type="tns:BPMServiceResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BizAutoAssignSoapIn">
+    <wsdl:part name="parameters" element="tns:BizAutoAssign" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignSoapOut">
+    <wsdl:part name="parameters" element="tns:BizAutoAssignResponse" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowSoapIn">
+    <wsdl:part name="parameters" element="tns:CAPStartWorkFlow" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowSoapOut">
+    <wsdl:part name="parameters" element="tns:CAPStartWorkFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="CAPStartWorkFlowAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:SetItemValues" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:SetItemValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowSoapIn">
+    <wsdl:part name="parameters" element="tns:StartWorkflow" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowSoapOut">
+    <wsdl:part name="parameters" element="tns:StartWorkflowResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="DZBIZServiceSoap">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignSoapIn" />
+      <wsdl:output message="tns:BizAutoAssignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CAP Start H3 workflow</wsdl:documentation>
+      <wsdl:input message="tns:CAPStartWorkFlowSoapIn" />
+      <wsdl:output message="tns:CAPStartWorkFlowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置批量流程数据项的值</wsdl:documentation>
+      <wsdl:input message="tns:SetItemValuesSoapIn" />
+      <wsdl:output message="tns:SetItemValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">启动H3流程实例</wsdl:documentation>
+      <wsdl:input message="tns:StartWorkflowSoapIn" />
+      <wsdl:output message="tns:StartWorkflowSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DZBIZServiceHttpGet">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHttpGetIn" />
+      <wsdl:output message="tns:BizAutoAssignHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DZBIZServiceHttpPost">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHttpPostIn" />
+      <wsdl:output message="tns:BizAutoAssignHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DZBIZServiceSoap" type="tns:DZBIZServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BizAutoAssign">
+      <soap:operation soapAction="http://tempuri.org/BizAutoAssign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <soap:operation soapAction="http://tempuri.org/CAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CAPStartWorkFlowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <soap:operation soapAction="http://tempuri.org/SetItemValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetItemValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <soap:operation soapAction="http://tempuri.org/StartWorkflow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:StartWorkflowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceSoap12" type="tns:DZBIZServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BizAutoAssign">
+      <soap12:operation soapAction="http://tempuri.org/BizAutoAssign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CAPStartWorkFlow">
+      <soap12:operation soapAction="http://tempuri.org/CAPStartWorkFlow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CAPStartWorkFlowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <soap12:operation soapAction="http://tempuri.org/SetItemValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SetItemValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <soap12:operation soapAction="http://tempuri.org/StartWorkflow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:StartWorkflowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceHttpGet" type="tns:DZBIZServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="BizAutoAssign">
+      <http:operation location="/BizAutoAssign" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceHttpPost" type="tns:DZBIZServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="BizAutoAssign">
+      <http:operation location="/BizAutoAssign" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DZBIZService">
+    <wsdl:port name="DZBIZServiceSoap" binding="tns:DZBIZServiceSoap">
+      <soap:address location="http://localhost:8010/Portal/Webservices/DZBIZService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceSoap12" binding="tns:DZBIZServiceSoap12">
+      <soap12:address location="http://localhost:8010/Portal/Webservices/DZBIZService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceHttpGet" binding="tns:DZBIZServiceHttpGet">
+      <http:address location="http://localhost:8010/Portal/Webservices/DZBIZService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceHttpPost" binding="tns:DZBIZServiceHttpPost">
+      <http:address location="http://localhost:8010/Portal/Webservices/DZBIZService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0221BBBE-562A-45A9-BE47-6DC8E7101169}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DongZheng.H3.WebApi</RootNamespace>
+    <AssemblyName>DongZheng.H3.WebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Pdf, Version=10.1.0.0, Culture=neutral, PublicKeyToken=00725b1ceb58d0a9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Aspose.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words, Version=10.5.0.0, Culture=neutral, PublicKeyToken=fa9a48344f15a022, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentFTP, Version=27.1.1.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\FluentFTP.27.1.1\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
+    <Reference Include="H3Engine, Version=10.0.0.11117, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\H3Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="H3Entity, Version=10.0.0.11117, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\H3Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\Portal\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Portal\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="OThinker.Common, Version=10.0.0.11117, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\OThinker.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="OThinker.H3.Controllers, Version=10.0.0.11117, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\OThinker.H3.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.9.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet">
+      <HintPath>Lib\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ScoreCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ScoreCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Portal\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>Lib\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>Lib\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\BPM.cs" />
+    <Compile Include="Common\Cache.cs" />
+    <Compile Include="Common\CAP\CAPClass.cs" />
+    <Compile Include="Common\BizService.cs" />
+    <Compile Include="Common\CommonFunction.cs" />
+    <Compile Include="Common\Converter.cs" />
+    <Compile Include="Common\DBHelper.cs" />
+    <Compile Include="Common\HttpHelper.cs" />
+    <Compile Include="Common\Model.cs" />
+    <Compile Include="Controllers\Ajax\AddProductsController.cs" />
+    <Compile Include="Controllers\Ajax\CRM_To_H3_AccedeCompanyController.cs" />
+    <Compile Include="Controllers\Ajax\CRM_To_H3_EarlyWarningController.cs" />
+    <Compile Include="Controllers\Ajax\CRM_To_H3_QuotaModifyController.cs" />
+    <Compile Include="Controllers\Ajax\CRM_To_H3_RiskMeddleController.cs" />
+    <Compile Include="Controllers\Ajax\DelMortageRulesController.cs" />
+    <Compile Include="Controllers\Ajax\DZBizHandlerAuthController.cs" />
+    <Compile Include="Controllers\Ajax\ProductInitController.cs" />
+    <Compile Include="Controllers\Ajax\RiskDealerController.cs" />
+    <Compile Include="Controllers\Ajax\UpdateHistoryDataController.cs" />
+    <Compile Include="Controllers\Ajax\WorkItemHandlerAuthController.cs" />
+    <Compile Include="Controllers\CustomController.cs" />
+    <Compile Include="Common\Portal\BPMServiceResult.cs" />
+    <Compile Include="Common\Portal\CAPInfo.cs" />
+    <Compile Include="Common\Portal\CommonFunction.cs" />
+    <Compile Include="Common\Portal\CRMFunction.cs" />
+    <Compile Include="Common\Portal\DZModel.cs" />
+    <Compile Include="Common\Portal\jtLDAP.cs" />
+    <Compile Include="Common\Portal\PriintEnterMortgage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\Portal\Proposal\CAP_Fuc.cs" />
+    <Compile Include="Common\Portal\Proposal\Common.cs" />
+    <Compile Include="Common\Portal\Proposal\DataRisk.cs" />
+    <Compile Include="Common\Portal\Proposal\WorkFlowFunctionNew.cs" />
+    <Compile Include="Common\Portal\TemplatePrintClass.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\Portal\WorkFlowFunction.cs" />
+    <Compile Include="Common\Portal\WorkFlowMethod.cs" />
+    <Compile Include="Common\Portal\WorkPcmFunction.cs" />
+    <Compile Include="Common\MySetting\WorkflowSetting.cs" />
+    <Compile Include="Common\MQ\RabbitMQHelper.cs" />
+    <Compile Include="Common\ParticipatingLoan\GFPictures.cs" />
+    <Compile Include="Common\ParticipatingLoan\GFUploadNotify.cs" />
+    <Compile Include="Common\ParticipatingLoan\GFUploadResult.cs" />
+    <Compile Include="Common\Proposal\Proposal.cs" />
+    <Compile Include="Common\Util\NPOIHelper.cs" />
+    <Compile Include="Common\Util\OcrHelper.cs" />
+    <Compile Include="Common\Util\QRCodeGenerator.cs" />
+    <Compile Include="Common\Util\RandomSerial.cs" />
+    <Compile Include="Common\Util\SerialCache.cs" />
+    <Compile Include="Common\Util\SerialGenerator.cs" />
+    <Compile Include="Common\Util\SerialType.cs" />
+    <Compile Include="Common\WorkFlowFunction.cs" />
+    <Compile Include="Common\PreApproval\PreApproval.cs" />
+    <Compile Include="Common\YXT\YXTClass.cs" />
+    <Compile Include="Common\WeChat\WeChatAdapter.cs" />
+    <Compile Include="Controllers\Acl\AclController.cs" />
+    <Compile Include="Controllers\Ajax\AddMortageRulesController.cs" />
+    <Compile Include="Controllers\Ajax\AddRuleDetaileController.cs" />
+    <Compile Include="Controllers\Ajax\AddYWDataController.cs" />
+    <Compile Include="Controllers\Ajax\BatchExpressNumberController.cs" />
+    <Compile Include="Controllers\Ajax\CommonHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\CRM_To_H3_ModifyInfomationOfAccedeCompanyController.cs" />
+    <Compile Include="Controllers\Ajax\DelProductsController.cs" />
+    <Compile Include="Controllers\Ajax\DelRuleDetaileController.cs" />
+    <Compile Include="Controllers\Ajax\DelRuleNameController.cs" />
+    <Compile Include="Controllers\Ajax\DelRulePropertyController.cs" />
+    <Compile Include="Controllers\Ajax\DelScoringRankController.cs" />
+    <Compile Include="Controllers\Ajax\DistributorLicenseController.cs" />
+    <Compile Include="Controllers\Ajax\DZBizHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\EnterNetAttachmentController.cs" />
+    <Compile Include="Controllers\Ajax\ExportDistributorScoreController.cs" />
+    <Compile Include="Controllers\Ajax\FinancialCodeSearchController.cs" />
+    <Compile Include="Controllers\Ajax\GetBusinessDataCollectController.cs" />
+    <Compile Include="Controllers\Ajax\GetDetailVarListController.cs" />
+    <Compile Include="Controllers\Ajax\GetMortageRulesController.cs" />
+    <Compile Include="Controllers\Ajax\GetMortgageDataController.cs" />
+    <Compile Include="Controllers\Ajax\GetProductsController.cs" />
+    <Compile Include="Controllers\Ajax\GetProducts_SelectController.cs" />
+    <Compile Include="Controllers\Ajax\GetRuleNameController.cs" />
+    <Compile Include="Controllers\Ajax\GetRulePropertyController.cs" />
+    <Compile Include="Controllers\Ajax\GetScoreController.cs" />
+    <Compile Include="Controllers\Ajax\GetScoringController.cs" />
+    <Compile Include="Controllers\Ajax\GetSubProcessWorkItemIdController.cs" />
+    <Compile Include="Controllers\Ajax\GuaranteeAmountController.cs" />
+    <Compile Include="Controllers\Ajax\MortgageAttachmentController.cs" />
+    <Compile Include="Controllers\Ajax\MortgageListController.cs" />
+    <Compile Include="Controllers\Ajax\MortgagePrintController.cs" />
+    <Compile Include="Controllers\Ajax\MortgageSearchController.cs" />
+    <Compile Include="Controllers\Ajax\PCMHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\ProposalHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\CopyScoreRuleController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\GetGradeExampleController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\GetNewLogFileController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\GetPusherInfo1Controller.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\GetPusherInfoController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\SavePusherConfigController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\StartPusherController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\StopPusherController.cs" />
+    <Compile Include="Controllers\Ajax\PusherHelper\TestController.cs" />
+    <Compile Include="Controllers\Ajax\RiskPointController.cs" />
+    <Compile Include="Controllers\Ajax\RSHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\RuleDetaileController.cs" />
+    <Compile Include="Controllers\Ajax\ScoringRankController.cs" />
+    <Compile Include="Controllers\Ajax\SetComputerController.cs" />
+    <Compile Include="Controllers\Ajax\SetMortgageRulesController.cs" />
+    <Compile Include="Controllers\Ajax\StartWorkFlowController.cs" />
+    <Compile Include="Controllers\Ajax\WorkFlowHandlerController.cs" />
+    <Compile Include="Controllers\Ajax\WorkItemHandlerController.cs" />
+    <Compile Include="Controllers\AfterLoan\AfterLoanWorkflowController.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\ApplicantType\ApplicantTypeController.cs" />
+    <Compile Include="Controllers\BPMApiController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProcessCenter\AutoAllocationOrderAuthController.cs" />
+    <Compile Include="Controllers\Proposal\ProposalAuthController.cs" />
+    <Compile Include="Controllers\Che300\ModelQueryController.cs" />
+    <Compile Include="Controllers\EventHandlerController.cs" />
+    <Compile Include="Controllers\CallCenterController.cs" />
+    <Compile Include="Controllers\Instance\InstanceExController.cs" />
+    <Compile Include="Controllers\NetSol\CarModelController.cs" />
+    <Compile Include="Controllers\OCR\OCRController.cs" />
+    <Compile Include="Controllers\OrganizationSyncController.cs" />
+    <Compile Include="Controllers\ParticipatingLoan\GuangFaBankController.cs" />
+    <Compile Include="Controllers\PCM\PCMController.cs" />
+    <Compile Include="Controllers\ProcessCenter\AutoAllocationOrderController.cs" />
+    <Compile Include="Controllers\ProcessCenter\LoanCommitmentController.cs" />
+    <Compile Include="Controllers\ProductCenter\ProductCenterController.cs" />
+    <Compile Include="Controllers\Proposal\ProposalController.cs" />
+    <Compile Include="Controllers\ServerLogController.cs" />
+    <Compile Include="Controllers\Setting\CustomSettingController.cs" />
+    <Compile Include="Controllers\SqlInjectAttribute.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\Workflow\WorkflowApiController.cs" />
+    <Compile Include="Controllers\Workflow\WorkflowSettingController.cs" />
+    <Compile Include="Controllers\WorkItemfinished\WorkitemfinishedController.cs" />
+    <Compile Include="Controllers\XssAttribute.cs" />
+    <Compile Include="Controllers\ZhengYuan\ZhengYuanController.cs" />
+    <Compile Include="Models\ApiResponse\Che300Response.cs" />
+    <Compile Include="Models\ApiResponse\QueryPbocResultResponse.cs" />
+    <Compile Include="Models\CallCenter\CallRecord.cs" />
+    <Compile Include="Models\CallCenter\QueryCallRecords.cs" />
+    <Compile Include="Models\DAL\C_FkFenDanUser.cs" />
+    <Compile Include="Models\DAL\OT_EnumerableMetaData.cs" />
+    <Compile Include="Models\DataItemParam.cs" />
+    <Compile Include="Models\DTO\NciicResultDto.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApiResponse\QueryNciicResultResponse.cs" />
+    <Compile Include="Models\DTO\PbocResultDto.cs" />
+    <Compile Include="Models\DZCommonApiResult.cs" />
+    <Compile Include="Models\Enum\FKFenDanEnum.cs" />
+    <Compile Include="Models\FaceSign\FaceSignCallBackResponse.cs" />
+    <Compile Include="Models\FaceSign\FaceSignRequest.cs" />
+    <Compile Include="Models\FaceSign\FaceSignResultResponse.cs" />
+    <Compile Include="Models\OCR\AuthorizationResult.cs" />
+    <Compile Include="Models\OCR\VinResult.cs" />
+    <Compile Include="Models\OCR\DriverLicenseResult.cs" />
+    <Compile Include="Models\OCR\VehicleInvoiceResult.cs" />
+    <Compile Include="Models\OCR\ContractResult.cs" />
+    <Compile Include="Models\OCR\BankCardResult.cs" />
+    <Compile Include="Models\OCR\IdCardResult.cs" />
+    <Compile Include="Models\OCR\RecognizeData.cs" />
+    <Compile Include="Models\OCR\RecognizeDataItem.cs" />
+    <Compile Include="Models\OCR\WarrantyResult.cs" />
+    <Compile Include="Models\ProductCenter\AddRelation.cs" />
+    <Compile Include="Models\ProductCenter\ProductCarTypeQuery.cs" />
+    <Compile Include="Models\ProductCenter\ProductDealerQuery.cs" />
+    <Compile Include="Models\ProductCenter\ProductQuery.cs" />
+    <Compile Include="Models\Risk\Risk.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyBankCodesModel.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyFinalAuditRequest.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyFirstAuditRequest.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyFinalAuditResponse.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyFirstAuditResponse.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyGiveMoneyResponse.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyMortgageRequest.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyRepaymentPlanRequest.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyRepaymentPlanResponse.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyRequestBase.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyResponseBase.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZySignOrderCallBackResponse.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyVerifyCodeRequest.cs" />
+    <Compile Include="Models\ZhengYuanModel\ZyVerifyCodeResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\xmapi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Lib\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Lib\RabbitMQ.Client.dll" />
+    <Content Include="Lib\Renci.SshNet.dll" />
+    <Content Include="Lib\Aspose.Pdf.dll" />
+    <Content Include="Lib\Aspose.Pdf.xml" />
+    <Content Include="Lib\Aspose.Words.dll" />
+    <Content Include="Lib\Aspose.Words.xml" />
+    <Content Include="Lib\ScoreCore.dll" />
+    <Content Include="Lib\System.Net.Http.Formatting.dll" />
+    <Content Include="Lib\System.Web.Http.dll" />
+    <Content Include="Lib\System.Web.Http.WebHost.dll" />
+    <Content Include="Lib\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Lib\Antlr3.Runtime.dll" />
+    <Content Include="Lib\EntityFramework.dll" />
+    <Content Include="Lib\H3Engine.dll" />
+    <Content Include="Lib\H3Entity.dll" />
+    <Content Include="Lib\Newtonsoft.Json.dll" />
+    <Content Include="Lib\NPOI.dll" />
+    <Content Include="Lib\NPOI.OOXML.dll" />
+    <Content Include="Lib\NPOI.OpenXml4Net.dll" />
+    <Content Include="Lib\NPOI.OpenXmlFormats.dll" />
+    <Content Include="Lib\OThinker.Common.dll" />
+    <Content Include="Lib\OThinker.H3.Controllers.dll" />
+    <Content Include="Lib\System.Data.OracleClient.dll" />
+    <Content Include="Lib\System.Web.Optimization.dll" />
+    <Content Include="Lib\System.Web.Providers.dll" />
+    <Content Include="Lib\WebGrease.dll" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Web References\xmapi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\xmapi\xmapi.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Controllers\DataCenter\" />
+    <Folder Include="Views\AutoAllocationOrder\" />
+    <Folder Include="Views\BatchExpressNumber\" />
+    <Folder Include="Views\DZBizHandler\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\PhoneNumber\" />
+    <Folder Include="Views\RSHandler\" />
+    <Folder Include="Views\ServerLog\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://macom.263.net/axis/xmapi%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\xmapi\</RelPath>
+      <UpdateFromURL>http://macom.263.net/axis/xmapi%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DongZheng_H3_WebApi_xmapi_XmapiImplProxyService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:38547/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

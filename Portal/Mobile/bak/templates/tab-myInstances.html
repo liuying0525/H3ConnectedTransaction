@@ -1,0 +1,111 @@
+<ion-view view-title="" hide-nav-bar="true" class="tab-myInstances">
+  <div class="menu-tittle">
+    <div class="menu-tittle-left"></div>
+    <div class="menu-tittle-middle f17">我的流程</div>
+    <div class="menu-tittle-right f14">
+      <span ng-click="openPopover()" class="pl25">筛选</span>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div ng-repeat="d in tabNames" ng-click="activeSlide($index)" ng-class="slectIndex==$index?'tab_selected tab-bar-item':'tab-bar-item'">
+      <span class="f15 rel db">
+          <i>{{d}}</i>
+        </span>
+      <div class="vertical-line"></div>
+    </div>
+
+  </div>
+
+  <ion-content>
+    <!--下拉 -->
+    <ion-refresher on-refresh="doRefresh(slectIndex)" pulling-text="{{pullingText}}"  refreshing-text="{{refreshingText}}" refreshing-icon="ion-loading-b">
+    </ion-refresher>
+
+    <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="slideIndex" does-continue="true" show-pager="false">
+       <!--进行中-->
+      <ion-slide>
+        <div ng-class="$last?'home-list bb0':'home-list'" ng-repeat="unfinished in instances.unfinished.list">
+          <div class="home-list-left">
+            <img ng-src="{{unfinished.UserAvatar}}">
+          </div>
+          <div class="home-list-right">
+            <div class="right-header">
+              <div class="right-header-left">
+                <span class="f16">{{unfinished.InstanceName}}</span>
+                <span class="sample f12">样例数据</span>
+              </div>
+              <div class="right-header-right sample-date">{{unfinished.FinishedTime}}</div>
+            </div>
+            <div class="right-content f13">
+              <p><span>{{unfinished.Orginator}}</span></p>
+              <p><span>{{unfinished.CreatedTime}}</p>
+          </div>
+          <img class="seal" src="../img/homeTabs/jiaji.png" ng-if="unfinishedWorkItem.Urged">
+        </div>
+      </div>
+            <div class="no-data f12"><span>没有更多的数据</span></div>
+            <div class="list-showEmpty" ng-if="instances.unfinished.list.length == 0">
+              <img src="../img/empty.svg">
+            </div>
+      </ion-slide>
+     <!--已完成  -->
+      <ion-slide>
+        <div ng-class="$last?'home-list bb0':'home-list'" ng-repeat="finished in instances.finished.list">
+          <div class="home-list-left">
+            <img ng-src="{{finished.UserAvatar}}">
+          </div>
+          <div class="home-list-right">
+            <div class="right-header">
+              <div class="right-header-left">
+                <span class="f16">{{finished.InstanceName}}</span>
+                <span class="sample f12">样例数据</span>
+              </div>
+              <div class="right-header-right sample-date">{{finished.FinishedTime}}</div>
+            </div>
+            <div class="right-content f13">
+              <p><span>{{finished.Orginator}}</span></p>
+              <p><span>{{finished.CreatedTime}}</p>
+          </div>
+          <img class="seal" src="../img/homeTabs/jiaji.png" ng-if="finished.Urged">
+        </div>
+      </div>
+            <div class="no-data f12"><span>没有更多的数据</span></div>
+            <div class="list-showEmpty" ng-if="instances.finished.list.length == 0">
+              <img src="../img/empty.svg">
+            </div>
+      </ion-slide>
+        <!--已取消  -->
+      <ion-slide>
+        <div ng-class="$last?'home-list bb0':'home-list'" ng-repeat="cancel in instances.cancel.list">
+          <div class="home-list-left">
+            <img ng-src="{{cancel.UserAvatar}}">
+          </div>
+          <div class="home-list-right">
+            <div class="right-header">
+              <div class="right-header-left">
+                <span class="f16">{{cancel.InstanceName}}</span>
+                <span class="sample f12">样例数据</span>
+              </div>
+              <div class="right-header-right sample-date">{{cancel.FinishedTime}}</div>
+            </div>
+            <div class="right-content f13">
+              <p><span>{{cancel.Orginator}}</span></p>
+              <p><span>{{cancel.CreatedTime}}</p>
+          </div>
+          <img class="seal" src="../img/homeTabs/jiaji.png" ng-if="cancel.Urged">
+        </div>
+      </div>
+      <!--数据为空  -->
+      <div  class="list-showEmpty" ng-if="instances.cancel.list.length == 0" >
+        <img src="../img/empty.svg" >
+      </div>
+    </ion-slide>
+ </ion-slide-box>
+      <!--上拉  -->
+     <ion-infinite-scroll ng-if="!currentTab.moredata" on-infinite="loadMore()" distance="10%">
+      </ion-infinite-scroll>
+  </ion-content>
+
+
+</ion-view>

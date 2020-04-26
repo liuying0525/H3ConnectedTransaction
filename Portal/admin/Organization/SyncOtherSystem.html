@@ -1,0 +1,246 @@
+﻿
+<script>
+    $(function () {
+        var pageData = {
+            SyncData: {},
+            LanData: $.Languages
+        };
+
+        //debugger;
+        InitPageData();
+        //
+        $("#H3ToolBar").AspLinkToolBar();
+        $(".H3Panel").BuildPanel();
+
+        var model = new Vue({
+            el: "#content",
+            data: pageData,
+            methods: {
+                syncFrom263: function (event) { syncFrom263(); },
+                syncAllFrom263: function (event) { syncAllFrom263(); },
+                syncFromCAP: function (event) { syncFromCAP(); },
+                syncAllFromCAP: function (event) { syncAllFromCAP(); },
+                syncToWechat: function (event) { syncToWechat(); },
+                syncAllToWechat: function (event) { syncAllToWechat(); }
+            }
+        });
+
+        //初始化页面数据
+        function InitPageData() {
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/GetSyncInfo",
+                type: 'get',
+                dataType: "json",
+                data: {},
+                async: false,//同步执行
+                success: function (result) {
+                    pageData.SyncData = result;
+
+                    ////同步时间
+                    //$("#txtADSyncTimes").val(result.AutoSynchTime); //读取同步时间
+                    //$("#txtOrgReloadTimes").val(result.AutoReloadTime); //读取自动加载时间
+                }
+            });
+        }
+
+        //增量同步（企业微信）
+        function syncToWechat() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncToWechatFromH3",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+            
+        }
+
+        //完整同步（企业微信）
+        function syncAllToWechat() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncAllToWechatFromH3",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+        }
+
+        function syncFrom263() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncFrom263",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+        }
+        function syncAllFrom263() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncAllFrom263",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+        }
+
+        function syncFromCAP() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncFromCAP",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+        }
+
+        function syncAllFromCAP() {
+            ShowLoading();
+            debugger;
+            $.ajax({
+                url: "../../WebApi/OrganizationSync/SyncAllFromCAP",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    debugger;
+                    HideLoading();
+                    if (result.Success) {
+                        top.ReloadNode();//加载组织树
+                    }
+                    InitPageData();
+                    alert(result.Message);
+                }
+            });
+        }
+    });
+
+
+    function dropDownchange() {
+        if ($(this).val() == "") {
+            var manager = $(this).ligerGetComboBoxManager();
+            $(manager.selectBox).find("input[type='checkbox']").each(function () {
+                $(this).removeAttr("checked");
+            });
+            $(manager.selectBox.table).find(".l-checkbox-checked").each(function () {
+                $(this).removeClass("l-checkbox-checked");
+            });
+        }
+    }
+</script>
+<validator name="formValidator">
+    <div id="H3ToolBar">
+        <a data-icon="fa fa-angle-right" @click="syncFrom263">增量同步（263）</a>
+        <a data-icon="fa fa-angle-right" @click="syncAllFrom263">完整同步（263）</a>
+        <a data-icon="fa fa-angle-double-right" @click="syncFromCAP">增量同步（CAP）</a>
+        <a data-icon="fa fa-angle-double-right" @click="syncAllFromCAP">完整同步（CAP）</a>
+
+        <a data-icon="fa fa-angle-right" @click="syncToWechat">增量同步（微信）</a>
+        <a data-icon="fa fa-angle-double-right" @click="syncAllToWechat">完整同步（微信）</a>
+    </div>   
+
+    <div class="H3Panel">
+        <span>263组织同步</span>
+        <table class="tableList">
+            <tr>
+                <td class="tableLeft">上次同步时间</td>
+                <td>                    
+                    <label>{{SyncData.Last263SyncTime}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tableLeft">上次同步结果</td>
+                <td>
+                    <label>{{SyncData.Last263SyncResult}}</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="H3Panel">
+        <span>CAP组织同步</span>
+        <table class="tableList">
+            <tr>
+                <td class="tableLeft">上次同步时间</td>
+                <td>
+                    <label>{{SyncData.LastCAPSyncTime}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tableLeft">上次同步结果</td>
+                <td>
+                    <label>{{SyncData.LastCAPSyncResult}}</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="H3Panel">
+        <span>同步至企业微信</span>
+        <table class="tableList">
+            <tr>
+                <td class="tableLeft">上次同步时间</td>
+                <td>
+                    <label>{{SyncData.LastWechatSyncTime}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tableLeft">上次同步结果</td>
+                <td>
+                    <label>{{SyncData.LastWechatSyncResult}}</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+</validator>

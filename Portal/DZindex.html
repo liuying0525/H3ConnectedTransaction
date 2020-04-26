@@ -1,0 +1,856 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>东正金融办公平台</title>
+    <link rel="stylesheet" href="css/css.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/slider.jquery.js"></script>
+    <script type="text/javascript" src="js/news.js"></script>
+    <script type="text/javascript">
+        $(function () {
+        })
+    </script>
+</head>
+
+<body background="images/bg-index.jpg">
+    <div class="index-logo-bg">
+        <div class="index-w1024">
+            <div class="left-368">
+                <img src="images/logo-1.png" width="250" height="45" />
+            </div>
+            <div class="right-871">
+                <div id="slider">
+                    <!--     <img src="images/01.png" />
+                    <img src="images/02.png" />
+                    <img src="images/03.png" />-->
+                </div>
+                <script type="text/javascript" src="js/slider.jquery.js"></script>
+                <script>
+                    $('#slider').lateralSlider({
+                        captionPadding: '0',
+                        captionHeight: 120
+                    });
+                    function baiduSerach() {
+                        var keyword = document.getElementById("txtkeyword").value;
+                        if (keyword == null || keyword == "") return false;
+                        $("#baidulink").attr("href", "https://www.baidu.com/s?wd=" + keyword);
+                        document.getElementById("baidulink").click();
+                    }
+                    
+                    $(function () {
+                        
+                        $.ajax({
+                            //url: "ajax/WorkFlowHandler.ashx",
+                            url: "/Portal/WorkflowHandler/all",// 19.6.28 wangxg
+                            data:
+                            {
+                                CommandName: "all",
+                                UserCode: "administrator"
+                            },
+                            type: "post",
+                            async: true,
+                            dataType: "json",
+                            success: function (data) {
+                                debugger;
+                               
+                                if (data) {
+                                    var jsonResult = JSON.parse(data);
+                                    setAllHtml(jsonResult);
+                                }
+                                else {
+
+                                }
+                            },
+                            //error: function (msg) {
+                            //    alert(msg.responseText + "出错了");
+                            //},
+                            error: function (msg) {// 19.7 
+                                showJqErr(msg);
+                            }
+
+                        });
+                    })
+                    function setHtml(data) {
+                        var workitemHtml = "";
+                        $.each(data, function (index, item) {
+                            workitemHtml += "<tr> <td align=\"left\"><a target=\"_blank\" style=\"color: #666\" href=\"WorkItemSheets.html?WorkItemID=" + item.ObjectID +"\"> " + item.InstanceName + "</a></td> <td>" + item.DisplayName + "</td> <td>" + item.OriginatorName + "</td> <td>" + item.ReceiveTime + "</td> </tr>";
+                        }); 
+                        $("#unfinishedCount").html(data.length);
+                        $("#tbUnfinishedWorkItem tbody").append(workitemHtml);
+                    }
+                    function setAllHtml(data) {
+                        var UnfinishedWorkItemCount = data.result[0].UnfinishedWorkItemCount.Result;
+                        $("#unfinishedCount").html(UnfinishedWorkItemCount);
+                        if (UnfinishedWorkItemCount > 99) {
+                            $($("#unfinishedCount").parent()).css("width","30px")
+                        }
+                        var UnfinishedWorkItem = "";
+                        var FinishedWorkItemCount = data.result[1].FinishedWorkItemCount.Result;
+                        $("#FinishedWorkItemCount").html(FinishedWorkItemCount);
+                        if (FinishedWorkItemCount > 99) {
+                            $($("#FinishedWorkItemCount").parent()).css("width", "30px")
+                        }
+                        var FinishedWorkItem = "";
+                        var UserUnReadedWorkItemCount = data.result[2].UserUnReadedWorkItemCount.Result;
+                        $("#UserUnReadedWorkItemCount").html(UserUnReadedWorkItemCount);
+                        if (UserUnReadedWorkItemCount > 99) {
+                            $($("#UserUnReadedWorkItemCount").parent()).css("width", "30px")
+                        }
+                        var UserUnReadedWorkItem = "";
+                        var UserReadedWorkItemCount = data.result[3].UserReadedWorkItemCount.Result;
+                        $("#UserReadedWorkItemCount").html(UserReadedWorkItemCount);
+                        if (UserReadedWorkItemCount > 99) {
+                            $($("#UserReadedWorkItemCount").parent()).css("width", "30px")
+                        }
+                        var UserReadedWorkItem = "";
+                        $.each(data.result, function (index, item) {
+                            if (index == 0) {
+                                var datatemp = JSON.parse(item.WorkItem);
+                                if (datatemp.length != 0) {
+                                    $.each(datatemp, function (index, item) {
+                                        UnfinishedWorkItem += "<tr> <td align=\"left\"><a target=\"_blank\" style=\"color: #666\" href=\"WorkItemSheets.html?WorkItemID=" + item.ObjectID + "\"> " + item.InstanceName + "</a></td> <td>" + item.DisplayName + "</td> <td>" + item.OriginatorName + "</td> <td>" + item.ReceiveTime + "</td> </tr>";
+                                    });
+                                    $("#tbUnfinishedWorkItem tbody").append(UnfinishedWorkItem);
+                                }
+                                
+                            }
+                            else if (index == 1) {
+                                var datatemp = JSON.parse(item.WorkItem);
+                                if (datatemp.length != 0) {
+                                    $.each(datatemp, function (index, item) {
+                                        FinishedWorkItem += "<tr> <td align=\"left\"><a target=\"_blank\" style=\"color: #666\" href=\"WorkItemSheets.html?WorkItemID=" + item.ObjectID + "\"> " + item.InstanceName + "</a></td> <td>" + item.DisplayName + "</td> <td>" + item.OriginatorName + "</td> <td>" + item.ReceiveTime + "</td> </tr>";
+                                    });
+                                    $("#tbfinishedWorkItem tbody").append(FinishedWorkItem);
+                                }
+                            }
+                            else if (index == 2) {
+                                var datatemp = JSON.parse(item.WorkItem);
+                                if (datatemp.length != 0) {
+                                    $.each(datatemp, function (index, item) {
+                                        UserUnReadedWorkItem += "<tr> <td align=\"left\"><a target=\"_blank\" style=\"color: #666\" href=\"WorkItemSheets.html?WorkItemID=" + item.ObjectID + "\"> " + item.InstanceName + "</a></td> <td>" + item.DisplayName + "</td> <td>" + item.OriginatorName + "</td> <td>" + item.ReceiveTime + "</td> </tr>";
+                                    });
+                                    $("#tbUserUnReadedWorkItem tbody").append(UserUnReadedWorkItem);
+                                }
+                            }
+                            else if (index == 3) {
+                                var datatemp = JSON.parse(item.WorkItem);
+                                if (datatemp.length != 0) {
+                                    $.each(datatemp, function (index, item) {
+                                        UserReadedWorkItem += "<tr> <td align=\"left\"><a target=\"_blank\" style=\"color: #666\" href=\"WorkItemSheets.html?WorkItemID=" + item.ObjectID + "\"> " + item.InstanceName + "</a></td> <td>" + item.DisplayName + "</td> <td>" + item.OriginatorName + "</td> <td>" + item.ReceiveTime + "</td> </tr>";
+                                    });
+                                    $("#tbUserReadedWorkItem tbody").append(UserReadedWorkItem);
+                                }
+                            }
+
+                            
+                        });
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="index-w1024">
+        <div class="index-main-nav-bg">
+            <div class="mquee">
+                <div class="text-h1">公司公告：</div>
+                <div id="demo" class="mquee-text">
+                    <div class="text">
+                        <div id="demo1">
+                            <ul>
+                                <li><a href='#'>上海东正汽车金融有限责任公司BPM工作流上线的公告</a></li>
+                                <li><a href='#'>上海东正汽车金融有限责任公司BPM工作流上线的公告</a></li>
+                                <li><a href='#'>上海东正汽车金融有限责任公司BPM工作流上线的公告</a></li>
+                            </ul>
+                        </div>
+                        <div id="demo2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="State">
+                <span>
+                    <img src="images/icon-9.png" />
+                </span><span>administrator，管理员</span><span><img src="images/icon-10.png" /></span><span><img src="images/icon-11.png" /></span><span><img src="images/icon-12.png" /></span>
+            </div>
+        </div>
+
+        <div class="index-body">
+            <!--左侧功能导航-->
+            <div class="left-230">
+                <div class="leftsidebar_box">
+                    <div class="tittle">办公平台</div>
+                    <div class="line"></div>
+                    <!--<dl class="icon-1">
+                        <dt onclick="changeImage()">公文系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">公司发文</a></dd>
+                        <dd><a href="#">公司收文</a></dd>
+                        <dd><a href="#">公司工作联系单</a></dd>
+                        <dd><a href="#">公司会议纪要</a></dd>
+                        <dd><a href="#">审批件流转</a></dd>
+                        <dd><a href="#">部门发文</a></dd>
+                    </dl>
+                    <dl class="icon-2">
+                        <dt onclick="changeImage()">合同管理系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">合同查询</a></dd>
+                        <dd><a href="#">合同台账</a></dd>
+                    </dl>
+                    <dl class="icon-3">
+                        <dt>招投标系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">招投标流程运行监督</a></dd>
+                        <dd><a href="#">招投标会议安排</a></dd>
+                        <dd><a href="#">招标项目台账</a></dd>
+                        <dd><a href="#">评标专家维护</a></dd>
+                    </dl>
+                    <dl class="icon-4">
+                        <dt onclick="changeImage()">生产经营系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">业务跟踪查询</a></dd>
+                    </dl>
+                    <dl class="icon-5">
+                        <dt>电子考勤系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">考勤管理</a></dd>
+                        <dd><a href="#">特殊考勤申请</a></dd>
+                        <dd><a href="#">考勤记录查询</a></dd>
+                    </dl>
+                    <dl class="icon-6">
+                        <dt>内控系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">部门控制目标</a></dd>
+                        <dd><a href="#">内控手册查询</a></dd>
+                        <dd><a href="#">内控全文索引</a></dd>
+                    </dl>
+                    <dl class="icon-7">
+                        <dt>无纸化会议系统<img src="images/select_xl01.png"></dt>
+                        <dd><a href="#">会议室使用情况</a></dd>
+                        <dd><a href="#">无纸化会议申请</a></dd>
+                        <dd><a href="#">会议材料上传</a></dd>
+                    </dl>-->
+                    <dl class="icon-8">
+                        <dt><a href="https://www.263.net/" target="_blank">263邮件</a></dt>
+                    </dl>
+                    <dl class="icon-6">
+                        <dt><a href="index.html#/app/Workflow/MyUnfinishedWorkItem" target="_blank">流程中心</a></dt>
+                    </dl>
+                    <dl class="icon-6">
+                        <dt><a href="http://172.16.10.133/CAP/Templates/Pages/Default.aspx" target="_blank">CAP</a></dt>
+                    </dl>
+                    <dl class="icon-6">
+                        <dt><a href="http://172.16.10.133/CAP/Templates/Pages/Default.aspx" target="_blank">CMS</a></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+                    <dl class="icon-0">
+                        <dt></dt>
+                    </dl>
+
+                </div>
+            </div>
+            <!--我的待办 开始-->
+            <div class="center">
+                <div class="tab">
+                    <div class="cf">
+                        <ul class="title-list fr cf ">
+                            <li class="on">
+                                <div class="index-my icon-my-01">
+                                    <div class="index-my-data icon-my-z-01">
+                                        <div id="unfinishedCount" class="my-f12"></div>
+                                    </div>
+                                </div>
+                                <div>我的待办</div>
+                            </li>
+                            <li>
+                                <div class="index-my icon-my-02">
+                                    <div class="index-my-data  icon-my-z-02">
+                                      <div id="FinishedWorkItemCount" class="my-f12"></div>
+                                    </div>
+                                </div>
+                                <div>我的已办</div>
+                            </li>
+                            <li>
+                                <div class="index-my icon-my-03">
+                                    <div class="index-my-data icon-my-z-03">
+                                        <div id="UserUnReadedWorkItemCount" class="my-f12"></div>
+                                    </div>
+                                </div>
+                                <div>我的待阅</div>
+                            </li>
+                            <li>
+                                <div class="index-my icon-my-04">
+                                    <div class="index-my-data icon-my-z-04">
+                                      <div id="UserReadedWorkItemCount" class="my-f12"></div>
+                                    </div>
+                                </div>
+                                <div>我的已阅</div>
+                            </li>
+                            <!--<li>
+                                <div class="index-my icon-my-05">
+                                    <div class="index-my-data icon-my-z-05">
+                                        <div class="my-f12">15</div>
+                                    </div>
+                                </div>
+                                <div>我的关注</div>
+                            </li>-->
+                            <li onclick="javascript:location.reload() ;">
+                                <div class="index-my icon-my-06"></div>
+                                <div>刷新</div>
+                            </li>
+                            <p><b></b></p>
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <!--我的待办-->
+                        <div class="news-list show">
+                            <table class="PStable" id="tbUnfinishedWorkItem">
+                                <!-- <tr>
+                                    <th colspan="5" style="background: #ffffff; text-align: left; padding-left: 20px; color: #555;">
+                                        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding-bottom: 5px;">
+                                            <tr>
+
+                                                <td style="padding: 0px 0px 0px 0px!important;">
+                                                    <div class="addressBook bk-dfdfdf">
+                                                        <div class="bk">
+                                                            <div class="left">
+                                                                <input name="" type="text" value="待办信息查询" />
+                                                            </div>
+                                                            <div class="right">
+                                                                <img src="images/1-icon-search.png" width="19" height="18" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </th>
+                                </tr>-->
+                                <tr>
+                                    <th align="left">标题</th>
+                                    <th class="width-15">任务名称</th>
+                                    <th class="width-9">发起人</th>
+                                    <th class="width-15">
+                                        <div class="arrow">接收时间</div>
+                                    </th>
+
+                                </tr>
+                                <!--<tr>
+                                    <td align="left">中国石化公布2015年第三季度业绩</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>-->
+                            </table>
+                            <!--分页部分-->
+                            <!--<div class="paging"><span class="disabled">&lt; </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> &gt; </a></div>-->
+                            <!--分页样式 end-->
+                        </div>
+                        <!--我的已办-->
+                        <div class="news-list">
+                            <table class="PStable" id="tbfinishedWorkItem">
+                                <!--<tr>
+                                    <th colspan="5" style="background: #ffffff; text-align: left; padding-left: 20px; color: #555;">公文(5)　　合同(3)　　招投标(2)　　结算(0)　　预算(0)　　考勤(0)</th>
+                                </tr>-->
+                                <tr>
+                                    <th align="left">标题</th>
+                                    <th class="width-15">任务名称</th>
+                                    <th class="width-9">发起人</th>
+                                    <th class="width-15">
+                                        <div class="arrow">接收时间</div>
+                                    </th>
+                                </tr>
+                                <!--<tr>
+                                    <td align="left">中国石化公布2015年第三季度业绩</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>-->
+                            </table>
+                            <!--分页部分-->
+                            <!--<div class="paging"><span class="disabled">&lt; </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> &gt; </a></div>-->
+                            <!--分页样式 end-->
+                        </div>
+                        <!--我的待阅-->
+                        <div class="news-list">
+                            <table class="PStable" id="tbUserUnReadedWorkItem">
+                                <!--<tr>
+                                    <th colspan="5" style="background: #ffffff; text-align: left; padding-left: 20px; color: #555;">公文(5)　　合同(3)　　招投标(2)　　结算(0)　　预算(0)　　考勤(0)</th>
+                                </tr>-->
+                                <tr>
+                                    <th align="left">标题</th>
+                                    <th class="width-15">任务名称</th>
+                                    <th class="width-9">发起人</th>
+                                    <th class="width-15">
+                                        <div class="arrow">接收时间</div>
+                                    </th>
+                                </tr>
+                                <!--<tr>
+                                    <td align="left">中国石化公布2015年第三季度业绩</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>-->
+                            </table>
+                            <!--分页部分-->
+                            <!--<div class="paging"><span class="disabled">&lt; </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> &gt; </a></div>-->
+                            <!--分页样式 end-->
+                        </div>
+                        <!--我的已阅-->
+                        <div class="news-list">
+                            <table class="PStable" id="tbUserReadedWorkItem">
+                                <!--<tr>
+                                    <th colspan="5" style="background: #ffffff; text-align: left; padding-left: 20px; color: #555;">公文(5)　　合同(3)　　招投标(2)　　结算(0)　　预算(0)　　考勤(0)</th>
+                                </tr>-->
+                                <tr>
+                                    <th align="left">标题</th>
+                                    <th class="width-15">任务名称</th>
+                                    <th class="width-9">发起人</th>
+                                    <th class="width-15">
+                                        <div class="arrow">接收时间</div>
+                                    </th>
+                                </tr>
+                                <!--<tr>
+                                    <td align="left">中国石化公布2015年第三季度业绩</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>-->
+                            </table>
+                            <!--分页部分-->
+                            <!--<div class="paging"><span class="disabled">&lt; </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> &gt; </a></div>-->
+                            <!--分页样式 end-->
+                        </div>
+                        <!--我的关注-->
+                        <div class="news-list">
+                            <table class="PStable">
+                                <!--<tr>
+                                    <th colspan="5" style="background: #ffffff; text-align: left; padding-left: 20px; color: #555;">公文(5)　　合同(3)　　招投标(2)　　结算(0)　　预算(0)　　考勤(0)</th>
+                                </tr>-->
+                                <!--<tr>
+                                    <th align="left">标题</th>
+                                    <th class="width-15">任务名称</th>
+                                    <th class="width-9">发起人</th>
+                                    <th class="width-15">
+                                        <div class="arrow">接收时间</div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化公布2015年第三季度业绩</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化第六届董事会第三次会议决议公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left">中国石化关于拟向合格投资者公开发行2015年公司债券的公告</td>
+                                    <td>公文</td>
+                                    <td>左建容</td>
+                                    <td>[2015-11-05]</td>
+
+                                </tr>-->
+                            </table>
+                            <!--分页部分-->
+                            <!--<div class="paging"><span class="disabled">&lt; </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> &gt; </a></div>-->
+                            <!--分页样式 end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--我的待办 end-->
+            <div class="right-220">
+                <!--百度搜索-->
+                <div class="baidu bk-dfdfdf">
+                    <div class="bk">
+                        <div class="left">
+                            <input name="" id="txtkeyword" type="text" placeholder="百度搜索" value="" />
+                            <a id="baidulink" href="#" style="display: none;" target="_blank"></a>
+                        </div>
+                        <div class="right" onclick="baiduSerach();">百度一下</div>
+
+                    </div>
+                </div>
+                <!--未集成系统-->
+                <div class="no-system bk-dfdfdf index-margin-top">
+                    <h1>快速入口</h1>
+                    <div class="list">
+                        <ul>
+                            <li><a title="#" target="_blank" href="StartInstance.html?WorkflowCode=XSSP">个人贷款申请</a> </li>
+                            <li><a title="#" target="_blank" href="#">机构贷款申请</a> </li>
+                            <li><a title="#" target="_blank" href="#">CAP账号开通</a> </li>
+                            <li><a title="#" target="_blank" href="#">请假申请</a></li>
+                            <li><a title="#" target="_blank" href="#">加班申请</a></li>
+                            <li><a title="#" target="_blank" href="#">WIFI/VPN申请</a></li>
+                            <li><a title="#" target="_blank" href="#">金融产品上线申请</a></li>
+                            <li><a title="#" target="_blank" href="#">测试/补丁上线申请</a></li>
+                            <li><a title="#" target="_blank" href="#">经销商上线申请</a></li>
+                            <li><a title="#" target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <div class="footer">
+        <!--<span class="icon-1">总访问次数：400024</span> <span class="icon-1">本日总访问次数：9</span> <span class="icon-2">当前在线人数：6</span> <span class="icon-2">您上次登录时间：2015-10-26 10：23：30</span> <span class="icon-2">您总登录次数：0</span><br />-->
+        上海东正汽车金融有限责任公司版权所有 地址：上海市浦东新区陆家嘴环路166号未来资产大厦21,30层  邮政编码：200120<br />
+        信息门户网站运行维护热线：
+    </div>
+    <script type="text/javascript">
+        $(".leftsidebar_box dt").css({ "background-color": "#f5f5f5" });
+        $(".leftsidebar_box dt img").attr("src", "images/select_xl01.png");
+        $(function () {
+            $(".leftsidebar_box dd").hide();
+            $(".leftsidebar_box dt").click(function () {
+                $(".leftsidebar_box dt").css({ "background-color": "#f5f5f5" })
+                $(this).css({ "background-color": "#f5f5f5" });
+                $(this).parent().find('dd').removeClass("menu_chioce");
+                $(".leftsidebar_box dt img").attr("src", "images/select_xl01.png");
+                $(this).parent().find('img').attr("src", "images/select_xl.png");
+                $(".menu_chioce").slideUp();
+                $(this).parent().find('dd').slideToggle();
+                $(this).parent().find('dd').addClass("menu_chioce");
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        var demo = document.getElementById("demo");
+        var demo1 = document.getElementById("demo1");
+        var demo2 = document.getElementById("demo2");
+        demo2.innerHTML = document.getElementById("demo1").innerHTML;
+        function Marquee() {
+            if (demo.scrollLeft - demo2.offsetWidth >= 0) {
+                demo.scrollLeft -= demo1.offsetWidth;
+            }
+            else {
+                demo.scrollLeft++;
+            }
+        }
+        var myvar = setInterval(Marquee, 30);
+        demo.onmouseout = function () { myvar = setInterval(Marquee, 30); }
+        demo.onmouseover = function () { clearInterval(myvar); }
+    </script>
+</body>
+</html>

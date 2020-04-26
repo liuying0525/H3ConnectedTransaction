@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>东正金融办公平台</title>
+    <link rel="stylesheet" href="../css/css.css" type="text/css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/slider.jquery.js"></script>
+    <script type="text/javascript" src="../js/news.js"></script>
+    <script type="text/javascript">
+        //只传入想要获取参数的参数名来获取参数
+        function getparastr(strname) {
+            var hrefstr, pos, parastr, para, tempstr;
+            hrefstr = window.location.href;
+            pos = hrefstr.indexOf("?")
+            parastr = hrefstr.substring(pos + 1);
+            para = parastr.split("&");
+            tempstr = "";
+            for (i = 0; i < para.length; i++) {
+                tempstr = para[i];
+                pos = tempstr.indexOf("=");
+                if (tempstr.substring(0, pos) == strname) {
+                    return tempstr.substring(pos + 1);
+                }
+            }
+            return null;
+        }
+        $(function () {
+            var para = getparastr("type");
+            var instanceid = getparastr("instanceid");
+            //para = "RSRiskManagement";
+            if (!para || !instanceid) {
+                return false;
+            }
+            //alert(para);
+            //alert(instanceid);
+            workitemSubmit(instanceid);
+        })
+        function workitemSubmit(instanceid) {
+            var htmlText = "";
+            //提交任务
+            $.ajax({
+                //url: "../ajax/DZBizHandler.ashx",
+                url: "/Portal/DZBizHandler/workitemSubmit",// 19.6.28 wangxg
+                data:
+                {
+                    CommandName: "workitemSubmit",
+                    instanceid: instanceid
+                },
+                type: "post",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    alert("ok");
+                    debugger;
+                    if (result) {
+
+                    }
+                    else {
+
+                    }
+                },
+                //error: function (msg) {
+                //    alert(msg.responseText + "出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

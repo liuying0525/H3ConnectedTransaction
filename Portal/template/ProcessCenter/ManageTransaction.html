@@ -1,0 +1,681 @@
+﻿<!--权限校验-->
+<script>
+	$.post('/Portal/Ajax/CheckFunction.ashx?Code=Manage_ManageTransaction', {}, function (ret) {
+		console.log(ret);
+		eval(ret)
+	})
+</script>
+<!--关联人管理-->
+<div class="hbox hbox-auto-xs hbox-auto-sm manageBox managetransaction">
+	<!-- main -->
+	<!-- main header -->
+	<div class="bg-light lter b-b wrapper-md manageHeader">
+		<div class="row" style=" padding-right: 15px; ">
+			<div class="col-sm-6 col-xs-12">
+				<span class="h3" ng-bind="menuData.DisplayName"></span>
+			</div>
+		</div>
+	</div>
+	<!--表格部分Start-->
+	<div class="wrapper-md paddingbottomNone manageBody">
+		<div class="table-responsive row tableBox">
+			<div class="col-xs-4 col-md-3" id="addTree">
+				<div class="zTreeDemoBackground left">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+			</div>
+			<div class="col-xs-14 col-md-9">
+				<div id="sheetContent" class="main-container sheetContent">
+					<div id="main-navbar" class="navbar toolBar mainnavbar" role="navigation">
+						<div class="content-wrapper " ng-show="addusershow">
+							<form method="post" ng-submit="MaOnSubmitForm($event,'person')"
+								class="bs-example form-horizontal manageform" name="personform" id="personformID"
+								novalidate>
+								<div class="navbar-inner">
+									<!--<div  ng-bind="personInfo.id">{{personInfo.id}}</div>-->
+									<div id="main-navbar-collapse"
+										class="collapse navbar-collapse main-navbar-collapse ManageBar">
+										<ul id="divTopBars" class="nav navbar-nav SheetToolBar">
+											<li data-action="ViewInstance" ng-show="addBtn">
+												<a href="javascript:void(0);" ng-click="addRole('userform')"><i
+														class="panel-title-icon fa fa-user toolImage"></i><span
+														class="toolText">新增关联人</span></a>
+											</li>
+											<li data-action="Print" ng-show="addBtn">
+												<a href="javascript:void(0);" ng-click="addRole('Manageform')"><i
+														class="panel-title-icon fa fa-print toolImage"></i><span
+														class="toolText">新增关联机构</span></a>
+											</li>
+											<li data-action="Save">
+												<a href="javascript:void(0);"><input type="submit" form="personformID"
+														class="saveButton"><i
+														class="panel-title-icon fa fa-save toolImage"></i><span
+														class="toolText">保存</span></input></a>
+											</li>
+											<li data-action="Close" ng-click="addClose()">
+												<a href="javascript:void(0);"><i
+														class="panel-title-icon fa fa-times toolImage"></i><span
+														class="toolText">关闭</span></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="contentBox" style="flex:1;overflow-x: hidden;padding-bottom: 50px;">
+									<div style="text-align: center;" class="DragContainer">
+										<label id="lblTitle"
+											class="panel-title">{{personInfo.id==""?baseName:personInfo.name}}</label>
+									</div>
+									<div class="sheetContainer col-md-12" id="accordion" role="tablist"
+										aria-multiselectable="true">
+										<div class="nav-icon fa  bannerTitle SheetdivU">
+											<label id="divSheetInfo" data-en_us="Sheet information">基本信息</label>
+										</div>
+										<div id="divSheet">
+											<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-5 control-label"><span class="must"
+															style="color:red">*</span>姓名:</label>
+													<div class="col-md-7">
+														<input type="text" class="form-control manageinput" type="text"
+															placeholder="请输入" ng-model="personInfo.name" name="user"
+															required ng-focus>
+															<!--<input type="text" ng-model="personInfo.id" name="id"/>-->
+															
+														<div class="error"
+															ng-show="(personform.user.$dirty&&personform.user.$invalid)||(personform.user.$invalid && personform.submitted)">
+															<span ng-show="personform.user.$error.required">
+																用户名不能为空
+															</span>
+															<!--<span ng-show="personform.user.$error.required">用户名不能为空。</span>-->
+														</div>
+														
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label"><span class="must"
+															style="color:red">*</span>护照号:</label>
+													<div class="col-md-7">
+														<input type="text" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.passport"
+															name="passport" required>
+														
+														<div style="color:red"
+															ng-show="(personform.passport.$dirty && personform.passport.$invalid)||(personform.passport.$invalid&&personform.submitted)">
+															<span
+																ng-show="personform.passport.$error.required">护照号不能为空。</span>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-5 control-label"><span class="must"
+															style="color:red;">*</span>身份证号:</label>
+													<div class="col-md-7">
+														<input type="text" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.idcard" name="idcard"
+															required ng-pattern="
+/^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/">
+		
+															<!--<div ng-show="clickAdd" >-->
+														<div style="color:red"
+															ng-show="(personform.idcard.$dirty && personform.idcard.$invalid)||(personform.idcard.$invalid&&personform.submitted)">
+															<span ng-show="personform.idcard.$error.required">身份证号不能为空。</span>
+															<span ng-show="personform.idcard.$error.pattern">身份证格式不正确。</span>
+														</div>
+												<!--<div style="color:red" ng-show="(personform.idcard.$dirty && personform.idcard.$invalid)">		
+														
+												
+												</div>		-->
+														
+														<!--</div>-->
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">国籍:</label>
+													<div class="col-md-7">
+														<select class="form-control" 
+															ng-model="personInfo.country"
+															ng-options="o.en as o.cn for o in countrys">
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">年龄:</label>
+                                                    <div class="col-md-7">
+                                                        <input type="number" class="form-control manageinput"
+                                                               placeholder="请输入" ng-model="personInfo.age" name="age" ng-pattern="/^\+?[1-9]\d*$/">
+                                                        <div style="color:red" ng-show="(personform.age.$dirty && personform.age.$invalid)||(personform.age.$invalid&&personform.submitted)">
+                                                            <span ng-show="personform.age.$error.pattern">年龄格式不正确。</span>
+                                                        </div>
+                                                    </div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">性别:</label>
+													<div class="col-md-7">
+														<label class="radio-inline col-xs-4">
+															<input type="radio" name="sex" id="inlineRadio1" value="1"
+																ng-model="personInfo.sex"
+																ng-checked="personInfo.sex==1"> 男
+														</label>
+														<label class="radio-inline col-xs-4">
+															<input type="radio" name="sex" id="inlineRadio2" value="0"
+																ng-model="personInfo.sex"
+																ng-checked="personInfo.sex==0"> 女
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-5 control-label"><span class="must"
+															style="color:red;">*</span>任职机构:</label>
+													<div class="col-md-7">
+														<input type="text" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.employedIn"
+															name="employedIn" required ng-focus>
+														
+														<div style="color:red"
+															ng-show="(personform.employedIn.$dirty && personform.employedIn.$invalid)||(personform.employedIn.$invalid&&personform.submitted)">
+															<span
+																ng-show="personform.employedIn.$error.required">任职机构不能为空。</span>
+														</div>
+													
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">职务:</label>
+													<div class="col-md-7">
+														<select class="form-control" ng-model="personInfo.duty" ng-options="o.name as o.name for o in dutys">
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<div class="col-md-6">												
+													<label class="col-md-5 control-label">最高学历:</label>
+													<div class="col-md-7">
+														<select class="form-control" ng-model="personInfo.highestEducation"
+														
+															ng-options="o.id as o.name for o in highestEducations">
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">毕业学校:</label>
+													<div class="col-md-7">
+														<input type="text" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.graduatedSchool">
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">电话号码:</label>
+													<div class="col-md-7">
+														<input type="number" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.mobile">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label class="col-md-5 control-label">邮箱:</label>
+													<div class="col-md-7">
+														<input type="email" class="form-control manageinput"
+															placeholder="请输入" ng-model="personInfo.email" name="email">
+															<span style="color:red;" ng-show="personform.email.$error.email">非法的邮箱。</span>															
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<label class="col-md-3 control-label">户籍地址:</label>
+												<div class="col-md-9 form-group" style="margin-bottom:0;">
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="personInfo.huJiAddress">
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<label class="col-md-3 control-label">居住地址:</label>
+												<div class="col-md-9  form-group" style="margin-bottom:0;">
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="personInfo.juZhuAddress">
+												</div>
+											</div>
+							
+											<div class="form-group col-md-12">
+											
+													<label class="col-md-3 control-label"><span class="must"
+															style="color:red;">*</span>关联方关系:</label>
+													<div class="col-md-9 form-group" style="margin-bottom:0;">
+														<select class="form-control" id="relation"
+															ng-model="personInfo.relation"
+															ng-options="o.id as o.name for o in relations"
+															name="relation" data-list="relations" required>
+
+															<!--	<option value=""></option>-->
+														</select>
+														
+														<div style="color:red"
+															ng-show="(personform.relation.$dirty&&personform.relation.$invalid)||(personform.relation.$invalid&&personform.submitted)">
+															<span
+																ng-show="personform.relation.$error.required">请选择关联方关系。</span>
+														</div>
+														
+													</div>
+												
+											</div>
+											<div class="panel panel-default col-md-12">
+												<div class="panel-heading">
+													<h3 class="panel-title">银行信息</h3>
+												</div>
+												<div class="panel-body brankPanel">
+													<div class="form-group" ng-repeat="item in personInfo.banks">
+														<div class="col-md-6 form-group">
+															<label class="col-md-4 control-label">开户银行:</label>
+															<div class="col-md-8">
+																<input type="text" class="form-control manageinput"
+																	placeholder="请输入" ng-model="item.depositBank">
+															</div>
+														</div>
+														<div class="col-md-6 form-group">
+															<label class="col-md-4 control-label">银行账号:</label>
+															<div class="col-md-8">
+																<input type="text" class="form-control manageinput"
+																	placeholder="请输入" ng-model="item.bankNo">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<a href="javascript:void(0);" ng-click="btn_addBank('personInfo')"
+															class="col-md-6 col-md-offset-3 addbrank">+
+															&nbsp;&nbsp;添加银行信息
+														</a>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+												<h4 class="col-md-6" style="font-size:14px">附件信息</h4>
+												<div class="col-md-12" id="psersonfiles">
+														<label class=" col-md-3 control-label">上传证件:</label>
+													<div class="col-md-9">
+														<div class="uploadimg float-left">
+															<div class="col-md-12 updiv">
+																<span class="glyphicon glyphicon-plus"
+																	aria-hidden="true"></span>
+															</div>
+															<input type="file" nv-file-select="" uploader="uploader"
+																class="col-md-12 imginput fileup" data-type="image"
+																multiple /><br />
+														</div>
+														<div class="showimg float-left"
+															ng-repeat="item in uploader.queue">
+															<button type="button"
+																class="btn btn-danger btn-circle btn-lg"
+																ng-click="item.remove()"><i
+																	class="glyphicon glyphicon-remove"></i></button>
+															<div ng-show="uploader.isHTML5"
+																ng-thumb="{ file: item._file, height: 100 }" ng-click="imgUrl(item.fileurl)"></div>
+															<strong>{{ item.file.name }}</strong>
+														</div>
+
+
+													</div>
+
+												</div>
+
+												<div>
+												</div>
+												<div class="col-md-12">
+													<label class="col-md-3 control-label">上传附件:</label>
+													<div class="col-md-9">
+														<button type="button" class="btn btn-default">
+															<i class="fa fa-cloud-upload" aria-hidden="true"></i>
+															上传文件
+														</button>
+														<input type="file" nv-file-select="" uploader="uploader1"
+															class="singleup" data-type="file" multiple/>
+														<p class="text-muted uploadtext">支持扩展名：.rar .zip .doc .docx .pdf
+															.jpg...</p>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<ul>
+														<li ng-repeat="item in uploader1.queue" class="filelist">
+															<a ng-href="{{item.fileurl}}" ng-if="!!item.fileurl" class="downfile"><strong>{{ item.file.name }} (点击文件名可进行下载)</strong></a>
+														<strong ng-if="!item.fileurl">{{ item.file.name }}</strong>
+															<div ng-show="uploader1.isHTML5">
+																<div class="progress" style="margin-bottom: 0;">
+																	<div class="progress-bar" role="progressbar"
+																		ng-style="{ 'width': item.progress + '%' }">
+																	</div>
+																</div>
+															</div>
+															<button type="button"
+																class="btn btn-circle btn-lg fileremove" ng-click="item.remove()">
+																<i class="glyphicon glyphicon-remove"></i></button>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</form>
+						</div>				
+						<div class="content-wrapper" ng-show="addManageshow">
+						<form method="post" ng-submit="MaOnSubmitForm($event,'related')"
+							class="bs-example form-horizontal manageform" name="relatedform" id="relatedformID"
+							novalidate>
+							<div class="navbar-inner">
+								<div id="main-navbar-collapse"
+									class="collapse navbar-collapse main-navbar-collapse ManageBar">
+									<ul id="divTopBars" class="nav navbar-nav SheetToolBar">
+										<li data-action="ViewInstance" ng-show="addBtn">
+											<a href="javascript:void(0);" ng-click="addRole('userform')"><i
+													class="panel-title-icon fa fa-user toolImage"></i><span
+													class="toolText">新增关联人</span></a>
+										</li>
+										<li data-action="Print" ng-show="addBtn">
+											<a href="javascript:void(0);" ng-click="addRole('Manageform')"><i
+													class="panel-title-icon fa fa-print toolImage"></i><span
+													class="toolText">新增关联机构</span></a>
+										</li>
+										<li data-action="Save">
+
+											<a href="javascript:void(0);"><input type="submit" form="relatedformID"
+													class="saveButton"><i
+													class="panel-title-icon fa fa-save toolImage"></i><span
+													class="toolText">保存</span></input></a>
+										</li>
+
+										<li data-action="Close" ng-click="addClose()">
+											<a href="javascript:void(0);"><i
+													class="panel-title-icon fa fa-times toolImage"></i><span
+													class="toolText">关闭</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="contentBox" style="flex:1;overflow-x: hidden;padding-bottom: 50px;">
+								<div style="text-align: center;" class="DragContainer" >
+									<!--<label id="lblTitle" class="panel-title">{{relatedInfo.id==""?"新增关联方（机构）":relatedInfo.name}}</label>-->
+									<label id="lblTitle" class="panel-title">{{relatedInfo.id==""?baseName:relatedInfo.name}}</label>
+								</div>
+
+								<div class="sheetContainer col-md-12" id="accordion" role="tablist"
+									aria-multiselectable="true">
+									<div class="nav-icon fa  bannerTitle SheetdivM">
+										<label id="divSheetInfo" data-en_us="Sheet information">基本信息</label>
+									</div>
+									<div id="divSheet1">
+										<div class="form-group col-md-12">
+											<div class="col-md-6">
+												<label class="col-md-5 control-label"><span class="must"
+														style="color:red">*</span>公司名称:</label>
+												<div class="col-md-7">
+													<input type="text" class="form-control manageinput"
+														ng-model="relatedInfo.name" placeholder="请输入" name="name" required ng-focus>
+																
+																<div class="error"
+															ng-show="(relatedform.name.$dirty&&relatedform.name.$invalid)||(relatedform.name.$invalid && relatedform.submitted)">
+															<small ng-show="relatedform.name.$error.required">
+																公司名称不能为空
+															</small>
+															<!--<span ng-show="personform.user.$error.required">用户名不能为空。</span>-->
+														</div>
+														
+														
+														
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-5 control-label"><span class="must"
+														style="color:red">*</span>公司类别:</label>
+												<div class="col-md-7">
+														<select class="form-control" id="category"
+															ng-model="relatedInfo.category"
+															ng-options="o.id as o.name for o in categorys"
+															name="category" data-list="categorys" required>
+														</select>
+														<div style="color:red"
+															ng-show="(relatedform.category.$dirty&&relatedform.category.$invalid)||(relatedform.category.$invalid&&relatedform.submitted)">
+															<span
+																ng-show="relatedform.category.$error.required && relatedInfo">请选择公司类别。</span>
+														</div>
+													
+														
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<div class="col-md-6">
+												<label class="col-md-5 control-label"><span class="must"
+														style="color:red;">*</span>营业执照号:</label>
+												<div class="col-md-7">
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.licenseNo" name="licenseNo" required ng-focus>
+													
+													<div class="error"
+															ng-show="(relatedform.licenseNo.$dirty&&relatedform.licenseNo.$invalid)||(relatedform.licenseNo.$invalid && relatedform.submitted)">
+															<small ng-show="relatedform.licenseNo.$error.required">
+																营业执照号不能为空
+															</small>
+															<!--<span ng-show="personform.user.$error.required">用户名不能为空。</span>-->
+														</div>	
+														
+														
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-5 control-label">法人姓名:</label>
+												<div class="col-md-7">
+
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.legalName">
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<div class="col-md-6">
+												<label class="col-md-5 control-label">法人身份证号:</label>
+												<div class="col-md-7">
+
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.legalIdcard">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-5 control-label">法人手机号:</label>
+												<div class="col-md-7">
+
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.legalMobile">
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<div class="col-md-6">
+												<label class="col-md-5 control-label">经营期限:</label>
+												<div class="col-md-7">
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.operatingPeriod">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-5 control-label">注册资本:</label>
+												<div class="col-md-7">
+													<input type="text" class="form-control manageinput"
+														placeholder="请输入" ng-model="relatedInfo.registerAsset">
+												</div>
+											</div>
+										</div>
+										<div ng-show='relatedInfo.level!=0'>
+															<div class="form-group col-md-12">
+												<div class="col-md-6">
+													<label class="col-md-6 control-label"><span class="must"
+															style="color:red">*</span>本公司占股比例:</label>
+													<div class="col-md-6 input-group">
+														<div class="col-md-12 input-group"> 
+														<input type="number" class="form-control manageinput"
+															placeholder="请输入" ng-model="relatedInfo.BGSZGBL" name="BGSZGBL" ng-pattern="/^([1-9]\d*(\.\d+)?|0)$/" required ng-focus>
+														<span class="input-group-addon">%</span></div>
+															
+                                                        <div class="error"
+                                                             ng-show="(relatedform.BGSZGBL.$dirty&&relatedform.BGSZGBL.$invalid)||(relatedform.BGSZGBL.$invalid && relatedform.submitted)">
+                                                            <small ng-show="relatedform.BGSZGBL.$error.required">
+                                                                本公司占股比例不能为空
+                                                            </small>
+                                                            <small ng-show="relatedform.BGSZGBL.$error.pattern">
+                                                            需要输入大于等于0的数字
+                                                            </small>
+                                                        </div>
+														
+														
+													</div>
+												</div>
+												<div class="col-md-6 form-group" style="margin-bottom:0;">
+													<label class="col-md-6 control-label"><span class="must"
+															style="color:red">*</span>占本公司股份比例:</label>
+													<div class="col-md-6 input-group">
+														<div class="col-md-12 input-group"> 	<input type="number" class="form-control manageinput"
+															placeholder="请输入" ng-model="relatedInfo.ZBGSGQBL" name="ZBGSGQBL" ng-pattern="/^([1-9]\d*(\.\d+)?|0)$/" required ng-focus>
+														<span class="input-group-addon">%</span></div>
+													
+                                                        <div class="error"
+                                                             ng-show="(relatedform.ZBGSGQBL.$dirty&&relatedform.ZBGSGQBL.$invalid)||(relatedform.ZBGSGQBL.$invalid && relatedform.submitted)">
+                                                            <small ng-show="relatedform.ZBGSGQBL.$error.required">
+                                                                占本公司股份比例不能为空
+                                                            </small>
+                                                            <small ng-show="relatedform.ZBGSGQBL.$error.pattern">
+                                                                需要输入大于等于0的数字
+                                                            </small>
+                                                        </div>
+													</div>
+												</div>
+											</div>
+										
+										</div>
+										
+										<div class="form-group col-md-12">
+											<label class="col-md-3 control-label">注册地址:</label>
+											<div class="col-md-9 form-group" style="margin-bottom:0;">
+												<input type="text" class="form-control manageinput" placeholder="请输入"
+													ng-model="relatedInfo.registerAddress">
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label class="col-md-3 control-label">营业地址:</label>
+											<div class="col-md-9 form-group" style="margin-bottom:0;">
+												<input type="text" class="form-control manageinput" placeholder="请输入"
+													ng-model="relatedInfo.businessAddress">
+											</div>
+										</div>
+										<div ng-show='relatedInfo.level!=0'>	
+						
+											<div class="form-group col-md-12">
+												
+													<label class="col-md-3 control-label">经营范围:</label>
+													<div class="col-md-9 form-group" style="margin-bottom:0;">
+														<textarea class="form-control" rows="3" placeholder="请输入备注"
+															ng-model="relatedInfo.businessScope"></textarea>
+													</div>
+											
+											</div>
+											<div class="panel panel-default col-md-12">
+												<div class="panel-heading">
+													<h3 class="panel-title">银行信息</h3>
+												</div>
+												<div class="panel-body brankPanel">
+													<div class="form-group" ng-repeat='x in relatedInfo.banks'>
+														<div class="col-md-6 form-group">
+															<label class="col-md-4 control-label">开户银行:</label>
+															<div class="col-md-8">
+																<input type="text" class="form-control manageinput"
+																	placeholder="请输入" ng-model="x.depositBank">
+															</div>
+														</div>
+														<div class="col-md-6 form-group">
+															<label class="col-md-4 control-label">银行账号:</label>
+															<div class="col-md-8">
+																<input type="text" class="form-control manageinput"
+																	placeholder="请输入" ng-model="x.bankNo">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<a href="javascript:void(0);" ng-click="btn_addBank('relatedInfo')"
+															class="col-md-6 col-md-offset-3 addbrank">+ &nbsp;&nbsp;添加银行信息
+														</a>
+													</div>
+	
+												</div>
+											</div>
+											<div class="form-group col-md-12">
+											<h4 class="col-md-6" style="font-size:14px">附件信息</h4>
+											<div class="col-md-12" id="dcredentialfiles">
+												<label class="col-md-2 control-label">上传证件:</label>
+												<div class="col-md-10">
+													<div class="uploadimg float-left">
+														<div class="col-md-12 updiv">
+															<span class="glyphicon glyphicon-plus"
+																aria-hidden="true"></span>
+														</div>
+														<input type="file" nv-file-select="" uploader="uploader"
+															class="col-md-12 imginput" data-type="image"
+															ng-model="relatedInfo.credentials" multiple /><br />
+													</div>
+													<div class="showimg float-left" ng-repeat="item in uploader.queue">
+														<button type="button" class="btn btn-danger btn-circle btn-lg"
+															ng-click="item.remove()"><i
+																class="glyphicon glyphicon-remove"></i></button>
+														<div ng-show="uploader.isHTML5"
+															ng-thumb="{ file: item._file, height: 100 }" ng-click="imgUrl(item.fileurl)" class="himgurl">
+														</div>
+														<strong>{{ item.file.name }}</strong>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<label class="col-md-2 control-label">上传附件:</label>
+												<div class="col-md-10">
+													<button type="button" class="btn btn-default">
+														<i class="fa fa-cloud-upload" aria-hidden="true"></i>
+														上传文件
+													</button>
+													<input type="file" nv-file-select="" uploader="uploader1"
+														class="singleup" data-type="file" multiple/>
+													<p class="text-muted uploadtext">支持扩展名：.rar .zip .doc .docx .pdf
+														.jpg...</p>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<ul>
+													<li ng-repeat="item in uploader1.queue" class="filelist">
+														
+													<a ng-href="{{item.fileurl}}" ng-if="!!item.fileurl" class="downfile"><strong>{{ item.file.name }} (点击文件名可进行下载) </strong></a>
+														<strong ng-if="!item.fileurl">{{ item.file.name }}</strong>
+														<div ng-show="uploader1.isHTML5">
+															<div class="progress" style="margin-bottom: 0;">
+																<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+															</div>
+														</div>															
+														<button type="button" class="btn btn-circle btn-lg fileremove"ng-click="item.remove()"><i class="glyphicon glyphicon-remove"></i></button>
+													</li>
+												</ul>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--表格部分End-->
+</div>

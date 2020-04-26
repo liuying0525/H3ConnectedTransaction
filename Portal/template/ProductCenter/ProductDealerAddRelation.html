@@ -1,0 +1,89 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    #tabProductQueryItem tbody tr td {
+        text-align:center;
+    }
+
+</style>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <div class="col">
+        <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+            产品/经销商 添加关联
+        </div>
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="col-md-12 " style="border: 1px solid #eaeeea;">
+                        <div class="input-group searchContainer">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-success" value="一键关联" ng-click="addRelation();" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group" style="border: 1px solid #eaeeea;background-color: #dff0d8;font-size:16px">
+                        选择经销商
+                    </div>
+
+                    <div class="col-md-12" style="border: 1px solid #eaeeea;">
+                        <div class="col-md-5 form-group">
+                            <div class="input-group">
+                                <input type="text" ng-model="dealerName" class="form-control" placeholder="请输入经销商名称">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="searchDealers()"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <select name="from[]" id="multi_dealer" class="form-control" size="15" multiple="multiple" style="font-size:18px;overflow: scroll;">
+                                <option ng-repeat="dealer in dealers" value="{{dealer.BUSINESSPARTNERID}}">{{dealer.BUSINESSPARTNERNAME}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <button type="button" id="multi_d_rightAll" class="btn btn-default btn-block" style="margin-top: 20px;"><i class="glyphicon glyphicon-forward"></i></button>
+                            <button type="button" id="multi_d_rightSelected" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                            <button type="button" id="multi_d_leftSelected" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                            <button type="button" id="multi_d_leftAll" class="btn btn-default btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <select name="to[]" id="multi_dealer_to" class="form-control" size="15" multiple="multiple" style="font-size:18px;overflow: scroll;"></select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 form-group" style="border: 1px solid #eaeeea;background-color: #dff0d8;font-size:16px">
+                        选择产品
+                    </div>
+
+                    <div class="col-md-12" style="border: 1px solid #eaeeea;">
+                        <div class="col-md-5 form-group">
+                            <select name="from[]" id="multi_product" class="form-control" size="15" multiple="multiple" style="font-size:18px">
+                                <option ng-repeat="product in products" value="{{product.PRODUCTID}}">{{product.PRODUCTNAME}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <button type="button" id="multi_d_rightAll_product" class="btn btn-default btn-block" style="margin-top: 20px;"><i class="glyphicon glyphicon-forward"></i></button>
+                            <button type="button" id="multi_d_rightSelected_product" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                            <button type="button" id="multi_d_leftSelected_product" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                            <button type="button" id="multi_d_leftAll_product" class="btn btn-default btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <select name="to[]" id="multi_product_to" class="form-control" size="15" multiple="multiple" style="font-size:18px"></select>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

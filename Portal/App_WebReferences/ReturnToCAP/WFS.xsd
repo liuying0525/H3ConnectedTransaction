@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CMSComplied">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:CMSCompliedReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CMSCompliedReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StatusCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CMSCompliedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CMSCompliedResult" type="tns:TransResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TransResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="message" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="returnCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeWFStatusResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TransResult" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CMSSettled">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:CMSSettledReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CMSSettledReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StatusCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CMSSettledResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CMSSettledResult" type="tns:TransResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProposalApproval">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:ApprovalReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ApprovalReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StatusCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ApprovalUser" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ApprovalComments" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProposalApprovalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="ProposalApprovalResult" type="tns:TransResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDDBank">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:DDBankReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DDBankReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="applicationNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BankName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BranchName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AccountName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VinNo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EngineNo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDDBankResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="UpdateDDBankResult" type="tns:TransResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendBackFI">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:SendBackFIReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SendBackFIReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="applicationNo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendBackFIResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="SendBackFIResult" type="tns:TransResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CMSCollectionData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="contractNbr" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CMSCollectionDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CMSCollectionDataResult" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

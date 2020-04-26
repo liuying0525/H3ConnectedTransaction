@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="/Portal/WFRes/_Scripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.tongdun.cn/bodyguard/tdreportv4.2.2.min.js"></script>
+    <script src="/Portal/WFRes/layer/layer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //查询同盾报表
+        function queryTdReport(idcard_no) {
+            console.log(idcard_no);
+            if (idcard_no && idcard_no != "") {
+                $.ajax({
+                    type: "GET",
+                    url: "/Portal/Proposal/GetTDData?idcardno=" + idcard_no,
+                    data: "",
+                    success: function (data) {
+                        if (data == "" || data == null) {
+                            layer.msg("该用户无调用记录");
+                            return;
+                        }
+                        var jsondata = $.parseJSON(data);
+                        if (jsondata.success) {
+                            if (jsondata.data.reportResult == 1) {
+                                $.showReport($.parseJSON(jsondata.data.reportInfo));
+                            }
+                            else {
+                                layer.msg("该用户无调用记录");
+                            }
+                        }
+                        else {
+                            layer.msg("该用户无调用记录");
+                        }
+                    },
+                    error: function (msg) {// 19.7 
+                        showJqErr(msg);
+                    }
+                });
+            }
+            else {
+                layer.msg("身份证号码为空");
+            }
+        }
+        
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); //   decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+        $(function () {
+            var no = localStorage.getItem("id");//QueryString("id");
+            if (no && no != "") {
+                queryTdReport(decodeURI(no));
+            }
+            else {
+                $("body").append("<h3>参数错误</h3>");
+            }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

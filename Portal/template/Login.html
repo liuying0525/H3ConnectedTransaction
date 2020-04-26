@@ -1,0 +1,197 @@
+﻿<div class="container w-xxl w-auto-xs page-signup">
+    <style>
+        /*验证码*/
+        .verificationCode {
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #code_img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            vertical-align: top;
+        }
+    </style>
+    <div class="signup-container">
+        <div class="signup-header">
+            <img src="WFRes/_Content/Login/images/LOGO_W.png">
+        </div>
+        <form name="form">
+            <div class="signup-form">
+                <div class="signup-text">
+                    <span>H3业务流程管理系统</span>
+                </div>
+                <!--重置密码 Start-->
+                <div ng-if="needResetPwd">
+                    <!-- ng-pattern="/^((?=.*[a-zA-Z]+)(?=.*[0-9])|(?=.*[a-zA-Z]+)(?=.*[~!@#￥%&*])|(?=.*[0-9])(?=.*[~!@#￥%&*]))[A-Za-z0-9~!@#$%&*]+$/" -->
+                    <div class="form-group w-icon">
+                        <input name="oldPassword" type="password" id="oldPassword"
+                               autofocus class="form-control input-lg" size="20" placeholder="{{LanJson.OldPassword}}"
+                               ng-model="oldPassword" ng-keypress="($event.which===13)?resetPwd():''" required>
+                        <span class="fa fa-user signup-form-icon"></span>
+                    </div>
+                    <div class="form-group w-icon" style="margin-top:15px;">
+                        <input name="newPassword" type="password" id="newPassword"
+                               class="form-control input-lg" size="20" placeholder="{{LanJson.NewPassword}}"
+                               ng-model="newPassword" ng-keypress="($event.which===13)?resetPwd():''" ng-keyup="validateInput()"  required ng-maxlength="16" ng-minlength="6">
+                        <span class="fa fa-lock signup-form-icon"></span>
+                    </div>
+                    <div class="form-group w-icon" style="margin-top:15px;">
+                        <input name="newPasswordConfirm" type="password" id="newPasswordConfirm"
+                               class="form-control input-lg" size="20" placeholder="{{LanJson.NewPasswordConfirm}}"
+                               ng-model="newPasswordConfirm" ng-keypress="($event.which===13)?resetPwd():''" ng-keyup="validateInput()" required ng-maxlength="16" ng-minlength="6">
+                        <span class="fa fa-lock signup-form-icon"></span>
+                    </div>
+                    <div ng-if="PwdResetValidateFailed" style="text-align: center;color:#ff0000; margin-top: 15px;">
+                        <span>{{PwdValidateErrorMsg}}</span>
+                    </div>
+                    <!--/(?=.*[0-9])(?=.*[a-zA-Z])|(?=.*[^a-zA-Z0-9])/-->
+                    <!--<div ng-if="!PasswordComplexityValid" style="text-align: center;color:#ff0000; margin-top: 15px;">
+                        <span>请输入6-16位的数字、字母、常用符号，不能为单一组合</span>
+                    </div>-->
+
+
+                    <div class="form-actions">
+                        <button type="submit" id="resetPwd" class="btn btn-lg btn-info btn-block"
+                                style="background-color: #4997D6"
+                                ng-click="resetPwd()">
+                            <span>更新密码</span>
+                        </button>
+                    </div>
+                </div>
+                <!--重置密码 End-->
+                <!--原始登录 Start-->
+                <div ng-if="!needResetPwd">
+                    <div class="form-group w-icon">
+                        <input name="txtUser" type="text" id="txtUser"
+                               autofocus class="form-control input-lg" size="20" placeholder="{{LanJson.Code}}"
+                               ng-model="userCode" ng-keypress="($event.which===13)?loginIn():''" required>
+                        <span class="fa fa-user signup-form-icon"></span>
+                    </div>
+                    <div class="form-group w-icon" style="margin-top:15px;">
+                        <input name="txtPassword" type="password" id="txtPassword"
+                               class="form-control input-lg" size="20" placeholder="{{LanJson.Password}}"
+                               ng-model="userPassword" ng-keypress="($event.which===13)?loginIn():''" required>
+                        <span class="fa fa-lock signup-form-icon"></span>
+                    </div>
+
+
+                    <div ng-if="hasCheckCode" class="form-group w-icon" style="margin-top:15px;height:50px;">
+                        <div id="verificationCode" class="verificationCode">
+                            <canvas width="100" height="40" id="verifyCanvas"></canvas>
+                            <img id="code_img">
+                        </div>
+                    </div>
+                    <div ng-if="hasCheckCode" class="form-group w-icon" style="margin-top:15px;">
+                        <input name="txtCheckCode" id="txtCheckCode"
+                               class="form-control input-lg" size="4" placeholder="{{LanJson.CheckCode}}"
+                               ng-model="checkCode" required>
+                        <span class="fa edit-obj signup-form-icon"></span>
+                    </div>
+                    <div ng-if="!LoginSuccess" style="text-align: center;color:#ff0000; margin-top: 15px;">
+                        <span translate="LoginController.NotInvalid">用户名密码错误</span>
+                    </div>
+                    <div ng-if="!ConnectionFailed" style="text-align: center;color:#ff0000; margin-top: 15px;">
+                        <span>引擎连接失败</span>
+                    </div>
+                    <div ng-if="!EnginePasswordValid" style="text-align: center;color:#ff0000; margin-top: 15px;">
+                        <span>引擎连接失败,密码错误</span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="loginIn" class="btn btn-lg btn-info btn-block"
+                                style="background-color: #4997D6"
+                                ng-click="loginIn()">
+                            <span translate="LoginController.Login">登录</span>
+                        </button>
+                    </div>
+                </div>
+                <!--原始登录 End-->
+                <!-- ng-disabled="form.$invalid" -->
+
+            </div>
+        </form>
+    </div>
+    <script>
+        var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9",
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+        ];
+        var str = '';
+        var verVal = drawCode();
+        // 绘制验证码
+        function drawCode(str) {
+            var canvas = document.getElementById("verifyCanvas"); //获取HTML端画布
+            var context = canvas.getContext("2d"); //获取画布2D上下文
+            context.fillStyle = "cornflowerblue"; //画布填充色
+            context.fillRect(0, 0, canvas.width, canvas.height); //清空画布
+            context.fillStyle = "white"; //设置字体颜色
+            context.font = "25px Arial"; //设置字体
+            var rand = new Array();
+            var x = new Array();
+            var y = new Array();
+            for (var i = 0; i < 4; i++) {
+                rand.push(rand[i]);
+                rand[i] = nums[Math.floor(Math.random() * nums.length)];
+                x[i] = i * 20 + 10;
+                y[i] = Math.random() * 20 + 20;
+                context.fillText(rand[i], x[i], y[i]);
+            }
+            str = rand.join('').toUpperCase();
+            //画3条随机线
+            for (var i = 0; i < 3; i++) {
+                drawline(canvas, context);
+            }
+
+            // 画30个随机点
+            for (var i = 0; i < 30; i++) {
+                drawDot(canvas, context);
+            }
+            convertCanvasToImage(canvas);
+            return str;
+        }
+
+        // 随机线
+        function drawline(canvas, context) {
+            context.moveTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height)); //随机线的起点x坐标是画布x坐标0位置，y坐标是画布高度的随机数
+            context.lineTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height)); //随机线的终点x坐标是画布宽度，y坐标是画布高度的随机数
+            context.lineWidth = 0.5; //随机线宽
+            context.strokeStyle = 'rgba(50,50,50,0.3)'; //随机线描边属性
+            context.stroke(); //描边，即起点描到终点
+        }
+        // 随机点(所谓画点其实就是画1px像素的线，方法不再赘述)
+        function drawDot(canvas, context) {
+            var px = Math.floor(Math.random() * canvas.width);
+            var py = Math.floor(Math.random() * canvas.height);
+            context.moveTo(px, py);
+            context.lineTo(px + 1, py + 1);
+            context.lineWidth = 0.2;
+            context.stroke();
+
+        }
+        // 绘制图片
+        function convertCanvasToImage(canvas) {
+            document.getElementById("verifyCanvas").style.display = "none";
+            var image = document.getElementById("code_img");
+            image.src = canvas.toDataURL("image/png");
+            return image;
+        }
+
+        // 点击图片刷新
+        document.getElementById('code_img').onclick = function () {
+            debugger;
+            resetCode();
+        }
+
+        function resetCode() {
+            $('#verifyCanvas').remove();
+            $('#code_img').before('<canvas width="100" height="40" id="verifyCanvas"></canvas>');
+            verVal = drawCode();
+        }
+    </script>
+</div>

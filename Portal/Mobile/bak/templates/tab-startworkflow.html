@@ -1,0 +1,74 @@
+<ion-view view-title="发起流程" align-title="center" hide-nav-bar="true" class="tab-startwf">
+
+  <div class="menu-tittle">
+    <div class="menu-tittle-left"></div>
+    <div class="menu-tittle-middle f17">发起流程</div>
+    <div class="menu-tittle-right f14">
+      <span  ng-click="openPopover()" class="pl25">筛选</span>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div ng-repeat="d in tabNames" ng-click="activeSlide($index)" ng-class="slectIndex==$index?'tab_selected tab-bar-item':'tab-bar-item'">
+        <span class="f15 rel db">
+          <i>{{d}}</i>
+        </span>
+      <div class="vertical-line"></div>
+    </div>
+  </div>
+
+
+    <ion-content>
+
+        <!--常用流程  -->
+        <div ng-show="slectIndex==0">
+            <div ng-repeat="category in categories">
+                <div ng-repeat="workflow in category.Workflows | filter:{'IsFavorite':true}" class="flow-list-item"
+                    ng-click="startWorkflow('{{workflow.WorkflowCode}}')">
+                  <div class="flow-li-left">
+                      <i ng-click="changeFavorite('{{workflow.WorkflowCode}}')" ng-class="{true: ' icon-star f16', false: ' icon-shoucaang_2  f16'}[workflow.IsFavorite]"></i>
+                  </div>
+                  <div class="flow-li-right">
+                        <div>
+                          <img class="flow-type" ng-src="{{url+workflow.WorkflowImage}}" />
+                          <span class="f16">
+                              {{ workflow.DisplayName | limitTo:16 }}
+                              {{ workflow.DisplayName.length > 16 ? '...' : '' }}
+                          </span>
+                          <span class="sample f12">样例数据</span>
+                        </div>
+                        <i class="ion-chevron-right f12"></i>
+                    </div>
+                </div>
+          </div>
+        </div>
+        <!--全部流程  -->
+        <div ng-show="!slectIndex==0">
+            <div ng-repeat="category in categories">
+                <!--全部流程   流程组名 -->
+                <div class="flow-list-tittle f13">
+                    {{category.DisplayName}}
+                </div>
+
+                <div data-title="全部" ng-repeat="workflow in category.Workflows" class="flow-list-item"
+                ng-click="startWorkflow('{{workflow.WorkflowCode}}')">
+                  <div class="flow-li-left">
+                  <i ng-click="changeFavorite('{{workflow.WorkflowCode}}','{{category.DisplayName}}')" ng-class="{true: ' icon-star f16', false: ' icon-shoucaang_2  f16'}[workflow.IsFavorite]"></i>
+                  </div>
+                  <div class="flow-li-right">
+                    <div>
+                      <img class="flow-type" ng-src="{{url+workflow.WorkflowImage}}" />
+                      <span class="f16">
+                        {{ workflow.DisplayName | limitTo:16 }}
+                        {{ workflow.DisplayName.length > 16 ? '...' : '' }}
+                      </span>
+                      <span class="sample f12">样例数据</span>
+                    </div>
+                    <i class="ion-chevron-right f12"></i>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>

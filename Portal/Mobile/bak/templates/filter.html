@@ -1,0 +1,62 @@
+<style type="text/css" scoped>
+
+</style>
+<ion-popover-view>
+    <div class="sideSlip">
+      <div class="menu-tittle">
+        <div class="menu-tittle-left pr25" ng-click="closePopover()"><i class="ion-chevron-right f22 blue"></i></div>
+        <div class="menu-tittle-middle f15"><i class="icon-shaixuan f14 blue"></i>筛选</div>
+        <div class="menu-tittle-right"></div>
+      </div>
+
+      <ion-content>
+        <div class="menu-bar">
+          <div class="menu-bar-left f15">流程名称</div>
+          <div class="menu-bar-right"></div>
+        </div>
+        <div class="input-container">
+          <input type="text" placeholder="请输入流程名称" class="f14">
+        </div>
+        <div class="menu-bar">
+          <div class="menu-bar-left f15">发起人</div>
+          <div class="menu-bar-right f14">请选择<i class="ion-chevron-right f14 ml10"></i></div>
+        </div>
+        <div class="menu-bar">
+          <div class="menu-bar-left f15">创建日期</div>
+          <div class="menu-bar-right"></div>
+        </div>
+        <div class="input-container" style="flex-wrap: nowrap;">
+          <input type="date" placeholder="初始时间" class="f14">
+          <div class="shortline"></div>
+          <input type="date" placeholder="结束时间" class="f14">
+        </div>
+        <div class="menu-bar">
+          <div class="menu-bar-left f15">是否加急</div>
+          <div class="menu-bar-right"></div>
+        </div>
+        <div class="input-container" ng-click="clickMergency($event)">
+          <input type="button" value="否" class="f14" >
+          <input type="button" value="是" class="f14">
+          <input type="button" value="不限" class="f14">
+        </div>
+        <div class="menu-bar">
+          <div class="menu-bar-left f15">展示方式</div>
+          <div class="menu-bar-right"></div>
+        </div>
+        <div class="input-container" ng-click="clickMergency($event)">
+          <input type="button" value="按时间" class="f14" >
+          <input type="button" value="按人名" class="f14 ">
+          <input type="button" value="按部门" class="f14">
+          <input type="button" value="按是否加急" class="f14 ">
+          <input type="button" value="按流程表单" class="f14">
+        </div>
+      </ion-content>
+      
+
+      <div class="bottom-button">
+        <div class="bb-left f16" ng-click="resetSearch()">重置</div>
+        <div class="bb-right f16">确定</div>
+      </div>
+    </div>
+</ion-popover-view>
+

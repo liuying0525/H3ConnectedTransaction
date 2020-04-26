@@ -1,0 +1,30 @@
+﻿.SheetGridView {
+    width: 100%;
+}
+
+.tab-content {
+    padding: 3px 0;
+}
+
+.select2-container {
+    width: 91%;
+    margin-left: 3px;
+}
+
+input[type=text], select, table {
+    width: 91%;
+    margin-left: 3px;
+}
+
+#pmt_detail .modal-dialog {
+    width: 800px;
+}
+
+#pmt_detail table {
+    margin-bottom: 0px;
+}
+
+#pmt_detail table td, th {
+    text-align: center;
+    width: 16.6%;
+}

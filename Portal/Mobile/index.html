@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!--<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">-->
+  <title>APP BPM</title>
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+  <!-- <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="lib/ionic/css/fontStyle.css" rel="stylesheet">
+
+
+   IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/fonts.css" rel="stylesheet">
+
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/ngCordova/ng-cordova.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+    <!-- 时间插件 -->
+    <script src="lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+    <link href="lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+    <script src="js/dingTalk.js"></script>
+  <script src="js/app.js"></script>
+   <script src="js/config.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/service/services.js?20191116"></script>
+  <script src="js/service/httpService.js"></script>
+    <script src="js/services.js?20180320001"></script>
+    <script src="js/service/sheetUserservice.js"></script>
+  <!--rem布局-->
+  <script src="js/flexible.js"></script>
+    <script src="form/jquery-2.1.3.min.js"></script>
+  <!--分部分controller-->
+  <script src="js/controller/homeCtrl.js"></script>
+  <script src="js/controller/myInstancesCtrl.js"></script>
+  <script src="js/controller/startworkflowCtrl.js"></script>
+  <script src="js/controller/loginCtrl.js"></script>
+  <script src="js/controller/settingsCtrl.js"></script>
+  <script src="js/controller/settingsLangCtrl.js"></script>
+  <script src="js/controller/detailsCtrl.js"></script>
+  <script src="js/controller/listDetailsCtrl.js"></script>
+  <script src="js/controller/inputGroupCtrl.js"></script>
+  <script src="js/controller/inputGroupShowCtrl.js"></script>
+  <script src="js/controller/sheetUserCtrl.js"></script>
+  <script src="js/userDirectives.js"></script>
+
+<body ng-app="starter" ng-controller="mainCtrl">
+
+  <ion-nav-bar class="bar-light header-botton ">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-view></ion-nav-view>
+</body>
+
+</html>

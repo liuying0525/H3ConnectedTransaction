@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44F7F4DC-EC5C-40B1-8A79-5EACD6742262}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OThinker.H3.Controllers</RootNamespace>
+    <AssemblyName>OThinker.H3.Controllers</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="H3Engine">
+      <HintPath>..\Portal\bin\H3Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="H3Entity">
+      <HintPath>..\Portal\bin\H3Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Portal\bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Portal\bin\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Portal\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Portal\bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\Portal\bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\Portal\bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\Portal\bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="OThinker.Common">
+      <HintPath>..\Portal\bin\OThinker.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="OThinker.H3.Controllers">
+      <HintPath>..\Portal\bin\OThinker.H3.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Portal\bin\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SAPConnectorClient, Version=10.0.0.11117, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Portal\bin\SAPConnectorClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Portal\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCode\Admin\DeploymentProcess.cs" />
+    <Compile Include="AppCode\EditUserType.cs" />
+    <Compile Include="AppStart\ExceptionLogAttribute.cs" />
+    <Compile Include="AppStart\FilterConfig.cs" />
+    <Compile Include="AppStart\RouteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppStart\Startup.cs" />
+    <Compile Include="AppCode\Admin\ConstantString.cs" />
+    <Compile Include="ControllerBase.cs" />
+    <Compile Include="Controllers\Admin\Formula\FormulaController.cs" />
+    <Compile Include="Controllers\Admin\Handler\AppNavigationChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\AppsChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\BizOjectChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\BizRuleChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\BizServiceChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\MasterDataTreeHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\ProcessModelHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\PropertyTreeHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\ReportTreeHander.cs" />
+    <Compile Include="Controllers\Admin\Handler\RuleFolderChildren.cs" />
+    <Compile Include="Controllers\Admin\Handler\WorkflowHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\WrokflowPackageChildren.cs" />
+    <Compile Include="Controllers\Admin\IndexController.cs" />
+    <Compile Include="Controllers\Admin\Handler\AbstractPortalTreeHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\FunctionHandler.cs" />
+    <Compile Include="Controllers\Admin\Handler\OrganizationHandler.cs" />
+    <Compile Include="Controllers\Admin\Portal\PortalAdminHandlerController.cs" />
+    <Compile Include="Controllers\Admin\PropertyTreeHandler\PropertyTreeHandlerController.cs" />
+    <Compile Include="Controllers\Admin\TreeDataController\PortalTreeController.cs" />
+    <Compile Include="Controllers\Admin\TreeDataController\ProtalTreeDragController.cs" />
+    <Compile Include="Controllers\Admin\TreeDataController\WorkflowTreeController.cs" />
+    <Compile Include="Controllers\Admin\TreeDataHandler\PortalTreeHandlerController.cs" />
+    <Compile Include="Controllers\Apps\AppsController.cs" />
+    <Compile Include="Controllers\Apps\FunctionNodeController.cs" />
+    <Compile Include="Controllers\BizQueryHandler\BizQueryHandlerController.cs" />
+    <Compile Include="Controllers\BPA\ReportParameterHandlerController.cs" />
+    <Compile Include="Controllers\Cluster\ClusterController.cs" />
+    <Compile Include="Controllers\Cluster\EngineController.cs" />
+    <Compile Include="Controllers\Cluster\SettingController.cs" />
+    <Compile Include="Controllers\Cluster\VesselController.cs" />
+    <Compile Include="Controllers\Controls\ImportHandlerController.cs" />
+    <Compile Include="Controllers\Controls\OfficeServiceController.cs" />
+    <Compile Include="Controllers\Customer\jtLDAP.cs" />
+    <Compile Include="Controllers\Designer\WorkflowDesignerController.cs" />
+    <Compile Include="Controllers\Designer\WorkflowHanderController.cs" />
+    <Compile Include="Controllers\HybridApp\HybridAppController.cs" />
+    <Compile Include="Controllers\Mobile\DingTalkController.cs" />
+    <Compile Include="Controllers\Mobile\MobileAccess.cs" />
+    <Compile Include="Controllers\Mobile\MobileController.cs" />
+    <Compile Include="Controllers\Mobile\WeChatController.cs" />
+    <Compile Include="Controllers\MvcDesigner\MvcDesignerController.cs" />
+    <Compile Include="Controllers\PortalService\HomePageController.cs" />
+    <Compile Include="Controllers\BizBus\AdapterController.cs" />
+    <Compile Include="Controllers\BizBus\BizDbConfigController.cs" />
+    <Compile Include="Controllers\BizBus\BizServiceController.cs" />
+    <Compile Include="Controllers\BizBus\BizServiceHandlerController.cs" />
+    <Compile Include="Controllers\BizBus\BizServiceMethodController.cs" />
+    <Compile Include="Controllers\BizBus\SAPConnectionConfigController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleDataElementController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleDecisionMatrixColumnController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleDecisionMatrixController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleDecisionMatrixRowController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleImportController.cs" />
+    <Compile Include="Controllers\BizRule\BizRuleTableController.cs" />
+    <Compile Include="Controllers\BPA\ReportSourceController.cs" />
+    <Compile Include="Controllers\BPA\ReportTemplateController.cs" />
+    <Compile Include="Controllers\BPA\ReportViewController.cs" />
+    <Compile Include="Controllers\Organization\CategoryController.cs" />
+    <Compile Include="Controllers\Organization\FunctionAclController.cs" />
+    <Compile Include="Controllers\Organization\OrgGroupController.cs" />
+    <Compile Include="Controllers\Organization\OrgUnitController.cs" />
+    <Compile Include="Controllers\Organization\OrgUserController.cs" />
+    <Compile Include="Controllers\Organization\QueryUserController.cs" />
+    <Compile Include="Controllers\Controls\SheetUserController.cs" />
+    <Compile Include="Controllers\Organization\OrgJobController.cs" />
+    <Compile Include="Controllers\Common.cs" />
+    <Compile Include="Controllers\Organization\SyncADController.cs" />
+    <Compile Include="Controllers\PortalService\PortalHandlerController.cs" />
+    <Compile Include="Controllers\PortalService\PortalPluginSettingPage.cs" />
+    <Compile Include="Controllers\ProcessCenter\AgentsController.cs" />
+    <Compile Include="Controllers\ProcessCenter\CirculateItemController.cs" />
+    <Compile Include="Controllers\ProcessCenter\FileUploadController.cs" />
+    <Compile Include="Controllers\ProcessCenter\Hanlers\MyWorkflowHandler.cs" />
+    <Compile Include="Controllers\ProcessCenter\ImportController.cs" />
+    <Compile Include="Controllers\ProcessCenter\InstanceController.cs" />
+    <Compile Include="Controllers\ProcessCenter\InstanceDataTrackController.cs" />
+    <Compile Include="Controllers\ProcessCenter\InstanceDetailController.cs" />
+    <Compile Include="Controllers\ProcessCenter\PersonalInfoController.cs" />
+    <Compile Include="Controllers\ProcessCenter\ReadAttachmentController.cs" />
+    <Compile Include="Controllers\ProcessCenter\WorkflowController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizMasterDataImportController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizObjectAclController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizObjectSchemaAssociationController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizObjectSchemaController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizObjectSchemaMethodController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizObjectSchemaPropertyController.cs" />
+    <Compile Include="Controllers\ProcessModel\BizQueryController.cs" />
+    <Compile Include="Controllers\ProcessModel\FunctionNodeLockerController.cs" />
+    <Compile Include="Controllers\ProcessModel\ListenerPolicyController.cs" />
+    <Compile Include="Controllers\ProcessModel\MasterPackageController.cs" />
+    <Compile Include="Controllers\ProcessModel\ReportFolderController.cs" />
+    <Compile Include="Controllers\ProcessModel\ProcessFolderController.cs" />
+    <Compile Include="Controllers\ProcessModel\RunBizQueryController.cs" />
+    <Compile Include="Controllers\ProcessModel\ScheduleInvokerController.cs" />
+    <Compile Include="Controllers\ProcessModel\ServiceMethodMapController.cs" />
+    <Compile Include="Controllers\ProcessModel\ServiceMethodParamMapController.cs" />
+    <Compile Include="Controllers\ProcessModel\TestBizObjectController.cs" />
+    <Compile Include="Controllers\ProcessModel\WorkflowFolderAclController.cs" />
+    <Compile Include="Controllers\ProcessModel\WorkflowPackageController.cs" />
+    <Compile Include="Controllers\ProcessModel\WorkflowPackageImportController.cs" />
+    <Compile Include="Controllers\ProcessModel\WorkSheetController.cs" />
+    <Compile Include="Controllers\Reporting\AjaxContext.cs" />
+    <Compile Include="Controllers\FormRule\FormRuleController.cs" />
+    <Compile Include="Controllers\Reporting\FunctionHelper.cs" />
+    <Compile Include="Controllers\Reporting\ReportBase.cs" />
+    <Compile Include="Controllers\Reporting\ReportController.cs" />
+    <Compile Include="Controllers\Reporting\ReportingController.cs" />
+    <Compile Include="Controllers\Reporting\ReportSqlSourseController.cs" />
+    <Compile Include="Controllers\Reporting\TreeSourseController.cs" />
+    <Compile Include="Controllers\Sheets\EditBizObjectSheetsController.cs" />
+    <Compile Include="Controllers\Sheets\InstanceSheetsController.cs" />
+    <Compile Include="Controllers\Sheets\WorkItemSheetsController.cs" />
+    <Compile Include="Controllers\StartIntance\StartInstanceController.cs" />
+    <Compile Include="Controllers\SysDeployment\SysDeploymentController.cs" />
+    <Compile Include="Controllers\SysLog\ExceptionLogController.cs" />
+    <Compile Include="Controllers\SysLog\InvokingLogController.cs" />
+    <Compile Include="Controllers\SysLog\LoginLogController.cs" />
+    <Compile Include="Controllers\SysLog\OrganizationLogController.cs" />
+    <Compile Include="Controllers\SysParam\CommonParamController.cs" />
+    <Compile Include="Controllers\SysParam\ServerMonitorController.cs" />
+    <Compile Include="Controllers\SysParam\WorkingCalendarController.cs" />
+    <Compile Include="Controllers\WebApi\BPMController.cs" />
+    <Compile Include="Controllers\WorkFlow\SimulationController.cs" />
+    <Compile Include="Controllers\WorkFlow\UpdateWorkflowAclController.cs" />
+    <Compile Include="Controllers\WorkFlow\WorflowHistoryController.cs" />
+    <Compile Include="Controllers\WorkFlow\WorkflowTempSettingController.cs" />
+    <Compile Include="MvcSheet\DataLogger.cs" />
+    <Compile Include="MvcSheet\ZipHelper.cs" />
+    <Compile Include="ViewModels\ActivityTemplateConfigsViewModel.cs" />
+    <Compile Include="ViewModels\AdapterViewModel.cs" />
+    <Compile Include="Controllers\SysParam\SSOManagerController.cs" />
+    <Compile Include="Controllers\SysParam\SystemOrgAclController.cs" />
+    <Compile Include="ViewModels\AgencyViewModel.cs" />
+    <Compile Include="ViewModels\AppFunctionNodeViewModel.cs" />
+    <Compile Include="ViewModels\AppImportSettingsViewModel.cs" />
+    <Compile Include="ViewModels\AppsViewModel.cs" />
+    <Compile Include="ViewModels\AssociatedObjectRowViewModel.cs" />
+    <Compile Include="ViewModels\AssociationDataMap.cs" />
+    <Compile Include="ViewModels\BizMasterDataImportViewModel.cs" />
+    <Compile Include="ViewModels\BizQueryPageViewModel.cs" />
+    <Compile Include="ViewModels\BizDbConfigViewModel.cs" />
+    <Compile Include="ViewModels\BizListenerViewModel.cs" />
+    <Compile Include="ViewModels\BizObjectAclViewModel.cs" />
+    <Compile Include="ViewModels\BizObjectSchemaMethod.cs" />
+    <Compile Include="ViewModels\BizObjectSchemaPropertyViewModel.cs" />
+    <Compile Include="ViewModels\BizQueryActionViewModel.cs" />
+    <Compile Include="ViewModels\BizQueryConditionViewModel.cs" />
+    <Compile Include="ViewModels\BizQueryPropertyViewModel.cs" />
+    <Compile Include="ViewModels\BizQueryViewMode.cs" />
+    <Compile Include="ViewModels\BizRuleTableViewModel.cs" />
+    <Compile Include="ViewModels\BizRuleViewModel.cs" />
+    <Compile Include="ViewModels\BizObjectSchemaViewModel.cs" />
+    <Compile Include="ViewModels\BizServiceHandlerViewModel.cs" />
+    <Compile Include="ViewModels\BizServiceMethodViewModel.cs" />
+    <Compile Include="ViewModels\BizServiceViewModel.cs" />
+    <Compile Include="ViewModels\BPMServiceResult.cs" />
+    <Compile Include="ViewModels\CirculateItemViewModel.cs" />
+    <Compile Include="ViewModels\CluserUserViewModel.cs" />
+    <Compile Include="ViewModels\Cluster\CluserUserViewModel.cs" />
+    <Compile Include="ViewModels\Cluster\EngineViewModel.cs" />
+    <Compile Include="ViewModels\Cluster\SettingViewModel.cs" />
+    <Compile Include="ViewModels\Cluster\VesselViewModel.cs" />
+    <Compile Include="ViewModels\CommonParamViewModel.cs" />
+    <Compile Include="Controllers\SysParam\QueryAgentController.cs" />
+    <Compile Include="Controllers\SysParam\GlobalDataController.cs" />
+    <Compile Include="Controllers\SysParam\MasterDataController.cs" />
+    <Compile Include="Controllers\SysParam\MessageSettingsController.cs" />
+    <Compile Include="Controllers\SysParam\SystemAclController.cs" />
+    <Compile Include="ViewModels\ActionResult.cs" />
+    <Compile Include="ViewModels\AgentsViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\DingAppViewModel.cs" />
+    <Compile Include="ViewModels\ExcepitonCode.cs" />
+    <Compile Include="ViewModels\ExceptionDetailViewModel.cs" />
+    <Compile Include="ViewModels\ExceptionLogViewModel.cs" />
+    <Compile Include="ViewModels\FilterConditionViewModel.cs" />
+    <Compile Include="ViewModels\FilterDataViewModel.cs" />
+    <Compile Include="ViewModels\FormulaTree.cs" />
+    <Compile Include="ViewModels\FunctionAclViewModel.cs" />
+    <Compile Include="ViewModels\FunctionUrlViewModel.cs" />
+    <Compile Include="ViewModels\GlobalDataViewModel.cs" />
+    <Compile Include="ViewModels\GridViewModel.cs" />
+    <Compile Include="ViewModels\HybridAppViewModel.cs" />
+    <Compile Include="ViewModels\InstanceViewModel.cs" />
+    <Compile Include="ViewModels\InvokingLogDetailViewModel.cs" />
+    <Compile Include="ViewModels\InvokingLogViewModel.cs" />
+    <Compile Include="ViewModels\Item.cs" />
+    <Compile Include="ViewModels\ListenerPolicyViewModel.cs" />
+    <Compile Include="ViewModels\LoginLogViewModel.cs" />
+    <Compile Include="ViewModels\MasterDataViewModel.cs" />
+    <Compile Include="ViewModels\MasterPackageViewModel.cs" />
+    <Compile Include="ViewModels\MessageSettingsViewModel.cs" />
+    <Compile Include="ViewModels\FunctionViewModel.cs" />
+    <Compile Include="Controllers\ProcessCenter\WorkItemController.cs" />
+    <Compile Include="ViewModels\MvcSheetViewModel.cs" />
+    <Compile Include="ViewModels\Notice.cs" />
+    <Compile Include="ViewModels\ObjectSchemaAssociationViewModel.cs" />
+    <Compile Include="ViewModels\OnlineUserViewModel.cs" />
+    <Compile Include="ViewModels\OrgAclViewModel.cs" />
+    <Compile Include="ViewModels\OrganizationLogViewModel.cs" />
+    <Compile Include="ViewModels\OrgGroupViewModel.cs" />
+    <Compile Include="ViewModels\OrgJobViewModel.cs" />
+    <Compile Include="ViewModels\OrgUnitViewModel.cs" />
+    <Compile Include="ViewModels\OrgUserViewModel.cs" />
+    <Compile Include="ViewModels\PagerInfo.cs" />
+    <Compile Include="ViewModels\PortalPageViewModel.cs" />
+    <Compile Include="ViewModels\PortalTreeNode.cs" />
+    <Compile Include="ViewModels\ProcessFolderViewModel.cs" />
+    <Compile Include="ViewModels\PropertySchemaViewModel.cs" />
+    <Compile Include="ViewModels\QueryAgentListParam.cs" />
+    <Compile Include="ViewModels\QuerySystemOrgAclListParam.cs" />
+    <Compile Include="ViewModels\ReportSourceViewModel.cs" />
+    <Compile Include="ViewModels\RESTfulParamViewModel.cs" />
+    <Compile Include="ViewModels\SAPConnectionViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleInvokerViewModel.cs" />
+    <Compile Include="ViewModels\SchemaMethodParamMapViewModel.cs" />
+    <Compile Include="ViewModels\ServerMonitorViewModel.cs" />
+    <Compile Include="ViewModels\ServiceMethodMapDetailViewModel.cs" />
+    <Compile Include="ViewModels\ServiceMethodMapViewModel.cs" />
+    <Compile Include="ViewModels\SignatureViewModel.cs" />
+    <Compile Include="ViewModels\SimulationViewModel.cs" />
+    <Compile Include="ViewModels\SitePagesViewModel.cs" />
+    <Compile Include="ViewModels\SlideShowViewModel.cs" />
+    <Compile Include="ViewModels\SSOManagerViewModel.cs" />
+    <Compile Include="ViewModels\SyncADViewModel.cs" />
+    <Compile Include="ViewModels\SysDeploymentViewModel.cs" />
+    <Compile Include="ViewModels\SystemAclViewModel.cs" />
+    <Compile Include="ViewModels\SystemOrgAclViewModel.cs" />
+    <Compile Include="ViewModels\TestObjectViewModel.cs" />
+    <Compile Include="ViewModels\TestServiceViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WorkflowClauseViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowFolderAclViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowNode.cs" />
+    <Compile Include="ViewModels\ReportImportViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowPackageImportViewModel.cs" />
+    <Compile Include="ViewModels\ReportPagePackageViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowPackageViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowTemplateViewModel.cs" />
+    <Compile Include="ViewModels\WorkflowViewModel.cs" />
+    <Compile Include="ViewModels\WorkingCalendarViewModel.cs" />
+    <Compile Include="ViewModels\WorkItemGroup.cs" />
+    <Compile Include="ViewModels\WorkItemViewModel.cs" />
+    <Compile Include="MvcSheet\ActionContext.cs" />
+    <Compile Include="MvcSheet\Data\MvcBizObject.cs" />
+    <Compile Include="MvcSheet\Data\MvcBizObjectList.cs" />
+    <Compile Include="MvcSheet\Data\MvcDataItem.cs" />
+    <Compile Include="MvcSheet\Data\MvcDataItemTable.cs" />
+    <Compile Include="MvcSheet\Data\MvcListItem.cs" />
+    <Compile Include="MvcSheet\MvcController.cs" />
+    <Compile Include="MvcSheet\MvcPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MvcSheet\MvcPostValue.cs" />
+    <Compile Include="MvcSheet\MvcResult.cs" />
+    <Compile Include="MvcSheet\MvcViewContext.cs" />
+    <Compile Include="MvcSheet\PermittedActions.cs" />
+    <Compile Include="MvcSheet\UserOptions.cs" />
+    <Compile Include="ViewModels\WorkSheetViewModel.cs" />
+    <Compile Include="Web\Enums\BindType.cs" />
+    <Compile Include="Web\Enums\CommentViewMode.cs" />
+    <Compile Include="Web\Enums\CountingType.cs" />
+    <Compile Include="Web\Enums\DockStyle.cs" />
+    <Compile Include="Web\Enums\ExampleAttribute.cs" />
+    <Compile Include="Web\Enums\PlaceHolderAttribute.cs" />
+    <Compile Include="Web\Enums\RichPropertyAttribute.cs" />
+    <Compile Include="Web\Enums\SelectionMode.cs" />
+    <Compile Include="Web\Enums\SelectRecipientType.cs" />
+    <Compile Include="Web\Enums\SheetAttachmentRenderType.cs" />
+    <Compile Include="Web\Enums\SheetButtonEventType.cs" />
+    <Compile Include="Web\Enums\SheetButtonType.cs" />
+    <Compile Include="Web\Enums\SheetControlType.cs" />
+    <Compile Include="Web\Enums\UserDisplayNameStyle.cs" />
+    <Compile Include="Web\Enums\UserListType.cs" />
+    <Compile Include="Web\Enums\ValueSource.cs" />
+    <Compile Include="Web\Events\CountingEventArgs.cs" />
+    <Compile Include="Web\Events\EditorColumnTrackEventArgs.cs" />
+    <Compile Include="Web\Events\EditorControlAddedEventArgs.cs" />
+    <Compile Include="Web\Events\EditorInitializingEventArgs.cs" />
+    <Compile Include="Web\Events\EditorLoadingEventArgs.cs" />
+    <Compile Include="Web\Events\EditorSavingEventArgs.cs" />
+    <Compile Include="Web\Events\EditorSourceLoadingEventArgs.cs" />
+    <Compile Include="Web\Events\EditorSqlEventArgs.cs" />
+    <Compile Include="Web\Events\OriginateInstanceEventArgs.cs" />
+    <Compile Include="Web\Events\SheetRetrieveEventHandler.cs" />
+    <Compile Include="Web\Events\SheetSubmitEventHandler.cs" />
+    <Compile Include="Web\ExportExcel.cs" />
+    <Compile Include="Web\HeapDataItemCollection.cs" />
+    <Compile Include="Web\Sessions.cs" />
+    <Compile Include="Web\SheetEnviroment.cs" />
+    <Compile Include="Web\Enums\SheetEnums.cs" />
+    <Compile Include="Web\SheetUtility.cs" />
+    <Compile Include="Controllers\Organization\OrganizationController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\AppConfig.cs" />
+    <Compile Include="Web\AppUtility.cs" />
+    <Compile Include="Web\UserValidator.cs" />
+    <Compile Include="Web\UserValidatorFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Common\" />
+    <Folder Include="Controllers\ReportHandler\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

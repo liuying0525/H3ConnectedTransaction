@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WFServiceImpl" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.16.83/CAPDZAFCService/WFS.Services.ServicesImpl.WFServiceImpl.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWFService_CMSComplied_InputMessage">
+    <wsdl:part name="parameters" element="tns:CMSComplied" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_CMSComplied_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CMSCompliedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_CMSSettled_InputMessage">
+    <wsdl:part name="parameters" element="tns:CMSSettled" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_CMSSettled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CMSSettledResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_ProposalApproval_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProposalApproval" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_ProposalApproval_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProposalApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_UpdateDDBank_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDDBank" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_UpdateDDBank_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDDBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_SendBackFI_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendBackFI" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_SendBackFI_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendBackFIResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_CMSCollectionData_InputMessage">
+    <wsdl:part name="parameters" element="tns:CMSCollectionData" />
+  </wsdl:message>
+  <wsdl:message name="IWFService_CMSCollectionData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CMSCollectionDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWFService">
+    <wsdl:operation name="CMSComplied">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/CMSComplied" message="tns:IWFService_CMSComplied_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/CMSCompliedResponse" message="tns:IWFService_CMSComplied_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/CMSSettled" message="tns:IWFService_CMSSettled_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/CMSSettledResponse" message="tns:IWFService_CMSSettled_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProposalApproval">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/ProposalApproval" message="tns:IWFService_ProposalApproval_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/ProposalApprovalResponse" message="tns:IWFService_ProposalApproval_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/UpdateDDBank" message="tns:IWFService_UpdateDDBank_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/UpdateDDBankResponse" message="tns:IWFService_UpdateDDBank_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/SendBackFI" message="tns:IWFService_SendBackFI_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/SendBackFIResponse" message="tns:IWFService_SendBackFI_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWFService/CMSCollectionData" message="tns:IWFService_CMSCollectionData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWFService/CMSCollectionDataResponse" message="tns:IWFService_CMSCollectionData_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IWFService" type="tns:IWFService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CMSComplied">
+      <soap:operation soapAction="http://tempuri.org/IWFService/CMSComplied" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSSettled">
+      <soap:operation soapAction="http://tempuri.org/IWFService/CMSSettled" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProposalApproval">
+      <soap:operation soapAction="http://tempuri.org/IWFService/ProposalApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDDBank">
+      <soap:operation soapAction="http://tempuri.org/IWFService/UpdateDDBank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackFI">
+      <soap:operation soapAction="http://tempuri.org/IWFService/SendBackFI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CMSCollectionData">
+      <soap:operation soapAction="http://tempuri.org/IWFService/CMSCollectionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WFServiceImpl">
+    <wsdl:port name="IWFService" binding="tns:IWFService">
+      <soap:address location="http://192.168.16.83/CAPDZAFCService/WFS.Services.ServicesImpl.WFServiceImpl.svc" />                
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

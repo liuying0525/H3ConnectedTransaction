@@ -1,0 +1,916 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A88C8ED5-C6B6-431E-9F09-37F4FF96E8C7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OThinker.H3.Cluster</RootNamespace>
+    <AssemblyName>OThinker.H3.Cluster</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WebGreaseLibPath>..\..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EditEngine.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\demo\avatars\1.jpg" />
+    <Content Include="assets\demo\avatars\2.jpg" />
+    <Content Include="assets\demo\avatars\3.jpg" />
+    <Content Include="assets\demo\avatars\4.jpg" />
+    <Content Include="assets\demo\avatars\5.jpg" />
+    <Content Include="assets\demo\demo.js" />
+    <Content Include="assets\demo\less-1.7.0.js" />
+    <Content Include="assets\demo\logo-big.png" />
+    <Content Include="assets\demo\pricing-bg.jpg" />
+    <Content Include="assets\demo\signin-bg-1.jpg" />
+    <Content Include="assets\demo\signin-bg-2.jpg" />
+    <Content Include="assets\demo\signin-bg-3.jpg" />
+    <Content Include="assets\demo\signin-bg-4.jpg" />
+    <Content Include="assets\demo\signin-bg-5.jpg" />
+    <Content Include="assets\demo\signin-bg-6.jpg" />
+    <Content Include="assets\demo\signin-bg-7.jpg" />
+    <Content Include="assets\demo\signin-bg-8.jpg" />
+    <Content Include="assets\demo\signin-bg-9.jpg" />
+    <Content Include="assets\demo\themes\adminflare.png" />
+    <Content Include="assets\demo\themes\asphalt.png" />
+    <Content Include="assets\demo\themes\clean.png" />
+    <Content Include="assets\demo\themes\default.png" />
+    <Content Include="assets\demo\themes\dust.png" />
+    <Content Include="assets\demo\themes\fresh.png" />
+    <Content Include="assets\demo\themes\frost.png" />
+    <Content Include="assets\demo\themes\purple-hills.png" />
+    <Content Include="assets\demo\themes\silver.png" />
+    <Content Include="assets\demo\themes\white.png" />
+    <Content Include="assets\fonts\font-awesome\fontawesome-webfont.svg" />
+    <Content Include="assets\images\pixel-admin\avatar.png" />
+    <Content Include="assets\images\pixel-admin\blank.png" />
+    <Content Include="assets\images\pixel-admin\blur.svg" />
+    <Content Include="assets\images\pixel-admin\H3BPM.png" />
+    <Content Include="assets\images\pixel-admin\main-menu-bg.png" />
+    <Content Include="assets\images\pixel-admin\main-navbar-bg.png" />
+    <Content Include="assets\images\pixel-admin\main-navbar-logo.png" />
+    <Content Include="assets\images\pixel-admin\user.jpg" />
+    <Content Include="assets\images\plugins\bootstrap-editable\loading.gif" />
+    <Content Include="assets\images\plugins\jquery.minicolors.png" />
+    <Content Include="assets\images\themes\adminflare\body-bg.png" />
+    <Content Include="assets\images\themes\adminflare\ie-navbar-bg.png" />
+    <Content Include="assets\images\themes\adminflare\menu-bg.png" />
+    <Content Include="assets\images\themes\clean\body-bg.gif" />
+    <Content Include="assets\javascripts\bootstrap-editable-demo.js" />
+    <Content Include="assets\javascripts\bootstrap-editable-demo.min.js" />
+    <Content Include="assets\javascripts\bootstrap-table.js" />
+    <Content Include="assets\javascripts\bootstrap.js" />
+    <Content Include="assets\javascripts\bootstrap.min.js" />
+    <Content Include="assets\javascripts\demo-mock.js" />
+    <Content Include="assets\javascripts\demo-mock.min.js" />
+    <Content Include="assets\javascripts\ie.js" />
+    <Content Include="assets\javascripts\ie.min.js" />
+    <Content Include="assets\javascripts\jquery-ui-extras.js" />
+    <Content Include="assets\javascripts\jquery-ui-extras.min.js" />
+    <Content Include="assets\javascripts\jquery.js" />
+    <Content Include="assets\javascripts\jquery.mockjax.js" />
+    <Content Include="assets\javascripts\jquery.mockjax.min.js" />
+    <Content Include="assets\javascripts\pixel-admin.js" />
+    <Content Include="assets\javascripts\pixel-admin.min.js" />
+    <Content Include="assets\stylesheetsh3\h3style.css" />
+    <Content Include="assets\stylesheets\bootstrap-table.css" />
+    <Content Include="assets\stylesheets\bootstrap.css" />
+    <Content Include="assets\stylesheets\bootstrap.min.css" />
+    <Content Include="assets\stylesheets\pages.css" />
+    <Content Include="assets\stylesheets\pages.min.css" />
+    <Content Include="assets\stylesheets\pixel-admin.css" />
+    <Content Include="assets\stylesheets\pixel-admin.min.css" />
+    <Content Include="assets\stylesheets\rtl.css" />
+    <Content Include="assets\stylesheets\rtl.min.css" />
+    <Content Include="assets\stylesheets\themes.css" />
+    <Content Include="assets\stylesheets\themes.min.css" />
+    <Content Include="assets\stylesheets\widgets.css" />
+    <Content Include="assets\stylesheets\widgets.min.css" />
+    <Content Include="EditSetting.html" />
+    <Content Include="EditVessel.html" />
+    <Content Include="Engine.html" />
+    <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="lang\ControllerData.js" />
+    <Content Include="lang\en.js" />
+    <Content Include="lang\zh_CN.js" />
+    <Content Include="Login.html" />
+    <Content Include="TabMaster.html" />
+    <Content Include="Vessel.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WFRes\css\PortalStyle0.css" />
+    <Content Include="WFRes\Site.css" />
+    <Content Include="WFRes\themes\H3Default\H3-All.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Common.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Dialog.css" />
+    <Content Include="WFRes\themes\H3Default\H3-HeadInfo.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Icons.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Panel.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Table.css" />
+    <Content Include="WFRes\themes\H3Default\H3-Toolbar.css" />
+    <Content Include="WFRes\themes\H3Default\Images\dragtarget.png" />
+    <Content Include="WFRes\themes\H3Default\Images\H3_BPM_Logo.png" />
+    <Content Include="WFRes\themes\H3Default\Images\icons\error.png" />
+    <Content Include="WFRes\themes\H3Default\Images\icons\icon-close-over.png" />
+    <Content Include="WFRes\themes\H3Default\Images\icons\icon-close.png" />
+    <Content Include="WFRes\themes\H3Default\Images\icons\success.png" />
+    <Content Include="WFRes\themes\H3Default\Images\icons\warn.png" />
+    <Content Include="WFRes\themes\H3Default\Images\LoginInfo.png" />
+    <Content Include="WFRes\themes\H3Default\Images\LoginOut.png" />
+    <Content Include="WFRes\themes\H3Default\Images\togglebar.png" />
+    <Content Include="WFRes\themes\H3Default\PortalStyle.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-all.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-common.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-dialog.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-form.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-grid.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-layout.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-menu.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-tab.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\css\ligerui-tree.css" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\bigloading.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\button-disabled.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\button-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\button.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\drop-icons.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\exclamation.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\invalid-line.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\loading.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\table.png" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\common\toggle.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-panel-title-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-panel-title-pressed.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-panel-title.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-tab-title-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-tab-title-pressed.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-tab-title.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-text.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-trigger-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-trigger-pressed.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\bg-trigger.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\btn-l.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\btn-r.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\btn.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\button-bg-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\button-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\checkbox.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\dateeditor-bar-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\dateeditor-header-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\controls\radio.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\dateeditor\date.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\dateeditor\icon-first.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\dateeditor\icon-last.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\dateeditor\icon-next.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\dateeditor\icon-prev.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\form\verify-corner.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-checkbox-checked.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-checkbox.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-detail-close.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-detail-open.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-tree-close.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\grid-tree-open.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\header-bg-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\header-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\header2-bg.jpg" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\popup-line.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\grid\popup-row-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\bar-button-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\checkbox-checked.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\checkbox.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\cross.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-close-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-close.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-down.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-drop.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-edited.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-first.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-last.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-line.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-load.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-next.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-prev.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-select.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-sort-asc.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-sort-desc.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-unselect.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\icon\icon-up.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\accordion-content.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\accordion-header-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\accordion-header.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\layout-header-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\layout-header.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\layout-sidebar-header.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\mini-bottom.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\mini-left.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\mini-right.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\mini-top.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\panel-content.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\panel-header-over.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\panel-header.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-item-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-item-left-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-item-over-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-item-right-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\tabs-tools.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\layout\togglebar.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-item-arrow.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-item-down.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-item-over-l.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-item-over-m.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-item-over-r.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-line-x.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\menu\menu-line-y.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\bar-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\header-bg.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\header-bg.jpg" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\header2-bg.jpg" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-btn-l.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-btn-r.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-btn.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-header.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-menu-item-down.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-menu.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-toolbar.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\panel\panel-tools.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\folder-open.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\folder.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\loading.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\nodeloading.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\nodeloading2.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\nodeloading3.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\nodeloading4.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-leaf.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-level.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-noline.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-status-close.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-status-open.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree-status.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\tree\tree.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\box-icons.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\box.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\dialog-bc.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\dialog-icons.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\dialog-tc.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\dialog-winbtns.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\dialog.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\taskbar-task.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\taskbar.gif" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\taskbar.png" />
+    <Content Include="WFRes\themes\ligerUI\Aqua\images\win\taskicon.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\add.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\add.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\archives.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\aspx.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\attibutes.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\back.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\bluebook.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\bookpen.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\busy.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\calendar.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\candle.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\coffee.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\comment.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\communication.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\config.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\customers.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\cut.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\database.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\delete.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\delete.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\disable.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\discuss.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\down.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\edit.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\enable.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\export.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\graywarn.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\greenwarn.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\AddADUser.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\AddAllADUsers.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizFolder.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizListener.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizObject.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizQuery.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizRule.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizScheduleInvoker.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizSchemaAssociation.jpg" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizSchemaView.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizService.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizServiceMethod.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizSheet.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizTreeNode.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizWFFolder.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizWorkflow.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\BizWorkflowPackage.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\Copy.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\doubleleft.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\doubleright.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\IB_Man.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\IB_OU.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\IB_Segment.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\IB_SelectUser.GIF" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\left.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\OrgPost.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\ReloadOrg.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\Return.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\right.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SetAcl1.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SyncAD.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SysSetting_Display.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SysSetting_NotificationContent.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SysSetting_NotificationMethod.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\H3_icons\SysSetting_Org.png" />
+    <Content Include="WFRes\themes\ligerUI\icons\help.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\home.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\import.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\lock.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\logout.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\mailbox.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\memeber.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\modify.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\msn.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\myaccount.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\ok.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\outbox.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\pager.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\photograph.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\plus.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\prev.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\preview.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\print.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\process.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\qq.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\query.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\refresh.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\return.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\right.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\role.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\save-disabled.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\save.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\search.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\search2.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\settings.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\table.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\true.gif" />
+    <Content Include="WFRes\themes\ligerUI\icons\up.gif" />
+    <Content Include="WFRes\themes\ligerUI\ligerui-icons.css" />
+    <Content Include="WFRes\_Content\Login\css\login.css" />
+    <Content Include="WFRes\_Content\Login\images\login-button-back.png" />
+    <Content Include="WFRes\_Content\Login\images\login-button.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginBtnLeft.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginBtnRight.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginCheck.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginCheckLeft.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginCheckRight.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginInputBack.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginInputLeft.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginInputLeft1.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginInputRight.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginInputRight1.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginName.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginPass.png" />
+    <Content Include="WFRes\_Content\Login\images\LoginUnCheck.png" />
+    <Content Include="WFRes\_Content\Login\images\LOGO.png" />
+    <Content Include="WFRes\_Content\Login\images\LOGO_W.png" />
+    <Content Include="WFRes\_Content\Login\images\Port.png" />
+    <Content Include="WFRes\_Content\Login\images\Server.png" />
+    <Content Include="WFRes\_Content\Site.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-All.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Common.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Dialog.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-HeadInfo.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Icons.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Panel.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Table.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\H3-Toolbar.css" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\dragtarget.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus_BizService.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus_EditBizAccount.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus_EditBizDbConfig.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus_EditSAPConnectionConfig.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizBus_ListBizAdapter.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizRule.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizRule_ListBizAdapter.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BizRule_ListRuleTable.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_DataSource.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_KPIAlert.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_KPIInstance.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_KPILib.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_KPIView.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_ReportSource.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_ReportTemplate.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_ReportView.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\BPA_TaskSchedule.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization_Category.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization_DefinePosition.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization_QueryOrg.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization_Settings.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Organization_SyncAD.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\PersonalSetting_MyAgents.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\PersonalSetting_MyCommets.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\PersonalSetting_MyConsultancies.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\ProcessModel.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\ProcessModel_BizMasterData.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\ServiceMoniter.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog_ExceptionLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog_IntegrationLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog_LoginLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog_MobileLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysLog_OrganizationLog.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_CommonParam.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_DataDictionary.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_FileServer.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_FunctionManger.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_GlobalData.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_MessageSetting.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_MobileDevice.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_QueryAgent.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_SharePoint.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_StatusSetting.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_SysAdministrator.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_SystemOrgAcl.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\SysParam_WorkingCalendar.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyFinishedInstance.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyFinishedWorkItem.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyHandledInstance.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyReceipt.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyUnfinishedInstance.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyUnfinishedWorkItem.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_MyWorkflow.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\functionIcons\Workspace_QueryInstance.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\H3_BPM_Logo.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\icons\error.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\icons\icon-close-over.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\icons\icon-close.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\icons\success.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\icons\warn.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\LoginInfo.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\LoginOut.png" />
+    <Content Include="WFRes\_Content\themes\H3Default\Images\togglebar.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-all.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-common.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-dialog.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-form.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-grid.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-layout.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-menu.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-tab.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\css\ligerui-tree.css" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\bigloading.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\button-disabled.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\button-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\button.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\drop-icons.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\exclamation.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\invalid-line.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\loading.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\table.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\common\toggle.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-panel-title-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-panel-title-pressed.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-panel-title.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-tab-title-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-tab-title-pressed.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-tab-title.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-text.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-trigger-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-trigger-pressed.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\bg-trigger.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\btn-l.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\btn-r.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\btn.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\button-bg-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\button-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\checkbox.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\dateeditor-bar-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\dateeditor-header-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\controls\radio.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\dateeditor\date.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\dateeditor\icon-first.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\dateeditor\icon-last.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\dateeditor\icon-next.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\dateeditor\icon-prev.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\form\verify-corner.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-checkbox-checked.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-checkbox.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-detail-close.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-detail-open.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-tree-close.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\grid-tree-open.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\header-bg-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\header-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\header2-bg.jpg" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\popup-line.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\grid\popup-row-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\bar-button-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\checkbox-checked.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\checkbox.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\cross.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-close-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-close.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-down.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-drop.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-edited.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-first.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-last.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-line.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-load.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-next.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-prev.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-select.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-sort-asc.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-sort-desc.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-unselect.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\icon\icon-up.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\accordion-content.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\accordion-header-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\accordion-header.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\layout-header-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\layout-header.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\layout-sidebar-header.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\mini-bottom.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\mini-left.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\mini-right.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\mini-top.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\panel-content.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\panel-header-over.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\panel-header.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-item-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-item-left-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-item-over-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-item-right-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\tabs-tools.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\layout\togglebar.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-item-arrow.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-item-down.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-item-over-l.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-item-over-m.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-item-over-r.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-line-x.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\menu\menu-line-y.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\bar-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\header-bg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\header-bg.jpg" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\header2-bg.jpg" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-btn-l.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-btn-r.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-btn.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-header.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-menu-item-down.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-menu.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-toolbar.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\panel\panel-tools.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\folder-open.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\folder.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\loading.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\nodeloading.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\nodeloading2.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\nodeloading3.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\nodeloading4.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-leaf.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-level.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-noline.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-status-close.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-status-open.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree-status.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\tree\tree.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\box-icons.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\box.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\dialog-bc.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\dialog-icons.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\dialog-tc.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\dialog-winbtns.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\dialog.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\taskbar-task.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\taskbar.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\taskbar.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\Aqua\images\win\taskicon.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\add.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\add.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\archives.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\aspx.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\attibutes.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\back.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\bluebook.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\bookpen.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\busy.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\calendar.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\candle.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\coffee.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\comment.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\communication.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\config.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\customers.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\cut.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\database.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\delete.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\delete.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\disable.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\discuss.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\down.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\edit.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\enable.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\export.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\graywarn.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\greenwarn.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\AddADUser.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\AddAllADUsers.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizFolder.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizListener.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizLocker.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizObject.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizQuery.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizRule.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizScheduleInvoker.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizSchemaAssociation.jpg" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizSchemaView.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizService.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizServiceMethod.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizSheet.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizTreeNode.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizUnLock.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizWFFolder.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizWorkflow.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\BizWorkflowPackage.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\Copy.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\doubleleft.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\doubleright.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\IB_Man.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\IB_OU.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\IB_Segment.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\IB_SelectUser.GIF" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\left.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\OrgPost.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\ReloadOrg.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\Return.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\right.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SetAcl1.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SyncAD.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SysSetting_Display.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SysSetting_NotificationContent.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SysSetting_NotificationMethod.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\H3_icons\SysSetting_Org.png" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\help.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\home.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\import.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\lock.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\logout.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\mailbox.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\memeber.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\modify.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\msn.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\myaccount.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\ok.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\outbox.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\pager.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\photograph.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\plus.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\prev.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\preview.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\print.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\process.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\qq.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\query.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\refresh.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\return.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\right.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\role.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\save-disabled.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\save.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\search.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\search2.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\settings.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\table.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\true.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\icons\up.gif" />
+    <Content Include="WFRes\_Content\themes\ligerUI\ligerui-icons.css" />
+    <Content Include="WFRes\_Scripts\H3AdminPlugins.js" />
+    <Content Include="WFRes\_Scripts\H3TreeTools.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.contextmenu.r2.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.cookie.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.lang.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.min.js" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.select.js" />
+    <Content Include="WFRes\_Scripts\jquery\json2.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\core\base.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\core\inject.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\ligerui.all.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\ligerui.min.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerAccordion.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerButton.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerCheckBox.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerCheckBoxList.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerComboBox.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerDateEditor.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerDialog.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerDrag.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerEasyTab.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerFilter.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerForm.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerGrid.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerLayout.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerListBox.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerMenu.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerMenuBar.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerMessageBox.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerPopupEdit.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerRadio.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerRadioList.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerResizable.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerSpinner.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerTab.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerTextBox.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerTip.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerToolBar.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerTree.js" />
+    <Content Include="WFRes\_Scripts\ligerUI\plugins\ligerWindow.js" />
+    <Content Include="WFRes\_Scripts\vue\Validator.js" />
+    <Content Include="WFRes\_Scripts\vue\vue-validator.js" />
+    <Content Include="WFRes\_Scripts\vue\vue.js" />
+    <Content Include="WFRes\_Scripts\vue\vue.min.js" />
+    <Content Include="WFRes\_Scripts\_BuildPanel.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OThinker.H3.Controller\OThinker.H3.Controllers.csproj">
+      <Project>{44f7f4dc-ec5c-40b1-8a79-5eacd6742262}</Project>
+      <Name>OThinker.H3.Controllers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\demo\less\bootstrap-mixins.less" />
+    <Content Include="assets\demo\less\bootstrap-variables.less" />
+    <Content Include="assets\demo\less\colors.less" />
+    <Content Include="assets\demo\less\mixins.less" />
+    <Content Include="assets\demo\less\variables.less" />
+    <Content Include="assets\fonts\font-awesome\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\font-awesome\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\font-awesome\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\font-awesome\FontAwesome.otf" />
+    <Content Include="WFRes\_Scripts\jquery\jquery.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>41339</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:28434/Cluster</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:28434/Cluster</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>DEL "$(TargetDir)Oracle.DataAccess.dll"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

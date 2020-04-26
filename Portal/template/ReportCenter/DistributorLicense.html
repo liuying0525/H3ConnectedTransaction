@@ -1,0 +1,77 @@
+﻿<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+    
+    .topButton:hover {
+        background-color: #DDD;
+    }
+    
+    .topButton:active {
+        background-color: #AAA;
+    }
+
+    #divSense {
+        /*position: absolute;*/
+        overflow: hidden;
+        border: solid 1px #000;
+        background-color: #fff;
+    }    
+    #divSense ul {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        /*width: inherit;*/
+    }    
+    #divSense > ul > li {
+        vertical-align: middle;
+        /*float: left;*/
+        list-style-type: none;
+        line-height: 25px;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 16px;
+        /*width: inherit;*/
+    }    
+    #divSense > ul > li:hover {
+        background-color: #3366CC;
+        color: white;
+        cursor: default;
+    }
+</style>
+
+<div style="width: 100%;" anchorDiv>
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        {{title}}
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+            <tr style="margin:20px">
+                <td>
+                    <span>营业执照名称：</span>
+                </td>
+                <td>
+                    <input type="text" style="width: 60%; padding: 6px 6px; margin-bottom:20px" data-yyzz="" ng-model="data.License" placeholder="输入营业执照名称" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%;">
+                    <span>经销商搜索：</span>
+                </td>
+                <td>
+                    <input type="text" style="width: 60%; padding: 6px 6px;" ng-model="data.Distributor" placeholder="输入经销商名称" ng-keyup="search();" />
+                    <div id="divSense" style="width: 60%; top:17.3%; left:42.8%; display: none;">
+                        <ul></ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="clear();" style="width: 100px;margin:30px">清空</button>
+        <button class="topButton" ng-click="save();" style="width: 100px;">保存</button>
+    </div>
+</div>

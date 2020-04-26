@@ -1,0 +1,756 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>呼出</title>
+    <link type="text/css" rel="stylesheet" href="../../vendor/jquery/select2/select2.css" />
+    <link type="text/css" rel="stylesheet" href="../../vendor/jquery/select2/select2-bootstrap.css" />
+    <script src="../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../WFRes/layer/layer.js"></script>
+    <script type="text/javascript" src="../../vendor/jquery/select2/select2.min.js"></script>
+    <script type="text/javascript" src="../../vendor/jquery/jsrender/jsrender.js"></script>
+    <script type="text/javascript" src="../../js/services/questiontype.js?002"></script>
+    <script type="text/x-jsrender" id="tp_sel">
+        {{for data}}
+        <option value="{{:id}}" title="{{:text}} [{{:id}}]">{{:text}}</option>
+        {{/for}}
+    </script>
+    <script type="text/javascript">
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .phoneBox {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 550px;
+            width: 650px;
+            border: 1px solid #000;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 30px;
+        }
+
+            .phoneBox .content {
+                display: flex;
+                height: 290px;
+                margin-bottom: 20px;
+            }
+
+            .phoneBox .left {
+                padding: 30px 0;
+                flex: 4;
+            }
+
+            .phoneBox .title {
+                line-height: 30px;
+                text-align: center;
+            }
+
+            .phoneBox .time {
+                height: 100px;
+                width: 100px;
+                line-height: 100px;
+                font-weight: bold;
+                color: #333;
+                text-align: center;
+                border-radius: 50%;
+                margin: 20px auto 30px;
+                border: 1px dashed #000;
+            }
+
+            .phoneBox .right {
+                flex: 6;
+            }
+
+            .phoneBox .off {
+                border: 0;
+                outline: none;
+                display: block;
+                width: 120px;
+                height: 30px;
+                line-height: 30px;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                background: red;
+                color: #fff;
+                margin: 0 auto;
+            }
+
+            .phoneBox .infos {
+                border: 1px solid #999;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                line-height: 30px;
+                padding: 20px;
+                height: 100%;
+                overflow-y: auto;
+            }
+
+        #texts {
+            display: block;
+            height: 80px;
+            width: 100%;
+            text-indent: 10px;
+            resize: none;
+            line-height: 30px;
+        }
+
+        .phoneBox .selects {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+            .phoneBox .selects span {
+                flex: 1;
+                text-align: center;
+                margin: 0 26px;
+                font-size: 10px;
+            }
+
+        .phoneBox .active {
+            /*border-bottom: 2px solid orange;*/
+            color: orange;
+        }
+
+        .phoneBox .submit {
+            border: none;
+            outline: none;
+            height: 30px;
+            width: 100px;
+            text-align: center;
+            line-height: 30px;
+            float: right;
+            margin-top: 20px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            color: #fff;
+            background: #0099cc;
+        }
+
+        .phoneBox .offText {
+            text-align: center;
+            color: red;
+        }
+
+        .sp-fontsize {
+            font-size: 13px
+        }
+
+        select {
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        .select2-container {
+            width: 100%
+        }
+    </style>
+    <script type="text/javascript">
+        var saveflag = false;
+        var params = {};
+        var recordFile = "";
+        var uniqueid = "";
+        var callnumber = "";
+        var haveContractFlag = false;
+        var objectId = "";
+        var RecordCreatedTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss");
+        //var isHandUp = false;
+
+        $(function () {
+            window.onbeforeunload = function (e) {
+                if (saveflag) {
+                    return;
+                } else {
+                    save("closesave");
+                }
+                return ;
+            };
+            start();
+
+            callnumber = QueryString("callnumber");
+            recordFile = QueryString("recordFile");
+            uniqueid = QueryString("uniqueid");
+            if (callnumber.length == 12) {
+                callnumber = callnumber.substring(1, callnumber.length);
+            }
+
+
+            //var script = document.createElement("script");
+            //document.p = script;
+            //script.type = "text/javascript";
+            //script.src = "/Portal/CallCenter/InitCommandJS";
+            //document.getElementsByTagName('head')[0].appendChild(script);
+
+            $.getScript("/Portal/CallCenter/InitCommandJS");
+
+            newInsert();
+
+            $.ajax({
+                url: "/Portal/CallCenter/QueryPersonContractInfo?PhoneNumber=" + callnumber,
+                type: "GET",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != 1) {
+                        $("#haveContractinfo").css("display", "none");
+                        $("#noinfo-callnumber").text(callnumber);
+                        $("#noInfos").css("display", "block");
+                        console.log("获取合同数据错误" + result.message);
+                        return;
+                    }
+
+                    if (result.data == null || result.data.length == 0) {
+                        $("#haveContractinfo").css("display", "none");
+                        $("#noinfo-callnumber").text(callnumber);
+                        $("#noInfos").css("display", "block");
+                    }
+                    else {
+
+                        for (var i = 0; i < result.data.length; i++) {
+                            var numberstr = numconvert((i + 1) + "");
+                            var headHtml = "";
+                            var infoHtml = "";
+                            var headActive = "";
+                            var infoHide = "";
+                            if (i == 0) {
+                                headActive = "class=\"active\"";
+                            } else {
+                                infoHide = "style=\"display: none\"";
+                            }
+                            headHtml = "<span " + headActive + " id=\"sp-contract" + i + "\" onclick=\"changeTab(" + i + ")\" >合同" + numberstr + "</span>";
+                            infoHtml += "<div " + infoHide + " class=\"contact\" id=\"contractNo" + i + "\">";
+                            infoHtml += "<div>申请号：<span class=\"sp-fontsize\" id=\"txt-applicationNumber" + i + "\" >" + result.data[i].ApplicationNumber + "</span></div>";
+                            infoHtml += "<div>主借人：<span class=\"sp-fontsize\" id=\"txt-mainApplicantName" + i + "\">" + result.data[i].MainApplicantName + "</span></div>";
+                            infoHtml += "<div>合同号：<input class=\"sp-fontsize\" id=\"txt-contractNo" + i + "\" value=\"" + result.data[i].ContractNo + "\" /></div>";
+                            infoHtml += "<div>姓名：<input class=\"sp-fontsize\" id=\"txt-name" + i + "\" value=\"" + result.data[i].Name + "\" /></div>";
+                            infoHtml += "<div>角色：<input class=\"sp-fontsize\" id=\"txt-persontype" + i + "\" value=\"" + result.data[i].PersonType + "\" /></div>";
+                            infoHtml += "<div>电话类型：<select class=\"sp-fontsize\" id=\"txt-mobileType" + i + "\">option value=\"\">请选择电话类型</option><option value=\"手机 Mobile Phone\">手机 Mobile Phone</option><option value=\"座机\">座机</option></select></div>";
+                            //infoHtml += "<p>咨询类型：<select class=\"sp-fontsize\" id=\"txt-questionType" + i + "\"><option value=\"\">请选择咨询类型</option><option value=\"贷后\">贷后</option></select></p>";
+                            infoHtml += "<div>证件类型：<input class=\"sp-fontsize\" id=\"txt-idCardType" + i + "\"  value=\"" + result.data[i].IdCardType + "\" /></div>";
+                            infoHtml += "<div>证件号码：<input class=\"sp-fontsize\" id=\"txt-idCardNumber" + i + "\" value=\"" + result.data[i].IdCardNumber + "\" /></div>";
+                            //infoHtml += "<div>咨询类型：";
+                            infoHtml += "<div>";
+                            infoHtml += "<span>咨询类型一：</span><select  multiple=\"multiple\" qtype=\"type_1\"  data-next=\"txt-questionTypeSecond" + i + "\" class=\"sp-fontsize type1 industry\" id=\"txt-questionType" + i + "\"></select>";
+                            infoHtml += "</div>";
+                            infoHtml += "<div>";
+                            infoHtml += "<span>咨询类型二：</span><select multiple=\"multiple\" qtype=\"type_2\"  class=\"sp-fontsize industry\" id=\"txt-questionTypeSecond" + i + "\"></select>";
+                            infoHtml += "</div>";
+                            //infoHtml += "</p>";
+                            //infoHtml += "</div>";
+                            $("#ul-contractNo").append(headHtml);
+                            $("#div-contract").append(infoHtml);
+                        }
+                        haveContractFlag = true;
+                        $("#texts").css("margin-top", "50px");
+
+                    }
+                    select2Init();
+                },
+                error: function (result) {
+                    console.log("获取合同数据错误" + result);
+                },
+            });
+
+
+        });
+
+
+        //初始化下拉框
+        function select2Init() {
+            var selectMod = {
+                initSelect: function ($target) { // 初始化
+                    $target.select2({
+                        placeholder: '',
+                        language: {
+                            noResults: function () {
+                                return "暂无数据"
+                            }
+                        }
+                    });
+                },
+                editInitSelected: function ($target, val) {
+                    $target.val(val).trigger('change');
+                },
+                renderNext: function () { // 下拉多选联动
+                    var $this = $(this);
+                    var cur = $this.attr('id');
+                    var curVal = $('#' + cur).val();
+                    var next = $this.data('next');
+                    var $next = $('#' + next);
+                    var tp = $('#tp_sel');
+                    var qtype = $this.attr('qtype');
+                    var curArr = questiontype[qtype] || [];
+                    if (curVal) {
+                        if (next && $next.length && curArr.length) {
+                            var alreadyValue = $next.val();
+                            var arr = curArr.filter(function (obj) {
+                                if (curVal.indexOf(obj.id + '') != -1) {
+                                    return obj;
+                                }
+                            }).map(function (obj) {
+                                if (obj && obj.children && obj.children.length) {
+                                    return obj.children;
+                                }
+                            });
+                            questiontype[next] = [].concat.apply([], arr); // 二维数组转换为一维数组
+                            $next.html(tp.render({ data: questiontype[next] })).change();
+                            $next.val(alreadyValue).trigger('change');
+                        }
+                    } else {
+                        if (next && $next.length) {
+                            $next.html(tp.render({ data: questiontype[next] })).change();
+                        }
+                    }
+                }
+            };
+
+            var industryMod = {
+                event: function () {
+                    $('body').on('change', '.industry', selectMod.renderNext);
+                },
+                init: function () {
+                    this.event();
+                    $('.type1').html($('#tp_sel').render({ data: questiontype.type_1 }));
+                    selectMod.initSelect($('.industry'));
+                },
+                //// 假如有回填信息，调用该方法即可
+                //editInit: function () {
+                //    // 回填信息，按照联动顺序，依次赋值
+                //    var editInfo = {
+                //        type_1: ['1'],
+                //        type_2: ['2']
+                //    };
+                //    selectMod.editInitSelected($('#txt-questionType'), editInfo.type_1);
+                //    selectMod.editInitSelected($('#txt-questionType2'), editInfo.type_2);
+                //}
+            };
+            industryMod.init();
+        }
+
+
+        //挂断
+        function callOutHandUp(handType) {
+            //isHandUp = true;
+            stop();
+            $("#calling-text").css("display", "none");
+            $("#btn-handup").css("display", "none");
+            $("#p-off").css("display", "block");
+            //手动挂断
+            if (handType == "byhand") {
+
+            }
+            else {  //点击按钮挂断
+
+                var extension = localStorage.getItem("phoneExtension");
+                $.ajax({
+                    url: "https://172.16.2.251/admin/?m=interface&c=api&a=hangup&extension=" + extension,
+                    type: "GET",
+                    async: false,
+                    dataType: "jsonp",
+                    success: function (result) {
+                        if (parseInt(result.result) == 1) {
+
+                        }
+                    },
+                    error: function (xhr) {
+                        alert("电话挂断出错");
+                    },
+                });
+            }
+        }
+
+        //提交
+        function save(savetype) {
+            saveflag = true;
+            //if (!isHandUp) {
+            //    callOutHandUp("bybtn");
+            //}
+            callOutHandUp("bybtn");
+            //保存数据信息
+            var callerPosition = localStorage.getItem("userPosition");
+            var callerName = localStorage.getItem("userName");
+            var callerCode = localStorage.getItem("userCode");
+            var remark = $("#texts").val();
+
+            var mainApplicantName = "";
+            var applicationNumber = "";
+            var calledName = "";
+            var calledType = "";
+            var calledIdType = "";
+            var calledIdNumber = "";
+            var contractNo = "";
+            var questionTypeArr1 = $("#noinfo-questionType1").select2('data');
+            var questionTypeArr2 = $("#noinfo-questionType2").select2('data');
+            var mobileType = "";
+
+            if (haveContractFlag) {
+
+                var activeId = $("#ul-contractNo").find(".active").attr("id");
+                activeId = activeId.substring(activeId.length - 1);
+
+                contractNo = $("#txt-contractNo" + activeId).val();
+                calledName = $("#txt-name" + activeId).val();
+                calledType = $("#txt-persontype" + activeId).val();
+                calledIdType = $("#txt-idCardType" + activeId).val();
+                calledIdNumber = $("#txt-idCardNumber" + activeId).val();
+                mainApplicantName = $("#txt-mainApplicantName" + activeId).val();
+                applicationNumber = $("#txt-applicationNumber" + activeId).val();
+
+                questionTypeArr1 = $("#txt-questionType" + activeId).select2('data');
+                questionTypeArr2 = $("#txt-questionTypeSecond" + activeId).select2('data');
+
+                mobileType = $("#txt-mobileType" + activeId).val();
+                if ((mobileType == "" || mobileType == null) && savetype == "save") {
+                    layer.msg("请选择电话类型", { icon: 2 });
+                    return;
+                }
+            }
+            else {
+                if (!checkPhone(callnumber)) {
+                    mobileType = "座机";
+                }
+            }
+
+            if (questionTypeArr2.length <= 0 && savetype == "save") {
+                layer.msg("请选择咨询类型", { icon: 2 });
+                return;
+            }
+
+            var questionTypeData = [];
+
+            questionTypeArr2.forEach(function (item, number) {
+                var id = item.id;
+                questiontype.type_1.forEach(function (item2, number2) {
+                    item2.children.forEach(function (item3, number3) {
+                        if (item3.id + "" == id) {
+                            questionTypeData.push({ QType1Id: item3.parentid + "", QType1Name: item2.text, QType2Id: id, QType2Name: item3.text });
+                        }
+                    });
+                });
+            });
+
+
+
+            var recordInfo = {
+                CallType: 0,
+                MainApplicantName: mainApplicantName,
+                ApplicationNumber: applicationNumber,
+                CalledName: calledName,
+                CalledType: calledType,
+                CalledNumber: callnumber,
+                CalledIdType: calledIdType,
+                CalledIdNumber: calledIdNumber,
+                CalledNumberType: mobileType == "" ? "手机 Mobile Phone" : mobileType,
+                ContractNo: contractNo,
+                CallerPosition: callerPosition,
+                CallerName: callerName,
+                RecordFileName: recordFile,
+                UniqueId: uniqueid,
+                Remark: remark,
+                CallDuration: totalseconds,
+                QuestionTypeStr: JSON.stringify(questionTypeData),
+                CallerCode: callerCode,
+                RecordCreatedTime: RecordCreatedTime
+            };
+
+
+            if (objectId == "") {
+                saveRecord(recordInfo);
+            }
+            else {
+                recordInfo.ObjectId = objectId;
+                updateRecord(recordInfo);
+            }
+
+        }
+
+        //进入添加
+        function newInsert() {
+
+            var callerPosition = localStorage.getItem("userPosition");
+            var callerName = localStorage.getItem("userName");
+            var callerCode = localStorage.getItem("userCode");
+            var type = "手机 Mobile Phone";
+            if (!checkPhone(callnumber)) {
+                type = "座机";
+            }
+
+            var recordInfo = {
+                CallType: 0,
+                CalledNumber: callnumber,
+                CalledNumberType: type,
+                CallerPosition: callerPosition,
+                CallerName: callerName,
+                RecordFileName: recordFile,
+                UniqueId: uniqueid,
+                CallerCode: callerCode,
+                RecordCreatedTime: RecordCreatedTime
+            };
+            saveRecord(recordInfo);
+        }
+
+        function saveRecord(recordInfo) {
+            //保存记录
+            $.ajax({
+                url: "/Portal/CallCenter/SaveRecord",
+                type: "Post",
+                async: false,
+                dataType: "json",
+                data: recordInfo,
+                success: function (result) {
+                    if (result.code == 1) {
+                        //保存通话记录成功
+                        //关闭页面
+                        objectId = result.data;
+                    }
+                },
+                error: function (xhr) {
+                    alert("保存通话记录出错");
+                },
+            });
+        }
+
+        function updateRecord(recordInfo) {
+            //保存记录
+            $.ajax({
+                url: "/Portal/CallCenter/UpdateRecord",
+                type: "Post",
+                async: false,
+                dataType: "json",
+                data: recordInfo,
+                success: function (result) {
+                    if (result.code == 1) {
+                        //保存通话记录成功
+                        //关闭页面
+                        layer.msg("保存通话记录成功,3秒后自动关闭页面", { icon: 1, time: 3000 }, function () {
+                            console.log("关闭页面");
+                            window.opener = null;
+                            window.open('', '_self');
+                            window.close();
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    alert("保存通话记录出错");
+                },
+            });
+        }
+
+
+        //切换
+        function changeTab(index) {
+            var activeId = $("#ul-contractNo").find(".active").attr("id");
+
+            activeId = parseInt(activeId.substring(activeId.length - 1));
+
+            if (index == activeId) {
+                return;
+            }
+
+            var spans = $("#ul-contractNo").find("span");
+
+            spans.each(function (number, item) {
+                var id = $(item).attr("id");
+                id = parseInt(id.substring(id.length - 1));
+                if (id == index) {
+                    $(item).addClass("active");
+                    $("#contractNo" + id).css("display", "block");
+                }
+                else {
+                    $(item).removeClass("active");
+                    $("#contractNo" + id).css("display", "none");
+                }
+            });
+        }
+
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); // decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+        //计时器
+        var hour, minute, second;//时 分 秒
+        hour = minute = second = 0;//初始化
+        var totalseconds = 0;//总秒数
+        var int;
+
+        function start()//开始
+        {
+            int = setInterval(timer, 1000);
+        }
+
+        function timer()//计时
+        {
+            second = second + 1;
+            totalseconds = totalseconds + 1;
+            if (second >= 60) {
+                second = 0;
+                minute = minute + 1;
+            }
+
+            if (minute >= 60) {
+                minute = 0;
+                hour = hour + 1;
+            }
+
+            $("#usetime").text(PrefixInteger(hour, 2) + ":" + PrefixInteger(minute, 2) + ":" + PrefixInteger(second, 2));
+
+        }
+
+        function stop()//暂停
+        {
+            window.clearInterval(int);
+        }
+
+        function PrefixInteger(num, length) {
+            return (Array(length).join(0) + num).slice(-length);
+        }
+
+        //123 -> 一二三
+        function numconvert(n) {
+            if (!/(^[1-9]\d*$)/) {
+                return '非法数字';
+            }
+            var uppercase = '千百亿千百十万千百十个';
+            var nLength = n.length;
+            var newStr = '';
+            if (uppercase.length - nLength < 0) {
+                return '数字过长';
+            }
+            uppercase = uppercase.substr(uppercase.length - nLength);
+            for (var i = 0; i < nLength; i++) {
+                newStr += '零一二三四五六七八九'.charAt(n[i]) + uppercase.charAt(i);
+            };
+            newStr = newStr.substr(0, newStr.length - 1);
+            return newStr;
+        }
+
+        function mixOnInit() {
+            //接口加载完毕
+            //$("#tip").html("接口加载完成").css('color', 'green');
+            console.log("1--->");
+        }
+
+        function mixOnCallback(str) {
+            var handindex = str.indexOf("Hangup");
+            var uniqueidindex = str.indexOf(uniqueid);
+            console.log("handindex=" + handindex + ",uniqueidindex=" + uniqueidindex);
+
+            if (handindex >= 0 && uniqueidindex >= 0) {
+                //if (!isHandUp) {
+                //    callOutHandUp("byhand");
+                //}
+                callOutHandUp("byhand");
+            }
+        }
+
+        function checkPhone(phone) {
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                //alert("手机号码有误，请重填");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</head>
+<body>
+<div class="phoneBox">
+    <div class="content">
+        <div class="left">
+            <div class="title" id="calling-text">通话中...</div>
+            <div class="time" id="usetime">00:00:00</div>
+            <button id="btn-handup" class="off" onclick="callOutHandUp('bybtn')">挂断</button>
+            <p id="p-off" style="text-align: center;color:red;display:none" class="offText"  >通话结束</p>
+        </div>
+        <div class="right">
+            <div class="infos" id="haveContractinfo">
+                <p class="selects" id="ul-contractNo">
+                    <!--<span class="active" id="sp-contract1">合同一</span>
+                    <span id="sp-contract1">合同二</span>-->
+                </p>
+                <div id="div-contract"></div>
+                <!--<div class="contact" id="contractNo1">
+                    <p>合同号：<span id="txt-contractNo1"></span></p>
+                    <p>姓名：<span id="txt-name1"></span></p>
+                    <p>角色：<span id="txt-persontype1"></span></p>
+                    <p>电话类型：<span id="txt-mobileType1"></span></p>
+                    <p>咨询类型：<select id="txt-questionType1"><option value="">请选择咨询类型</option><option value="贷后">贷后</option></select></p>
+                    <p>证件类型：<span id="txt-idCardType1"></span></p>
+                    <p>证件号码：<span id="txt-idCardNumber1"></span></p>
+                </div>-->
+                <!--<div class="contact" id="contractNo2" style="display:none">
+                    <p>合同号：</p>
+                    <p>姓名：</p>
+                    <p>角色：</p>
+                    <p>电话类型：</p>
+                    <p>咨询类型：</p>
+                    <p>证件类型：</p>
+                    <p>证件号码：</p>
+                </div>-->
+            </div>
+            <div id="noInfos" style="display:none">
+                <div>
+                    <p>未知来电号码：<span class="sp-fontsize" id="noinfo-callnumber"></span></p>
+                    <p style="margin-top:15px">
+                        咨询类型：
+                        <div>
+                            <select class="sp-fontsize type1 industry" id="noinfo-questionType1" qtype="type_1" multiple="multiple" data-next="noinfo-questionType2"></select>
+                        </div>
+                        <div>
+                            <select class="sp-fontsize industry" id="noinfo-questionType2" qtype="type_2" multiple="multiple"></select>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <textarea name="" id="texts" placeholder="添加通话备注"></textarea>
+    <button id="btn-sub" class="submit" onclick="save('save')">提交</button>
+</div>
+</body>
+</html>

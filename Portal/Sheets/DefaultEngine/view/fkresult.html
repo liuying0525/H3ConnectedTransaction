@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>风控评估结果</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/Portal/WFRes/images/DZJR_16_16.png" media="screen">
+    <link href="../../../WFRes/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" />
+    <link href="../../../WFRes/css/MvcSheet.css" rel="stylesheet" />
+    <link href="../../../WFRes/assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script src="../../../WFRes/assets/javascripts/bootstrap.min.js"></script>
+    <script src='/Portal/WFRes/_Scripts/showError.js'></script>
+    <style type="text/css">
+        .table-bordered > thead > tr > th {
+            text-align: center;
+            background-color: #EEEEEE
+        }
+
+        .table-bordered > tbody > tr > td {
+            text-align: center
+        }
+    </style>
+    <script type="text/javascript">
+        //全部的规则引擎
+        var moreRuleEnginee = "";
+
+        var showAgain = false;
+
+        $(function () {
+            var repid = QueryString("repid");
+            var id = QueryString("id");
+            var idCard = QueryString("idCard");
+            if (id == "" || id == null) {
+                alert("未查询到任务ID");
+                return;
+            }
+            if (idCard == "" || idCard == null) {
+                alert("未查询到身份证号码");
+                return;
+            }
+            var arr_result = {
+                "00": "初始化",
+                "01": "通过",
+                "02": "拒绝",
+                "03": "转人工"
+            };
+            $.ajax({
+                url: "/Portal/Api/QueryRiskEvaluationResult?InstanceId=" + id + "&idCard=" + idCard + "&T=" + new Date().getTime(),
+                data: "",
+                type: "GET",
+                async: false,
+                dataType: "json",
+                success: function (result) {
+                    if (result == "" || result == null) {
+                        alert("未查询到数据");
+                        return;
+                    }
+                    var r = JSON.parse(result);
+                    if (r.code == "00") {
+                        var data = r.data;
+
+                        //加载风控评估结果数据
+                        var evaluateResultName = ""
+                        if (data.evaluateResult.name != "" && data.evaluateResult.name != null && data.evaluateResult.name != "null") {
+                            evaluateResultName = data.evaluateResult.name;
+                        }
+                        $("#fk_resultName").text(evaluateResultName);
+
+                        var evaluateResultResult = "03";
+                        if (data.evaluateResult.result != "" && data.evaluateResult.result != null && data.evaluateResult.result != "null") {
+                            evaluateResultResult = data.evaluateResult.result;
+                        }
+                        $("#fk_result").text(arr_result[evaluateResultResult]);
+
+                        //加载同盾信用评分
+                        var tdScore = "";
+                        if (data.tdScore.score != "" && data.tdScore.score != null && data.tdScore.score != "null") {
+                            tdScore = data.tdScore.score;
+                        }
+                        $("#td_score").text(tdScore);
+
+                        //加载外部数据源
+                        //1.同盾
+                        var queryCountBySevenDay = "";
+                        var queryCountByOneMonth = "";
+                        var queryCountByThreeMonth = "";
+                        if (data.outerSource.tdOuterSource.queryCountBySevenDay != "" && data.outerSource.tdOuterSource.queryCountBySevenDay != null && data.outerSource.tdOuterSource.queryCountBySevenDay != "null") {
+                            queryCountBySevenDay = data.outerSource.tdOuterSource.queryCountBySevenDay;
+                        }
+                        if (data.outerSource.tdOuterSource.queryCountByOneMonth != "" && data.outerSource.tdOuterSource.queryCountByOneMonth != null && data.outerSource.tdOuterSource.queryCountByOneMonth != "null") {
+                            queryCountByOneMonth = data.outerSource.tdOuterSource.queryCountByOneMonth;
+                        }
+                        if (data.outerSource.tdOuterSource.queryCountByThreeMonth != "" && data.outerSource.tdOuterSource.queryCountByThreeMonth != null && data.outerSource.tdOuterSource.queryCountByThreeMonth != "null") {
+                            queryCountByThreeMonth = data.outerSource.tdOuterSource.queryCountByThreeMonth;
+                        }
+                        $("#sevendays_search_count").text(queryCountBySevenDay);
+                        $("#onemonth_search_count").text(queryCountByOneMonth);
+                        $("#threemonth_search_count").text(queryCountByThreeMonth);
+
+                        //2.聚立信
+                        var phoneGrayScore = "";
+                        if (data.outerSource.juXinLiOuterSource.phoneGrayScore != "" && data.outerSource.juXinLiOuterSource.phoneGrayScore != null && data.outerSource.juXinLiOuterSource.phoneGrayScore != "null") {
+                            phoneGrayScore = data.outerSource.juXinLiOuterSource.phoneGrayScore;
+                        }
+
+                        $("#grey_score").text(phoneGrayScore);
+                        var seedNumber = "";
+                        if (data.outerSource.juXinLiOuterSource.hasReport != "" && data.outerSource.juXinLiOuterSource.hasReport != null && data.outerSource.juXinLiOuterSource.hasReport != "null") {
+                            seedNumber = data.outerSource.juXinLiOuterSource.hasReport.toLowerCase() == "true" ? "是" : "否";
+                        }
+                        $("#is_seednumber").text(seedNumber);
+
+                        var cntCash30 = "";
+                        if (data.outerSource.juXinLiOuterSource.cntCash_30 != "" && data.outerSource.juXinLiOuterSource.cntCash_30 != null && data.outerSource.juXinLiOuterSource.cntCash_30 != "null") {
+                            cntCash30 = data.outerSource.juXinLiOuterSource.cntCash_30;
+                        }
+                        $("#30dc_search_count").text(cntCash30);
+
+                        var cntCash60 = "";
+                        if (data.outerSource.juXinLiOuterSource.cntCash_60 != "" && data.outerSource.juXinLiOuterSource.cntCash_60 != null && data.outerSource.juXinLiOuterSource.cntCash_60 != "null") {
+                            cntCash60 = data.outerSource.juXinLiOuterSource.cntCash_60;
+                        }
+                        $("#60dc_search_count").text(cntCash60);
+
+                        var cntCash = "";
+                        var cntCc = "";
+                        if (data.outerSource.juXinLiOuterSource.cntCash != "" && data.outerSource.juXinLiOuterSource.cntCash != null && data.outerSource.juXinLiOuterSource.cntCash != "null") {
+                            cntCash = data.outerSource.juXinLiOuterSource.cntCash;
+                        }
+                        if (data.outerSource.juXinLiOuterSource.cntCc != "" && data.outerSource.juXinLiOuterSource.cntCc != null && data.outerSource.juXinLiOuterSource.cntCc != "null") {
+                            cntCc = data.outerSource.juXinLiOuterSource.cntCc;
+                        }
+
+                        $("#720dc_search_count").text(cntCash);
+                        $("#720xindc_search_count").text(cntCc);
+
+                        //3.银联
+                        var debitCardCount = "";
+                        if (data.outerSource.unionpaysmartOuterSource.debitCardCount != "" && data.outerSource.unionpaysmartOuterSource.debitCardCount != null && data.outerSource.unionpaysmartOuterSource.debitCardCount != "null") {
+                            debitCardCount = data.outerSource.unionpaysmartOuterSource.debitCardCount;
+                        }
+                        $("#bankcard_count").text(debitCardCount);
+
+
+                        //加载规则引擎
+                        if (data.ruleResult != null && data.ruleResult != "") {
+                            moreRuleEnginee = data.ruleResult;
+                            var ruleResult = data.ruleResult;
+                            console.log(ruleResult);
+                            var ruleEngineeHtml = "";
+                            var count = 0;
+                            $(ruleResult).each(function (n, v) {
+
+                                if (v.result.indexOf("通过") >= 0) {
+                                    return true;
+                                }
+
+                                if (count > 4) {
+                                    $("#rule_enginee").append("<div class='panel-footer' style='text-align:right'> <button type='button' class='btn btn-primary btn-sm' onclick='showMore()' >查看更多</button></div>");
+                                    return false;
+                                }
+
+                                ruleEngineeHtml += "<tr>";
+                                ruleEngineeHtml += "<td>" + (count + 1) + "</td>";
+                                ruleEngineeHtml += "<td>" + v.ruleName + "</td>";
+                                ruleEngineeHtml += "<td style='color:red'>" + v.result + "</td>";
+                                ruleEngineeHtml += "</tr>";
+                                count++;
+                            });
+                            $("#rule_enginee").find("tbody").append(ruleEngineeHtml);
+                        }
+
+                        //4.加载机器学习模型评分
+                        var modelScore = "";
+                        var rateScore = "";
+                        var modelResult = "";
+                        if (data.modelResult.score != "" && data.modelResult.score != null && data.modelResult.score != "null") {
+                            modelScore = data.modelResult.score;
+                        }
+                        if (data.modelResult.rate != "" && data.modelResult.rate != null && data.modelResult.rate != "null") {
+                            rateScore = data.modelResult.rate;
+                            $("#th_machine_score").hide();
+                            $("#td_machine_score").hide();
+                        }
+                        else {
+                            $("#th_rate").hide();
+                            $("#td_rate").hide();
+                        }
+
+                        if (data.modelResult.result != "" && data.modelResult.result != null && data.modelResult.result != "null") {
+                            modelResult = data.modelResult.result;
+                        }
+                        $("#machine_score").text(modelScore);
+                        $("#rate").text(rateScore);
+                        $("#machine_result").text(modelResult);
+                        //客户评级
+                        if (data.modelResult.grade) {
+                            $("#fk_grade").text(data.modelResult.grade);
+                        }
+                    }
+                    else {
+                        var message = "出错啦！未查询到报告数据";
+                        if (r.message == "" || r.message == null) {
+                            //message = "";
+                        } else {
+                            console.log(r.message);
+                        }
+                        alert(message);
+                    }
+                },
+                //error: function (msg) {
+                //},
+                error: function (msg) {// 19.7
+                    showJqErr(msg);
+                }
+            });
+        });
+
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); //   decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+        //查看更多规则引擎
+        function showMore() {
+
+            if (showAgain) {
+                $("#moreRuleEnginee").modal('show');
+                return;
+            }
+            showAgain = true;
+
+            var moreHtml = "";
+
+            var moreEngineeJson = moreRuleEnginee;
+            var count = 0;
+            $(moreEngineeJson).each(function (n, v) {
+
+                if (v.result.indexOf("通过") >= 0) {
+                    return true;
+                }
+
+                moreHtml += "<tr>";
+                moreHtml += "<td>" + (count + 1) + "</td>";
+                moreHtml += "<td>" + v.ruleName + "</td>";
+                moreHtml += "<td style='color:red'>" + v.result + "</td>";
+                moreHtml += "</tr>";
+                count++;
+            });
+
+            $("#moreRuleEnginee").find("tbody").append(moreHtml);
+            $("#moreRuleEnginee").modal('show');
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1 style="text-align:center">风控评估报告</h1>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">风控评估结果</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>申请人姓名</th>
+                            <th>评估建议</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span id="fk_resultName"></span></td>
+                            <td><span id="fk_result" style="color:red"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span>客户评级</span></td>
+                            <td><span id="fk_grade" style="color:red"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">同盾信用评分</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>评分</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span id="td_score"></span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">外部数据源</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>数据源名称</th>
+                            <th colspan="2">明细</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3">
+                                同盾
+                            </td>
+                            <td>
+                                近7天查询次数
+                            </td>
+                            <td>
+                                <span id="sevendays_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近1个月查询次数
+                            </td>
+                            <td>
+                                <span id="onemonth_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近3个月查询次数
+                            </td>
+                            <td>
+                                <span id="threemonth_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6">
+                                聚立信
+                            </td>
+                            <td>
+                                灰度分
+                            </td>
+                            <td>
+                                <span id="grey_score" style="color:red"></span>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                是否种子号
+                            </td>
+                            <td>
+                                <span id="is_seednumber" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近30天内现金贷次数
+                            </td>
+                            <td>
+                                <span id="30dc_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近60天内现金贷次数
+                            </td>
+                            <td>
+                                <span id="60dc_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近720天现金贷查询次数
+                            </td>
+                            <td>
+                                <span id="720dc_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                近720天信用卡代还查询次数
+                            </td>
+                            <td>
+                                <span id="720xindc_search_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                银联
+                            </td>
+                            <td>
+                                关联银行卡数
+                            </td>
+                            <td>
+                                <span id="bankcard_count" style="color:red"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">规则引擎</h3>
+            </div>
+            <div class="panel-body" id="rule_enginee">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>规则编号</th>
+                            <th>规则名称</th>
+                            <th>结果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!--<div class="panel-footer">Panel footer</div>-->
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#DDDDDD">
+                <h3 class="panel-title">机器学习模型评分</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th id="th_machine_score">评分</th>
+                            <th id="th_rate" >逾期率</th>
+                            <th>建议</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td  id="td_machine_score"><span id="machine_score"></span></td>
+                            <td  id="td_rate"><span id="rate"></span></td>
+                            <td><span id="machine_result" style="color:red"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 查看更过规则引擎 Modal -->
+    <div class="modal fade" id="moreRuleEnginee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">规则引擎</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th>规则编号</th>
+                          <th>规则名称</th>
+                          <th>结果</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!--
+    经销商与产品关联
+     -->
+<!-- ng-init="
+     app.settings.asideFolded=false;
+     app.settings.asideDock=false;" -->
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <!--<form>-->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row" style=" padding-right 15px; ">
+                <div class="col-sm-6 col-xs-12">
+                    <span class="h3" ng-bind="menuData.DisplayName"></span>
+                    <!--<span translate="WorkItemController.UnFinishedWorkitem"></span><br />
+                    {{'WorkItemController.UnFinishedWorkitem'|translate}}<br />-->
+                    <!--<h1 class="m-n font-thin h3 text-black">{{name}}</h1>-->
+                </div>
+
+                
+            </div>
+        </div>
+
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="" style="margin:15px;color:red">
+                        说明：<br/>
+                        1.经销商一栏只能上传经销商的Excel；<br/>
+                        2.产品一栏只能上传产品的Excel；<br/>
+                        3.Excel格式为：xls；
+                    </div>
+                    <table class="table" style="width:60%">
+                        <tr>
+                            <td style="width:80px">经销商</td>
+                            <td>
+                                <input type="file" id="fileFI" name="fileFI" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>产品</td>
+                            <td>
+                                <input type="file" id="fileProduct" name="fileProduct" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <a id="btnUpLoad" class="btn btn-default" ng-click="Upload()">上传</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--表格部分End-->
+        </div>
+        <!--</form>-->
+        <!-- / main -->
+    </div>

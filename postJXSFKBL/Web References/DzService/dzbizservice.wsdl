@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BizAutoAssign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="activeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cyz" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="amount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BizAutoAssignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BizAutoAssignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BizAutoAssignHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="activeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cyz" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="amount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BizAutoAssignHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BizAutoAssignHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cancelInstanceData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="workflowCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cancelInstanceDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cancelInstanceDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateInstanceData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="workflowCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateInstanceDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="updateInstanceDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="finishedInstance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="instanceID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="finishedInstanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="finishedInstanceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="postDZJR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="postDZJRResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="postDZJRResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartWorkFlowWidthValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WorkFlowCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JsonStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartWorkFlowWidthValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StartWorkFlowWidthValuesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Authentication" type="tns:Authentication" />
+      <s:complexType name="Authentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="updateWorkFlowData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WorkFlowCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JsonStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="instanceid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateWorkFlowDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="updateWorkFlowDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetSigleItemValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectSchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetSigleItemValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetSigleItemValuesResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetItemValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectSchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bizObjectId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyValues" type="tns:ArrayOfDataItemParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDataItemParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataItemParam" nillable="true" type="tns:DataItemParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataItemParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetItemValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetItemValuesResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartWorkflow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="workflowCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="finishStart" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramValues" type="tns:ArrayOfDataItemParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BPMServiceResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstanceID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkItemID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkItemUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StartWorkflowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StartWorkflowResult" type="tns:BPMServiceResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="postHttp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="instanceid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="postHttpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="postHttpResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BizAutoAssignSoapIn">
+    <wsdl:part name="parameters" element="tns:BizAutoAssign" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignSoapOut">
+    <wsdl:part name="parameters" element="tns:BizAutoAssignResponse" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:BizAutoAssignHistory" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:BizAutoAssignHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataSoapIn">
+    <wsdl:part name="parameters" element="tns:cancelInstanceData" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataSoapOut">
+    <wsdl:part name="parameters" element="tns:cancelInstanceDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataSoapIn">
+    <wsdl:part name="parameters" element="tns:updateInstanceData" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataSoapOut">
+    <wsdl:part name="parameters" element="tns:updateInstanceDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceSoapIn">
+    <wsdl:part name="parameters" element="tns:finishedInstance" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceSoapOut">
+    <wsdl:part name="parameters" element="tns:finishedInstanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRSoapIn">
+    <wsdl:part name="parameters" element="tns:postDZJR" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRSoapOut">
+    <wsdl:part name="parameters" element="tns:postDZJRResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:StartWorkFlowWidthValues" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:StartWorkFlowWidthValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataSoapIn">
+    <wsdl:part name="parameters" element="tns:updateWorkFlowData" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataSoapOut">
+    <wsdl:part name="parameters" element="tns:updateWorkFlowDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:SetSigleItemValues" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:SetSigleItemValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:SetItemValues" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:SetItemValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetItemValuesAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowSoapIn">
+    <wsdl:part name="parameters" element="tns:StartWorkflow" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowSoapOut">
+    <wsdl:part name="parameters" element="tns:StartWorkflowResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkflowAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="postHttpSoapIn">
+    <wsdl:part name="parameters" element="tns:postHttp" />
+  </wsdl:message>
+  <wsdl:message name="postHttpSoapOut">
+    <wsdl:part name="parameters" element="tns:postHttpResponse" />
+  </wsdl:message>
+  <wsdl:message name="postHttpAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistoryHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="workflowCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="workflowCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceHttpGetIn">
+    <wsdl:part name="instanceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRHttpGetIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="url" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesHttpGetIn">
+    <wsdl:part name="WorkFlowCode" type="s:string" />
+    <wsdl:part name="UserCode" type="s:string" />
+    <wsdl:part name="JsonStr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataHttpGetIn">
+    <wsdl:part name="WorkFlowCode" type="s:string" />
+    <wsdl:part name="UserCode" type="s:string" />
+    <wsdl:part name="JsonStr" type="s:string" />
+    <wsdl:part name="instanceid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesHttpGetIn">
+    <wsdl:part name="bizObjectSchemaCode" type="s:string" />
+    <wsdl:part name="bizObjectId" type="s:string" />
+    <wsdl:part name="ItemName" type="s:string" />
+    <wsdl:part name="ItemValue" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="postHttpHttpGetIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="instanceid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="postHttpHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistoryHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="activeCode" type="s:string" />
+    <wsdl:part name="cyz" type="s:string" />
+    <wsdl:part name="amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BizAutoAssignHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="workflowCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="cancelInstanceDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+    <wsdl:part name="workflowCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="updateInstanceDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceHttpPostIn">
+    <wsdl:part name="instanceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="finishedInstanceHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRHttpPostIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="url" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="postDZJRHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesHttpPostIn">
+    <wsdl:part name="WorkFlowCode" type="s:string" />
+    <wsdl:part name="UserCode" type="s:string" />
+    <wsdl:part name="JsonStr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartWorkFlowWidthValuesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataHttpPostIn">
+    <wsdl:part name="WorkFlowCode" type="s:string" />
+    <wsdl:part name="UserCode" type="s:string" />
+    <wsdl:part name="JsonStr" type="s:string" />
+    <wsdl:part name="instanceid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="updateWorkFlowDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesHttpPostIn">
+    <wsdl:part name="bizObjectSchemaCode" type="s:string" />
+    <wsdl:part name="bizObjectId" type="s:string" />
+    <wsdl:part name="ItemName" type="s:string" />
+    <wsdl:part name="ItemValue" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetSigleItemValuesHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="postHttpHttpPostIn">
+    <wsdl:part name="SchemaCode" type="s:string" />
+    <wsdl:part name="instanceid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="postHttpHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="DZBIZServiceSoap">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignSoapIn" />
+      <wsdl:output message="tns:BizAutoAssignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHistorySoapIn" />
+      <wsdl:output message="tns:BizAutoAssignHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消流程实例</wsdl:documentation>
+      <wsdl:input message="tns:cancelInstanceDataSoapIn" />
+      <wsdl:output message="tns:cancelInstanceDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例数据更新</wsdl:documentation>
+      <wsdl:input message="tns:updateInstanceDataSoapIn" />
+      <wsdl:output message="tns:updateInstanceDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例结束</wsdl:documentation>
+      <wsdl:input message="tns:finishedInstanceSoapIn" />
+      <wsdl:output message="tns:finishedInstanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取经销商放款统计信息</wsdl:documentation>
+      <wsdl:input message="tns:postDZJRSoapIn" />
+      <wsdl:output message="tns:postDZJRSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:StartWorkFlowWidthValuesSoapIn" />
+      <wsdl:output message="tns:StartWorkFlowWidthValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:updateWorkFlowDataSoapIn" />
+      <wsdl:output message="tns:updateWorkFlowDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置流程数据项的值</wsdl:documentation>
+      <wsdl:input message="tns:SetSigleItemValuesSoapIn" />
+      <wsdl:output message="tns:SetSigleItemValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置批量流程数据项的值</wsdl:documentation>
+      <wsdl:input message="tns:SetItemValuesSoapIn" />
+      <wsdl:output message="tns:SetItemValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">启动H3流程实例</wsdl:documentation>
+      <wsdl:input message="tns:StartWorkflowSoapIn" />
+      <wsdl:output message="tns:StartWorkflowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">调用融数接口</wsdl:documentation>
+      <wsdl:input message="tns:postHttpSoapIn" />
+      <wsdl:output message="tns:postHttpSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DZBIZServiceHttpGet">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHttpGetIn" />
+      <wsdl:output message="tns:BizAutoAssignHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHistoryHttpGetIn" />
+      <wsdl:output message="tns:BizAutoAssignHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消流程实例</wsdl:documentation>
+      <wsdl:input message="tns:cancelInstanceDataHttpGetIn" />
+      <wsdl:output message="tns:cancelInstanceDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例数据更新</wsdl:documentation>
+      <wsdl:input message="tns:updateInstanceDataHttpGetIn" />
+      <wsdl:output message="tns:updateInstanceDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例结束</wsdl:documentation>
+      <wsdl:input message="tns:finishedInstanceHttpGetIn" />
+      <wsdl:output message="tns:finishedInstanceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取经销商放款统计信息</wsdl:documentation>
+      <wsdl:input message="tns:postDZJRHttpGetIn" />
+      <wsdl:output message="tns:postDZJRHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:StartWorkFlowWidthValuesHttpGetIn" />
+      <wsdl:output message="tns:StartWorkFlowWidthValuesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:updateWorkFlowDataHttpGetIn" />
+      <wsdl:output message="tns:updateWorkFlowDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置流程数据项的值</wsdl:documentation>
+      <wsdl:input message="tns:SetSigleItemValuesHttpGetIn" />
+      <wsdl:output message="tns:SetSigleItemValuesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">调用融数接口</wsdl:documentation>
+      <wsdl:input message="tns:postHttpHttpGetIn" />
+      <wsdl:output message="tns:postHttpHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DZBIZServiceHttpPost">
+    <wsdl:operation name="BizAutoAssign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHttpPostIn" />
+      <wsdl:output message="tns:BizAutoAssignHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">零售信审审批和放款审批分单逻辑</wsdl:documentation>
+      <wsdl:input message="tns:BizAutoAssignHistoryHttpPostIn" />
+      <wsdl:output message="tns:BizAutoAssignHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消流程实例</wsdl:documentation>
+      <wsdl:input message="tns:cancelInstanceDataHttpPostIn" />
+      <wsdl:output message="tns:cancelInstanceDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例数据更新</wsdl:documentation>
+      <wsdl:input message="tns:updateInstanceDataHttpPostIn" />
+      <wsdl:output message="tns:updateInstanceDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">流程实例结束</wsdl:documentation>
+      <wsdl:input message="tns:finishedInstanceHttpPostIn" />
+      <wsdl:output message="tns:finishedInstanceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取经销商放款统计信息</wsdl:documentation>
+      <wsdl:input message="tns:postDZJRHttpPostIn" />
+      <wsdl:output message="tns:postDZJRHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:StartWorkFlowWidthValuesHttpPostIn" />
+      <wsdl:output message="tns:StartWorkFlowWidthValuesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">发起流程自带子表数据</wsdl:documentation>
+      <wsdl:input message="tns:updateWorkFlowDataHttpPostIn" />
+      <wsdl:output message="tns:updateWorkFlowDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置流程数据项的值</wsdl:documentation>
+      <wsdl:input message="tns:SetSigleItemValuesHttpPostIn" />
+      <wsdl:output message="tns:SetSigleItemValuesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">调用融数接口</wsdl:documentation>
+      <wsdl:input message="tns:postHttpHttpPostIn" />
+      <wsdl:output message="tns:postHttpHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DZBIZServiceSoap" type="tns:DZBIZServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BizAutoAssign">
+      <soap:operation soapAction="http://tempuri.org/BizAutoAssign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <soap:operation soapAction="http://tempuri.org/BizAutoAssignHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <soap:operation soapAction="http://tempuri.org/cancelInstanceData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <soap:operation soapAction="http://tempuri.org/updateInstanceData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <soap:operation soapAction="http://tempuri.org/finishedInstance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <soap:operation soapAction="http://tempuri.org/postDZJR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <soap:operation soapAction="http://tempuri.org/StartWorkFlowWidthValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:StartWorkFlowWidthValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <soap:operation soapAction="http://tempuri.org/updateWorkFlowData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:updateWorkFlowDataAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <soap:operation soapAction="http://tempuri.org/SetSigleItemValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <soap:operation soapAction="http://tempuri.org/SetItemValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetItemValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <soap:operation soapAction="http://tempuri.org/StartWorkflow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:StartWorkflowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <soap:operation soapAction="http://tempuri.org/postHttp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:postHttpAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceSoap12" type="tns:DZBIZServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BizAutoAssign">
+      <soap12:operation soapAction="http://tempuri.org/BizAutoAssign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <soap12:operation soapAction="http://tempuri.org/BizAutoAssignHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <soap12:operation soapAction="http://tempuri.org/cancelInstanceData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <soap12:operation soapAction="http://tempuri.org/updateInstanceData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <soap12:operation soapAction="http://tempuri.org/finishedInstance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <soap12:operation soapAction="http://tempuri.org/postDZJR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <soap12:operation soapAction="http://tempuri.org/StartWorkFlowWidthValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:StartWorkFlowWidthValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <soap12:operation soapAction="http://tempuri.org/updateWorkFlowData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:updateWorkFlowDataAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <soap12:operation soapAction="http://tempuri.org/SetSigleItemValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetItemValues">
+      <soap12:operation soapAction="http://tempuri.org/SetItemValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SetItemValuesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkflow">
+      <soap12:operation soapAction="http://tempuri.org/StartWorkflow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:StartWorkflowAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <soap12:operation soapAction="http://tempuri.org/postHttp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:postHttpAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceHttpGet" type="tns:DZBIZServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="BizAutoAssign">
+      <http:operation location="/BizAutoAssign" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <http:operation location="/BizAutoAssignHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <http:operation location="/cancelInstanceData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <http:operation location="/updateInstanceData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <http:operation location="/finishedInstance" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <http:operation location="/postDZJR" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <http:operation location="/StartWorkFlowWidthValues" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <http:operation location="/updateWorkFlowData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <http:operation location="/SetSigleItemValues" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <http:operation location="/postHttp" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DZBIZServiceHttpPost" type="tns:DZBIZServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="BizAutoAssign">
+      <http:operation location="/BizAutoAssign" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BizAutoAssignHistory">
+      <http:operation location="/BizAutoAssignHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelInstanceData">
+      <http:operation location="/cancelInstanceData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateInstanceData">
+      <http:operation location="/updateInstanceData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finishedInstance">
+      <http:operation location="/finishedInstance" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postDZJR">
+      <http:operation location="/postDZJR" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWorkFlowWidthValues">
+      <http:operation location="/StartWorkFlowWidthValues" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkFlowData">
+      <http:operation location="/updateWorkFlowData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSigleItemValues">
+      <http:operation location="/SetSigleItemValues" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postHttp">
+      <http:operation location="/postHttp" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DZBIZService">
+    <wsdl:port name="DZBIZServiceSoap" binding="tns:DZBIZServiceSoap">
+      <soap:address location="http://localhost:8010/Portal/webservices/dzbizservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceSoap12" binding="tns:DZBIZServiceSoap12">
+      <soap12:address location="http://localhost:8010/Portal/webservices/dzbizservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceHttpGet" binding="tns:DZBIZServiceHttpGet">
+      <http:address location="http://localhost:8010/Portal/webservices/dzbizservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DZBIZServiceHttpPost" binding="tns:DZBIZServiceHttpPost">
+      <http:address location="http://localhost:8010/Portal/webservices/dzbizservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,55 @@
+﻿<script>$.post('/Portal/Ajax/CheckFunction.ashx?Code=Manage_ManageSearch', {}, function(ret) {
+		console.log(ret);
+		eval(ret)
+	})</script>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <!--<form>-->
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row" style=" padding-right: 15px; ">
+            <div class="col-sm-6 col-xs-12">
+                <span class="h3" ng-bind="menuData.DisplayName"></span>
+                <!--<span translate="WorkItemController.UnFinishedWorkitem"></span><br />
+                    {{'WorkItemController.UnFinishedWorkitem'|translate}}<br />-->
+                <!--<h1 class="m-n font-thin h3 text-black">{{name}}</h1>-->
+            </div>
+
+        </div>
+    </div>
+    <!--表格部分Start-->
+    <div class="wrapper-md paddingbottomNone">
+        <div class="form-inline" style="display: block;">
+            <div class="input-group searchContainer">
+                <div class="form-group">
+                    <input type="text" class="input-sm form-control" style="width:200px" ng-model="searchKey" ng-change="searchKeyChange()" autocomplete="off" placeholder="关联人名称">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="border-left:0px;border-right:0px;">关联人类型</span>
+                        <select class="select form-control" id="usertype" style="width:200px" ng-model="UserType">
+                            <option value=""></option>
+                            <option value="0">自然人</option>
+                            <option value="1">机构</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="border-left:0px;border-right:0px;">证件号</span>
+                        <input type="text" class="input-sm form-control" style="width:200px" ng-model="searchKey" ng-change="searchKeyChange()" autocomplete="off" placeholder="请输入">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-sm btn-default search" type="button" style="height:30px;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

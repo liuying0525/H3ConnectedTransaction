@@ -1,0 +1,280 @@
+﻿
+<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton:hover {
+            background-color: #DDD;
+        }
+
+        .topButton:active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style="width: 100%;" anchorDiv class="isHide">
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        {{title}}
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+            <tr ng-show="State==1">
+                <td>
+                    <span>内网/外网</span>
+                </td>
+                <td>
+                    <input ng-model="Internettype" style="width:90%;" class="form-control check" required />
+                </td>
+                <td>
+                    <span>性质</span>
+                </td>
+                <td>
+                    <input ng-model="Classname" style="width:90%;" class="form-control check" required />
+                </td>
+            </tr>
+            <tr style="margin:20px">
+                <td>
+                    <span>规则名称</span>
+                </td>
+                <td>
+                    <input ng-model="RuleName" disabled="disabled" style="width:90%;" class="form-control" required />
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <span>明细名称</span>
+                </td>
+                <td>
+                    <input ng-model="DetaileName" style="width:90%;" class="form-control check" required />
+                </td>
+                <td>
+                    <span>权重</span>
+                </td>
+                <td>
+                    <input ng-model="Rate" style="width:90%;" class="form-control check" required />
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;" id="table">
+            <colgroup>
+                <col style="width: 33.3%;" />
+                <col style="width: 33.3%;" />
+                <col style="width: 33.3%;" ng-hide="State==1" />
+            </colgroup>
+            <tr style="background-color: #DDD;">
+                <th style="padding: 5px 0 3px; text-align: center">分值</th>
+                <th style="padding: 5px 0 3px; text-align: center">得分说明</th>
+                <th style="padding: 5px 0 3px; text-align: center" ng-hide="State==1">操作</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #AAA;" ng-repeat="row in Datas">
+                <td style="padding: 4px 4px 3px;" align="center" valign="middle">
+                    <input disabled="disabled" style="width: 70%; padding: 3px 5px;" class="check" ng-model="row.Score" maxlength="200" />
+
+                </td>
+                <td style="padding: 4px 4px 3px;" align="center" valign="middle">
+                    <input disabled="disabled" style="width: 70%; padding: 3px 5px;" class="check" ng-model="row.Memo" maxlength="200" />
+                </td>
+                <td style="padding: 4px 4px 3px;" align="center" valign="middle" ng-hide="State==1">
+                    <a class="delete check" ng-click="DelRow($index);"><div class="fa fa-minus"></div></a>
+                </td>
+            </tr>
+        </table>
+        <div ng-hide="State==1">
+            <div style="width: 8%; float: left; padding-top: 3px;"><a id="Add_GJPeople_646" ng-click="AddRow();"><div class="fa fa-plus" style="margin-left:15px;margin-top:5px"></div></a></div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="cancel();" style="width: 100px;margin:30px">取消</button>
+        <button class="topButton" ng-click="save();" ng-hide="State==1" style="width: 100px;">保存</button>
+    </div>
+</div>
+
+<style>
+    .editVar + div {
+        display: none;
+    }
+
+    .editVar:focus + div {
+        position: absolute;
+        width: 400px;
+        max-height: 175px;
+        border: 1px solid #CCC;
+        padding: 5px;
+        background-color: #FFF;
+        border-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        z-index: 9999999;
+    }
+
+    .editVar + div:focus div {
+        display: inline;
+        padding: 5px 8px;
+        cursor: pointer;
+        border: 1px solid #AAA;
+        background-color: #FFF;
+        border-radius: 5px;
+        margin: 2px 3px;
+    }
+
+    .editVar:focus + div div {
+        display: inline;
+        padding: 5px 8px;
+        cursor: pointer;
+        border: 1px solid #AAA;
+        background-color: #FFF;
+        border-radius: 5px;
+        margin: 2px 3px;
+    }
+
+        .editVar:focus + div div:hover {
+            background-color: #CCC;
+        }
+
+        .editVar:focus + div div:active {
+            background-color: #AAA;
+        }
+</style>
+
+<script type="text/ng-template" id="AddRuleDetaile.html">
+    <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+            ×
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            <span>分值详细</span>
+        </h4>
+    </div>
+    <alert class="animated fadeInDown hide fadeOut" id="EditError"
+           type="danger" close=""
+           style="width: 300px;font-size:15px;">
+        <span ng-bind="FailMessage"></span>
+    </alert>
+    <div class="modal-body" style="padding-left:50px;padding-right:50px;">
+        <form class="bs-example form-horizontal">
+
+            <!--<div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-md-4 control-label">班主任</label>
+                <div class="col-md-8 input-group">
+                    <div ui-jq="SheetUser" ui-options="WasAgentOptions"
+                         id="WasAgent" class="form-control" style="height:32px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>-->
+            <div class="row">
+                <div class="col-md-2">
+                    <label>类型</label>
+                </div>
+                <div class="col-md-4">
+                    <select name="Type" ng-model="Type" style="width:157px;height:25px">
+                        <option value="范围">范围</option>
+                        <option value="存在">存在</option>
+                        <option value="不存在">不存在</option>
+                        <option value="文本">文本</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>分值</label>
+                </div>
+                <div class="col-md-4">
+                    <input ng-model="Value" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>明细变量</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="editVar" ng-model="Detail" ng-maxlength="4" required ng-change="searchData()" />
+                    <div onselectstart="return false;">
+                        <div ng-repeat="d in ChooseData" ng-mousedown="setValue(d.a);">{{d.a}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2" ng-show="Type=='文本'">
+                    <label>取值</label>
+                </div>
+                <div class="col-md-4" ng-show="Type=='文本'">
+                    <input ng-model="GetValue" required />
+                </div>
+            </div>
+            <div class="row" ng-show="Type=='范围'">
+                <div class="col-md-2">
+                    <label>匹配区间</label>
+                </div>
+                <div class="col-md-10">
+                    <div style="display: flex; justify-content: flex-start; align-items: center;">
+                        <div style="width: 5px; height: 1px;"></div>
+                        <label style="font-weight: 700; font-size: 16px;">[</label>
+                        <div style="width: 5px; height: 1px;"></div>
+                        <input ng-model="MinValue" ng-change="this.value=formatMin(MinValue)" style="width: 35%;" required />
+                        <div style="width: 5px; height: 1px;"></div>
+                        <label style="font-weight: 700; font-size: 16px;">,</label>
+                        <div style="width: 5px; height: 1px;"></div>
+                        <input ng-model="MaxValue" ng-change="this.value=format(MaxValue)" style="width: 35%;" />
+                        <div style="width: 5px; height: 1px;"></div>
+                        <label style="font-weight: 700; font-size: 16px;">)</label>
+                        <div style="width: 5px; height: 1px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <!--<div class="col-md-1" >
+            <label style="text-align:center">[</label>
+        </div>
+        <div class="col-md-3" >
+            <input ng-model="MinValue" ng-maxlength="4" required style="width: 100%;" />
+        </div>
+        <div class="col-md-1" >
+            <label>,</label>
+        </div>
+        <div class="col-md-3" >
+            <input ng-model="MaxValue" ng-maxlength="4" required style="width: 100%;" />
+        </div>
+        <div class="col-md-1" >
+            <label style="text-align:center">)</label>
+        </div>
+        <div class="col-md-1" >
+
+        </div>-->
+            </div>
+            <div class="row" style="height: 100px;"></div>
+
+            <!--<div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-md-4 control-label">权重</label>
+                <div class="col-md-8 input-group">
+                    <input ng-model="Rate" ng-maxlength="4" style="width:90%;" class="form-control" required /><span style="font-size:20px;">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>-->
+            <input ng-model="ObjectID" type="hidden" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info"
+                ng-click="ok()">
+            <span translate="QueryTableColumn.Button_Save"></span>
+        </button>
+    </div>
+</script>

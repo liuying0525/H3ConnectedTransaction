@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NCIIC</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/Portal/WFRes/images/DZJR_16_16.png" media="screen">
+    <link href="/Portal/WFRes/assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Portal/WFRes/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" />
+    <link href="/Portal/WFRes/assets/stylesheets/themes.min.css" rel="stylesheet" />
+    <link href="/Portal/WFRes/css/MvcSheet.css" rel="stylesheet" />
+    <script src="/Portal/WFRes/_Scripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <style>
+        .tab td {
+            padding: 10px;
+        }
+
+            .tab td:nth-child(1) {
+                width: 20%;
+            }
+
+        #tab .li-active {
+            background-color: blue;
+            color: white;
+        }
+
+        .hide {
+            display:none
+        }
+    </style>
+    <script type="text/javascript">
+
+        var oldTab = "tab0";
+
+        $(function () {
+            var instanceid = QueryString("instanceid");
+            var app_no = QueryString("app_no");
+            $.ajax({
+                url: "/Portal/Api/QueryNCIIC?InstanceId=" + instanceid + "&ApplicationNumber=" + app_no + "&T=" + new Date().getTime(),
+                data: "",
+                type: "GET",
+                async: false,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+
+                    if (result == "" || result == null || result == undefined) {
+                        alert("暂无数据");
+                    }
+
+                    if (result.code != "00") {
+                        alert("错误：" + result.message);
+                    }
+
+                    if (result.data.nciicResultList.length <= 0) {
+                        alert("暂无数据");
+                    }
+
+                    var personHtml = "";
+
+                    if (result.data.nciicResultList.length > 0) {
+
+                        result.data.nciicResultList.forEach(function (item, number) {
+                            var custCategory = item.PersonnelCategoryName;
+
+                            var isActive = "li-active";
+
+                            if (number != 0) {
+                                isActive = "";
+                            }
+
+                            personHtml += "<li><a href=\"#\" id=\"liA-" + number + "\" class=\"" + isActive + "\" onclick=\"changeTab(" + number + ")\" >" + item.xm + "(" + custCategory + ")" + "</a></li>";
+
+                            initContentTable(item, number);
+                        });
+                    }
+                    else {
+                        var item = {};
+                        initContentTable(item, 0);
+
+                    }
+                    if (personHtml != "") {
+                        //渲染人员
+                        $("#tab").append(personHtml);
+                    }
+
+                },
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        });
+
+        function QueryString(name) {
+            var reg = new RegExp("(^|&)" + name.toLowerCase() + "=([^&]*)(&|$)", "i");
+            var r = decodeURI(window.location.search.toLowerCase().substr(1)).match(reg);
+            if (r != null) return decodeURI(r[2]); //   decodeURIComponent(encodeURIComponent (unescape(r[2])));
+            return null;
+        }
+
+        function initContentTable(nciicItem, number) {
+
+            var hide = "hide";
+            if (number == 0) {
+                hide = "";
+            }
+
+            if (nciicItem.xm == "null" || nciicItem.xm == null) {
+                nciicItem.xm = "";
+            }
+            if (nciicItem.resultXm == "null" || nciicItem.resultXm == null) {
+                nciicItem.resultXm = "";
+            }
+            if (nciicItem.gmsfhm == "null" || nciicItem.gmsfhm == null) {
+                nciicItem.gmsfhm = "";
+            }
+            if (nciicItem.resultGmsfhm == "null" || nciicItem.resultGmsfhm == null) {
+                nciicItem.resultGmsfhm = "";
+            }
+            if (nciicItem.cym == "null" || nciicItem.cym == null) {
+                nciicItem.cym = "";
+            }
+            if (nciicItem.resultCym == "null" || nciicItem.resultCym == null) {
+                nciicItem.resultCym = "";
+            }
+            if (nciicItem.xb == "null" || nciicItem.xb == null) {
+                nciicItem.xb = "";
+            }
+            if (nciicItem.resultXb == "null" || nciicItem.resultXb == null) {
+                nciicItem.resultXb = "";
+            }
+            if (nciicItem.mz == "null" || nciicItem.mz == null) {
+                nciicItem.mz = "";
+            }
+            if (nciicItem.resultMz == "null" || nciicItem.resultMz == null) {
+                nciicItem.resultMz = "";
+            }
+            if (nciicItem.csrq == "null" || nciicItem.csrq == null) {
+                nciicItem.csrq = "";
+            }
+            if (nciicItem.resultCsrq == "null" || nciicItem.resultCsrq == null) {
+                nciicItem.resultCsrq = "";
+            }
+            if (nciicItem.hyzk == "null" || nciicItem.hyzk == null) {
+                nciicItem.hyzk = "";
+            }
+            if (nciicItem.resultHyzk == "null" || nciicItem.resultHyzk == null) {
+                nciicItem.resultHyzk = "";
+            }
+            if (nciicItem.zz == "null" || nciicItem.zz == null) {
+                nciicItem.zz = "";
+            }
+            if (nciicItem.resultZz == "null" || nciicItem.resultZz == null) {
+                nciicItem.resultZz = "";
+            }
+            if (nciicItem.ssssxq == "null" || nciicItem.ssssxq == null) {
+                nciicItem.ssssxq = "";
+            }
+            if (nciicItem.resultSsssxq == "null" || nciicItem.resultSsssxq == null) {
+                nciicItem.resultSsssxq = "";
+            }
+            if (nciicItem.jgssx == "null" || nciicItem.jgssx == null) {
+                nciicItem.jgssx = "";
+            }
+            if (nciicItem.resultJgssx == "null" || nciicItem.resultJgssx == null) {
+                nciicItem.resultJgssx = "";
+            }
+            if (nciicItem.csdssx == "null" || nciicItem.csdssx == null) {
+                nciicItem.csdssx = "";
+            }
+            if (nciicItem.resultCsdssx == "null" || nciicItem.resultCsdssx == null) {
+                nciicItem.resultCsdssx = "";
+            }
+            if (nciicItem.fwcs == "null" || nciicItem.fwcs == null) {
+                nciicItem.fwcs = "";
+            }
+            if (nciicItem.resultFwcs == "null" || nciicItem.resultFwcs == null) {
+                nciicItem.resultFwcs = "";
+            }
+            if (nciicItem.whcd == "null" || nciicItem.whcd == null) {
+                nciicItem.whcd = "";
+            }
+            if (nciicItem.resultWhcd == "null" || nciicItem.resultWhcd == null) {
+                nciicItem.resultWhcd = "";
+            }
+
+            var contentHtml = "";
+            contentHtml += "<table class=\"tab table-bordered " + hide + "\" id=\"tab" + number + "\" style=\"width: 100 %\">";
+            contentHtml += "<tr>";
+            contentHtml += "<td>姓名</td><td>" + nciicItem.xm + "</td><td>" + nciicItem.resultXm + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>身份证号码</td><td>" + nciicItem.gmsfhm + "</td><td>" + nciicItem.resultGmsfhm + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>曾用名</td><td>" + nciicItem.cym + "</td><td>" + nciicItem.resultCym + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>性别</td><td>" + nciicItem.xb + "</td><td>" + nciicItem.resultXb + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>民族</td><td>" + nciicItem.mz + "</td><td>" + nciicItem.resultMz + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>出生日期</td><td>" + nciicItem.csrq + "</td><td>" + nciicItem.resultCsrq + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>婚姻状况</td><td>" + nciicItem.hyzk + "</td><td>" + nciicItem.resultHyzk + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>住址</td><td>" + nciicItem.zz + "</td><td>" + nciicItem.resultZz + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>所属省市县（区）</td><td>" + nciicItem.ssssxq + "</td><td>" + nciicItem.resultSsssxq + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>籍贯省市县（区）</td><td>" + nciicItem.jgssx + "</td><td>" + nciicItem.resultJgssx + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>出生地省市县（区）</td><td>" + nciicItem.csdssx + "</td><td>" + nciicItem.resultCsdssx + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>服务处所</td><td>" + nciicItem.fwcs + "</td><td>" + nciicItem.resultFwcs + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "<tr>";
+            contentHtml += "<td>受教育程度</td><td>" + nciicItem.whcd + "</td><td>" + nciicItem.resultWhcd + "</td>";
+            contentHtml += "</tr>";
+            contentHtml += "</table>";
+
+            $("#tab").after(contentHtml);
+        }
+
+        function changeTab(tabId) {
+            //相同标签不变
+            if (oldTab == "tab" + tabId) {
+                return;
+            }
+
+            //全部不显示
+            $("#tab li a").removeClass("li-active");
+
+            //增加显示
+            $("#liA-" + tabId).addClass("li-active");
+
+            //tab显示 隐藏
+            $("#" + oldTab).addClass("hide");
+
+            oldTab = "tab" + tabId;
+            $("#" + oldTab).removeClass("hide");
+            
+
+        }
+
+    </script>
+</head>
+<body>
+    <h3 style="width:100%;text-align:center;padding-left:50px;">
+        NCIIC信息
+    </h3>
+    <div style="padding-left:50px;padding-right:50px;">
+        <div class="divContent" style="width:100%">
+            <ul id="tab" class="nav nav-tabs">
+                <!--<li><a href="#dee65257-1330-4d60-a59d-5a7c8434cbfd" data-toggle="tab"><span>借款人:何跃武</span></a></li>-->
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

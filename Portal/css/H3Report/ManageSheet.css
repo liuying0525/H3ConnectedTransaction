@@ -1,0 +1,418 @@
+﻿.app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.app-header-fixed .app-header{
+	flex: 0 0 50px;
+	width: 100%;
+	z-index: 1025;
+}
+
+.mainContent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex: 1;
+    width: 100%;
+    padding:0 !important;
+    height: 100%;
+    display: flex;
+    }
+
+
+
+
+
+
+.app-aside{
+	flex: 0 0 200px;
+}
+
+.app-content{
+	margin-left:0;
+	flex: 1;
+	height: 100%;
+	overflow: hidden;
+}
+.input-group-text {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.must {
+    color: red;
+}
+
+.addbrank {
+    text-align: center;
+    border: 1px dashed #ADADAD;
+    height: 40px;
+    line-height: 40px;
+}
+
+.imginput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100px;
+    z-index: 100;
+    opacity: 0;
+}
+
+.updiv {
+    position: absolute;
+    top: 0;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    line-height: 100px;
+    z-index: 0;
+    border: 1px dashed #999;
+    border-radius: 6px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .updiv span {
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 30px;
+        color: #999;
+    }
+
+.uploadimg {
+    position: relative;
+    height: 120px;
+    width: 120px;
+}
+
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+/* Default class applied to drop zones on over */
+.another-file-over-class {
+    border: dotted 3px green;
+}
+
+html, body {
+    height: 100%;
+}
+
+canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.showimg {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    text-align: center;
+    margin: 0 20px 0;
+}
+
+    .showimg .close {
+        height: 15px;
+        width: 15px;
+        background: red;
+        border-radius: 50%;
+    }
+
+.btn-circle {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.8;
+    border-radius: 15px;
+    line-height: 20px;
+    padding-top: 0;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+}
+
+.clearfix {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.float-left {
+    float: left;
+}
+
+.uploadtext {
+    margin-top: 10px;
+}
+
+.singleup {
+    height: 30px;
+    width: 93px;
+    position: absolute;
+    left: 15px;
+    top: 0;
+    z-index: 20;
+    opacity: 0;
+}
+
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+.another-file-over-class {
+    border: dotted 3px green;
+}
+
+.fileremove {
+    right: -20px;
+    top: 5px;
+}
+
+.dateicon {
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+
+
+.bannerTitle {
+    width: 100%;
+    background: #eee;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+    .bannerTitle label {
+        padding-left: 10px;
+    }
+
+.DragContainer label {
+    font-size: 22px;
+    line-height: 60px;
+}
+
+.content-wrapper.contentBox {
+    /*position: fixed;
+    width: 74%;
+    left: 25%;
+    height: 70%;*/
+    /*  position: absolute;*/
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.ManageBar {
+    margin-top: -10px;
+    margin-left: -20px;
+}
+
+.relatedwarn {
+    padding-left: 40px;
+}
+
+    .relatedwarn strong {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        height: 28px;
+        line-height: 28px;
+        position: relative;
+        margin-left: -20px;
+    }
+
+        .relatedwarn strong span {
+            font-size: 20px;
+            position: absolut;
+            left: -10px;
+            top: 5px;
+        }
+
+    .relatedwarn a {
+        display: block;
+        margin-top: 5px;
+    }
+
+.toolImage {
+    margin-right: 5px;
+}
+
+.panel .panel-title {
+    font-size: 14px;
+}
+
+.contentBox {
+    flex: 1;
+    overflow-x: hidden;
+    padding-bottom: 50px;
+}
+
+#sheetContent, #main-navbar {
+    height: 100%
+}
+
+.content-wrapper {
+    height: 100%;
+}
+
+.navbar-inner {
+    flex: 0 0 50px;
+}
+
+.manageBox{
+	flex-direction:column;
+	display: flex;
+}
+
+/*.manageBox input.ng-invalid{
+	border:1px solid red;
+}*/
+
+/*input.ng-valid{
+	border:1px solid green;
+}*/
+.FOCUS_CLASS {
+    border: 1px solid red;
+}
+
+.manageform {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.managemaintenance .manageform{
+	width: 100%;
+}
+
+.error {
+    color: red
+}
+
+.ng-valid {
+    border-color: #cfdadd !important;
+}
+/*.chosen-container{
+	width:100%;
+}*/
+.saveButton {
+    position: absolute;
+    top: 11px;
+    opacity: 0;
+}
+
+.errore span {
+    color: #6666;
+}
+
+.borderColor {
+    border-color: red;
+}
+
+.toast-top-right {
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -150px;
+}
+
+.manageBody {
+    
+    flex: 1;
+    height:100%;
+    padding:0 0 10px 15px!important;
+    }
+
+    .manageBody div.tableBox > div {
+        padding-top: 20px;
+           
+    }
+.table-responsive{
+	height: 100%;
+	width: 100%;
+}
+.app-content-body{
+	height: 100%;
+}
+.managerelatedparty .table-responsive{
+	display:block;
+}
+
+.managetransaction .table-responsive{
+	display: flex;
+}
+.fade-in-up{
+	height:100%;
+}
+
+div#addTree {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 0 40px rgba(0,0,0,0.1) inset;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 0 40px rgba(0,0,0,0.1) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.2),0 0 40px rgba(0,0,0,0.1) inset;
+    overflow-y: auto;
+    overflow-x: hidden;
+     padding-bottom: 30px;
+}
+
+    div#addTree::after {
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        position: absolute;
+        content: '';
+        width: 1px;
+        height: 100%;
+        /* z-index: -1; */
+        top: 0;
+        right: -2px;
+    }
+
+.filelist {
+    position: relative;
+    padding: 10px 0;
+}
+
+.downfile strong {
+    color: dodgerblue
+}
+
+.redBorder {
+    border-color: red;
+}
+
+.greyBorder {
+    border-color: #cfdadd;
+}
+
+.himgurl{
+cursor: pointer;
+}

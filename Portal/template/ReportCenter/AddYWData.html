@@ -1,0 +1,113 @@
+﻿
+<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+    .topButton:hover {
+        background-color: #DDD;
+    }
+    .topButton:active {
+        background-color: #AAA;
+    }
+</style>
+
+<div style="width: 100%;" anchorDiv>
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        {{title}}
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+
+            <tr style="margin:20px">
+                <td>
+                    <span>经销商名称</span>
+                </td>
+                <td>
+                    <!--<select name="Shop" id="DelalerName" style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Shop" ng-change="getText()">
+                        <option ng-repeat="province in data" value="{{province.key}}">{{province.value}}</option>
+                    </select>-->
+                    <input type="text" style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.DEALERNAME" disabled="" />
+                </td>
+                <td>
+                    <span>欺诈风险</span>
+                </td>
+                <td>
+                    <input type="text" style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.RISK" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>拖车能力</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.TOW" />
+                </td>
+                <td>
+                    <span>处置能力</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.PUNISH" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>归档率</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.ARCHIVING" />
+                </td>
+                <td>
+                    <span>投诉数</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom: 20px" ng-model="data.COMPLAIN" />
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td>
+                    <span>所在省份</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Province" disabled />
+                </td>
+                <td>
+                    <span>所在城市</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="City" disabled />
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td>
+                    <span>欺诈风险</span>
+                </td>
+                <td>
+                    <!--<input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Risk" />-->
+                </td>
+                <td>
+                    <span>政策培训</span>
+                </td>
+                <td>
+                    <input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Policy" />
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td>
+                    <span>投诉数</span>
+                </td>
+                <td>
+                    <!--<input style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Complain" />-->
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="cancel();" style="width: 100px;margin:30px">取消</button>
+        <button class="topButton" ng-click="save();" style="width: 100px;">保存</button>
+    </div>
+</div>

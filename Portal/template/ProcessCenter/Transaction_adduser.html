@@ -1,0 +1,442 @@
+﻿<!--权限校验-->
+<script>$.post('/Portal/Ajax/CheckFunction.ashx?Code=Manage_TransactionaddUser', {}, function (ret) {
+		console.log(ret);
+		eval(ret)
+	})</script>
+<div class="content-wrapper contentBox" ng-show="addusershow">
+    <div style="text-align: center;" class="DragContainer">
+        <label id="lblTitle" class="panel-title">关联方（自然人）</label>
+    </div>
+    <form method="post" onsubmit="OnSubmitForm()"
+          class="bs-example form-horizontal manageform">
+        <div class="sheetContainer col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="nav-icon fa  bannerTitle fa-angle-down SheetdivU"
+                 ng-click="hidediv('divSheet','SheetdivU')">
+                <label id="divSheetInfo" data-en_us="Sheet information">基本信息</label>
+            </div>
+            <div id="divSheet">
+                <div class="form-group col-md-12">
+                    <div class="col-md-4 form-group">
+                        <label id="Label470" class="col-sm-3 control-label">
+                            <span class="must" style="color:red">*</span>姓名:
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label id="Label470" class="col-sm-3 control-label">
+                            <span class="must" style="color:red">*</span>护照号:
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label id="Label470" class="col-sm-4 control-label">
+                            <span class="must"
+                                  style="color:red;">*</span>身份证号:
+                        </label>
+                        <div class="col-sm-8">
+
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="col-md-4 form-group">
+                        <label id="Label470"
+                               class="col-sm-3 control-label">国籍:</label>
+                        <div class="col-sm-9">
+                            <select class="form-control">
+                                <option>请选择</option>
+                                <option>中国</option>
+                                <option>英国</option>
+                                <option>美国</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+
+                        <label id="Label470"
+                               class="col-sm-3 control-label">年龄:</label>
+                        <div class="col-sm-9">
+                            <select class="form-control">
+                                <option>请选择</option>
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label id="Label470"
+                               class="col-sm-3 control-label">性别:</label>
+                        <div class="col-sm-9">
+                            <label class="radio-inline col-xs-4">
+                                <input type="radio" name="inlineRadioOptions"
+                                       id="inlineRadio1" value="option1"> 男
+                            </label>
+                            <label class="radio-inline col-xs-4">
+                                <input type="radio" name="inlineRadioOptions"
+                                       id="inlineRadio2" value="option2"> 女
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group col-md-12">
+
+                    <div class="col-md-4 form-group">
+                        <label id="Label470" class="col-sm-4 control-label">
+                            <span class="must"
+                                  style="color:red;">*</span>任职机构:
+                        </label>
+                        <div class="col-sm-8">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 form-group">
+
+                        <label id="Label470"
+                               class="col-sm-3 control-label">职务:</label>
+                        <div class="col-sm-9">
+                            <select class="form-control manageinput">
+                                <option>请选择</option>
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-4">
+                        <label id="Label470"
+                               class="col-sm-3 control-label">最高学历:</label>
+                        <div class="col-sm-9">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label id="Label470"
+                               class="col-sm-2 control-label">毕业学校:</label>
+                        <div class="col-sm-10">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label id="Label470"
+                           class="col-sm-1 control-label">户籍地址:</label>
+                    <div class="col-sm-11">
+                        <input id="Control470" type="text"
+                               class="form-control manageinput" placeholder="请输入">
+                    </div>
+
+
+                </div>
+                <div class="form-group col-md-12">
+
+                    <label id="Label470"
+                           class="col-sm-1 control-label">居住地址:</label>
+                    <div class="col-sm-11">
+                        <input id="Control470" type="text"
+                               class="form-control manageinput" placeholder="请输入">
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label id="Label470"
+                               class="col-sm-2 control-label">电话号码:</label>
+                        <div class="col-sm-10">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label id="Label470"
+                               class="col-sm-2 control-label">邮箱:</label>
+                        <div class="col-sm-10">
+                            <input id="Control470" type="text"
+                                   class="form-control manageinput" placeholder="请输入">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <label id="Label470" class="col-sm-2 control-label">
+                            <span class="must"
+                                  style="color:red;">*</span>关联方关系:
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control">
+                                <option>股东/高管/重要岗位</option>
+                                <option>中国</option>
+                                <option>英国</option>
+                                <option>美国</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel panel-default col-md-12">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">银行信息</h3>
+                    </div>
+                    <div class="panel-body brankPanel"
+                         ng-init="banks=[{depositBank:'',bankAccount:''}]">
+                        <div class="form-group" ng-repeat='x in banks'>
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">开户银行:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入" ng-model="x.depositBank">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">银行账号:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入" ng-model="x.bankAccount">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:void(0);" ng-click="btn_addBank()"
+                               class="col-md-6 col-md-offset-1 addbrank">
+                                +
+                                &nbsp;&nbsp;添加银行信息
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h4 class="col-sm-6">附件信息</h4>
+
+                    <div class="col-md-12">
+                        <label id="Label470"
+                               class="col-md-2 control-label">上传证件:</label>
+                        <div class="col-md-10">
+                            <div class="uploadimg float-left">
+                                <div class="col-sm-12 updiv">
+                                    <span class="glyphicon glyphicon-plus"
+                                          aria-hidden="true"></span>
+                                </div>
+                                <input type="file" nv-file-select=""
+                                       uploader="uploader" class="col-sm-12 imginput"
+                                       ng-click="single($event)" data-type="image"
+                                       multiple /><br />
+                            </div>
+
+                            <div class="showimg float-left"
+                                 ng-repeat="item in uploader.queue"
+                                 ng-if="!thetypefile">
+                                <button type="button"
+                                        class="btn btn-danger btn-circle btn-lg"
+                                        ng-click="item.remove()">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                                <!--<button type="button" class="btn btn-xs close" ng-click="item.remove()"><span aria-hidden="true">&times;</span></button>-->
+                                <div ng-show="uploader.isHTML5"
+                                     ng-thumb="{ file: item._file, height: 100 }">
+                                </div>
+                                <strong>{{ item.file.name }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label id="Label470"
+                               class="col-md-2 control-label">上传附件:</label>
+                        <div class="col-md-10">
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-cloud-upload"
+                                   aria-hidden="true"></i>
+                                上传文件
+                            </button>
+                            <input type="file" nv-file-select="" uploader="uploader"
+                                   class="singleup" data-type="file"
+                                   ng-click="single($event)" />
+                            <p class="text-muted uploadtext">
+                                支持扩展名：.rar .zip .doc
+                                .docx .pdf .jpg...
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <ul>
+                            <li ng-repeat="item in uploader.queue" ng-if="!!thetypefile">
+                                <strong>{{ item.file.name }}</strong>
+                                <div ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar"
+                                             ng-style="{ 'width': item.progress + '%' }">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="btn btn-circle btn-lg fileremove"
+                                        ng-click="item.remove()">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="sheetContainer col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="nav-icon fa  bannerTitle fa-angle-down familydivU"
+                 ng-click="hidediv('family','familydivU')">
+                <label id="familyInfo" data-en_us="Sheet information">直系亲属信息</label>
+            </div>
+
+            <div class="panel panel-default col-md-12" id="family">
+                <div class="panel-heading">
+                    <h3 class="panel-title">直系亲属信息</h3>
+                </div>
+                <div class="panel-body brankPanel" ng-init="family=[{name:'',idnumber:'',relation:'',birth:''}]">
+                    <div class="row" ng-repeat='x in family'>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">姓名:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入"
+                                           ng-model="x.name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">证件号:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入"
+                                           ng-model="x.idnumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">关系:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" ng-model="x.relation">
+                                        <option>请选择</option>
+                                        <option>父亲</option>
+                                        <option>母亲</option>
+                                        <option>爷爷</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">出生年月:</label>
+                                <div class="col-sm-7">
+                                    <span class="glyphicon glyphicon-calendar dateicon"
+                                          aria-hidden="true"></span>
+                                    <input id="StartTime"
+                                           ng-model="x.birth"
+                                           ui-jq="wdatePicker"
+                                           class="input-sm form-control"
+                                           placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="javascript:void(0);" ng-click="btn_addFamily()" class="col-md-6 col-md-offset-1 addbrank">+&nbsp;&nbsp;添加直系亲属</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sheetContainer col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="nav-icon fa  bannerTitle fa-angle-down organizationdivU"
+                 ng-click="hidediv('organization','organizationdivU')">
+                <label id="organizationInfo"
+                       data-en_us="Sheet information">法人机构或其他组织</label>
+            </div>
+            <div class="panel panel-default col-md-12" id="organization">
+                <div class="panel-heading">
+                    <h3 class="panel-title">机构信息</h3>
+                </div>
+                <div class="panel-body brankPanel" ng-init="orlist=[{organization:'',registrationNo:'',nature:''}]">
+                    <div class="row" ng-repeat='x in orlist'>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">机构名称:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入"
+                                           ng-model="x.organization">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">注册号:</label>
+                                <div class="col-sm-10">
+                                    <input id="Control470" type="text"
+                                           class="form-control manageinput"
+                                           placeholder="请输入"
+                                           ng-model="x.registrationNo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label id="Label470"
+                                       class="col-sm-2 control-label">公司性质:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" ng-model="x.nature">
+                                        <option>请选择</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="javascript:void(0);" ng-click="btn_addorganization()" class="col-md-6 col-md-offset-1 addbrank">+&nbsp;&nbsp;添加机构</a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>

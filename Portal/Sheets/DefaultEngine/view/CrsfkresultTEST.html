@@ -1,0 +1,1278 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>风控评估结果</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/Portal/WFRes/images/DZJR_16_16.png" media="screen">
+    <link href="../../../WFRes/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" />
+    <link href="../../../WFRes/css/MvcSheet.css" rel="stylesheet" />
+    <link href="../../../WFRes/assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../WFRes/_Scripts/jquery/jquery.js"></script>
+    <script src="../../../WFRes/assets/javascripts/bootstrap.min.js"></script>
+    <script src='/Portal/WFRes/_Scripts/showError.js'></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab {
+            width: 100%;
+        }
+
+            .tab td {
+                padding: 10px;
+            }
+
+                .tab td:nth-child(1) {
+                    width: 25%;
+                }
+
+        .lettitle {
+            position: relative;
+        }
+
+        .bannerTitle .Titlebottom {
+            border-bottom: 2px solid #787878;
+            position: absolute;
+            top: 36px;
+            left: 0px;
+            width: 78px;
+            display: inline-block;
+        }
+
+        .bannerTitle .active {
+            background-color: #DBD8CB;
+            color: #676767;
+        }
+
+        .bannerTitle .nav_title {
+            display: inline-block;
+            height: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            cursor: pointer;
+            float: left;
+        }
+
+        #example, #example1 {
+            width: 40%;
+            height: auto;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            overflow: hidden;
+        }
+
+            #example .modal-header, #example1 .modal-header {
+                padding: 5px;
+            }
+
+            #example .modal-body, #example1 .modal-body {
+                overflow: auto;
+                max-height: 70%;
+            }
+
+            #example .modal-footer, #example1 .modal-footer {
+                padding: 0px;
+            }
+    </style>
+</head>
+<body>
+    <div style="position: relative;">
+        <h3 style="text-align: center; padding-left: 50px; padding-right: 50px;">风控评估报告</h3>
+        <button class="btn" id="rgcx" onclick="timegetrsrquest()" style="position: absolute; right: 50px; bottom: 5px;">人工查询</button>
+    </div>
+    <div style="padding-left: 50px; padding-right: 50px; word-spacing: 8px; letter-spacing: 2px">
+        <table style="width: 100%; background: #ccc;">
+            <tbody>
+                <tr style="padding-left: 50px;">
+                    <td style="font-weight: 700; font-size: 15px; width: 140px; text-align: center;">风控评估结果</td>
+                    <td>
+                        <span id="fkpgjg"></span>
+                    </td>
+                    <td>建议贷款额度:
+                        <span id="jydked" style="padding-left: 5px;"></span>
+                    </td>
+                    <td>信用评分：
+                        <span id="grxypf" style="padding-left: 5px;"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="padding-left: 50px; padding-right: 50px; word-spacing: 8px; letter-spacing: 2px" id="fk">
+        <table style="background-color: #ccc; width: 100%;">
+            <tbody id="rsrstult">
+            </tbody>
+        </table>
+    </div>
+    <div style="padding-left: 50px; padding-right: 50px; margin-bottom: 15px; word-spacing: 8px; letter-spacing: 2px">
+        <table style="background-color: #ccc; width: 100%;">
+            <tbody id="ycsj">
+                <tr style="height: 22px; line-height: 22px;">
+                    <td style="width: 140px;"></td>
+                    <td style="width: 70px;">异常数据: </td>
+                    <td style="width: 55px;">担保人:</td>
+                    <td id="dbrycsj"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="padding-left: 50px; padding-right: 50px;">
+        <div class="lettitle">
+            <table class="tab table-bordered" style="border-left-width: 0px; border-top-width: 0px;">
+                <tr>
+                    <td style="border-left-width: 0px; border-top-width: 0px;"></td>
+                    <td id="dbr">
+                        <span>担保人</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab1',this)">
+                <span>数据1</span>
+            </div>
+            <table id="tab1" class="tab table-bordered">
+                <tr>
+                    <td>手机运营商类别</td>
+                    <td id="dbr____ds1__product__operation"></td>
+                </tr>
+                <tr>
+                    <td>手机三要素验证结果</td>
+                    <td id="dbr____ds1__product__result"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab2',this)">
+                <span>数据2</span>
+            </div>
+            <table id="tab2" class="tab table-bordered">
+                <tr>
+                    <td>通过身份证号查询高危行为</td>
+                    <td id="dbr____ds2__sl_id_abnormal"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询法院失信人</td>
+                    <td id="dbr____ds2__sl_id_court_bad"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询法院被执行人</td>
+                    <td id="dbr____ds2__sl_id_court_executed"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询银行(含信用卡)不良</td>
+                    <td id="dbr____ds2__sl_id_bank_bad"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询非银(含全部非银类型)不良</td>
+                    <td id="dbr____ds2__sl_id_p2p_bad"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询银行(含信用卡)失联</td>
+                    <td id="dbr____ds2__sl_id_bank_lost"></td>
+                </tr>
+                <tr>
+                    <td>通过身份证号查询非银(含全部非银类型)失联</td>
+                    <td id="dbr____ds2__sl_id_p2p_lost"></td>
+                </tr>
+                <tr>
+                    <td>通过手机号查询高危行为</td>
+                    <td id="dbr____ds2__sl_lm_cell_abnormal"></td>
+                </tr>
+                <tr>
+                    <td>通过手机号查询银行(含信用卡)不良</td>
+                    <td id="dbr____ds2__sl_lm_cell_bank_bad"></td>
+                </tr>
+                <tr>
+                    <td>通过手机号查询银行(含信用卡)失联</td>
+                    <td id="dbr____ds2__sl_lm_cell_bank_lost"></td>
+                </tr>
+                <tr>
+                    <td>多头借贷</td>
+                    <td id="dtjd">0</td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab3',this)">
+                <span>数据3</span>
+            </div>
+            <table id="tab3" class="tab table-bordered">
+                <tr>
+                    <td>3个月征信多头借贷数</td>
+                    <td id="dbr____ds3__busiData__last3MonMuliAppCnt"></td>
+                </tr>
+                <tr>
+                    <td>1个月征信多头借贷数</td>
+                    <td id="dbr____ds3__busiData__last1MonMuliAppCnt"></td>
+                </tr>
+                <tr>
+                    <td>外部信用评分A</td>
+                    <td id="dbr____ds3__busiData__records__credooScore__0"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab4',this)">
+                <span>数据4</span>
+            </div>
+            <table id="tab4" class="tab table-bordered">
+                <tr>
+                    <td>手机欺诈分</td>
+                    <td id="dbr____ds4__user_gray__phone_gray_score"></td>
+                </tr>
+                <tr>
+                    <td>过去1个月的查询次数</td>
+                    <td id="dbr____ds4__near1mselectcount"></td>
+                </tr>
+                <tr>
+                    <td>过去3个月的查询次数</td>
+                    <td id="dbr____ds4__near3mselectcount"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab5',this)">
+                <span>数据5</span>
+            </div>
+            <table id="tab5" class="tab table-bordered">
+                <tr>
+                    <td>外部信用评分B</td>
+                    <td id="dbr____ds5__zm_score"></td>
+                </tr>
+                <tr>
+                    <td>外部欺诈评分A</td>
+                    <td id="dbr____ds5__score"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab6',this)">
+                <span>数据6</span>
+            </div>
+            <table id="tab6" class="tab table-bordered">
+                <tr>
+                    <td>外部欺诈评分B</td>
+                    <td id="dbr____ds6__final_score"></td>
+                </tr>
+                <tr>
+                    <td>欺诈处理建议</td>
+                    <td id="dbr____ds6__final_decision"></td>
+                </tr>
+                <tr>
+                    <td>命中的欺诈风险规则</td>
+                    <td id="dbr____ds6__hit_rules"></td>
+                    <!-- ds6__hit_rules 中取所有的name值 -->
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab7',this)">
+                <span>数据7</span>
+            </div>
+            <table id="tab7" class="tab table-bordered">
+                <tr>
+                    <td>执行公开信息</td>
+                    <td id="dbr____ds7__fxtj__zhixing"></td>
+                </tr>
+                <tr>
+                    <td>民商事裁判文书</td>
+                    <td id="dbr____ds7__fxtj__caipan"></td>
+                </tr>
+                <tr>
+                    <td>民商事审判流程</td>
+                    <td id="dbr____ds7__fxtj__shenpan"></td>
+                </tr>
+                <tr>
+                    <td>行政违法记录</td>
+                    <td id="dbr____ds7__fxtj__weifa"></td>
+                </tr>
+                <tr>
+                    <td>欠税名单</td>
+                    <td id="dbr____ds7__fxtj__qianshui"></td>
+                </tr>
+                <tr>
+                    <td>纳税非正常户</td>
+                    <td id="dbr____ds7__fxtj__feizheng"></td>
+                </tr>
+                <tr>
+                    <td>欠款欠费名单</td>
+                    <td id="dbr____ds7__fxtj__qiankuan"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="divContent">
+            <div class="nav-icon fa  fa-angle-double-down ss" style="width: 100%;" onclick="hidediv('tab8',this)">
+                <span>数据8</span>
+            </div>
+            <table id="tab8" class="tab table-bordered">
+                <tr>
+                    <td>卡等级</td>
+                    <td id="dbr____ds8__CDCA002__0"></td>
+                </tr>
+                <tr>
+                    <td>卡性质</td>
+                    <td id="dbr____ds8__CDCA003__0"></td>
+                </tr>
+                <tr>
+                    <td>近12个月月均交易金额</td>
+                    <td id="dbr____ds8__CDTB061__0"></td>
+                </tr>
+                <tr>
+                    <td>近12个月月均交易笔数</td>
+                    <td id="dbr____ds8__CDTB064__0"></td>
+                </tr>
+                <tr>
+                    <td>近12个月月均消费金额</td>
+                    <td id="dbr____ds8__CDTB065__0"></td>
+                </tr>
+                <tr>
+                    <td>近12个月转入交易金额</td>
+                    <td id="dbr____ds8__CDTP029__0"></td>
+                </tr>
+                <tr>
+                    <td>近12个月有无境外交易</td>
+                    <td id="dbr____ds8__CDCT003__0"></td>
+                </tr>
+                <tr>
+                    <td>风险得分分类</td>
+                    <td id="dbr____ds8__CSRL002__0"></td>
+                </tr>
+                <tr>
+                    <td>套现模型分类</td>
+                    <td id="dbr____ds8__CSRL004__0"></td>
+                </tr>
+                <tr>
+                    <td>消费能力等级</td>
+                    <td id="dbr____ds8__CSWC001__0"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="example" class="modal fade in" aria-hidden="true">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h6 style="text-align: center;">命中的欺诈风险规则</h6>
+        </div>
+        <div class="modal-body" style="background-color: rgb(255,255,255);">
+            <div id="Application"></div>
+        </div>
+        <div class="modal-footer" style="margin-top: 0;">
+            <a class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <div id="example1" class="modal fade in" aria-hidden="true">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h6 style="text-align: center;">多头借贷</h6>
+        </div>
+        <div class="modal-body" style="background-color: rgb(255,255,255);">
+            <div id="dtjdxq"></div>
+        </div>
+        <div class="modal-footer" style="margin-top: 0;">
+            <a class="btn" data-dismiss="modal">关闭</a>
+        </div>
+    </div>
+    <div id="backgif" style="display: none; background-image: url('/Portal/WFRes/_Content/themes/ligerUI/Aqua/images/common/bigloading.gif'); background-repeat: no-repeat; background-position: center; width: 100%; height: 100%; background-color: rgba(255,255,255,.5); position: fixed; left: 0; top: 0;"></div>
+    <script>
+        //风控结果
+        var arrrsrq = [];
+        arrrsrq['localreject'] = "东正本地规则<span style=\"color:red;\">拒绝</span>";
+        arrrsrq['cloudaccept'] = "云端规则<span style=\"color:red;\">通过</span>";
+        arrrsrq['cloudreject'] = "云端规则<span style=\"color:red;\">拒绝</span>";
+        arrrsrq['cloudmanual'] = "云端规则返回<span style=\"color:red;\">转人工</span>";
+        arrrsrq['localmanual'] = "本地<span style=\"color:red;\">转人工</span>";
+        //数据源6欺诈风险规则字段对应名称
+        var tdlist = {
+            "black_list":
+                {
+                    'value': "命中的属性值",
+                    'fraudTypeDisplayName': "风险类型",
+                    'executedName': "被执行人姓名",
+                    'age': "年龄",
+                    'gender': "性别",
+                    'province': "省份",
+                    'caseDate': "立案时间",
+                    'executeCourt': "执行法院",
+                    'executeSubject': "执行标的",
+                    'executeStatus': "执行状态",
+                    'evidenceCourt': "做出依据执行法院",
+                    'termDuty': "生效法律文书确定的义务",
+                    'carryOut': "被执行人履行情况",
+                    'specificCircumstances': "失信被执行人行为具体情形",
+                    'executeCode': "执行依据文号",
+                    'caseCode': "案号",
+                    'evidenceTime': "证据时间",
+                    'overdueDate': "逾期时间",
+                    'overduePeriods': "逾期期数",
+                    'overdueAmount': "逾期金额",
+                    'overdueCount': "逾期次数",
+                    'overdueDay': "逾期天数",
+                    'debtAmount': "欠款金额"
+                },
+            "grey_list":
+                {
+                    'value': "命中灰名单的属性值",
+                    'greyListType': "灰名单类型",
+                    'riskLevelDisplayName': "风险级别",
+                    'fraudTypeDisplayName': "风险类型",
+                    'evidenceTime': "证据时间"
+                },
+            "fuzzy_black_list":
+                {
+                    'fuzzyIdNumber': "模糊身份证",
+                    'fuzzyName': "模糊姓名",
+                    'fraudTypeDisplayName': "风险类型"
+                },
+            "custom_list":
+                {
+                },
+            "association_partner":
+                {
+                    'industryDisplayName': "行业类型",
+                    'count': "数量"
+                },
+            "association_industry":
+                {
+                    'dimType': "属性名",
+                    'count': "个数",
+                    'industryDisplayNames': "行业类型"
+                },
+            "association_industry":
+                {
+                    'dimType': "属性名",
+                    'count': "个数",
+                    'industryDisplayNames': "行业类型"
+                },
+            "discredit_count":
+                {
+                    'calcDimType': "属性名",
+                    'calcDimTypeValue': "属性值",
+                    'calcType': "个数",
+                    'result': "计算结果",
+                    'overdueAmount': "逾期金额",
+                    'overdueCount': "逾期笔数",
+                    'overdueDay': "逾期天数"
+                },
+            "frequency_one_dim":
+                {
+                    'dimType': "属性名",
+                    'result': "计算结果"
+                },
+            "frequency_distinct":
+                {
+                    'dimType': "主属性名",
+                    'subDim_type': "从属性名",
+                    'result': "计算结果",
+                    'list': "列表"
+                }
+        };
+        //数据源2多头借贷
+        var dtjd = {
+            "ds2__als_d7_id_pdl_orgnum": "身份证号在近7天申请线上小额现金贷的机构数",
+            "ds2__als_d7_id_caon_orgnum": "身份证号在近7天申请线上现金分期的机构数",
+            "ds2__als_d7_id_caoff_orgnum": "身份证号在近7天申请线下现金分期的机构数",
+            "ds2__als_d7_id_coon_orgnum": "身份证号在近7天申请线上消费分期的机构数",
+            "ds2__als_d7_id_cooff_orgnum": "身份证号在近7天申请线下消费分期的机构数",
+            "ds2__als_d7_id_af_orgnum": "身份证号在近7天申请汽车金融的机构数",
+            "ds2__als_d7_id_oth_orgnum": "身份证号在近7天申请其他的机构数",
+            "ds2__als_d7_id_nbank_orgnum": "身份证号在近7天在非银机构申请机构数",
+            "ds2__als_d7_id_nbank_p2p_orgnum": "身份证号在近7天在非银机构-p2p申请机构数",
+            "ds2__als_d7_id_nbank_mc_orgnum": "身份证号在近7天在非银机构-小贷申请机构数",
+            "ds2__als_d7_id_nbank_ca_orgnum": "身份证号在近7天在非银机构-现金类分期申请机构数",
+            "ds2__als_d7_id_nbank_cf_orgnum": "身份证号在近7天在非银机构-消费类分期申请机构数",
+            "ds2__als_d7_id_nbank_com_orgnum": "身份证号在近7天在非银机构-代偿类分期申请机构数",
+            "ds2__als_d7_id_nbank_oth_orgnum": "身份证号在近7天在非银机构-其他申请机构数",
+            "ds2__als_d7_id_nbank_nsloan_orgnum": "身份证号在近7天在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_d7_id_nbank_autofin_orgnum": "身份证号在近7天在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_d7_id_nbank_sloan_orgnum": "身份证号在近7天在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_d7_id_nbank_cons_orgnum": "身份证号在近7天在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_d7_id_nbank_finlea_orgnum": "身份证号在近7天在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_d7_id_nbank_else_orgnum": "身份证号在近7天在非银机构-其他申请机构数",
+            "ds2__als_d7_cell_pdl_orgnum": "手机号在近7天申请线上小额现金贷的机构数",
+            "ds2__als_d7_cell_caon_orgnum": "手机号在近7天申请线上现金分期的机构数",
+            "ds2__als_d7_cell_caoff_orgnum": "手机号在近7天申请线下现金分期的机构数",
+            "ds2__als_d7_cell_coon_orgnum": "手机号在近7天申请线上消费分期的机构数",
+            "ds2__als_d7_cell_cooff_orgnum": "手机号在近7天申请线下消费分期的机构数",
+            "ds2__als_d7_cell_af_orgnum": "手机号在近7天申请汽车金融的机构数",
+            "ds2__als_d7_cell_oth_orgnum": "手机号在近7天申请其他的机构数",
+            "ds2__als_d7_cell_nbank_orgnum": "手机号在近7天在非银机构申请机构数",
+            "ds2__als_d7_cell_nbank_p2p_orgnum": "手机号在近7天在非银机构-p2p申请机构数",
+            "ds2__als_d7_cell_nbank_mc_orgnum": "手机号在近7天在非银机构-小贷申请机构数",
+            "ds2__als_d7_cell_nbank_ca_orgnum": "手机号在近7天在非银机构-现金类分期申请机构数",
+            "ds2__als_d7_cell_nbank_cf_orgnum": "手机号在近7天在非银机构-消费类分期申请机构数",
+            "ds2__als_d7_cell_nbank_com_orgnum": "手机号在近7天在非银机构-代偿类分期申请机构数",
+            "ds2__als_d7_cell_nbank_oth_orgnum": "手机号在近7天在非银机构-其他申请机构数",
+            "ds2__als_d7_cell_nbank_nsloan_orgnum": "手机号在近7天在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_d7_cell_nbank_autofin_orgnum": "手机号在近7天在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_d7_cell_nbank_sloan_orgnum": "手机号在近7天在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_d7_cell_nbank_cons_orgnum": "手机号在近7天在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_d7_cell_nbank_finlea_orgnum": "手机号在近7天在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_d7_cell_nbank_else_orgnum": "手机号在近7天在非银机构-其他申请机构数",
+            "ds2__als_m1_id_pdl_orgnum": "身份证号在近1个月申请线上小额现金贷的机构数",
+            "ds2__als_m1_id_caon_orgnum": "身份证号在近1个月申请线上现金分期的机构数",
+            "ds2__als_m1_id_caoff_orgnum": "身份证号在近1个月申请线下现金分期的机构数",
+            "ds2__als_m1_id_coon_orgnum": "身份证号在近1个月申请线上消费分期的机构数",
+            "ds2__als_m1_id_cooff_orgnum": "身份证号在近1个月申请线下消费分期的机构数",
+            "ds2__als_m1_id_af_orgnum": "身份证号在近1个月申请汽车金融的机构数",
+            "ds2__als_m1_id_oth_orgnum": "身份证号在近1个月申请其他的机构数",
+            "ds2__als_m1_id_nbank_orgnum": "身份证号在近1个月在非银机构申请机构数",
+            "ds2__als_m1_id_nbank_p2p_orgnum": "身份证号在近1个月在非银机构-p2p申请机构数",
+            "ds2__als_m1_id_nbank_mc_orgnum": "身份证号在近1个月在非银机构-小贷申请机构数",
+            "ds2__als_m1_id_nbank_ca_orgnum": "身份证号在近1个月在非银机构-现金类分期申请机构数",
+            "ds2__als_m1_id_nbank_cf_orgnum": "身份证号在近1个月在非银机构-消费类分期申请机构数",
+            "ds2__als_m1_id_nbank_com_orgnum": "身份证号在近1个月在非银机构-代偿类分期申请机构数",
+            "ds2__als_m1_id_nbank_oth_orgnum": "身份证号在近1个月在非银机构-其他申请机构数",
+            "ds2__als_m1_id_nbank_nsloan_orgnum": "身份证号在近1个月在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_m1_id_nbank_autofin_orgnum": "身份证号在近1个月在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_m1_id_nbank_sloan_orgnum": "身份证号在近1个月在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_m1_id_nbank_cons_orgnum": "身份证号在近1个月在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_m1_id_nbank_finlea_orgnum": "身份证号在近1个月在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_m1_id_nbank_else_orgnum": "身份证号在近1个月在非银机构-其他申请机构数",
+            "ds2__als_m1_cell_pdl_orgnum": "手机号在近1个月申请线上小额现金贷的机构数",
+            "ds2__als_m1_cell_caon_orgnum": "手机号在近1个月申请线上现金分期的机构数",
+            "ds2__als_m1_cell_caoff_orgnum": "手机号在近1个月申请线下现金分期的机构数",
+            "ds2__als_m1_cell_coon_orgnum": "手机号在近1个月申请线上消费分期的机构数",
+            "ds2__als_m1_cell_cooff_orgnum": "手机号在近1个月申请线下消费分期的机构数",
+            "ds2__als_m1_cell_af_orgnum": "手机号在近1个月申请汽车金融的机构数",
+            "ds2__als_m1_cell_oth_orgnum": "手机号在近1个月申请其他的机构数",
+            "ds2__als_m1_cell_nbank_orgnum": "手机号在近1个月在非银机构申请机构数",
+            "ds2__als_m1_cell_nbank_p2p_orgnum": "手机号在近1个月在非银机构-p2p申请机构数",
+            "ds2__als_m1_cell_nbank_mc_orgnum": "手机号在近1个月在非银机构-小贷申请机构数",
+            "ds2__als_m1_cell_nbank_ca_orgnum": "手机号在近1个月在非银机构-现金类分期申请机构数",
+            "ds2__als_m1_cell_nbank_cf_orgnum": "手机号在近1个月在非银机构-消费类分期申请机构数",
+            "ds2__als_m1_cell_nbank_com_orgnum": "手机号在近1个月在非银机构-代偿类分期申请机构数",
+            "ds2__als_m1_cell_nbank_oth_orgnum": "手机号在近1个月在非银机构-其他申请机构数",
+            "ds2__als_m1_cell_nbank_nsloan_orgnum": "手机号在近1个月在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_m1_cell_nbank_autofin_orgnum": "手机号在近1个月在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_m1_cell_nbank_sloan_orgnum": "手机号在近1个月在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_m1_cell_nbank_cons_orgnum": "手机号在近1个月在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_m1_cell_nbank_finlea_orgnum": "手机号在近1个月在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_m1_cell_nbank_else_orgnum": "手机号在近1个月在非银机构-其他申请机构数",
+            "ds2__als_m3_id_pdl_orgnum": "身份证号在近3个月申请线上小额现金贷的机构数",
+            "ds2__als_m3_id_caon_orgnum": "身份证号在近3个月申请线上现金分期的机构数",
+            "ds2__als_m3_id_caoff_orgnum": "身份证号在近3个月申请线下现金分期的机构数",
+            "ds2__als_m3_id_coon_orgnum": "身份证号在近3个月申请线上消费分期的机构数",
+            "ds2__als_m3_id_cooff_orgnum": "身份证号在近3个月申请线下消费分期的机构数",
+            "ds2__als_m3_id_af_orgnum": "身份证号在近3个月申请汽车金融的机构数",
+            "ds2__als_m3_id_oth_orgnum": "身份证号在近3个月申请其他的机构数",
+            "ds2__als_m3_id_nbank_orgnum": "身份证号在近3个月在非银机构申请机构数",
+            "ds2__als_m3_id_nbank_p2p_orgnum": "身份证号在近3个月在非银机构-p2p申请机构数",
+            "ds2__als_m3_id_nbank_mc_orgnum": "身份证号在近3个月在非银机构-小贷申请机构数",
+            "ds2__als_m3_id_nbank_ca_orgnum": "身份证号在近3个月在非银机构-现金类分期申请机构数",
+            "ds2__als_m3_id_nbank_cf_orgnum": "身份证号在近3个月在非银机构-消费类分期申请机构数",
+            "ds2__als_m3_id_nbank_com_orgnum": "身份证号在近3个月在非银机构-代偿类分期申请机构数",
+            "ds2__als_m3_id_nbank_oth_orgnum": "身份证号在近3个月在非银机构-其他申请机构数",
+            "ds2__als_m3_id_nbank_nsloan_orgnum": "身份证号在近3个月在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_m3_id_nbank_autofin_orgnum": "身份证号在近3个月在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_m3_id_nbank_sloan_orgnum": "身份证号在近3个月在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_m3_id_nbank_cons_orgnum": "身份证号在近3个月在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_m3_id_nbank_finlea_orgnum": "身份证号在近3个月在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_m3_id_nbank_else_orgnum": "身份证号在近3个月在非银机构-其他申请机构数",
+            "ds2__als_m3_cell_pdl_orgnum": "手机号在近3个月申请线上小额现金贷的机构数",
+            "ds2__als_m3_cell_caon_orgnum": "手机号在近3个月申请线上现金分期的机构数",
+            "ds2__als_m3_cell_caoff_orgnum": "手机号在近3个月申请线下现金分期的机构数",
+            "ds2__als_m3_cell_coon_orgnum": "手机号在近3个月申请线上消费分期的机构数",
+            "ds2__als_m3_cell_cooff_orgnum": "手机号在近3个月申请线下消费分期的机构数",
+            "ds2__als_m3_cell_af_orgnum": "手机号在近3个月申请汽车金融的机构数",
+            "ds2__als_m3_cell_oth_orgnum": "手机号在近3个月申请其他的机构数",
+            "ds2__als_m3_cell_nbank_orgnum": "手机号在近3个月在非银机构申请机构数",
+            "ds2__als_m3_cell_nbank_p2p_orgnum": "手机号在近3个月在非银机构-p2p申请机构数",
+            "ds2__als_m3_cell_nbank_mc_orgnum": "手机号在近3个月在非银机构-小贷申请机构数",
+            "ds2__als_m3_cell_nbank_ca_orgnum": "手机号在近3个月在非银机构-现金类分期申请机构数",
+            "ds2__als_m3_cell_nbank_cf_orgnum": "手机号在近3个月在非银机构-消费类分期申请机构数",
+            "ds2__als_m3_cell_nbank_com_orgnum": "手机号在近3个月在非银机构-代偿类分期申请机构数",
+            "ds2__als_m3_cell_nbank_oth_orgnum": "手机号在近3个月在非银机构-其他申请机构数",
+            "ds2__als_m3_cell_nbank_nsloan_orgnum": "手机号在近3个月在非银机构-持牌网络小贷机构申请机构数",
+            "ds2__als_m3_cell_nbank_autofin_orgnum": "手机号在近3个月在非银机构-持牌汽车金融机构申请机构数",
+            "ds2__als_m3_cell_nbank_sloan_orgnum": "手机号在近3个月在非银机构-持牌小贷机构申请机构数",
+            "ds2__als_m3_cell_nbank_cons_orgnum": "手机号在近3个月在非银机构-持牌消费金融机构申请机构数",
+            "ds2__als_m3_cell_nbank_finlea_orgnum": "手机号在近3个月在非银机构-持牌融资租赁机构申请机构数",
+            "ds2__als_m3_cell_nbank_else_orgnum": "身份证号在近3个月在非银机构-其他申请机构数",
+            "ds2__brma__als_m6_id_avg_monnum": "身份证号在近6个月每月平均申请次数",
+            "ds2__brma__als_m6_id_tot_mons": "身份证号在近6个月申请记录月份数",
+            "ds2__brma__als_m6_id_max_monnum": "身份证号在近6个月最大月申请次数"
+        };
+        //规则码字典（名称转化）;
+        var gzzsmc = {
+            "主体审批_年龄限制": "年龄超政策范围",
+            "主体审批_共借人": "低龄未婚白户且共借人非直系",
+            "主体审批_担保人": "低龄未婚白户无共借人（或担保人）",
+            "主体审批_人行报告": "白户且共借人不为直系",
+            "主体审批_人行报告2": "白户且无共借人",
+            "主体审批_婚姻状态": "婚姻状况不匹配",
+            "主体审批_简化_户籍": "非本省户籍（不在受理区域）",
+            "主体审批_转人工1": "低龄未婚白户无共借人（有担保人）",
+            "主体审批_人行报告交叉2": "低龄未婚白户且共借人白户",
+            "主体审批_转人工3": "高金额且共借人非直系",
+            "主体审批_转人工2": "高金额且共借人非直系",
+            "主体审批_人行报告交叉3_内网": "高金额且共借人白户",
+            "主体审批_人行报告交叉3": "高金额且共借人白户",
+            "主体审批_人行报告交叉1": "主共借均白户",
+            "主体审批_常规_外网户籍": "非本省户籍或非中国国籍",
+            "主体审批_常规_内网户籍": "非中国国籍",
+            "高首比_简化_二手车_内网转人工1": "高首付高贷款金额且配偶不是共借人",
+            "高首比_简化_二手车_外网转人工1": "高首付高贷款金额且配偶不是共借人",
+            "高首比_常规_二手车_转人工1": "高首付且配偶不是共借人",
+            "主体审批_常规_转人工2": "配偶不是共借人",
+            "主体审批_常规_转人工3": "白户且无共借人",
+            "要素审批_贷款用途": "非自用",
+            "要素审批_简化_存量简化贷": "有存量简化贷",
+            "要素审批_简化_贷款金额_外网": "贷款金额不符政策",
+            "要素审批_简化_贷款金额": "贷款金额不符政策",
+            "要素审批_贷款期限": "贷款期限不符政策",
+            "要素审批_附加费贷款": "附加费贷款期限不符政策",
+            "要素审批_金额评估": "金额评估不符政策",
+            "要素审批_常规_贷款金额": "贷款金额不符政策",
+            "要素审批_常规_金额评估": "金额评估不符政策",
+            "要素审批_材料齐全": "材料不齐全",
+            "要素审批_附加费贷款2": "含附加费贷款",
+            "要素审批_常规_贷款用途": "非自用",
+            "信用审批_信用逾期": "信用记录瑕疵（涉及政策）",
+            "信用审批_呆账拒绝": "呆账",
+            "信用审批_呆账人工": "呆账为零",
+            "信用审批_担保": "代偿或以资抵债",
+            "信用审批_风险敞口_外网": "风险敞口超标",
+            "信用审批_风险敞口_内网": "风险敞口超标",
+            "信用审批_信用不良": "查询次数较多&对外担保瑕疵",
+            "直通类审批_优质经销商": "非优质经销商",
+            "直通类审批_贷款金额": "金额超标",
+            "直通类审批_贷款金额_外网": "金额超标",
+            "直通类审批_贷款金额_内网": "金额超标",
+            "直通类审批_首付比例": "首付较低",
+            "二手车_人车一致": "借款人非抵押人",
+            "二手车_车龄不符": "车龄不符政策",
+            "二手车_行驶里程不符": "行驶里程不符政策",
+            "二手车_贷款金额不符_常规": "贷款金额不符政策",
+            "二手车_贷款金额不符": "贷款金额不符政策",
+            "二手车_附加费贷款": "含附加费贷款",
+            "二手车_贷款年限不符": "贷款年限不符政策",
+            "二手车_材料不符": "材料不齐全"
+        }
+        var request = "";
+        $(function () {
+            getRS();
+        })
+        function getRS() {
+            var location = decodeURI(window.location.search);
+            var rsfkurl = location.split("&")[1].split("=")[1];
+            var repID = location.split("&")[2].split("=")[1];
+            $.ajax({
+                //url: "../../../ajax/RSHandler.ashx",
+                url: "/Portal/RSHandler/Index",// 19.6.28 wangxg
+                data:
+                {
+                    CommandName: "getRSResult",
+                    param: "{\"reqID\": \"" + repID + "\" }",
+                    address: rsfkurl
+                    //address: "http://192.168.16.102:8088/request/result"
+                },
+                type: "post",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    if (result.data) {
+                        $("#fkpgjg").html(arrrsrq[result.data.action]);
+                        $("#jydked").html(result.data.limit);
+                        $("#grxypf").html(Math.round(result.data.scorecard));
+                        if (Math.round(result.data.scorecard) < 400) {
+                            var span = "<span style=\"color:red;padding-left:15px;\">建议拒绝</span>";
+                            $("#grxypf").after(span);
+                        }
+                        if (Math.round(result.data.scorecard) < 470 && Math.round(result.data.scorecard) >= 400) {
+                            var span = "<span style=\"color:red;padding-left:15px;\">建议人工审批</span>";
+                            $("#grxypf").after(span);
+                        }
+                        if (Math.round(result.data.scorecard) >= 470) {
+                            var span = "<span style=\"color:red;padding-left:15px;\">建议通过</span>";
+                            $("#grxypf").after(span);
+                        }
+                        if (arrrsrq[result.data.action] != "东正本地规则拒绝" || result.msg.indexOf("手机号错误") != -1 || result.msg.indexOf("Nciic查询姓名或者身份证号信息不一致，请核对后重新申请") != -1 || result.msg.indexOf("用户名或密码错误") != -1 || result.msg.indexOf("无法连接人行服务器") != -1 || result.msg.indexOf("评分卡分数低于最低阈值") != -1) {
+                            $("#rgcx").attr("disabled", "disabled");
+                        }
+                    }
+                    result.msg = result.msg.replace(",人工查询成功", "").replace(",人工查询失败", "");
+                    if (result.msg != "") {
+                        $("#fk").show();
+                        var rsmsg = result.msg.split(",");
+                        for (var i = 0; i < rsmsg.length; i++) {
+                            if (rsmsg[i] != "") {
+                                var msg = "";
+                                var tr = "<tr>";
+                                tr += "<td style=\"width: 140px; height: 22px;\"></td>";
+                                if (i == 0) {
+                                    tr += "<td style=\"width: 70px;\">命中规则: </td>";
+                                } else {
+                                    tr += "<td style=\"width: 70px;\"></td>";
+                                }
+                                tr += "<td ></td>";
+                                tr += "<td>";
+                                for (var k = 0; k < rsmsg[i].split("：").length - 1; k++) {
+                                    msg += rsmsg[i].split("：")[k] + "：";
+                                }
+                                if (gzzsmc.hasOwnProperty(rsmsg[i].split("：")[rsmsg[i].split("：").length - 1])) {
+                                    msg += gzzsmc[rsmsg[i].split("：")[rsmsg[i].split("：").length - 1]] + ";";
+                                } else {
+                                    msg += rsmsg[i].split("：")[rsmsg[i].split("：").length - 1] + ";";
+                                }
+                                tr += msg;
+                                tr + "</td>";
+                                tr += "</tr>";
+                                $("#rsrstult").append(tr);
+                            }
+                        }
+
+                    } else {
+                        $("#fk").hide();
+                    }
+                    getrsfkresult(result);
+                },
+                error: function () {
+                    alert("出错了");
+                    //var result = { "reqID": "d89d71c8-c8dc-4956-97e7-e6a3bdc1beba", "data": { "action": "cloudmanual", "limit": "", "scorecard": "408.29275299999995" }, "code": "00", "msg": "申请人：信用审批_信用不良,申请人：数据3：信用审批_信用不良1,担保人：数据4：信用审批_信用不良2,", "sqr_reject_code": "", "gjr_reject_code": "", "dbr_reject_code": "", "ds": { "dbr": { "6595071": { "score": 10, "conditions": [{ "hits": [{ "count": 1, "industryDisplayName": "小额贷款公司" }, { "count": 1, "industryDisplayName": "P2P网贷" }], "hitsForDim": [{ "count": 1, "dimType": "account_mobile", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "account_mobile", "industryDisplayName": "P2P网贷" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "P2P网贷" }], "result": 2, "resultsForDim": [{ "count": 2, "dimType": "account_mobile" }, { "count": 2, "dimType": "id_number" }], "type": "association_partner" }], "ruleId": "6595071" }, "6595081": { "score": 0, "conditions": [{ "hits": [{ "count": 1, "industryDisplayName": "小额贷款公司" }, { "count": 1, "industryDisplayName": "P2P网贷" }], "hitsForDim": [{ "count": 1, "dimType": "account_mobile", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "account_mobile", "industryDisplayName": "P2P网贷" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "P2P网贷" }], "result": 2, "resultsForDim": [{ "count": 2, "dimType": "account_mobile" }, { "count": 2, "dimType": "id_number" }], "type": "association_partner" }], "ruleId": "6595081" }, "6595091": { "score": 0, "conditions": [{ "hits": [{ "count": 1, "industryDisplayName": "小额贷款公司" }, { "count": 1, "industryDisplayName": "P2P网贷" }], "hitsForDim": [{ "count": 1, "dimType": "account_mobile", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "account_mobile", "industryDisplayName": "P2P网贷" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "小额贷款公司" }, { "count": 1, "dimType": "id_number", "industryDisplayName": "P2P网贷" }], "result": 2, "resultsForDim": [{ "count": 2, "dimType": "account_mobile" }, { "count": 2, "dimType": "id_number" }], "type": "association_partner" }], "ruleId": "6595091" }, "ds4__auth_org": "rskj99", "ds4__near12mselectcount": "1", "ds2__sl_id_p2p_lost": "0", "ds2__sl_id_bank_lost": "2", "ds2__sl_id_p2p_bad": "1", "ds2__sl_id_bank_bad": "0", "ds2__sl_id_court_executed": "2", "ds2__sl_id_court_bad": "1", "ds2__sl_id_abnormal": "0", "ds2__als_d7_id_nbank_oth_orgnum": "3", "ds2__als_d7_id_nbank_oth_orgnum": "3", "ds4__als_d7_id_nbank_nsloan_orgnum": "1", "ds4__near3mselectcount": "1", "ds4__update_time": "1519962565147", "ds4__user_basic__user_age": "34", "ds4__user_basic__user_city": "武汉市", "ds4__user_basic__user_gender": "男", "ds4__user_basic__user_idcard": "42010419831119243X", "ds4__user_basic__user_idcard_valid": "true", "ds4__user_basic__user_name": "何多利", "ds4__user_basic__user_phone": "13517122109", "ds4__user_basic__user_phone_city": "武汉", "ds4__user_basic__user_phone_operator": "中国移动", "ds4__user_basic__user_phone_province": "湖北", "ds4__user_basic__user_province": "湖北省", "ds4__user_basic__user_region": "硚口区", "ds4__user_blacklist__blacklist_category": "", "ds4__user_blacklist__blacklist_details": "", "ds4__user_blacklist__blacklist_name_with_idcard": "false", "ds4__user_blacklist__blacklist_name_with_phone": "false", "ds4__user_blacklist__blacklist_update_time_name_idcard": "", "ds4__user_blacklist__blacklist_update_time_name_phone": "", "ds4__user_gray__contacts_class1_blacklist_cnt": "3", "ds4__user_gray__contacts_class1_cnt": "15", "ds4__user_gray__contacts_class2_blacklist_cnt": "89", "ds4__user_gray__contacts_router_cnt": "13", "ds4__user_gray__contacts_router_ratio": "0.8666666666666667", "ds4__user_gray__phone_gray_score": "25", "ds4__user_gray__user_phone": "13517122109", "ds4__user_grid_id": "b32e16a2-1dcc-11e8-9221-5254004f83b4-1281", "ds4__user_idcard_suspicion__idcard_applied_in_orgs": "", "ds4__user_idcard_suspicion__idcard_with_other_names": "", "ds4__user_idcard_suspicion__idcard_with_other_phones": "", "ds4__user_phone_suspicion__phone_applied_in_orgs": "", "ds4__user_phone_suspicion__phone_with_other_idcards": "", "ds4__user_phone_suspicion__phone_with_other_names": "", "ds4__user_register_orgs__phone_num": "13517122109", "ds4__user_register_orgs__register_orgs": "", "ds4__user_register_orgs__register_orgs_statistics": "", "ds4__user_searched_history_by_orgs__org_self__0": "true", "ds4__user_searched_history_by_orgs__searched_date__0": "2018-03-02", "ds4__user_searched_history_by_orgs__searched_org__0": "线上消费分期", "ds4__user_searched_statistic__searched_org_cnt": "1", "ds4__userregfinanceappcount": "", "ds4__userregloanappcount": "", "ds4__userregloanorfinappcount": "", "ds2__code": "100002", "ds2__flag_applyloanstr": "0", "ds2__swift_number": "3000610_20180302114928_2921", "ds3__busiData__batchNo": "15199625666151643", "ds3__busiData__last1MonMuliAppCnt": "0", "ds3__busiData__last3MonMuliAppCnt": "0", "ds3__busiData__records__amount__0": "", "ds3__busiData__records__bnkAmount__0": "", "ds3__busiData__records__busiDate__0": "", "ds3__busiData__records__cnssAmount__0": "", "ds3__busiData__records__erCode__0": "E000001", "ds3__busiData__records__erMsg__0": "'子批次号'长度超过24", "ds3__busiData__records__idNo__0": "42010419831119243X", "ds3__busiData__records__idType__0": "0", "ds3__busiData__records__industry__0": "", "ds3__busiData__records__name__0": "何多利", "ds3__busiData__records__p2pAmount__0": "", "ds3__busiData__records__queryAmtM3__0": "", "ds3__busiData__records__queryAmtM6__0": "", "ds3__busiData__records__queryAmt__0": "", "ds3__busiData__records__reasonCode__0": "01", "ds3__busiData__records__seqNo__0": "d89d71c8-c8dc-4956-97e7-e6a3bdc1beba", "ds3__header__authCode": "OTE0613XX", "ds3__header__authDate": "2018-03-02 11:49:26", "ds3__header__chnlId": "rskj", "ds3__header__orgCode": "91440300MA5DM8421A", "ds3__header__rtCode": "E000000", "ds3__header__rtMsg": "交易成功", "ds3__header__transDate": "2018-03-02 11:49:26", "ds3__header__transNo": "15199625666154680", "ds3__oriMessage": "", "ds1__code": "600000", "ds1__flag__flag_telCheck": "1", "ds1__product__costTime": "635", "ds1__product__operation": "移动", "ds1__product__result": "不一致", "ds1__swift_number": "3000610_20180302114933_9156", "ds2__flag_specialList_c": "0", "ds6__policy_set_name": "借款事件_网站_20170720", "ds6__risk_type": "", "spend_time": 38, "ds6__policy_name": "借款事件_网站_20170720", "ds6__final_score": 10, "ds6__final_decision": "Accept", "ds6__policy_set": [{ "ds6__policy_score": 10, "ds6__policy_mode": "Weighted", "ds6__risk_type": "suspiciousLoan", "ds6__policy_decision": "Accept", "ds6__policy_name": "STARK借款_网站", "ds6__policy_uuid": "1a2c7963355e4b13895576231fb9cdfc", "ds6__hit_rules": [{ "score": 10, "decision": "Accept", "name": "7天内申请人在多个平台申请借款", "id": "6595071", "uuid": "1f157ed863c84c2481e92129ee0adc27", "parentUuid": "" }, { "score": 0, "decision": "Accept", "name": "1个月内申请人在多个平台申请借款", "id": "6595081", "uuid": "56777b55175a4b4caac02b932c35ce72", "parentUuid": "" }, { "score": 0, "decision": "Accept", "name": "3个月内申请人在多个平台申请借款", "id": "6595091", "uuid": "e1552335f5e84d10babb4929a287b3c8", "parentUuid": "" }] }, { "ds6__policy_score": 0, "ds6__policy_mode": "Weighted", "ds6__risk_type": "applySuspicious", "ds6__policy_decision": "Accept", "ds6__policy_name": "欺诈行为_网站", "ds6__policy_uuid": "3d27dfa14e04440e94d171975bae2a00" }], "success": true, "seq_id": "1519962563347827F47C8290B5067527", "ds6__hit_rules": [{ "score": 10, "decision": "Accept", "name": "7天内申请人在多个平台申请借款", "id": "6595071", "uuid": "1f157ed863c84c2481e92129ee0adc27", "parentUuid": "" }, { "score": 0, "decision": "Accept", "name": "1个月内申请人在多个平台申请借款", "id": "6595081", "uuid": "56777b55175a4b4caac02b932c35ce72", "parentUuid": "" }, { "score": 0, "decision": "Accept", "name": "3个月内申请人在多个平台申请借款", "id": "6595091", "uuid": "e1552335f5e84d10babb4929a287b3c8", "parentUuid": "" }], "ds8__CDCA001__0": "null", "ds8__CDCA002__0": "null", "ds8__CDCA003__0": "null", "ds8__CDCA004__0": "null", "ds8__CDCA005__0": "null", "ds8__CDTB001__0": "null", "ds8__CDTB002__0": "null", "ds8__CDTB003__0": "null", "ds8__CDTB004__0": "null", "ds8__CDTB005__0": "null", "ds8__CDTB006__0": "null", "ds8__CDTB007__0": "null", "ds8__CDTB008__0": "null", "ds8__CDTB009__0": "null", "ds8__CDTB010__0": "null", "ds8__CDTB011__0": "null", "ds8__CDTB012__0": "null", "ds8__CDTB013__0": "null", "ds8__CDTB014__0": "null", "ds8__CDTB015__0": "null", "ds8__CDTB016__0": "null", "ds8__CDTB017__0": "null", "ds8__CDTB018__0": "null", "ds8__CDTB019__0": "null", "ds8__CDTB020__0": "null", "ds8__CDTB021__0": "null", "ds8__CDTB022__0": "null", "ds8__CDTB023__0": "null", "ds8__CDTB024__0": "null", "ds8__CDTB025__0": "null", "ds8__CDTB026__0": "null", "ds8__CDTB027__0": "null", "ds8__CDTB028__0": "null", "ds8__CDTB029__0": "null", "ds8__CDTB030__0": "null", "ds8__CDTB031__0": "null", "ds8__CDTB032__0": "null", "ds8__CDTB033__0": "null", "ds8__CDTB034__0": "null", "ds8__CDTB035__0": "null", "ds8__CDTB036__0": "null", "ds8__CDTB037__0": "null", "ds8__CDTB038__0": "null", "ds8__CDTB039__0": "null", "ds8__CDTB040__0": "null", "ds8__CDTB041__0": "null", "ds8__CDTB042__0": "null", "ds8__CDTB043__0": "null", "ds8__CDTB044__0": "null", "ds8__CDTB045__0": "null", "ds8__CDTB046__0": "null", "ds8__CDTB047__0": "null", "ds8__CDTB048__0": "null", "ds8__CDTB049__0": "null", "ds8__CDTB050__0": "null", "ds8__CDTB051__0": "null", "ds8__CDTB052__0": "null", "ds8__CDTB053__0": "null", "ds8__CDTB054__0": "null", "ds8__CDTB055__0": "null", "ds8__CDTB056__0": "null", "ds8__CDTB057__0": "null", "ds8__CDTB058__0": "null", "ds8__CDTB059__0": "null", "ds8__CDTB060__0": "null", "ds8__CDTB061__0": "null", "ds8__CDTB062__0": "null", "ds8__CDTB063__0": "null", "ds8__CDTB064__0": "null", "ds8__CDTB065__0": "null", "ds8__CDTB066__0": "null", "ds8__CDTB067__0": "null", "ds8__CDTB068__0": "null", "ds8__CDTB069__0": "null", "ds8__CDTB070__0": "null", "ds8__CDTB071__0": "null", "ds8__CDTB072__0": "null", "ds8__CDTB073__0": "null", "ds8__CDTB074__0": "null", "ds8__CDTB075__0": "null", "ds8__CDTB076__0": "null", "ds8__CDTB077__0": "null", "ds8__CDTB078__0": "null", "ds8__CDTB079__0": "null", "ds8__CDTB080__0": "null", "ds8__CDTB081__0": "null", "ds8__CDTB082__0": "null", "ds8__CDTB083__0": "null", "ds8__CDTB084__0": "null", "ds8__CDTB085__0": "null", "ds8__CDTB086__0": "null", "ds8__CDTB087__0": "null", "ds8__CDTB088__0": "null", "ds8__CDTB089__0": "null", "ds8__CDTB090__0": "null", "ds8__CDTB091__0": "null", "ds8__CDTB092__0": "null", "ds8__CDTB093__0": "null", "ds8__CDTB094__0": "null", "ds8__CDTB095__0": "null", "ds8__CDTB096__0": "null", "ds8__CDTB097__0": "null", "ds8__CDTB098__0": "null", "ds8__CDTB099__0": "null", "ds8__CDTB100__0": "null", "ds8__CDTB101__0": "null", "ds8__CDTB102__0": "null", "ds8__CDTB103__0": "null", "ds8__CDTB104__0": "null", "ds8__CDTB105__0": "null", "ds8__CDTB106__0": "null", "ds8__CDTB107__0": "null", "ds8__CDTB108__0": "null", "ds8__CDTP001__0": "null", "ds8__CDTP002__0": "null", "ds8__CDTP003__0": "null", "ds8__CDTP004__0": "null", "ds8__CDTP005__0": "null", "ds8__CDTP006__0": "null", "ds8__CDTP007__0": "null", "ds8__CDTP008__0": "null", "ds8__CDTP009__0": "null", "ds8__CDTP010__0": "null", "ds8__CDTP011__0": "null", "ds8__CDTP012__0": "null", "ds8__CDTP013__0": "null", "ds8__CDTP014__0": "null", "ds8__CDTP015__0": "null", "ds8__CDTP016__0": "null", "ds8__CDTP017__0": "null", "ds8__CDTP018__0": "null", "ds8__CDTP019__0": "null", "ds8__CDTP020__0": "null", "ds8__CDTP021__0": "null", "ds8__CDTP022__0": "null", "ds8__CDTP023__0": "null", "ds8__CDTP024__0": "null", "ds8__CDTP025__0": "null", "ds8__CDTP026__0": "null", "ds8__CDTP027__0": "null", "ds8__CDTP028__0": "null", "ds8__CDTP029__0": "null", "ds8__CDTP030__0": "null", "ds8__CDTP031__0": "null", "ds8__CDTP032__0": "null", "ds8__CDTP033__0": "null", "ds8__CDTP034__0": "null", "ds8__CDTP035__0": "null", "ds8__CDTP036__0": "null", "ds8__CDTP037__0": "null", "ds8__CDTP038__0": "null", "ds8__CDTP039__0": "null", "ds8__CDTP040__0": "null", "ds8__CDTP041__0": "null", "ds8__CDTP042__0": "null", "ds8__CDTP043__0": "null", "ds8__CDTP044__0": "null", "ds8__CDTP045__0": "null", "ds8__CDTP046__0": "null", "ds8__CDTP047__0": "null", "ds8__CDTP048__0": "null", "ds8__CDTP049__0": "null", "ds8__CDTP050__0": "null", "ds8__CDTP051__0": "null", "ds8__CDTP052__0": "null", "ds8__CDTP053__0": "null", "ds8__CDTP054__0": "null", "ds8__CDTP055__0": "null", "ds8__CDTP056__0": "null", "ds8__CDTP057__0": "null", "ds8__CDTP058__0": "null", "ds8__CDTP059__0": "null", "ds8__CDTP060__0": "null", "ds8__CDTC001__0": "null", "ds8__CDTC002__0": "null", "ds8__CDTC003__0": "null", "ds8__CDTC004__0": "null", "ds8__CDTC005__0": "null", "ds8__CDTC006__0": "null", "ds8__CDCT001__0": "null", "ds8__CDCT002__0": "null", "ds8__CDCT003__0": "null", "ds8__CSRL001__0": "null", "ds8__CSRL002__0": "null", "ds8__CSRL003__0": "null", "ds8__CSRL004__0": "null", "ds8__CSWC001__0": "null", "ds8__CSWC002__0": "null", "ds8__CSSS001__0": "null", "ds8__CSSS002__0": "null", "ds8__CSSS003__0": "null", "ds8__CSSP001__0": "null", "ds8__CSSP002__0": "null", "ds8__CSSP003__0": "null", "ds7__fxtj__caipan": "0", "ds7__fxtj__feizheng": "0", "ds7__fxtj__qiankuan": "0", "ds7__fxtj__qianshui": "0", "ds7__fxtj__shenpan": "0", "ds7__fxtj__shixin": "0", "ds7__fxtj__weifa": "0", "ds7__fxtj__xianchu": "0", "ds7__fxtj__xiangao": "0", "ds7__fxtj__zhixing": "0", "ds7__fxtj__zuifan": "0", "ds7__message": "", "ds7__seconds": "0.125", "ds7__success": "s", "ds3__busiData__hisOverdCnt": "0", "ds3__busiData__hisSerOverdCnt": "0", "ds3__busiData__hitDishoneCnt": "0", "ds3__busiData__hitExeCnt": "0", "ds3__busiData__hitSerTrafViolCnt": "0", "ds3__busiData__last2YOverdCnt": "0", "ds3__busiData__records__dataBuildTime__0": "", "ds3__busiData__records__dataStatus__0": "", "ds3__busiData__records__rskMark__0": "", "ds3__busiData__records__rskScore__0": "", "ds3__busiData__records__sourceId__0": "", "ds2__als_d7_id_bank_allnum": "null", "ds2__als_d7_id_nbank_p2p_allnum": "null", "ds2__als_d7_id_nbank_mc_allnum": "null", "ds2__als_d7_id_nbank_cf_allnum": "null", "ds2__als_d7_id_nbank_ca_allnum": "null", "ds2__als_d7_id_nbank_com_allnum": "null", "ds2__als_d7_cell_bank_allnum": "null", "ds2__als_d7_cell_nbank_p2p_allnum": "null", "ds2__als_d7_cell_nbank_mc_allnum": "null", "ds2__als_d7_cell_nbank_cf_allnum": "null", "ds2__als_d7_cell_nbank_ca_allnum": "null", "ds2__als_d7_cell_nbank_com_allnum": "null", "ds2__als_m6_id_avg_monnum": "null", "ds2__als_m6_id_tot_mons": "null", "ds2__als_m6_id_max_monnum": "null", "ds3__busiData__records__credooScore__0": "null", "ds5__zm_score": "null", "ds5__score": "null", "ds6_final_score": "null" }, "gjr": null, "sqr": null } };
+                    //if (result.msg != "") {
+                    //    $("#fk").show();
+                    //    var rsmsg = result.msg.split(",");
+                    //    for (var i = 0; i < rsmsg.length; i++) {
+                    //        if (rsmsg[i] != "") {
+                    //            var msg = "";
+                    //            var tr = "<tr>";
+                    //            tr += "<td style=\"width: 140px; height: 22px;\"></td>";
+                    //            if (i == 0) {
+                    //                tr += "<td style=\"width: 70px;\">命中规则: </td>";
+                    //            } else {
+                    //                tr += "<td style=\"width: 70px;\"></td>";
+                    //            }
+                    //            tr += "<td ></td>";
+                    //            tr += "<td>";
+                    //            for (var k = 0; k < rsmsg[i].split("：").length - 1; k++) {
+                    //                msg += rsmsg[i].split("：")[k] + "：";
+                    //            }
+                    //            if (gzzsmc.hasOwnProperty(rsmsg[i].split("：")[rsmsg[i].split("：").length - 1])) {
+                    //                msg += gzzsmc[rsmsg[i].split("：")[rsmsg[i].split("：").length - 1]] + ";";
+                    //            } else {
+                    //                msg += rsmsg[i].split("：")[rsmsg[i].split("：").length - 1] + ";";
+                    //            }
+                    //            tr += msg;
+                    //            tr + "</td>";
+                    //            tr += "</tr>";
+                    //            $("#rsrstult").append(tr);
+                    //        }
+                    //    }
+                    //} else {
+                    //    $("#fk").hide();
+                    //}
+                    //getrsfkresult(result);
+                }
+            });
+            return false;
+        }
+        //写数据
+        function getrsfkresult(request) {
+            debugger;
+            $("td").each(function () {
+                if (this.id) {
+                    var id1 = this.id;
+                    var id = this.id.split("____")[1];
+                    var manid = this.id.split("____")[0];
+                    if (!request == "") {
+                        if (manid == "dbr") {
+                            if (request.ds.dbr && request.ds.dbr.hasOwnProperty(id)) {
+                                //console.log(request.ds.dbr[id].length);
+                                if (typeof (request.ds.dbr[id]) == "object") {
+                                    var html = "";
+                                    for (var i = 0; i < request.ds.dbr[id].length; i++) {
+                                        html += "<div style=\"clear:both;\">";
+                                        html += "<div style=\"float:left;width:50%;\">";
+                                        html += "<span style=\"padding:5px 5px;display:inline-block;\">";
+                                        html += request.ds.dbr[id][i].name + ";";
+                                        html += "</span>";
+                                        html += "</div>";
+                                        html += "<div  style=\"float:left;width:50%;\">";
+                                        if (request.ds['dbr'].hasOwnProperty(request.ds.dbr[id][i].id) && request.ds['dbr'][request.ds.dbr[id][i].id].conditions.length > 0) {
+                                            var dell = request.ds['dbr'][request.ds.dbr[id][i].id].conditions[0];
+                                            if (dell.hits) {
+                                                var del = dell.hits;
+                                            }
+                                            if (dell.list) {
+                                                var del = dell.list;
+                                            }
+                                            var getkey = request.ds['dbr'][request.ds.dbr[id][i].id].conditions[0].type;
+                                            html += "<div>";
+                                            html += "<span style=\"padding:5px 5px;display:inline-block;\">" + request.ds.dbr[id][i].name + ":</span>";
+                                            if (dell.result) {
+                                                html += "<span style=\"padding:5px 5px;display:inline-block;\">" + dell.result + "</span>";
+                                            }
+                                            html += "</div>";
+                                            if (dell.hits) {
+                                                for (var j = 0, l = del.length; j < l; j++) {
+                                                    for (var key in del[j]) {
+                                                        html += "<div>";
+                                                        if (tdlist[getkey][key]) {
+                                                            html += "<span style=\"padding:5px 5px;display:inline-block;\">" + tdlist[getkey][key] + ":</span>";
+                                                        } else {
+                                                            html += "<span style=\"padding:5px 5px;display:inline-block;\">" + key + ":</span>";
+                                                        }
+                                                        if (key.indexOf("Time") != -1) {
+                                                            var dat = new Date(del[j][key]);
+                                                            var mon = dat.getMonth() >= 9 ? (dat.getMonth() + 1) : ("0" + (dat.getMonth() * 1 + 1));
+                                                            var hour = dat.getHours() >= 10 ? (dat.getHours()) : ("0" + (dat.getHours() * 1));
+                                                            var min = dat.getMinutes() >= 10 ? (dat.getMinutes()) : ("0" + (dat.getMinutes() * 1));
+                                                            var sec = dat.getSeconds() >= 10 ? (dat.getSeconds()) : ("0" + (dat.getSeconds() * 1));
+                                                            var time = dat.getFullYear() + "-" + mon + "-" + dat.getDate() + " " + hour + "：" + min + "：" + sec;
+                                                            html += "<span style=\"padding:5px 5px;display:inline-block;\">" + time + "</span>";
+                                                        } else {
+                                                            html += "<span style=\"padding:5px 5px;display:inline-block;\">" + del[j][key] + "</span>";
+                                                        }
+                                                        html += "</div>";
+                                                    }
+                                                }
+                                            }
+                                            if (dell.list) {
+                                                for (var j = 0; j < del.length; j++) {
+                                                    html += "<div>";
+                                                    html += "<span style=\"padding:5px 5px;display:inline-block;\">" + del[j] + ":</span>";
+                                                    html += "</div>";
+                                                }
+                                            }
+                                        }
+                                        html += "</div>";
+                                        html += "</div>";
+                                    }
+                                    var xq = "<a href=\"#example\" style=\"color:red;\" data-toggle=\"modal\">" + request.ds.dbr[id].length + "</a>";
+                                    $("#" + id1).append(xq);
+                                    document.getElementById("Application").innerHTML = html;
+                                    return;
+                                }
+                                document.getElementById(id1).innerHTML = request.ds.dbr[id];
+
+                            }
+                        }
+                    }
+                }
+            })
+            debugger;
+            var dtjdsl = 0;
+            for (var key in request.ds.dbr) {
+                if (dtjd.hasOwnProperty(key)) {
+                    dtjdsl++;
+                    var div = "<div style=\"clear:both;\">";
+                    div += "<div style=\"width:50%;float:left;\">";
+                    div += dtjd[key];
+                    div += "</div>";
+                    div += "<div style=\"width:50%;float:left;text-align:center;\">";
+                    div += request.ds.dbr[key];
+                    div += "</div>";
+                    div += "</div>";
+                    $("#dtjdxq").append(div);
+                }
+                if (dtjdsl > 0) {
+                    var xq = "<a href=\"#example1\" style=\"color:red;\" data-toggle=\"modal\">" + dtjdsl + "</a>";
+                    $("#dtjd").html(xq);
+                }
+            }
+            isred(request);
+        }
+        //标红
+        function isred(request) {
+            $("#tab7").find("tr").each(function () {
+                if ($(this).find("td:eq(1)").html() == "null" || $(this).find("td:eq(1)").html() == "" || $(this).find("td:eq(1)").html() == "0") {
+                    if ($(this).find("td:eq(2)").html() == "null" || $(this).find("td:eq(2)").html() == "" || $(this).find("td:eq(1)").html() == "0") {
+                        if ($(this).find("td:eq(3)").html() == "null" || $(this).find("td:eq(3)").html() == "" || $(this).find("td:eq(1)").html() == "0") {
+                            $(this).hide();
+                        }
+                    }
+                };
+            });
+            $(".divContent").find("tr").each(function () {
+                if ($(this).find("td:eq(1)").html() == "null" || $(this).find("td:eq(1)").html() == "") {
+                    $(this).hide();
+                };
+            })
+            var dbrycsj = "";
+            //数据1手机三要素
+            if ($("#dbr____ds1__product__result").html() == "不一致") {
+                $("#dbr____ds1__product__result").css({ "color": "red" });
+                dbrycsj += "数据1  手机号三要素验证不一致；";
+            }
+            //数据2
+            function swth(value) {
+                var ismz = "";
+                switch (value) {
+                    case "0":
+                        ismz = "本人直接命中";
+                        break;
+                    case "1":
+                        ismz = "一度关系命中";
+                        break;
+                    case "2":
+                        ismz = "二度关系命中";
+                        break;
+                    default:
+                        ismz = "未命中";
+                        break;
+                }
+                return ismz;
+            }
+            //身份证高危行为
+            var dbrsfzgwxw = $("#dbr____ds2__sl_id_abnormal").html();
+            var dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzgwxw) + "</span>";
+            $("#dbr____ds2__sl_id_abnormal").html($("#dbr____ds2__sl_id_abnormal").html() + dbrspan);
+            //身份证法院被失信人
+            var dbrsfzfysxr = $("#dbr____ds2__sl_id_court_bad").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzfysxr) + "</span>";
+            $("#dbr____ds2__sl_id_court_bad").html($("#dbr____ds2__sl_id_court_bad").html() + dbrspan);
+            //身份证法院被执行人
+            var dbrsfzfyzxr = $("#dbr____ds2__sl_id_court_executed").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzfyzxr) + "</span>";
+            $("#dbr____ds2__sl_id_court_executed").html($("#dbr____ds2__sl_id_court_executed").html() + dbrspan);
+            //身份证银行不良
+            var dbrsfzyhbl = $("#dbr____ds2__sl_id_bank_bad").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzyhbl) + "</span>";
+            $("#dbr____ds2__sl_id_bank_bad").html($("#dbr____ds2__sl_id_bank_bad").html() + dbrspan);
+            //身份证非银不良
+            var dbrsfzfybl = $("#dbr____ds2__sl_id_p2p_bad").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzfybl) + "</span>";
+            $("#dbr____ds2__sl_id_p2p_bad").html($("#dbr____ds2__sl_id_p2p_bad").html() + dbrspan);
+            //身份证银行失联
+            var dbrsfzyhsl = $("#dbr____ds2__sl_id_bank_lost").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzyhsl) + "</span>";
+            $("#dbr____ds2__sl_id_bank_lost").html($("#dbr____ds2__sl_id_bank_lost").html() + dbrspan);
+            //身份证非银失联
+            var dbrsfzfysl = $("#dbr____ds2__sl_id_p2p_lost").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsfzfysl) + "</span>";
+            $("#dbr____ds2__sl_id_p2p_lost").html($("#dbr____ds2__sl_id_p2p_lost").html() + dbrspan);
+            //手机号高危行为
+            var dbrsjhgwxw = $("#dbr____ds2__sl_lm_cell_abnormal").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsjhgwxw) + "</span>";
+            $("#dbr____ds2__sl_lm_cell_abnormal").html($("#dbr____ds2__sl_lm_cell_abnormal").html() + dbrspan);
+            //手机号银行不良
+            var dbrsjhyhbl = $("#dbr____ds2__sl_lm_cell_bank_bad").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsjhyhbl) + "</span>";
+            $("#dbr____ds2__sl_lm_cell_bank_bad").html($("#dbr____ds2__sl_lm_cell_bank_bad").html() + dbrspan);
+            //手机号银行失联
+            var dbrsjhyhsl = $("#dbr____ds2__sl_lm_cell_bank_lost").html();
+            dbrspan = "<span style=\"padding-left:15px!important;\">" + swth(dbrsjhyhsl) + "</span>";
+            $("#dbr____ds2__sl_lm_cell_bank_lost").html($("#dbr____ds2__sl_lm_cell_bank_lost").html() + dbrspan);
+            //数据3外部信用评分
+            if ($("#dbr____ds3__busiData__records__credooScore__0").html() >= 300 && $("#dbr____ds3__busiData__records__credooScore__0").html() < 500) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">信用状况较差</span>";
+                dbrycsj += "数据3 外部信用评分A" + $("#dbr____ds3__busiData__records__credooScore__0").html() + " 信用状况较差； ";
+                $("#dbr____ds3__busiData__records__credooScore__0").append(span);
+            }
+            if ($("#dbr____ds3__busiData__records__credooScore__0").html() >= 500 && $("#dbr____ds3__busiData__records__credooScore__0").html() < 650) {
+                var span = "<span style=\"padding-left:15px!important;\">信用状况一般</span>";
+                $("#dbr____ds3__busiData__records__credooScore__0").append(span);
+            }
+            if ($("#dbr____ds3__busiData__records__credooScore__0").html() >= 650) {
+                var span = "<span style=\"padding-left:15px!important;\">信用状况优质</span>";
+                $("#dbr____ds3__busiData__records__credooScore__0").append(span);
+            }
+            //数据4手机欺诈分
+            if ($("#dbr____ds4__user_gray__phone_gray_score").html() >= 1 && $("#dbr____ds4__user_gray__phone_gray_score").html() <= 6) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">高欺诈风险</span>";
+                dbrycsj += "数据4 手机欺诈分" + $("#dbr____ds4__user_gray__phone_gray_score").html() + " 高欺诈风险； ";
+                $("#dbr____ds4__user_gray__phone_gray_score").append(span);
+            }
+            //数据5外部欺诈评分A
+            if ($("#dbr____ds5__score").html() == 0) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">数据不足</span>";
+                dbrycsj += "数据5 外部欺诈评分A" + $("#dbr____ds5__score").html() + " 数据不足；";
+                $("#dbr____ds5__score").append(span);
+            }
+            if ($("#dbr____ds5__score").html() >= 1 && $("#dbr____ds5__score").html() <= 9) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">高欺诈风险</span>";
+                dbrycsj += "数据5 外部欺诈评分A" + $("#dbr____ds5__score").html() + " 高欺诈风险；";
+                $("#dbr____ds5__score").append(span);
+            }
+            //数据5外部信用评分B
+            if ($("#dbr____ds5__zm_score").html() == 0) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">数据不足</span>";
+                dbrycsj += "数据5 外部信用评分B" + $("#dbr____ds5__zm_score").html() + " 数据不足；";
+                $("#dbr____ds5__zm_score").append(span);
+            }
+            if ($("#dbr____ds5__zm_score").html() >= 350 && $("#dbr____ds5__zm_score").html() <= 500) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">信用状况较差</span>";
+                dbrycsj += "数据5 外部信用评分B" + $("#dbr____ds5__zm_score").html() + " 信用状况较差；";
+                $("#dbr____ds5__zm_score").append(span);
+            }
+            if ($("#dbr____ds5__zm_score").html() >= 500 && $("#dbr____ds5__zm_score").html() < 750) {
+                var span = "<span style=\"padding-left:15px!important;\">信用状况一般</span>";
+                $("#dbr____ds5__zm_score").append(span);
+            }
+            if ($("#dbr____ds5__zm_score").html() >= 750) {
+                var span = "<span style=\"padding-left:15px!important;\">信用状况优质</span>";
+                $("#dbr____ds5__zm_score").append(span);
+            }
+            //数据6外部欺诈评分B
+            if ($("#dbr____ds6__final_score").html() >= 80 && $("#dbr____ds6__final_score").html() < 100) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">差</span>";
+                dbrycsj += "数据6 外部欺诈评分B" + $("#dbr____ds6__final_score").html() + " 差";
+                $("#dbr____ds6__final_score").append(span);
+            }
+            if ($("#dbr____ds6__final_score").html() >= 20 && $("#dbr____ds6__final_score").html() < 80) {
+                var span = "<span style=\"padding-left:15px!important;\">一般</span>";
+                $("#dbr____ds6__final_score").append(span);
+            }
+            if ($("#dbr____ds6__final_score").html() < 20) {
+                var span = "<span style=\"padding-left:15px!important;\">优质</span>";
+                $("#dbr____ds6__final_score").append(span);
+            }
+            //数据6欺诈处理意见
+            if ($("#dbr____ds6__final_decision").html() == "Reject") {
+                $("#dbr____ds6__final_decision").css({ "color": "red" });
+                dbrycsj += "数据6 欺诈处理意见" + $("#dbr____ds6__final_decision").html();
+            }
+            //数据8近12月有无境外交易
+            if ($("#dbr____ds8__CDCT003__0").html() == "发生过境外交易") {
+                dbrycsj += "数据8 近12月有无境外交易 发生过境外交易； ";
+                $("#dbr____ds8__CDCT003__0").css({ "color": "red" });
+            }
+            //数据8风险得分分类
+            if ($("#dbr____ds8__CSRL002__0").html() <= 3) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">高逾期风险</span>";
+                dbrycsj += "数据8 风险得分分类" + $("#dbr____ds8__CSRL002__0").html() + " 高逾期风险； ";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() == 9990) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">风险极大</span>";
+                dbrycsj += "数据8 风险得分分类" + $("#dbr____ds8__CSRL002__0").html() + " 风险极大； ";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() == 9991) {
+                var span = "<span style=\"padding-left:15px!important;\">风险极小</span>";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() >= 4 && $("#dbr____ds8__CSRL002__0").html() <= 5) {
+                var span = "<span style=\"padding-left:15px!important;\">中高逾期风险</span>";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() >= 6 && $("#dbr____ds8__CSRL002__0").html() <= 7) {
+                var span = "<span style=\"padding-left:15px!important;\">中逾期风险</span>";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() >= 8 && $("#dbr____ds8__CSRL002__0").html() <= 9) {
+                var span = "<span style=\"padding-left:15px!important;\">中低逾期风险</span>";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL002__0").html() >= 10 && $("#dbr____ds8__CSRL002__0").html() <= 11) {
+                var span = "<span style=\"padding-left:15px!important;\">中逾期风险</span>";
+                $("#dbr____ds8__CSRL002__0").append(span);
+            }
+            //数据8套现模型分类
+            if ($("#dbr____ds8__CSRL004__0").html() <= 3) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">高套现风险</span>";
+                dbrycsj += "数据8 套现模型分类" + $("#dbr____ds8__CSRL004__0").html() + " 高套现风险； ";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() == 9990) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">套现可能性极大</span>";
+                dbrycsj += "数据8 套现模型分类" + $("#dbr____ds8__CSRL004__0").html() + " 套现可能性极大； ";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() == 9991) {
+                var span = "<span style=\"padding-left:15px!important;\">套现可能性极小</span>";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() >= 4 && $("#dbr____ds8__CSRL004__0").html() <= 5) {
+                var span = "<span style=\"padding-left:15px!important;\">中高套现风险</span>";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() >= 6 && $("#dbr____ds8__CSRL004__0").html() <= 7) {
+                var span = "<span style=\"padding-left:15px!important;\">中套现风险</span>";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() >= 8 && $("#dbr____ds8__CSRL004__0").html() <= 9) {
+                var span = "<span style=\"padding-left:15px!important;\">中低套现风险</span>";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            if ($("#dbr____ds8__CSRL004__0").html() >= 10 && $("#dbr____ds8__CSRL004__0").html() <= 11) {
+                var span = "<span style=\"padding-left:15px!important;\">低套现风险</span>";
+                $("#dbr____ds8__CSRL004__0").append(span);
+            }
+            //数据8消费能力分级
+            if ($("#dbr____ds8__CSWC001__0").html() == 1) {
+                var span = "<span style=\"padding-left:15px!important;\">（与地域相比）显著低</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 2) {
+                var span = "<span style=\"padding-left:15px!important;\">（与地域相比）低</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 3) {
+                var span = "<span style=\"padding-left:15px!important;\">（与地域相比）相当</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 4) {
+                var span = "<span style=\"padding-left:15px!important;\">（与地域相比）高</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 5) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">（与地域相比）显著高</span>";
+                dbrycsj += "数据8 消费能力分级" + $("#dbr____ds8__CSWC001__0").html() + " （与地域相比）显著高； ";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 6) {
+                var span = "<span style=\"color:red;padding-left:15px!important;\">高额消费</span>";
+                dbrycsj += "数据8 消费能力分级" + $("#dbr____ds8__CSWC001__0").html() + " 高额消费； ";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == 7) {
+                var span = "<span style=\"padding-left:15px!important;\">近3个月无交易</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            if ($("#dbr____ds8__CSWC001__0").html() == "null") {
+                var span = "<span style=\"padding-left:15px!important;\">近12个月无交易</span>";
+                $("#dbr____ds8__CSWC001__0").append(span);
+            }
+            //担保人数据不存在隐藏
+            if (request.ds.dbr == null) {
+                $(".divContent").find("tr").find("td:eq(1)").css({ "opacity": "0" });
+            } else {
+                $("#dbrycsj").html(dbrycsj);
+            }
+            if ($("#dbrycsj").html() == "") {
+                $("#dbrycsj").parent().parent().parent().hide();
+            }
+        }
+        function timegetrsrquest() {
+            $("#rgcx").attr("disabled", "disabled");
+            var repID = decodeURI(window.location.search).split("&")[2].split("=")[1];
+            var rsfkurl = decodeURI(window.location.search).split("&")[1].split("=")[1];
+            $.ajax({
+                //url: "../../../ajax/RSHandler.ashx?Math=" + Math.random(),
+                url: "/Portal/RSHandler/Index?Math=" + Math.random(),// 19.6.28 wangxg
+                data:
+                {
+                    CommandName: "postRongshu",
+                    instanceid: repID,
+                    SchemaCode: "CompanyApp",
+                    manual: "1"
+                },
+                type: "post",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    $("#backgif").show();
+                    timegets();
+                },
+                //error: function (msg) {
+                //    alert("出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        }
+        function timegets() {
+            var location = decodeURI(window.location.search);
+            var rsfkurl = location.split("&")[1].split("=")[1];
+            var repID = location.split("&")[2].split("=")[1];
+            $.ajax({
+                //url: "../../../ajax/RSHandler.ashx",
+                url: "/Portal/RSHandler/Index",// 19.6.28 wangxg
+                data:
+                {
+                    CommandName: "getRSResult",
+                    param: "{\"reqID\": \"" + repID + "\" }",
+                    //address: "http://192.168.16.102:8088/request/result"
+                    address: rsfkurl
+                },
+                type: "post",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    if (result.msg.indexOf("人工查询") != -1) {
+                        $("#backgif").hide();
+                        if (result.msg.indexOf("人工查询成功") != -1) {
+                            $("#rgcx").attr("disabled", "disabled");
+                        } else {
+                            $("#rgcx").attr("disabled", false);
+                        }
+                        result.msg = result.msg.replace(",人工查询成功", "").replace(",人工查询失败", "");
+                        if (result.data) {
+                            $("#fkpgjg").html(arrrsrq[result.data.action]);
+                            $("#jydked").html(result.data.limit);
+                            $("#grxypf").html(Math.round(result.data.scorecard));
+                            if (Math.round(result.data.scorecard) < 400) {
+                                var span = "<span style=\"color:red;padding-left:15px;\">建议拒绝</span>";
+                                $("#grxypf").after(span);
+                            }
+                            if (Math.round(result.data.scorecard) < 470 && Math.round(result.data.scorecard) >= 400) {
+                                var span = "<span style=\"color:red;padding-left:15px;\">建议人工审批</span>";
+                                $("#grxypf").after(span);
+                            }
+                            if (Math.round(result.data.scorecard) >= 470) {
+                                var span = "<span style=\"color:red;padding-left:15px;\">建议通过</span>";
+                                $("#grxypf").after(span);
+                            }
+                        }
+                        if (result.msg != "") {
+                            $("#fk").show();
+                            var rsmsg = result.msg.split(",");
+                            var msg = "";
+                            for (var i = 0; i < rsmsg.length; i++) {
+                                if (rsmsg[i] != "") {
+                                    for (var k = 0; k < rsmsg[i].split("：").length - 1; k++) {
+                                        msg += rsmsg[i].split("：")[k] + "：";
+                                    }
+                                    if (gzzsmc.hasOwnProperty(rsmsg[i].split("：")[rsmsg[i].split("：").length - 1])) {
+                                        msg += gzzsmc[rsmsg[i].split("：")[rsmsg[i].split("：").length - 1]] + ";";
+                                    } else {
+                                        msg += rsmsg[i].split("：")[rsmsg[i].split("：").length - 1] + ";";
+                                    }
+                                }
+                            }
+                            $("#rsrstult").html(msg);
+                        } else {
+                            $("#fk").hide();
+                        }
+                        getrsfkresult(result);
+                    } else {
+                        setTimeout("timegets()", 10000);
+                    }
+                },
+                //error: function (msg) {
+                //    alert("出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        }
+        function hidediv(id, ctrl1) {
+            var ctrl = document.getElementById(id);
+            if ($(ctrl).css("display") != 'none') {
+                $(ctrl).hide();
+                //class ="nav-icon fa fa-chevron-down bannerTitle"
+                if ($(ctrl1).hasClass("fa-angle-double-down") || $(ctrl1).hasClass("fa-angle-double-right")) {
+                    $(ctrl1).removeClass("fa-angle-double-down");
+                    $(ctrl1).addClass("fa-angle-double-right");
+                }
+                else {
+                    $(ctrl1).removeClass("fa-chevron-down");
+                    $(ctrl1).addClass("fa-chevron-right");
+                }
+                $(ctrl1).css({ "margin-bottom": "8px", "border-bottom": "1px solid #ccc" });
+            }
+            else {
+                $(ctrl).show();
+                if ($(ctrl1).hasClass("fa-angle-double-down") || $(ctrl1).hasClass("fa-angle-double-right")) {
+                    $(ctrl1).removeClass("fa-angle-double-right");
+                    $(ctrl1).addClass("fa-angle-double-down");
+                }
+                else {
+                    $(ctrl1).removeClass("fa-chevron-right");
+                    $(ctrl1).addClass("fa-chevron-down");
+                }
+                $(ctrl1).css({ "margin-bottom": "0px", "border-bottom": "0px solid #ccc" });
+            }
+        }
+    </script>
+</body>
+</html>

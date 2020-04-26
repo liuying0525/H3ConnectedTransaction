@@ -1,0 +1,104 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    #tabProductQueryItem tbody tr td {
+        text-align:center;
+    }
+
+</style>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <div class="col">
+        <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+            产品查询
+        </div>
+        <!--表格部分Start-->
+        <div class="wrapper-md paddingbottomNone">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <div class="form-inline" style="float:left;">
+                        <div class="input-group searchContainer">
+
+                            <div class="form-group">
+                                <input type="text" class="input-sm form-control" style="width:200px"
+                                       ng-model="SearchKey.ProductName"
+                                       autocomplete="off"
+                                       placeholder="请输入产品名称">
+                                <!--<input name="ProductName" style="width: 100%; padding: 3px 6px;" ng-model="SearchKey.ProductName" placeholder="请输入产品名称" />-->
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input ng-model="SearchKey.StartTime" id="StartTime"
+                                           ui-jq="wdatePicker" style="width:100px;"
+                                           class="input-sm form-control"
+                                           placeholder="产品有效期始" />
+                                    <span class="input-group-addon" style="border-left:0px;border-right:0px;" translate="QueryTableColumn.To"></span>
+                                    <input ng-model="SearchKey.EndTime" id="EndTime"
+                                           class="input-sm form-control" style="width:100px;"
+                                           ui-jq="wdatePicker"
+                                           placeholder="产品有效期止" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">
+                                    搜索
+                                </button>
+                                <input  type="button" class="btn btn-default" value="清空" ng-click="clearSearch();" />
+                                <!--<input  type="button" class="btn btn-warning" value="导出Excel" ng-click="export();" />-->
+                                    
+                                <!--<a class="topButton" target="_blank" href="/Portal/ajax/ExportDistributorScore.ashx" style="width: 100px;text-align:center;">导出Excel</a>-->
+
+                            </div>
+                        </div>
+
+                        <table ui-jq="dataTable" id="tabProductQueryItem"
+                               ui-options="options()"
+                               class="table table-striped m-b-none" style="width:99.5%">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;" class="hide414">
+                                        序号
+                                    </th>
+                                    <th style="width:15%;" class="hide414">
+                                        产品名称
+                                    </th>
+                                    <th style="width:15%;" class="hide414">
+                                        产品别名
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        产品有效期始
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        产品有效期止
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        产品组
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        客户利率
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        实际利率
+                                    </th>
+                                    <th style="width:10%;" class="hide414">
+                                        补贴率
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

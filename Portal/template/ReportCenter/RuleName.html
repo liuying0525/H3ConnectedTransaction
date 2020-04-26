@@ -1,0 +1,444 @@
+﻿
+<style>
+    label {
+        margin-bottom: 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton[disabled="disabled"] {
+            cursor: not-allowed;
+        }
+
+        .topButton:not([disabled="disabled"]):hover {
+            background-color: #DDD;
+        }
+
+        .topButton:not([disabled="disabled"]):active {
+            background-color: #AAA;
+        }
+
+    .cmbtn {
+        float: left;
+        width: 50px;
+        height: 50px;
+        border-radius: 20%;
+        margin: 2px;
+    }
+
+        .cmbtn:hover {
+            background-color: dimgray;
+            color: #ffffff;
+        }
+
+    .btn1 {
+        width: 80px;
+        border-radius: 10%;
+        margin: 10px;
+        background-color: #23b7e5;
+        color: #ffffff;
+    }
+
+        .btn1:hover {
+            background-color: #5bc0de;
+        }
+
+    .area {
+        font-size: 19px;
+    }
+
+    .comp {
+        margin: 2px;
+        width: 100%;
+        border-radius: 15%;
+    }
+
+    #setArea {
+        padding-left: 3px;
+        float: left;
+        font-size: 17px;
+        width: 70%;
+        height: 200px;
+        background-color: rgba(242, 242, 242, 1);
+    }
+</style>
+
+<div style=" width: 100%; max-width: 100%;">
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA;">
+        规则名称列表
+    </div>
+
+    <div style="padding: 10px; display: flex; align-items: center; justify-content: flex-start; width: 100%; max-width: 100%;">
+        <table style="width: 100%;">
+            <colgroup>
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+            </colgroup>
+            <tr>
+
+                <td style="padding: 3px 8px;">
+                    <input name="ClassName" style="width: 100%; padding: 3px 6px;" ng-model="SearchKey.ClassName" placeholder="请输入分类名称" ng-change="clickSearch()" />
+                </td>
+                <td colspan="3" style="padding: 10px 0 0 8px; ">
+                    <div style="width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+
+                        <button class="topButton" style="width: 100px;" ng-click="clickSearch();">
+                            搜索
+                        </button>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <button class="topButton" style="width: 100px;" ng-click="btn_addAgents();">
+                            新增
+                        </button>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <button class="topButton" style="width: 100px;" ng-click="Delete();">
+                            批量删除
+                        </button>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <button class="topButton" style="width: 100px;" ng-click="Back();">
+                            返回上级
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding: 10px 10px; width: 100%; max-width: 100%; overflow-y: auto; overflow-x: hidden; ">
+        <table style="border-top: 1px solid #AAA; border-left: 1px solid #AAA; width: 100%; max-width: 100%;">
+            <tr>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    <input type="checkbox" ng-change="selectAll();" ng-model="checkAll" />
+                    序号
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    大类名称
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis; ">
+                    分类名称
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis; ">
+                    权重比例
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis; display:none">
+                    GUID
+                </th>
+                <th style="padding: 5px 8px; border-right: 1px solid #FFF; border-bottom: 1px solid #AAA; background-color: #AAA; color: #FFF; white-space: nowrap; text-overflow: ellipsis;">
+                    操作
+                </th>
+            </tr>
+            <tr ng-repeat="row in Datas" style="{{($index % 2 == 0 ? 'background-color: #EEE;' : 'background-color: #FFF;') + (row.State==1?'color: #929':'')}}">
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="width: 100%; white-space: nowrap; text-overflow: ellipsis;">
+                        <input type="checkbox" ng-change="select($index);" ng-model="row.checked" />
+                        {{row.No}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.BClassName}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.ClassName}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="padding: 5px 8px; white-space: nowrap;">
+                        {{row.Rate}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;display:none">
+                    <div style="padding: 5px 8px; white-space: nowrap; ">
+                        {{row.ObjectID}}
+                    </div>
+                </td>
+                <td style="padding: 5px 8px; border-right: 1px solid #AAA; border-bottom: 1px solid #AAA;">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <a style="color: #158df0;" ng-click="btn_updateComputer($index);">配置公式</a>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <a style="color: #158df0;" ng-click="New($index);">查看下级</a>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <a style="color: #158df0;" ng-click="btn_updateAgents($index);">修改</a>
+                        <div style="height: 1px; width: 20px;"></div>
+                        <a style="color: #158df0;" ng-click="Delete($index);">删除</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding: 10px; width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+        <input style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 50px; padding: 5px 8px;" ng-model="Page" ng-change="CheckMax()" />
+        <label>　/　{{TotalPage}}　</label>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(-1)" ng-disabled="Min">
+            <span class="fa fa-chevron-left"></span>
+        </button>
+        <button style="padding: 4px 10px;" class="topButton" ng-click="ModPage(1)" ng-disabled="Max">
+            <span class="fa fa-chevron-right">
+            </span>
+        </button>
+        <label>　共{{Total}}条数据　</label>
+        <label>每页</label>
+        <select ng-model="Size" style="border-radius: 5px; border: 1px solid #CCC; background-color: #FFF; text-align: center; width: 60px; padding: 6px 8px;" ng-change="clickSearch()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <label>条数据　</label>
+    </div>
+</div>
+
+<script type="text/ng-template" id="EditRuleName.html">
+    <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+            ×
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            <span>规则名称</span>
+        </h4>
+    </div>
+    <alert class="animated fadeInDown hide fadeOut" id="EditError"
+           type="danger" close=""
+           style="width: 300px;font-size:15px;">
+        <span ng-bind="FailMessage"></span>
+    </alert>
+    <div class="modal-body" style="padding-left:50px;padding-right:50px;">
+        <form class="bs-example form-horizontal">
+
+            <!--<div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">班主任</label>
+                        <div class="col-md-8 input-group">
+                            <div ui-jq="SheetUser" ui-options="WasAgentOptions"
+                                 id="WasAgent" class="form-control" style="height:32px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">性质</label>
+                        <div class="col-md-8 input-group">
+                            <input ng-model="BClassName" disabled="disabled" style="width:90%;" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">名称</label>
+                        <div class="col-md-8 input-group">
+                            <input ng-model="ClassName" style="width:90%;" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">权重</label>
+                        <div class="col-md-8 input-group">
+                            <input ng-model="Rate" style="width:90%;" class="form-control" required /><span style="font-size:20px;">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <input ng-model="ObjectID" type="hidden" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info"
+                ng-click="ok()">
+            <span translate="QueryTableColumn.Button_Save"></span>
+        </button>
+    </div>
+</script>
+
+<style>
+    .modal-dialog{
+        width: 60%;
+        min-width: 650px;
+    }
+
+    .ExpresionPanel {
+        background-color: #F8F8F8;
+        border: 1px solid #CCC;
+        padding: 5px;
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        min-height: 100px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .TextExp {
+        padding: 5px 0px;
+        margin: 1px;
+        cursor:default;
+    }
+
+    .VarExp {
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #CCC;
+        margin: 1px;
+        background-color: #FFF;
+        cursor:default
+    }
+
+    .Var {
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #CCC;
+        margin: 1px;
+        background-color: #FFF;
+        cursor:pointer;
+    }
+
+        .Var:hover {
+            background-color: #CCC;
+        }
+
+    .Empty {
+        width: 30px;
+        height: 30px;
+        margin: 1px;
+    }
+
+    .Const {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid #CCC;
+        margin: 1px;
+        background-color: #FFF;
+        cursor:pointer;
+    }
+
+        .Const:hover {
+            background-color: #CCC;
+        }
+
+    .itemSelected {
+        background-color: #49F;
+        color: #FFF;
+    }
+
+        .itemSelected:hover{
+            background-color: #038;
+        }
+
+    .itemSelectCount {
+        display: inline;
+        text-align: center;
+        color: #d8e528;
+    }
+</style>
+
+<script type="text/ng-template" id="EditComputer.html">
+    <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+            ×
+        </button>
+    </div>
+
+    <div class="modal-body" style="">
+        <div>
+            <div style="float:left;width:30%; max-height: 400px; overflow-y: auto;" onselectstart="return false;">
+                <div>规则明细区</div>{{exp}}
+                <div ng-repeat="item in data"><button class="Var {{item.count > 0 ? 'itemSelected' : ''}}" ng-click="GetValue($index)"><div ng-if="item.count" class="itemSelectCount > 0">{{item.count}}</div><div ng-if="!(item.count > 0)" class="itemSelectCount"> </div> {{item.name}}</button></div>
+            </div>
+            <div style="float:left;margin-left:10px;width:65%;padding:10px;border-left:1px solid gray;">
+                <div style="width:100%">
+                    <div style="float:left;width:15%;padding-left:10px">标准区</div>
+                    <div style="float:left;width:85%;padding-bottom:10px">
+                        <div style="width: 100%; display: flex; justify-content: flex-start; align-items: center;" onselectstart="return false;">
+                            <div class="Const" ng-click="SetValue(1)">1</div>
+                            <div class="Const" ng-click="SetValue(2)">2</div>
+                            <div class="Const" ng-click="SetValue(3)">3</div>
+                            <div class="Const" ng-click="SetValue(4)">4</div>
+                            <div class="Const" ng-click="SetValue(5)">5</div>
+                            <div class="Const" ng-click="SetValue(6)">6</div>
+                            <div class="Const" ng-click="SetValue(7)">7</div>
+                            <div class="Const" ng-click="SetValue(8)">8</div>
+                            <div class="Const" ng-click="SetValue(9)">9</div>
+                            <div class="Const" ng-click="SetValue(0)">0</div>
+                        </div>
+                    </div>
+                    <div style="float:left;width:15%;padding-left:10px">　</div>
+                    <div style="float:left;width:85%;padding-bottom:10px">
+                        <div style="width: 100%; display: flex; justify-content: flex-start; align-items: center;" onselectstart="return false;">
+                            <div class="Const" ng-click="SetValue('+')">+</div>
+                            <div class="Const" ng-click="SetValue('-')">-</div>
+                            <div class="Const" ng-click="SetValue('×')">×</div>
+                            <div class="Const" ng-click="SetValue('÷')">÷</div>
+                            <div class="Const" ng-click="SetValue('.')">.</div>
+                            <div class="Empty"></div>
+                            <div class="Empty"></div>
+                            <div class="Empty"></div>
+                            <div class="Const" ng-click="RemoveLast()">←</div>
+                            <div class="Const" ng-click="RemoveAll()">C</div>
+                        </div>
+                    </div>
+
+                    <div style="clear:both;border-top:1px solid gray;padding:5px" width:100%">
+                        <div style="padding:10px;">公式配置区</div>
+                        <div id="setArea" style="display:none;"></div>
+                        <div class="ExpresionPanel" onselectstart="return false;">
+                            <span ng-class="x.class" ng-repeat="x in items">{{x.class == 'VarExp' ? data[x["value"]].name : x.value}}</span>
+                        </div>
+                    </div>
+                    <div style="clear:both;color:#F00000;font-size:14px">
+                        <span>备注：可单击配置需要设定的参数至公式配置区。</span>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid gray;width:100%;clear:both;text-align:center">
+            <button class="btn1" ng-click="default()">默认公式</button>
+            <button class="btn1" ng-click="cancel()">取消</button>
+            <button class="btn1" ng-click="check();">校验</button>
+            <button class="btn1" ng-click="ok()">提交</button>
+        </div>
+    </div>
+
+</script>

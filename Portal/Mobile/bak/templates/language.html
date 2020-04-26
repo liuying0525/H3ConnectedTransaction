@@ -1,0 +1,15 @@
+<ion-view hide-nav-bar='true' class="language">
+  <div class="menu-tittle f17">
+    <div class="menu-tittle-left pr25"  ng-click="gobackSetting()">
+      <i class="ion-chevron-left f17 blue"></i>
+    </div>
+    <div class="menu-tittle-middle">语言切换</div>
+    <div class="menu-tittle-right"  ng-class="isLanguages?'islanguage':''" ng-click="gobackSetting()">完成</div>
+  </div>
+  <ion-radio ng-repeat="language in languages" ng-value="language.value" ng-change="changelanguages()" ng-model="setting.language" class="menu-bar f16">
+    {{ language.text }}
+  </ion-radio>
+  <style>
+
+  </style>
+</ion-view>

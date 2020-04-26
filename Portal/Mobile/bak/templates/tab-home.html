@@ -1,0 +1,180 @@
+<ion-view view-title="" hide-nav-bar="true" class="tab-home">
+
+  <div class="menu-tittle">
+    <div class="menu-tittle-left">
+      <img src="../img/homeTabs/logo.svg" class="logo2" />
+    </div>
+    <div class="menu-tittle-middle f17">首页</div>
+    <div class="menu-tittle-right f14">
+      <span class="pr25 pl25" ng-click="gosetting()">设置</span>
+      <span ng-click="openPopover()" class="pl25">筛选</span>
+    </div>
+  </div>
+
+
+
+  <div class="tab-bar">
+    <div ng-repeat="d in tabNames" ng-click="activeSlide($index)" ng-class="slectIndex==$index?'tab_selected tab-bar-item':'tab-bar-item'">
+        <span class="f15 rel db">
+          <i>{{d}}</i>
+          <i class="circle f12" ng-if="begeFlag&&$index==0"> {{unfinishedWorkItemNum}}</i>
+          <i class="circle f12" ng-if="begeFlag&&$index==1"> {{unreadworkitemNum}}</i>
+        </span>
+      <div class="vertical-line"></div>
+    </div>
+
+  </div>
+
+
+
+  <ion-content>
+    <!--下拉 -->
+    <ion-refresher on-refresh="doRefresh(slectIndex)" pulling-text="{{pullingText}}"  refreshing-text="{{refreshingText}}" refreshing-icon="ion-loading-b">
+    </ion-refresher>
+
+
+    <!--<div class="home-list">-->
+      <!--<div class="home-list-left">-->
+        <!--<img src="../img/adam.jpg">-->
+      <!--</div>-->
+      <!--<div class="home-list-right">-->
+        <!--<div class="right-header">-->
+          <!--<div class="right-header-left">-->
+            <!--<span class="f16">张三的请假单</span>-->
+            <!--<span class="sample f12">样例数据</span>-->
+          <!--</div>-->
+          <!--<div class="right-header-right">2012-09-08</div>-->
+        <!--</div>-->
+        <!--<div class="right-content f13">-->
+          <!--<p><span>结束时间：</span><span>2017-05-04 12:23:24</span></p>-->
+          <!--<p><span>结束时间：</span><span>2017-05-04 12:23:24</span></p>-->
+          <!--<p><span>结束时间：</span><span>2017-05-04 12:23:24</span></p>-->
+        <!--</div>-->
+        <!--<img class="seal" src="../img/homeTabs/cuiban.png">-->
+        <!--<img class="seal" src="../img/homeTabs/jiaji.png">-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--待办 -->
+    <div ng-show="slectIndex==0">
+
+        <div ng-repeat="unfinishedWorkItem in unfinishedWorkItems" ng-class="$last?'home-list bb0':'home-list'" ng-click="openWorkItem('{{unfinishedWorkItem.ObjectId}}')">
+            <!--ng-class="$last?'home-list bb0':'home-list'"-->
+            <!--ng-class="($index==unfinishedWorkItems.length-1)?'home-list bb0':'home-list'"-->
+            <div class="home-list-left">
+                <img ng-src="{{unfinishedWorkItem.UserAvatar}}">
+            </div>
+            <div class="home-list-right">
+                <div class="right-header">
+                    <div class="right-header-left">
+                        <span class="f16">{{unfinishedWorkItem.InstanceName}}{{unfinishedWorkItem.type}}</span>
+                        <span class="sample f10">样例数据</span>
+                    </div>
+                    <div class="right-header-right sample-date">{{unfinishedWorkItem.ReceiveTime}}</div>
+                </div>
+                <div class="right-content f13">
+                    <p><span>{{unfinishedWorkItem.ReceiveTime}}</span></p>
+                    <p><span>{{unfinishedWorkItem.FinishTime}}</p>
+                </div>
+                <!--<img class="seal" src="../img/homeTabs/cuiban.png">-->
+                <img class="seal" src="../img/homeTabs/jiaji.png" ng-if="unfinishedWorkItem.Urged">
+            </div>
+        </div>
+      <div class="no-data f12"><span>没有更多的数据</span></div>
+    </div>
+
+    <!--待阅 -->
+    <div ng-show="slectIndex==1">
+
+        <ion-list>
+          <ion-item ng-repeat="unreadworkitem in unreadworkitems">
+            <div ng-class="$last?'home-list bb0':'home-list'">
+              <div class="home-list-left">
+                <img ng-src="{{unreadworkitem.UserAvatar}}">
+              </div>
+              <div class="home-list-right">
+                <div class="right-header">
+                  <div class="right-header-left">
+                    <span class="f16">{{unreadworkitem.InstanceName}}{{unreadworkitem.type}}</span>
+                    <span class="sample f12">样例数据</span>
+                  </div>
+                  <div class="right-header-right f12">{{unreadworkitem.ReceiveTime}}</div>
+                </div>
+                <div class="right-content f13">
+                  <p><span>{{unreadworkitem.ReceiveTime}}</span></p>
+                  <p><span>{{unreadworkitem.FinishTime}}</span></p>
+                  <p class="mt10"><i class="icon-shenpi f12 mr10"></i><span class="blue">{{unreadworkitem.OrigiantorOUName}}</span></p>
+                </div>
+              </div>
+            </div>
+            <ion-option-button class="button-assertive button-unreadworkitems f16" ng-click="remove('{{unreadworkitem.ObjectId}}')">
+              已阅
+            </ion-option-button>
+          </ion-item>
+        </ion-list>
+      <div class="no-data f12"><span>没有更多的数据</span></div>
+
+    </div>
+    <!--已办 -->
+    <div ng-show="slectIndex==2">
+
+      <div ng-repeat="finishedworkitem in finishedworkitems" ng-class="$last?'home-list bb0':'home-list'">
+        <div class="home-list-left">
+          <img ng-src="{{finishedworkitem.UserAvatar}}">
+        </div>
+        <div class="home-list-right">
+          <div class="right-header">
+            <div class="right-header-left">
+              <span class="f16">{{finishedworkitem.InstanceName}}{{finishedworkitem.type}}</span>
+              <span class="sample f12">样例数据</span>
+            </div>
+            <div class="right-header-right">{{finishedworkitem.FinishTime | limitTo:-11}}</div>
+          </div>
+          <div class="right-content f13">
+            <p><span>{{finishedworkitem.OrigiantorName}}</span></p>
+            <p><span>{{finishedworkitem.FinishTime | limitTo:-11}}</span></p>
+            <p class="mt10">
+              <i class="icon-shenpi f12 mr10"></i><span class="blue">{{finishedworkitem.OrigiantorOUName}}</span><i  ng-class="{{finishedworkitem.Agree}}==true ? 'orange' : 'red'">({{finishedworkitem.Agreetext}})</i>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="no-data f12"><span>没有更多的数据</span></div>
+
+    </div>
+
+    <!--已阅 -->
+    <div ng-show="slectIndex==3">
+      <div ng-repeat="finishedworkitem in finishedworkitems" ng-class="$last?'home-list bb0':'home-list'">
+        <div class="home-list-left">
+          <img ng-src="{{finishedworkitem.UserAvatar}}">
+        </div>
+        <div class="home-list-right">
+          <div class="right-header">
+            <div class="right-header-left">
+              <span class="f16">{{finishedworkitem.InstanceName}}{{finishedworkitem.type}}</span>
+              <span class="sample f12">样例数据</span>
+            </div>
+            <div class="right-header-right">{{finishedworkitem.FinishTime | limitTo:-11}}</div>
+          </div>
+          <div class="right-content f13">
+            <p><span>{{finishedworkitem.OrigiantorName}}</span></p>
+            <p><span>{{finishedworkitem.FinishTime | limitTo:-11}}</span></p>
+            <p class="mt10">
+              <i class="icon-shenpi f12 mr10"></i><span class="blue">{{finishedworkitem.OrigiantorOUName}}</span><i  ng-class="{{finishedworkitem.Agree}}==true ? 'orange' : 'red'">({{finishedworkitem.Agreetext}})</i>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="no-data f12"><span>没有更多的数据</span></div>
+    </div>
+
+
+    <!--上拉  -->
+    <ion-infinite-scroll ng-if="!currentTab.moredata" on-infinite="loadMore()" distance="10%">
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+</ion-view>

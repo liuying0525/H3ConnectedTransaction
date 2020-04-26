@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getApplicationInfoForSFTP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="date" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getApplicationInfoForSFTPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getApplicationInfoForSFTPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getApplicationInfoForSFTPSoapIn">
+    <wsdl:part name="parameters" element="tns:getApplicationInfoForSFTP" />
+  </wsdl:message>
+  <wsdl:message name="getApplicationInfoForSFTPSoapOut">
+    <wsdl:part name="parameters" element="tns:getApplicationInfoForSFTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="getApplicationInfoForSFTPHttpGetIn">
+    <wsdl:part name="date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getApplicationInfoForSFTPHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="getApplicationInfoForSFTPHttpPostIn">
+    <wsdl:part name="date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getApplicationInfoForSFTPHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="ForExternalWebServiceSoap">
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:getApplicationInfoForSFTPSoapIn" />
+      <wsdl:output message="tns:getApplicationInfoForSFTPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ForExternalWebServiceHttpGet">
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:getApplicationInfoForSFTPHttpGetIn" />
+      <wsdl:output message="tns:getApplicationInfoForSFTPHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ForExternalWebServiceHttpPost">
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ProposalApproval</wsdl:documentation>
+      <wsdl:input message="tns:getApplicationInfoForSFTPHttpPostIn" />
+      <wsdl:output message="tns:getApplicationInfoForSFTPHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ForExternalWebServiceSoap" type="tns:ForExternalWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <soap:operation soapAction="http://tempuri.org/getApplicationInfoForSFTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ForExternalWebServiceSoap12" type="tns:ForExternalWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <soap12:operation soapAction="http://tempuri.org/getApplicationInfoForSFTP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ForExternalWebServiceHttpGet" type="tns:ForExternalWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <http:operation location="/getApplicationInfoForSFTP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ForExternalWebServiceHttpPost" type="tns:ForExternalWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getApplicationInfoForSFTP">
+      <http:operation location="/getApplicationInfoForSFTP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ForExternalWebService">
+    <wsdl:port name="ForExternalWebServiceSoap" binding="tns:ForExternalWebServiceSoap">
+      <soap:address location="https://bpm.dongzhengafc.com:8010/Portal/Webservices/ForExternalWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ForExternalWebServiceSoap12" binding="tns:ForExternalWebServiceSoap12">
+      <soap12:address location="https://bpm.dongzhengafc.com:8010/Portal/Webservices/ForExternalWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ForExternalWebServiceHttpGet" binding="tns:ForExternalWebServiceHttpGet">
+      <http:address location="https://bpm.dongzhengafc.com:8010/Portal/Webservices/ForExternalWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ForExternalWebServiceHttpPost" binding="tns:ForExternalWebServiceHttpPost">
+      <http:address location="https://bpm.dongzhengafc.com:8010/Portal/Webservices/ForExternalWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>东正金融办公平台</title>
+    <link rel="stylesheet" href="../css/css.css" type="text/css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/slider.jquery.js"></script>
+    <script type="text/javascript" src="../js/news.js"></script>
+    <script type="text/javascript">
+        //只传入想要获取参数的参数名来获取参数
+        function getparastr(strname) {
+            var hrefstr, pos, parastr, para, tempstr;
+            hrefstr = window.location.href;
+            pos = hrefstr.indexOf("?")
+            parastr = hrefstr.substring(pos + 1);
+            para = parastr.split("&");
+            tempstr = "";
+            for (i = 0; i < para.length; i++) {
+                tempstr = para[i];
+                pos = tempstr.indexOf("=");
+                if (tempstr.substring(0, pos) == strname) {
+                    return tempstr.substring(pos + 1);
+                }
+            }
+            return null;
+        }
+        function workitemSubmit(instanceid) {
+            var htmlText = "";
+            //提交任务
+            $.ajax({
+                //url: "../ajax/DZBizHandler.ashx",
+                url: "/Portal/DZBizHandler/workitemSubmit",// 19.6.28 wangxg
+                data:
+                {
+                    CommandName: "workitemSubmit",
+                    instanceid: instanceid
+                },
+                type: "post",
+                async: true,
+                dataType: "json",
+                success: function (result) {
+                    alert("ok");
+                    debugger;
+                    if (result) {
+
+                    }
+                    else {
+
+                    }
+                },
+                //error: function (msg) {
+                //    alert(msg.responseText + "出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        }
+        function GetGuessCustomer1() {
+            var arr = [[0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0],
+	    [0, 2, 0, 3, 0, 0],
+	    [0, 0, 0, 0, 0, 0]
+            ]
+            for (i = 0; i < arr.length ; i++) {   //遍历每一个具体的值
+                for (j = 0; j < arr[i].length ; j++) {
+                    document.write(arr[i][j] + ' ');
+                }
+                document.write('<br/>');
+            }
+
+
+        }
+        var t = Date.now();
+
+        function sleep(d) {
+            while (Date.now - t <= d);
+        }
+        sleep(1000);
+        var count = 0;
+        var res;
+
+        function getdata() {
+            //获取申请人指标信息
+            $.ajax({
+                //url: "../ajax/DZBizHandler.ashx",
+                url: "/Portal/DZBizHandler/gethknl",// 19.6.28 wangxg
+                data: { CommandName: "gethknl" },
+                type: "POST",
+                async: false,
+                dataType: "text",
+                success: function (result) {
+                    res = JSON.parse(result.replace(/\n/g, ""));
+                    if (res) {
+                        var t = setInterval('GetGuessCustomer()', 15000);
+                    }
+
+                },
+                //error: function (msg) {
+                //    alert("出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+        }
+        //客户指标测算
+        function GetGuessCustomer() {
+            if (count == res.length) {
+                clearInterval(t);
+                return;
+            }
+            $("#Text1").val(res[count].ZJR);
+            $("#Text2").val(res[count].GJR);
+            $("#Text3").val(res[count].DKJE);
+            $("#Text4").val(res[count].QS);
+            count += 1;
+            var certno = $("#Text1").val().trim();          //获申请人取证件编码
+            var gjrcertno = $("#Text2").val().trim();         //获共借人取证件编码
+            var isgjr = "否";              //是否隐藏共借人
+            var loanAmt = $("#Text3").val().trim();   //放款金额
+            var periods = $("#Text4").val().trim();           //期数
+            var dzcarloan = "";                             //东正车贷月应还款额
+            if (gjrcertno != "") { dzcarloan = parseFloat(loanAmt) / parseInt(periods); }
+            else { dzcarloan = 0.7 * parseFloat(loanAmt) / parseInt(periods); }
+
+            //alert("证件编码:" + certno + ",有无共借人:" + isgjr + "," + "放款金额:" + loanAmt);
+            //alert("共建人证件编码:" + gjrcertno + "东正车贷月应还款额:" + dzcdRepayAmtOfMonth);
+            $("#ControIncomOfMonth_ctl").attr("disabled", "disabled");
+            $("#ControDabtsOfMonth_ctl").attr("disabled", "disabled");
+            $("#ControAssetValuation_ctl").attr("disabled", "disabled");
+            $("#ControRepayLoan_ctl").attr("disabled", "disabled");
+            $("#ControgIncomOfMonth_ctl").attr("disabled", "disabled");
+            $("#ControgDabtsOfMonth_ctl").attr("disabled", "disabled");
+            $("#ControgAssetValuation_ctl").attr("disabled", "disabled");
+            $("#ControgRepayLoan_ctl").attr("disabled", "disabled");
+            var v0 ="",v1 = "0", v2 = "0", v3 = "0", v4 = "0", v5 = "0", v6 = "0", v7 = "0", v8 = "0";
+            //获取申请人指标信息
+            $.ajax({
+                url: "/Portal/PCMHandler/Index",//wangxg 19.7
+                //url: "../ajax/PCMHandler.ashx",
+                data: { CommandName: "GetConnect", certno: certno, dzcarloan: dzcarloan },
+                type: "POST",
+                async: false,
+                dataType: "text",
+                success: function (result) {
+                    result = JSON.parse(result.replace(/\n/g, ""));
+                    if (result.Result == "Success") {
+                        //$("#ControIncomOfMonth_ctl").val(
+                        v1 = parseFloat(result.C_IncomOfMonth);//月收入估值 
+                        //$("#ControDabtsOfMonth_ctl").val(
+                        v2 = parseFloat(result.C_DabtsOfMonth); //月应还债务
+                        //$("#ControAssetValuation_ctl").val(
+                        v3 = parseFloat(result.C_AssetValuation);//客户资产估值
+                        //$("#ControRepayLoan_ctl").val(
+                        v4 = parseFloat(result.C_RepayLoan); //客户月还贷能力
+                        //alert("月收入估值：" + C_IncomOfMonth + "月应还债务:" + C_DabtsOfMonth + "客户资产估值:" + C_AssetValuation + "客户月还贷能力" + C_RepayLoan);
+                    }
+
+                },
+                //error: function (msg) {
+                //    //alert("出错了");
+                //},
+                error: function (msg) {// 19.7 
+                    showJqErr(msg);
+                }
+            });
+            //获取共借人指标
+            if (gjrcertno == "") { $("#divgLine").hide(); }
+            else {
+                if (isgjr == "否") { $("#divgGGustom").show(); $("#divgLine").hide(); }
+                $.ajax({
+                    url: "/Portal/PCMHandler/Index",//wangxg 19.7
+                    //url: "../ajax/PCMHandler.ashx",
+                    data: { CommandName: "GetConnect", certno: gjrcertno, dzcarloan: dzcarloan },
+                    type: "POST",
+                    async: false,
+                    dataType: "text",
+                    success: function (result) {
+                        result = JSON.parse(result.replace(/\n/g, ""));
+                        if (result.Result == "Success") {
+                            //$("#ControgIncomOfMonth_ctl").val(
+                            v5 = parseFloat(result.C_IncomOfMonth);//月收入估值 
+                            //$("#ControgDabtsOfMonth_ctl").val(
+                            v6 = parseFloat(result.C_DabtsOfMonth); //月应还债务
+                            //$("#ControgAssetValuation_ctl").val(
+                            v7 = parseFloat(result.C_AssetValuation);//客户资产估值
+                            //$("#ControgRepayLoan_ctl").val(
+                            v8 = parseFloat(result.C_RepayLoan); //客户月还贷能力
+                            //alert("月收入估值：" + C_IncomOfMonth + "月应还债务:" + C_DabtsOfMonth + "客户资产估值:" + C_AssetValuation + "客户月还贷能力" + C_RepayLoan);
+                        }
+
+                    },
+                    //error: function (msg) {
+                    //    //alert("出错了");
+                    //},
+                    error: function (msg) {// 19.7 
+                        showJqErr(msg);
+                    }
+                });
+            }
+
+            //结果插入数据库 inserthknl
+            $.ajax({
+                //url: "../ajax/DZBizHandler.ashx",
+                url: "/Portal/DZBizHandler/inserthknl",// 19.6.28 wangxg
+                data: {
+                    CommandName: "inserthknl",
+                    APPNO: res[count].BZ1,
+                    ZJR: $("#Text1").val(),
+                    GJR: $("#Text2").val(),
+                    DKJE: $("#Text3").val(),
+                    QS: $("#Text4").val(),
+                    ZJR_YSRGZ: v1,
+                    ZJR_YYHZW: v2,
+                    ZJR_KHZCGZ: v3,
+                    ZJR_KHYHKNL: v4,
+                    GJR_YSRGZ: v5,
+                    GJR_YYHZW: v6,
+                    GJR_KHZCGZ: v7,
+                    GJR_KHYHKNL: v8
+                },
+                type: "POST",
+                async: false,
+                dataType: "text",
+                success: function (result) {
+                    $("#tb2").append("<tr><td>正确：" + res[count].BZ1 + "</td><td>" + result + "</td></tr>");
+                },
+                error: function (msg) {
+                    $("#tb2").append("<tr><td>错误：" + res[count].BZ1 + "</td><td></td></tr>");
+                }
+            });
+            $("#tb2").append("<tr><td>" + $("#Text1").val() + "</td><td>" + $("#Text2").val() + "</td><td>" + $("#Text3").val() + "</td><td>" + $("#Text4").val() + "</td><td>" + v1 + "</td><td>" + v2 + "</td><td>" + v3 + "</td><td>" + v4 + "</td><td>" + v5 + "</td><td>" + v6 + "</td><td>" + v7 + "</td><td>" + v8 + "</td><tr>");
+
+        }
+    </script>
+</head>
+<body>
+    <!-- <%-------------------客户测算-------------------------------%>-->
+    <div class="nav-icon fa  fa-angle-double-down ss" style="width: 90%; text-align: center; margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid #ccc;">
+        <label data-en_us="Sheet information">客户测算</label>
+    </div>
+    <div style="position: relative; margin-left: 25%; padding-right: 10%;" id="divCustoms">
+        <div>
+            <div id="Div1" class="rightbox1">
+                <table id="Table1" data-type="SheetGridView" class="SheetGridView">
+                    <tbody>
+                        <tr class="header">
+                            <td id="Td2">
+                                <label id="Label2" data-type="SheetLabel" style="">申请人</label>
+                            </td>
+                            <td id="Td3">
+                                <label id="Label3" data-type="SheetLabel" style="">共借人</label>
+                            </td>
+                            <td id="Td4">
+                                <label id="Label4" data-type="SheetLabel" style="">贷款金额</label>
+                            </td>
+                            <td id="Td1">
+                                <label id="Label1" data-type="SheetLabel" style="">还款期数</label>
+                            </td>
+
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <input id="Text1" type="text" data-type="SheetTextBox" style="text-align: center">
+                            </td>
+                            <td>
+                                <input id="Text2" type="text" data-type="SheetTextBox" style="text-align: center">
+                            </td>
+                            <td>
+                                <input id="Text3" type="text" data-type="SheetTextBox" style="text-align: center">
+                            </td>
+                            <td>
+                                <input id="Text4" type="text" data-type="SheetTextBox" style="text-align: center">
+                            </td>
+                            <td>
+                                <button type="button" onclick="getdata()">Click Me!</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="height: 50px;"></div>
+        <div>
+            <div class="row tableContent">
+                <div id="titlesqr" class="leftbox1" style="width: 11.666666%;">
+                    <span id="Labesqr" data-type="SheetLabel" style="">申请人</span>
+                </div>
+                <div id="controsqrr" class="rightbox1">
+                    <table id="TableCus" data-type="SheetGridView" class="SheetGridView">
+                        <tbody>
+                            <tr class="header">
+                                <td id="ControIncomOfMonth_Header">
+                                    <label id="ControIncomOfMonth_Label" data-type="SheetLabel" style="">月收入估值</label>
+                                </td>
+                                <td id="ControDabtsOfMonth_Heade">
+                                    <label id="ControDabtsOfMonth_Label" data-type="SheetLabel" style="">月应还债务</label>
+                                </td>
+                                <td id="ControAssetValuation_Header">
+                                    <label id="ControAssetValuation_Label" data-type="SheetLabel" style="">客户资产估值</label>
+                                </td>
+                                <td id="ControRepayLoan_Header">
+                                    <label id="ControRepayLoan_Label" data-type="SheetLabel" style="">客户月还贷能力</label>
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <td>
+                                    <input id="ControIncomOfMonth_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControDabtsOfMonth_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControAssetValuation_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControRepayLoan_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="divgGGustom">
+            <div class="row tableContent">
+                <div id="titlegsqr" class="leftbox1" style="width: 11.666666%;">
+                    <span id="Labegsqr" data-type="SheetLabel" style="">共借人</span>
+                </div>
+                <div id="controgsqrr" class="rightbox1">
+                    <table id="TablegCus" data-type="SheetGridView" class="SheetGridView">
+                        <tbody>
+                            <tr class="header">
+                                <td id="ControgIncomOfMonth_Header">
+                                    <label id="ControgIncomOfMonth_Label" data-type="SheetLabel" style="">月收入估值</label>
+                                </td>
+                                <td id="ControgDabtsOfMonth_Heade">
+                                    <label id="ControgDabtsOfMonth_Label" data-type="SheetLabel" style="">月应还债务</label>
+                                </td>
+                                <td id="ControgAssetValuation_Header">
+                                    <label id="ControgAssetValuation_Label" data-type="SheetLabel" style="">客户资产估值</label>
+                                </td>
+                                <td id="ControgRepayLoan_Header">
+                                    <label id="ControgRepayLoan_Label" data-type="SheetLabel" style="">客户月还贷能力</label>
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <td>
+                                    <input id="ControgIncomOfMonth_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControgDabtsOfMonth_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControgAssetValuation_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                                <td>
+                                    <input id="ControgRepayLoan_ctl" type="text" data-type="SheetTextBox" style="text-align: center">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <%--------------------------------------------------%>-->
+    <div>
+        <table id="tb2" data-type="SheetGridView" class="SheetGridView">
+            <tbody>
+                <tr class="header">
+                    <td id="Td9">
+                        <label id="Label9" data-type="SheetLabel" style="">gjr</label>
+                    </td>
+                    <td id="Td10">
+                        <label id="Label10" data-type="SheetLabel" style="">zjr</label>
+                    </td>
+                    <td id="Td11">
+                        <label id="Label11" data-type="SheetLabel" style="">dkje</label>
+                    </td>
+                    <td id="Td12">
+                        <label id="Label12" data-type="SheetLabel" style="">qs</label>
+                    </td>
+                    <td id="Td5">
+                        <label id="Label5" data-type="SheetLabel" style="">月收入估值</label>
+                    </td>
+                    <td id="Td6">
+                        <label id="Label6" data-type="SheetLabel" style="">月应还债务</label>
+                    </td>
+                    <td id="Td7">
+                        <label id="Label7" data-type="SheetLabel" style="">客户资产估值</label>
+                    </td>
+                    <td id="Td8">
+                        <label id="Label8" data-type="SheetLabel" style="">客户月还贷能力</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,144 @@
+{
+  "ContractFileType": [
+    {
+      "ID": "1",
+      "OBJECTID": "6039a7e9-5e41-40ab-8347-4bd3b47e8adf",
+      "TEMPLATENAME": "贷款申请表(个人版)",
+      "INSTANCETYPE": "个人_附件上传",
+      "DATAFIELD": "F_LoanApplication"
+    },
+    {
+      "ID": "2",
+      "OBJECTID": "0dce5d41-2139-4b35-bdee-ae2f23750407",
+      "TEMPLATENAME": "网上仲裁协议书20190801",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_ArbitrationAgreement"
+    },
+    {
+      "ID": "3",
+      "OBJECTID": "48bf19f3-3c38-46b0-b9ad-a5c86db65984",
+      "TEMPLATENAME": "网上仲裁协议书20190801",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_ArbitrationAgreement"
+    },
+    {
+      "ID": "4",
+      "OBJECTID": "1557b64a-b6d1-4b93-94be-d040112e2417",
+      "TEMPLATENAME": "欢迎信、还款计划表",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_RepaymentPlan"
+    },
+    {
+      "ID": "5",
+      "OBJECTID": "13a5df5d-9ebf-4ac1-9172-79ec3637603a",
+      "TEMPLATENAME": "工商银行客户扣款授权书(个人版)",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_DeductionAuthorize_Icbc"
+    },
+    {
+      "ID": "6",
+      "OBJECTID": "b600c798-eef3-4f7b-b105-eb8fe7a2db01",
+      "TEMPLATENAME": "股东会决议书-机构担保",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_Shareholder_Guarantee_C"
+    },
+    {
+      "ID": "7",
+      "OBJECTID": "5c1c93f3-cf13-4807-b083-9d05e89da3c6",
+      "TEMPLATENAME": "全额划付授权书",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_FullpayAuthorize"
+    },
+    {
+      "ID": "8",
+      "OBJECTID": "1bf8effd-7def-42d7-b643-0f207c77e48f",
+      "TEMPLATENAME": "股东会决议-机构贷款",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_Shareholder_Loan_C"
+    },
+    {
+      "ID": "9",
+      "OBJECTID": "e678c518-612a-40e9-ba59-552d4aa7a357",
+      "TEMPLATENAME": "股东会决议-机构贷款",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_Shareholder_Loan_C"
+    },
+    {
+      "ID": "10",
+      "OBJECTID": "97539137-a3cf-42fa-b95e-ac6c5f48ff7e",
+      "TEMPLATENAME": "贷款申请表(个人版)",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_LoanApplication"
+    },
+    {
+      "ID": "11",
+      "OBJECTID": "79548df0-cc9f-4570-a8cd-6ac443313a16",
+      "TEMPLATENAME": "欢迎信、还款计划表",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_RepaymentPlan"
+    },
+    {
+      "ID": "12",
+      "OBJECTID": "4233f748-2a66-416c-b32a-29fda77e6269",
+      "TEMPLATENAME": "股东会决议书-机构担保",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_Shareholder_Guarantee_C"
+    },
+    {
+      "ID": "13",
+      "OBJECTID": "79fccafa-6889-40d7-b406-f88f961f2694",
+      "TEMPLATENAME": "贷款同意通知书(个人版)",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_AgreeLoan"
+    },
+    {
+      "ID": "14",
+      "OBJECTID": "28f6824b-19ed-419a-98a9-7ff24ae24435",
+      "TEMPLATENAME": "机构汽车贷款申请表",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_LoanApplication_C"
+    },
+    {
+      "ID": "15",
+      "OBJECTID": "796b6f7f-e4d4-4b85-9c13-cc001b9349ef",
+      "TEMPLATENAME": "个人零售贷款合同v1907",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_LoanContract"
+    },
+    {
+      "ID": "16",
+      "OBJECTID": "00faeb5f-6a90-4788-ac3f-cffcf2455d2a",
+      "TEMPLATENAME": "扣款授权书及划付授权书(机构版)",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_DeductionAuthorize_C"
+    },
+    {
+      "ID": "17",
+      "OBJECTID": "af735a7e-5021-4765-9d77-1af9e0d6d75d",
+      "TEMPLATENAME": "建设银行客户扣款授权书(个人版)",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_DeductionAuthorize_Ccb"
+    },
+    {
+      "ID": "18",
+      "OBJECTID": "07bf3323-a3c1-4e03-bbbc-49a8427c157a",
+      "TEMPLATENAME": "机构贷款合同",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_LoanContract_C"
+    },
+    {
+      "ID": "19",
+      "OBJECTID": "be8c351d-4a78-435f-b681-29791064d38c",
+      "TEMPLATENAME": "机构贷款同意通知书",
+      "INSTANCETYPE": "机构",
+      "DATAFIELD": "F_AgreeLoan_C"
+    },
+    {
+      "ID": "20",
+      "OBJECTID": "796b6f7f-e4d4-4b85-9c13-cc001b9349ef",
+      "TEMPLATENAME": "个人零售贷款合同1812",
+      "INSTANCETYPE": "个人",
+      "DATAFIELD": "F_LoanContract"
+    }
+  ]
+}

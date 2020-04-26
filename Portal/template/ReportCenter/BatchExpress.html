@@ -1,0 +1,68 @@
+﻿<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton:hover {
+            background-color: #DDD;
+        }
+
+        .topButton:active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style="width: 100%;" anchorDiv>
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        {{title}}
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+            <tr style="margin:20px">
+                <td>
+                    <span>输入快递单号：</span>
+                </td>
+                <td>
+                    <input type="text" style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="data.ExpressNumber" placeholder="输入快递单号" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>关联抵押流程：</span>
+                </td>
+                <td>
+                    <ul data-mortgageid="" style="width: 60%; padding: 6px 6px; margin-bottom: 20px;"></ul>
+                    <script>
+                        function deleteSelect(o) {
+                            var $li = $(o).parent();
+                            //debugger
+                            var $id = $("[data-mortgageid]");
+                            var $val = $id.attr("data-mortgageid").split("|");
+                            var $listid = "";
+                            for (var i = 0; i < $val.length; i++) {
+                                if ($li.attr("data-objectid") != $val[i]) { $listid += $val[i] + "|" }
+                            }
+                            $id.attr("data-mortgageid", $listid);
+                            $li.remove();
+                        }
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>抵押流程名称：</span>
+                </td>
+                <td>
+                    <select style="width: 60%; padding: 6px 6px; margin-bottom:20px;" id="mortgageList" onchange='$("[data-mortgageid]").append("<li style=\"margin-bottom: 3px;border:1px dashed grey;\" data-objectid=" + $("#mortgageList option:selected").val() + ">" + $("#mortgageList option:selected").text() + "<span style=\"margin-left:9px;cursor:pointer;font-size:18px;\" onclick=\"deleteSelect(this);\">×</span></li>").attr("data-mortgageid",$("[data-mortgageid]").attr("data-mortgageid") + "|" + $("#mortgageList option:selected").val());'></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="clear();" style="width: 100px;margin:30px">清空</button>
+        <button class="topButton" ng-click="save();" style="width: 100px;">保存</button>
+    </div>
+</div>

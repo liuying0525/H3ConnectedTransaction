@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateH3FileAuthority">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="role" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateH3FileAuthorityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateH3FileAuthorityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPickApplicationNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPickApplicationNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPickApplicationNoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttachmentContent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttachmentContentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAttachmentContentResult" type="tns:ArrayOfAttachmentHeader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAttachmentHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AttachmentHeader" nillable="true" type="tns:AttachmentHeader" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AttachmentHeader">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SerializableObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="BizObjectId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WeChatMediaID" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="WeChatMediaExpireTime" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="DingTalkMediaID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastVersion" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataField" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContentType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ContentLength" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreatedTime" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="FileFlag" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="Printable" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Downloadable" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="BizObjectSchemaCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StoragePath" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StorageFileName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DownloadUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModifiedBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModifiedTime" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SerializableObject" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Cloneable">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Serialized" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ObjectID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentObjectID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentPropertyName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ParentIndex" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Cloneable" />
+      <s:element name="GetGongHangAttachmentContent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Datafields" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGongHangAttachmentContentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGongHangAttachmentContentResult" type="tns:ArrayOfAttachmentHeader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateWordAttachment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="field" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateWordAttachmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateWordAttachmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfAttachmentHeader" nillable="true" type="tns:ArrayOfAttachmentHeader" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthoritySoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateH3FileAuthority" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthoritySoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateH3FileAuthorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateUser" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPickApplicationNo" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPickApplicationNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAttachmentContent" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAttachmentContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGongHangAttachmentContent" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGongHangAttachmentContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateWordAttachment" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateWordAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthorityHttpGetIn">
+    <wsdl:part name="role" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthorityHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserHttpGetIn">
+    <wsdl:part name="userCode" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoHttpGetIn">
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentHttpGetIn">
+    <wsdl:part name="applicationNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAttachmentHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentHttpGetIn">
+    <wsdl:part name="applicationNo" type="s:string" />
+    <wsdl:part name="Datafields" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAttachmentHeader" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentHttpGetIn">
+    <wsdl:part name="applicationNum" type="s:string" />
+    <wsdl:part name="customername" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="field" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthorityHttpPostIn">
+    <wsdl:part name="role" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateH3FileAuthorityHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserHttpPostIn">
+    <wsdl:part name="userCode" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoHttpPostIn">
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickApplicationNoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentHttpPostIn">
+    <wsdl:part name="applicationNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentContentHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAttachmentHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentHttpPostIn">
+    <wsdl:part name="applicationNo" type="s:string" />
+    <wsdl:part name="Datafields" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGongHangAttachmentContentHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAttachmentHeader" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentHttpPostIn">
+    <wsdl:part name="applicationNum" type="s:string" />
+    <wsdl:part name="customername" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="field" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWordAttachmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="AttachmentServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">权限验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateH3FileAuthoritySoapIn" />
+      <wsdl:output message="tns:ValidateH3FileAuthoritySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">帐号信息验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateUserSoapIn" />
+      <wsdl:output message="tns:ValidateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取放款单信息</wsdl:documentation>
+      <wsdl:input message="tns:GetPickApplicationNoSoapIn" />
+      <wsdl:output message="tns:GetPickApplicationNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取附件信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAttachmentContentSoapIn" />
+      <wsdl:output message="tns:GetAttachmentContentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷后-获取工行附件</wsdl:documentation>
+      <wsdl:input message="tns:GetGongHangAttachmentContentSoapIn" />
+      <wsdl:output message="tns:GetGongHangAttachmentContentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">生成放款承诺函，并添加到表单的附件中</wsdl:documentation>
+      <wsdl:input message="tns:GenerateWordAttachmentSoapIn" />
+      <wsdl:output message="tns:GenerateWordAttachmentSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AttachmentServiceHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">权限验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateH3FileAuthorityHttpGetIn" />
+      <wsdl:output message="tns:ValidateH3FileAuthorityHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">帐号信息验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateUserHttpGetIn" />
+      <wsdl:output message="tns:ValidateUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取放款单信息</wsdl:documentation>
+      <wsdl:input message="tns:GetPickApplicationNoHttpGetIn" />
+      <wsdl:output message="tns:GetPickApplicationNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取附件信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAttachmentContentHttpGetIn" />
+      <wsdl:output message="tns:GetAttachmentContentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷后-获取工行附件</wsdl:documentation>
+      <wsdl:input message="tns:GetGongHangAttachmentContentHttpGetIn" />
+      <wsdl:output message="tns:GetGongHangAttachmentContentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">生成放款承诺函，并添加到表单的附件中</wsdl:documentation>
+      <wsdl:input message="tns:GenerateWordAttachmentHttpGetIn" />
+      <wsdl:output message="tns:GenerateWordAttachmentHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AttachmentServiceHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">权限验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateH3FileAuthorityHttpPostIn" />
+      <wsdl:output message="tns:ValidateH3FileAuthorityHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">帐号信息验证</wsdl:documentation>
+      <wsdl:input message="tns:ValidateUserHttpPostIn" />
+      <wsdl:output message="tns:ValidateUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取放款单信息</wsdl:documentation>
+      <wsdl:input message="tns:GetPickApplicationNoHttpPostIn" />
+      <wsdl:output message="tns:GetPickApplicationNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取附件信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAttachmentContentHttpPostIn" />
+      <wsdl:output message="tns:GetAttachmentContentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">贷后-获取工行附件</wsdl:documentation>
+      <wsdl:input message="tns:GetGongHangAttachmentContentHttpPostIn" />
+      <wsdl:output message="tns:GetGongHangAttachmentContentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">生成放款承诺函，并添加到表单的附件中</wsdl:documentation>
+      <wsdl:input message="tns:GenerateWordAttachmentHttpPostIn" />
+      <wsdl:output message="tns:GenerateWordAttachmentHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AttachmentServiceSoap" type="tns:AttachmentServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <soap:operation soapAction="http://tempuri.org/ValidateH3FileAuthority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <soap:operation soapAction="http://tempuri.org/ValidateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <soap:operation soapAction="http://tempuri.org/GetPickApplicationNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <soap:operation soapAction="http://tempuri.org/GetAttachmentContent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <soap:operation soapAction="http://tempuri.org/GetGongHangAttachmentContent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <soap:operation soapAction="http://tempuri.org/GenerateWordAttachment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AttachmentServiceSoap12" type="tns:AttachmentServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <soap12:operation soapAction="http://tempuri.org/ValidateH3FileAuthority" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <soap12:operation soapAction="http://tempuri.org/ValidateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <soap12:operation soapAction="http://tempuri.org/GetPickApplicationNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <soap12:operation soapAction="http://tempuri.org/GetAttachmentContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <soap12:operation soapAction="http://tempuri.org/GetGongHangAttachmentContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <soap12:operation soapAction="http://tempuri.org/GenerateWordAttachment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AttachmentServiceHttpGet" type="tns:AttachmentServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <http:operation location="/ValidateH3FileAuthority" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <http:operation location="/ValidateUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <http:operation location="/GetPickApplicationNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <http:operation location="/GetAttachmentContent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <http:operation location="/GetGongHangAttachmentContent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <http:operation location="/GenerateWordAttachment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AttachmentServiceHttpPost" type="tns:AttachmentServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateH3FileAuthority">
+      <http:operation location="/ValidateH3FileAuthority" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <http:operation location="/ValidateUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPickApplicationNo">
+      <http:operation location="/GetPickApplicationNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentContent">
+      <http:operation location="/GetAttachmentContent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGongHangAttachmentContent">
+      <http:operation location="/GetGongHangAttachmentContent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWordAttachment">
+      <http:operation location="/GenerateWordAttachment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AttachmentService">
+    <wsdl:port name="AttachmentServiceSoap" binding="tns:AttachmentServiceSoap">
+      <soap:address location="https://bpm.dongzhengafc.com:8010/Portal/webservices/AttachmentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AttachmentServiceSoap12" binding="tns:AttachmentServiceSoap12">
+      <soap12:address location="https://bpm.dongzhengafc.com:8010/Portal/webservices/AttachmentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AttachmentServiceHttpGet" binding="tns:AttachmentServiceHttpGet">
+      <http:address location="https://bpm.dongzhengafc.com:8010/Portal/webservices/AttachmentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AttachmentServiceHttpPost" binding="tns:AttachmentServiceHttpPost">
+      <http:address location="https://bpm.dongzhengafc.com:8010/Portal/webservices/AttachmentService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,77 @@
+﻿
+<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+        .topButton:hover {
+            background-color: #DDD;
+        }
+
+        .topButton:active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style="width: 100%;" anchorDiv>
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        产品新增
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+            <colgroup>
+                <col style="width: 50%;" />
+                <col style="width: 50%;" />
+            </colgroup>
+            <tr>
+                <td>
+                    经销商名称：{{Dealer}}
+                </td>
+                <td>
+                    <div style="width: 100%; display: flex; align-items: center;">
+                        <input style="width: calc(100% - 140px); padding: 3px 6px;" ng-model="ProductName" placeholder="请输入产品名称"/>
+                        <div style="width: 20px; height: 1px;"></div>
+                        <button class="topButton" ng-click="search();" style="width: 100px;">
+                            搜索
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+            <colgroup>
+                <col style="width: 33.3%;" />
+                <col style="width: 33.3%;" />
+                <col style="width: 33.3%;" />
+            </colgroup>
+            <tr style="background-color: #DDD;">
+                <th style="padding: 5px 0 3px; text-align: center">产品名称</th>
+                <th style="padding: 5px 0 3px; text-align: center">产品别名</th>
+                <th style="padding: 5px 0 3px; text-align: center">描述</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #AAA;" ng-repeat="row in Datas">
+                <td anchor="{{row.ProductName}}" style="padding: 4px 4px 3px;" align="center" valign="middle">
+                    {{row.ProductName}}
+                </td>
+                <td style="padding: 4px 4px 3px;" align="center" valign="middle">
+                    <input style="width: 70%; padding: 3px 5px;" ng-model="row.ProductAlias" maxlength="200"/>
+                </td>
+                <td style="padding: 4px 4px 3px;" align="center" valign="middle">
+                    <textarea style="width: 70%; min-width: 70%; height: 50px; max-width: 70%; padding: 3px 5px;" ng-model="row.Description" maxlength="500"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div style="border-bottom: 1px solid #AAA;" ng-hide="Datas.length > 0">
+            当前无可添加产品
+        </div>
+    </div>
+    <div style="display: flex; padding: 10px; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="cancel();" style="width: 100px;">取消</button>
+        <div style="width: 100px; height: 1px;" ng-show="Datas.length > 0"></div>
+        <button class="topButton" ng-click="save();" style="width: 100px;" ng-show="Datas.length > 0">保存</button>
+    </div>
+</div>

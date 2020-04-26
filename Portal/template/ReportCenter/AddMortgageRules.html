@@ -1,0 +1,87 @@
+﻿
+<style>
+    .topButton {
+        border-radius: 5px;
+        background-color: #FFF;
+        border: 1px solid #AAA;
+        cursor: pointer;
+    }
+
+        .topButton:hover {
+            background-color: #DDD;
+        }
+
+        .topButton:active {
+            background-color: #AAA;
+        }
+</style>
+
+<div style="width: 100%;" anchorDiv>
+    <div style="padding: 10px; font-size: 28px; font-weight: 700; border-bottom: 1px solid #AAA; text-align: center;">
+        {{title}}
+    </div>
+    <div style="width: 100%; padding: 10px;">
+        <table style="width: 100%;">
+
+            <tr style="margin:20px">
+                <td>
+                    <span>经销商名称</span>
+                </td>
+                <td>
+                    <select name="Shop" style="width: 60%; padding: 6px 6px; margin-bottom:20px" ng-model="Datas[0].Shop" ng-change="clickSearch()">
+                        <option value="东正办理">东正办理</option>
+                        <option value="东正外包">东正外包</option>
+                        <!--<option value="主办店办理">主办店办理</option>-->
+                    </select>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <span>省份</span>
+                </td>
+                <td>
+                    <select style="width: 60%; padding: 6px 6px;margin-bottom:20px"    ng-model="Datas[0].Province" ng-change="getCity()">
+                        <option value="" selected="selected">请选择</option>
+                        <option ng-repeat="province in Province" value="{{province.code}}">{{province.codeName}}</option>
+
+                    </select>
+                </td>
+                <td>
+                    <span>城市</span>
+                </td>
+                <td>
+                    <select style="width: 60%; padding: 6px 6px; margin-bottom:20px"  ng-model="Datas[0].City" ng-change="clickSearch()">
+                        <option value="">请选择</option>
+                        <option ng-repeat="province in City" value="{{province.code}}">{{province.codeName}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>上牌员</span>
+                </td>
+                <td>
+                    <select style="width: 60%; padding: 6px 6px;" ng-model="Datas[0].SpName" ng-change="clickSearch()">
+                        <option value="">请选择</option>
+                        <option ng-repeat="spName in SpName" value="{{spName.id}}">{{spName.Name}}</option>
+                    </select>
+                </td>
+                <td>
+                    <span>抵押员</span>
+                </td>
+                <td>
+                    <select style="width: 60%; padding: 6px 6px;" ng-model="Datas[0].DyName" ng-change="clickSearch()">
+                        <option value="">请选择</option>
+                        <option ng-repeat="dyName in DyName" value="{{dyName.id}}">{{dyName.Name}}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button class="topButton" ng-click="cancel();" style="width: 100px;margin:30px">取消</button>
+        <button class="topButton" ng-click="save();" style="width: 100px;" >保存</button>
+    </div>
+</div>
